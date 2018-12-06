@@ -1,2 +1,2 @@
 // import "./dashboard/prototype/refactor"
-import "./styles.scss"
+import "./newton/css/styles.scss"

@@ -1,0 +1,50 @@
+body {
+	font-family: 'Fira Sans', Arial, sans-serif;
+	margin: 0;
+	padding: 20px;
+	background: $pageBgColor;
+	color: #fff;
+}
+
+.container {
+	width: 100%;
+	max-width: 1200px;
+	padding: 0 1em;
+	margin: 1em auto;
+}
+
+.dashboard-svg {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+header {
+	text-align: center;
+}
+
+h1 {
+	margin: 1em 0 0;
+	font-weight: 500;
+}
+
+.btn {
+	margin-top: .5em;
+	display: inline-block;
+	background: #28405a;
+	border: 1px solid #435f7d;
+	padding: 0.35em 0.75em 0.45em;
+	border-radius: 3px;
+	font-size: 14px;
+	color: #ddd;
+	cursor: pointer;
+
+	&:focus {
+		outline: none;
+		background: $orange;
+	}
+
+	&:hover {
+		background: lighten(#28405a, 10%);
+	}
+}

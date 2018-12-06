@@ -1,0 +1,15 @@
+@import "variables";
+@import "demo";
+
+.link {
+  stroke: $graphLinkColor;
+}
+
+svg,
+.labels-container {
+	font-family: 'Roboto';
+	text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+	text {
+		fill: $graphLabelColor;
+	}
+}
