@@ -2,7 +2,6 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
 	mode: 'development',
@@ -50,7 +49,7 @@ module.exports = {
 				title: 'Microservices Dashboard Protoype',
 			},
 			template: 'preview.hbs',
-		filename: 'index.html'
+			filename: 'index.html'
 		})
 	]
 }
