@@ -1,0 +1,48 @@
+{
+	"extends": "eslint:recommended",
+	"parserOptions": {
+		"sourceType": "module"
+	},
+	"env": {
+		"es6": true,
+		"jasmine": true,
+		"node": true
+	},
+	"globals": {
+		"context": true
+	},
+	"rules": {
+		"indent": [
+			"error",
+			"tab"
+		],
+		"no-console": "off",
+		"no-unused-vars": [
+			"error",
+			{
+				"args": "none"
+			}
+		],
+		"object-curly-spacing": [
+			"error",
+			"always"
+		],
+		"semi": [
+			"error",
+			"never"
+		],
+		"space-before-blocks": "error",
+		"space-before-function-paren": "error",
+		"spaced-comment": [
+			"error",
+			"always",
+			{
+				"exceptions": [
+					"-",
+					"+"
+				]
+			}
+		],
+		"strict": "warn"
+	}
+}
