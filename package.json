@@ -9,7 +9,9 @@
     "server": "webpack-dev-server --open",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "lint:watch": "nodemon -w src --exec 'npm run lint'"
+    "lint:watch": "nodemon -w . --exec 'npm run lint'",
+    "test": "jest",
+    "test:watch": "nodemon -w . --exec 'npm test'"
   },
   "dependencies": {
     "d3": "^5.7.0",
@@ -23,6 +25,7 @@
     "handlebars": "^4.0.12",
     "handlebars-loader": "^1.7.0",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^23.6.0",
     "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "^4.10.0",
     "nodemon": "^1.18.7",
