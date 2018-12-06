@@ -6,7 +6,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
 	mode: 'development',
-	entry: './newton/index.js',
+	entry: './preview.js',
 	output: {
 		filename: '[name].js',
 		path: path.resolve(__dirname, 'dist')
@@ -49,7 +49,7 @@ module.exports = {
 			templateParameters: {
 				title: 'Microservices Dashboard Protoype',
 			},
-			template: 'newton/index.hbs',
+			template: 'preview.hbs',
 		filename: 'index.html'
 		})
 	]
