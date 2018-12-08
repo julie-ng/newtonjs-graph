@@ -1,2 +1,2 @@
-import "./newton/scratch/scratch"
+import "./newton/demo"
 import "./newton/css/styles.scss"
