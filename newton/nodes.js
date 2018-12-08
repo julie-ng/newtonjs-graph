@@ -81,13 +81,17 @@ const strokeColor = function (node) {
 class Nodes {
 	constructor (data, opts) {
 		console.log('new Nodes()')
-		this.data = data
+		this.setData(data)
 		this.container = opts.container // d3 select() element
 		this.adapter = opts.adapter // cola
 	}
 
+	setData (data) {
+		this.data = data.nodes
+	}
+
 	updateData (data) {
-		this.data = data
+		this.setData(data)
 	}
 
 	render () {

@@ -22,7 +22,7 @@ const links = new Links(data, {
 	container: svg
 })
 
-const nodes = new Nodes(data.nodes, {
+const nodes = new Nodes(data, {
 	container: svg,
 	adapter: cola
 })
@@ -72,6 +72,6 @@ document.querySelector('#js-update')
 		// note, we changed data, but we need to apply styles to update, not just enter()
 
 		links.updateData(data)
-		nodes.updateData(data.nodes)
+		nodes.updateData(data)
 		render()
 	})
