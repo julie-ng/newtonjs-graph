@@ -1,7 +1,14 @@
 const Graph = require('./../newton/graph')
-const data = require('./data')
-const margin = 40
+const GraphData = require('./../newton/graph-data')
 
+const source = require('./data')
+const data = new GraphData({
+	nodes: source.nodes,
+	map: source.linksMap,
+	key: 'id'
+})
+
+const margin = 40
 const graph = new Graph(data, {
 	margin: margin,
 	height: 550,

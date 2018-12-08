@@ -75,19 +75,7 @@ const linksMap = [
 	{ source: 'H', target: 'C' },
 ]
 
-const links = []
-linksMap.forEach((l) => {
-	links.push({
-		source: findNode(l.source),
-		target: findNode(l.target),
-	})
-})
-
-function findNode (id) {
-	return elements.findIndex((node) => node.id === id)
-}
-
 module.exports = {
 	nodes: elements,
-	links: links
+	linksMap: linksMap
 }
