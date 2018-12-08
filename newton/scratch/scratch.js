@@ -5,6 +5,7 @@ import newton from './lib/nodes'
 import newtonTransitions from './lib/transitions'
 import styleNode from './lib/style-node'
 
+const Labels = require('./../labels')
 const Links = require('./../links')
 const Nodes = require('./../nodes')
 
@@ -22,14 +23,17 @@ const svg = d3.select('svg')
 	.attr('width', width)
 	.attr('height', height)
 
-const labelsContainer =  svg // d3.select('#labels-container')
-
 const links2 = new Links(data, {
 	container: svg
 })
+
 const nodes2 = new Nodes(data.nodes, {
 	container: svg,
 	adapter: cola
+})
+
+const labels2 = new Labels(data, {
+	container: svg
 })
 
 /**
@@ -40,47 +44,18 @@ cola.nodes(data.nodes)
 	.jaccardLinkLengths(100,0.8)
 	.start(30)
 
-
-
 render()
-
 
 /**
  * Render Helper
  */
 function render () {
-	let t = d3.transition()
-		.duration(250)
-		.ease(d3.easeLinear)
-
-
 	links2.render()
 	nodes2.render()
+	labels2.render()
 
-	// Labels
-	let labels = labelsContainer.selectAll('text')
-	.data(data.nodes)
-
-	labels.transition(t)
-		.attr('font-size', newton.calculateFontSize)
-
-	labels = labels.enter().append('text')
-		.text((node) => node.label)
-			.attr('text-anchor', 'middle')
-			.attr('alignment-baseline', 'central')
-			.attr('font-size', newton.calculateFontSize)
-		.merge(labels)
-			.attr('dx', (node) => node.cx)
-			.attr('dy', (node) => node.cy)
-			.attr('class', (node) => 'label status-' + node.status)
-
-
-	// Position everything
 	cola.on('tick', () => {
-
-		labels.attr('x', (d) => d.x)
-			.attr('y', (d) => d.y + fixedRadius*2.5)
-
+		labels2.position()
 		links2.position()
 		nodes2.position()
 	})
