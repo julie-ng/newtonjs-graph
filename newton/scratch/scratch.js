@@ -1,9 +1,5 @@
 import * as d3 from 'd3'
 import * as Cola from 'webcola'
-import colors from './lib/colors'
-import newton from './lib/nodes'
-import newtonTransitions from './lib/transitions'
-import styleNode from './lib/style-node'
 
 const Labels = require('./../labels')
 const Links = require('./../links')
@@ -13,7 +9,6 @@ const data = require('./data')
 const margin = 40
 const height = 550
 const width = window.innerWidth - margin
-const fixedRadius = 12
 
 /**
  * Setup Layout
@@ -23,16 +18,16 @@ const svg = d3.select('svg')
 	.attr('width', width)
 	.attr('height', height)
 
-const links2 = new Links(data, {
+const links = new Links(data, {
 	container: svg
 })
 
-const nodes2 = new Nodes(data.nodes, {
+const nodes = new Nodes(data.nodes, {
 	container: svg,
 	adapter: cola
 })
 
-const labels2 = new Labels(data, {
+const labels = new Labels(data, {
 	container: svg
 })
 
@@ -50,17 +45,17 @@ render()
  * Render Helper
  */
 function render () {
-	links2.render()
-	nodes2.render()
-	labels2.render()
+	links.render()
+	nodes.render()
+	labels.render()
 
 	cola.on('tick', () => {
-		labels2.position()
-		links2.position()
-		nodes2.position()
+		labels.position()
+		links.position()
+		nodes.position()
 	})
 
-	nodes2.animate()
+	nodes.animate()
 }
 
 
@@ -76,7 +71,7 @@ document.querySelector('#js-update')
 
 		// note, we changed data, but we need to apply styles to update, not just enter()
 
-		links2.updateData(data)
-		nodes2.updateData(data.nodes)
+		links.updateData(data)
+		nodes.updateData(data.nodes)
 		render()
 	})

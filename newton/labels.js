@@ -17,6 +17,7 @@ class Labels {
 	setData (data) {
 		this.data = data.nodes
 	}
+
 	updateData (data) {
 		this.setData(data)
 	}
