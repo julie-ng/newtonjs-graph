@@ -5,6 +5,7 @@ import newton from './lib/nodes'
 import newtonTransitions from './lib/transitions'
 import styleNode from './lib/style-node'
 
+const Links = require('./../links')
 const Nodes = require('./../nodes')
 
 const data = require('./data')
@@ -21,9 +22,11 @@ const svg = d3.select('svg')
 	.attr('width', width)
 	.attr('height', height)
 
-const linksContainer =  svg // d3.select('#links-container')
 const labelsContainer =  svg // d3.select('#labels-container')
 
+const links2 = new Links(data, {
+	container: svg
+})
 const nodes2 = new Nodes(data.nodes, {
 	container: svg,
 	adapter: cola
@@ -50,16 +53,8 @@ function render () {
 		.duration(250)
 		.ease(d3.easeLinear)
 
-	// Links
-	let links = linksContainer.selectAll('.link')
-	.data(data.links)
 
-	links = links.enter()
-		.append('line')
-		.merge(links)
-			.attr('class', 'link')
-			.style('stroke-width', 1)
-
+	links2.render()
 	nodes2.render()
 
 	// Labels
@@ -82,14 +77,11 @@ function render () {
 
 	// Position everything
 	cola.on('tick', () => {
-		links.attr('x1', (d) => d.source.x)
-			.attr('y1', (d) => d.source.y)
-			.attr('x2', (d) => d.target.x)
-			.attr('y2', (d) => d.target.y)
 
 		labels.attr('x', (d) => d.x)
 			.attr('y', (d) => d.y + fixedRadius*2.5)
 
+		links2.position()
 		nodes2.position()
 	})
 
@@ -109,6 +101,7 @@ document.querySelector('#js-update')
 
 		// note, we changed data, but we need to apply styles to update, not just enter()
 
+		links2.updateData(data)
 		nodes2.updateData(data.nodes)
 		render()
 	})
