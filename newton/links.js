@@ -14,7 +14,6 @@ class Links {
 	 * @param {d3Element} opts.container - d3 element from `select()`
 	 */
 	constructor (data, opts) {
-		console.log('new Links()')
 		this.setData(data)
 		this.container = opts.container
 	}

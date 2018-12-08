@@ -15,7 +15,6 @@ class Nodes {
 	 * @param {d3adapter} opts.adapter - reference to layout adapter (webcola). required to enable dragging of nodes
 	 */
 	constructor (data, opts) {
-		console.log('new Nodes()')
 		this.setData(data)
 		this.container = opts.container
 		this.adapter = opts.adapter
