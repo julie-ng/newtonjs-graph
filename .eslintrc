@@ -14,7 +14,10 @@
 	"rules": {
 		"indent": [
 			"error",
-			"tab"
+			"tab",
+			{
+				"MemberExpression": "off"
+			}
 		],
 		"no-console": "off",
 		"no-unused-vars": [
