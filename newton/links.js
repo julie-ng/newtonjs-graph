@@ -1,5 +1,6 @@
 const d3 = require('d3')
 const SELECTOR = '.link'
+const Transitions = require('./transitions')
 
 /**
  * Encapsulates what is needed to create the links between
@@ -41,7 +42,7 @@ class Links {
 
 	/**
 	 * Renders the links, updating existing and drawing new links.
-	 * TODO: remove old links, return self
+	 * TODO: return self
 	 */
 	render () {
 		let t = d3.transition()
@@ -53,10 +54,9 @@ class Links {
 
 		links.exit()
 			.transition(t)
-				.style('fill-opacity', 0)
-				.attr('y1', (d) => d.source.y + 2) // fade down
-				.attr('y2', (d) => d.target.y + 2) // fade down
-				.remove()
+				.call(Transitions.fadeOut)
+				.call(Transitions.FadeDown.line)
+			.remove()
 
 		links = links.enter()
 			.append('line')

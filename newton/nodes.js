@@ -1,6 +1,8 @@
 const d3 = require('d3')
 const colors = require('./config/colors')
 
+const Transitions = require('./transitions')
+
 const fixedRadius = 12
 const flashColors = {
 	original: {
@@ -120,7 +122,7 @@ class Nodes {
 
 	/**
 	 * Renders the nodes, updating existing and drawing new nodes.
-	 * TODO: remove old nodes, return self
+	 * TODO: return self
 	 */
 	render () {
 		console.log('Nodes.render()')
@@ -134,10 +136,9 @@ class Nodes {
 
 		nodes.exit()
 			.transition(t)
-				.style('stroke-opacity', 0)
-				.style('fill-opacity', 0)
-				.attr('cy', (d) => d.y + 5) // fade down
-				.remove()
+				.call(Transitions.fadeOut)
+				.call(Transitions.FadeDown.circle, 5)
+			.remove()
 
 		nodes = nodes.enter()
 			.append('circle')

@@ -1,4 +1,6 @@
 const d3 = require('d3')
+const Transitions = require('./transitions')
+
 const fixedRadius = 12
 const defaultFontSize = 16
 
@@ -49,7 +51,7 @@ class Labels {
 
 	/**
 	 * Renders the labels, updating existing and drawing new labels.
-	 * TODO: remove old labels, return self
+	 * TODO: return self
 	 */
 	render () {
 		let t1 = d3.transition()
@@ -61,9 +63,9 @@ class Labels {
 
 		labels.exit()
 			.transition(t1)
-				.style('fill-opacity', 0)
-				.attr('y', (d) => d.y + fixedRadius*2.5 + 5) // fade down
-				.remove()
+				.call(Transitions.fadeOut)
+				.call(Transitions.FadeDown.text, fixedRadius*2.5 + 5)
+			.remove()
 
 		let t2 = d3.transition()
 				.duration(250)
