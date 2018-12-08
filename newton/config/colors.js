@@ -7,7 +7,7 @@ const red = '#b72022'
 const yellow = '#fdd835'
 const orange = '#d2620b'
 
-export default {
+module.exports = {
 	backgroundColor: backgroundColor,
 	backgroundOffsetColor: backgroundOffsetColor,
 	darkNodeBg: darkNodeBg,

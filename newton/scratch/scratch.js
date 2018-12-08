@@ -5,21 +5,13 @@ import newton from './lib/nodes'
 import newtonTransitions from './lib/transitions'
 import styleNode from './lib/style-node'
 
+const Nodes = require('./../nodes')
+
 const data = require('./data')
 const margin = 40
 const height = 550
 const width = window.innerWidth - margin
 const fixedRadius = 12
-const flashColors = {
-	original: {
-		fill: colors.statusColors.down.fill,
-		stroke: colors.statusColors.down.stroke
-	},
-	target: {
-		fill: '#700000',
-		stroke: '#700000'
-	}
-}
 
 /**
  * Setup Layout
@@ -29,15 +21,13 @@ const svg = d3.select('svg')
 	.attr('width', width)
 	.attr('height', height)
 
-// Organize elements into containers
-// svg.append('g').attr('id', 'links-container')
-// svg.append('g').attr('id', 'labels-container')
-// 	.attr('class', 'labels-container')
-// svg.append('g').attr('id', 'circles-container')
-
 const linksContainer =  svg // d3.select('#links-container')
 const labelsContainer =  svg // d3.select('#labels-container')
-const circlesContainer =  svg // d3.select('#circles-container')
+
+const nodes2 = new Nodes(data.nodes, {
+	container: svg,
+	adapter: cola
+})
 
 /**
  * Layout: use cola
@@ -46,6 +36,8 @@ cola.nodes(data.nodes)
 	.links(data.links)
 	.jaccardLinkLengths(100,0.8)
 	.start(30)
+
+
 
 render()
 
@@ -68,17 +60,7 @@ function render () {
 			.attr('class', 'link')
 			.style('stroke-width', 1)
 
-	// TODO: simplify example like this:
-	// https://github.com/d3/d3-selection#joining-data
-	let nodes = svg.selectAll('circle')
-	.data(data.nodes, (d) => d.id)
-
-	nodes = nodes.enter()
-		.append('circle')
-			.attr('data-title', (d) => d.label)
-		.merge(nodes)
-			.call(styleNode)
-			.call(cola.drag)
+	nodes2.render()
 
 	// Labels
 	let labels = labelsContainer.selectAll('text')
@@ -108,16 +90,10 @@ function render () {
 		labels.attr('x', (d) => d.x)
 			.attr('y', (d) => d.y + fixedRadius*2.5)
 
-		nodes.attr('cx', (d) => d.x)
-			.attr('cy', (d) => d.y)
+		nodes2.position()
 	})
 
-	// Animations
-	nodes.filter('.status-down')
-	.call(newtonTransitions.flash, flashColors)
-
-	nodes.filter('.status-deploying')
-	.call(newtonTransitions.pulse, 3)
+	nodes2.animate()
 }
 
 
@@ -133,5 +109,6 @@ document.querySelector('#js-update')
 
 		// note, we changed data, but we need to apply styles to update, not just enter()
 
+		nodes2.updateData(data.nodes)
 		render()
 	})
