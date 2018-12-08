@@ -1,3 +1,4 @@
+const d3 = require('d3')
 const SELECTOR = '.link'
 
 /**
@@ -43,8 +44,19 @@ class Links {
 	 * TODO: remove old links, return self
 	 */
 	render () {
+		let t = d3.transition()
+		.duration(100)
+		.ease(d3.easeLinear)
+
 		let links = this.container.selectAll(SELECTOR)
 		.data(this.data)
+
+		links.exit()
+			.transition(t)
+				.style('fill-opacity', 0)
+				.attr('y1', (d) => d.source.y + 2) // fade down
+				.attr('y2', (d) => d.target.y + 2) // fade down
+				.remove()
 
 		links = links.enter()
 			.append('line')

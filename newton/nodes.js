@@ -128,6 +128,17 @@ class Nodes {
 		let nodes = this.container.selectAll('circle')
 			.data(this.data, (d) => d.id)
 
+		let t = d3.transition()
+			.duration(300)
+			.ease(d3.easeLinear)
+
+		nodes.exit()
+			.transition(t)
+				.style('stroke-opacity', 0)
+				.style('fill-opacity', 0)
+				.attr('cy', (d) => d.y + 5) // fade down
+				.remove()
+
 		nodes = nodes.enter()
 			.append('circle')
 				.attr('data-title', (d) => d.label)

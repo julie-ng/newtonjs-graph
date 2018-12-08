@@ -20,7 +20,17 @@ graph.render()
 // Fake Data Updata
 document.querySelector('#js-update')
 	.addEventListener('click', () => {
-		data.nodes[data.nodes.length-1].status = "down"
+		// magnesium -> fail
+		data.nodes[data.nodes.length-2].status = "down"
+
+		graph.updateData(data)
+		graph.render()
+	})
+
+document.querySelector('#js-delete')
+	.addEventListener('click', () => {
+		data.nodes.pop()
+		data.links.pop()
 
 		graph.updateData(data)
 		graph.render()

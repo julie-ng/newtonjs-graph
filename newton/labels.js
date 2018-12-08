@@ -52,14 +52,23 @@ class Labels {
 	 * TODO: remove old labels, return self
 	 */
 	render () {
-		let t = d3.transition()
+		let t1 = d3.transition()
 		.duration(250)
 		.ease(d3.easeLinear)
 
 		let labels = this.container.selectAll('text')
 			.data(this.data)
 
-		labels.transition(t)
+		labels.exit()
+			.transition(t1)
+				.style('fill-opacity', 0)
+				.attr('y', (d) => d.y + fixedRadius*2.5 + 5) // fade down
+				.remove()
+
+		let t2 = d3.transition()
+				.duration(250)
+				.ease(d3.easeLinear)
+		labels.transition(t2)
 			.attr('font-size', calculateFontSize)
 
 		labels = labels.enter().append('text')

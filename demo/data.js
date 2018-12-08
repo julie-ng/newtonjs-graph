@@ -48,16 +48,16 @@ const elements = [
 		label: "Pon"
 	},
 	{
-		id: "K",
-		size: 8,
-		status: "up",
-		label: "Sodium"
-	},
-	{
 		id: "M",
 		size: 7,
 		status: "up",
 		label: "Magnesium"
+	},
+	{
+		id: "K",
+		size: 8,
+		status: "up",
+		label: "Sodium"
 	}
 ]
 
@@ -68,11 +68,11 @@ const linksMap = [
 	{ source: 'C', target: 'N' },
 	{ source: 'C', target: 'O' },
 	{ source: 'C', target: 'F' },
-	{ source: 'L', target: 'K' },
 	{ source: 'E', target: 'C' },
 	{ source: 'E', target: 'P' },
 	{ source: 'H', target: 'M' },
 	{ source: 'H', target: 'C' },
+	{ source: 'L', target: 'K' }
 ]
 
 module.exports = {
