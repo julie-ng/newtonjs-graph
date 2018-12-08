@@ -21,7 +21,7 @@ function circle (transition, offset = 5) {
  * @param {d3Transition} transition
  * @param {Integer} [offset] - distance along y-axis to fade down
  */
-function line (transition, offset = 2) {
+function link (transition, offset = 2) {
 	transition
 		.attr('y1', (d) => d.source.y + offset)
 		.attr('y2', (d) => d.target.y + offset)
@@ -39,6 +39,6 @@ function text (transition, offset = 5) {
 
 module.exports = {
 	circle: circle,
-	line: line,
+	link: link,
 	text: text
 }

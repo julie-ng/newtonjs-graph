@@ -55,7 +55,7 @@ class Links {
 		links.exit()
 			.transition(t)
 				.call(Transitions.fadeOut)
-				.call(Transitions.FadeDown.line)
+				.call(Transitions.FadeDown.link)
 			.remove()
 
 		links = links.enter()
