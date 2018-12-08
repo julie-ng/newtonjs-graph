@@ -1,84 +1,6 @@
 const d3 = require('d3')
-const colors = require('./config/colors')
-
+const NodeUI = require('./node-ui')
 const Transitions = require('./transitions')
-
-const fixedRadius = 12
-const flashColors = {
-	original: {
-		fill: colors.statusColors.down.fill,
-		stroke: colors.statusColors.down.stroke
-	},
-	target: {
-		fill: '#700000',
-		stroke: '#700000'
-	}
-}
-const calculateRadius = function (node) {
-	return fixedRadius // temp
-}
-
-/**
- * Flashes a circle inifinitely
- * @private
- * @param {node} circle - d3 selected elememt/node to animate
- * @param {Object} opts - map of colors
- */
-function flash (circle, opts = {}) {
-	circle.transition()
-		.on('start', function repeat (d) {
-			d3.active(this)
-				.duration(200)
-				.attr('fill', opts.target.fill)
-				.attr('stroke', opts.target.stroke)
-			.transition()
-				.duration(350)
-				.attr('fill', opts.original.fill)
-				.attr('stroke', opts.original.stroke)
-			.transition()
-				.delay(200)
-				.on('start', repeat)
-		})
-}
-
-/**
- * Pulses a circle infinitely
- * @private
- * @param {node} circle - d3 selected elememt/node to animate
- * @param {Integer} delta - amount to increase radius by
- */
-function pulse (circle, delta) {
-	circle.transition()
-		.on('start', function repeat (d) {
-			let originalRadius = calculateRadius(d)
-			d3.active(this)
-				.duration(300)
-				.attr('r', originalRadius + delta)
-			.transition()
-				.duration(800)
-				.attr('r', originalRadius)
-			.transition()
-				.on('start', repeat)
-		})
-}
-
-const styleNode = function (selection) {
-	selection.attr('class', (node) => 'node status-' + node.status)
-		.attr('fill', fillColor)
-		.attr('stroke', strokeColor)
-		.attr('stroke-width', '3px')
-		.attr('r', fixedRadius)
-}
-
-const fillColor = function (node) {
-	return colors.statusColors[node.status].fill
-}
-
-const strokeColor = function (node) {
-	return colors.statusColors[node.status].stroke
-}
-
-// ------------------------
 
 /**
  * Encapsulates what is needed to create the nodes of a network graph,
@@ -144,7 +66,7 @@ class Nodes {
 			.append('circle')
 				.attr('data-title', (d) => d.label)
 			.merge(nodes)
-				.call(styleNode)
+				.call(NodeUI.styleNode)
 				.call(this.adapter.drag)
 
 		this.nodes = nodes
@@ -164,12 +86,11 @@ class Nodes {
 	 * (Re)starts any animations using current data.
 	 */
 	animate () {
-		// console.log('Nodes.animate()')
 		this.nodes.filter('.status-down')
-			.call(flash, flashColors)
+			.call(NodeUI.flash)
 
 		this.nodes.filter('.status-deploying')
-			.call(pulse, 3)
+			.call(NodeUI.pulse, 3)
 	}
 }
 
