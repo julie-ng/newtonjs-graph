@@ -11,7 +11,20 @@ const defaults = {
 	width: 800 // can't use `window` in tests
 }
 
+/**
+ * Network Graph
+ */
 class Graph {
+
+	/**
+	 * Also initializes graph
+	 *
+	 * @param {Object|GraphData} data - network graph data
+	 * @param {Object} [opts] - options
+	 * @param {Object} [opts.margin] - graph margins
+	 * @param {Object} [opts.height] - height of network graph
+	 * @param {Object} [opts.width] - width of network graph
+	 */
 	constructor (data, opts = {}) {
 		this.data = data
 
@@ -22,6 +35,10 @@ class Graph {
 		this.init()
 	}
 
+	/**
+	 * Initializes graph by setting up `<svg>` layout and binding data.
+	 *
+	 */
 	init () {
 		this.cola = Cola.d3adaptor(d3).size([this.width, this.height])
 		this.svg = d3.select('svg')
@@ -47,6 +64,10 @@ class Graph {
 			.start(30)
 	}
 
+	/**
+	 * Renders the graph, specifically all links, nodes and labels.
+	 * No links have to be drawn first so circles are on top.
+	 */
 	render () {
 		this.links.render()
 		this.nodes.render()
@@ -63,6 +84,13 @@ class Graph {
 		return this
 	}
 
+	/**
+	 * Updates Data
+	 *
+	 * Change interface such data we're not really updating data, but just re-rendering.
+	 *
+	 * @param {Up} data
+	 */
 	updateData (data) {
 		this.labels.updateData(data)
 		this.links.updateData(data)
