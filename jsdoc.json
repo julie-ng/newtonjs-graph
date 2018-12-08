@@ -1,0 +1,37 @@
+{
+	"tags": {
+		"allowUnknownTags": true,
+		"dictionaries": [
+			"jsdoc",
+			"closure"
+		]
+	},
+	"source": {
+		"include": [
+			"newton"
+		],
+		"includePattern": ".+\\.js(doc)?$",
+		"excludePattern": "(^|\\/|\\\\)_"
+	},
+	"opts": {
+		"template": "node_modules/tidy-jsdoc",
+		"encoding": "utf8",
+		"destination": "./docs/",
+		"recurse": true
+	},
+	"plugins": [
+		"plugins/markdown",
+		"plugins/summarize"
+	],
+	"templates": {
+		"cleverLinks": false,
+		"monospaceLinks": false
+	},
+	"metadata": {
+		"title": "Newton Graph Library",
+		"header": {
+			"background": "#102027",
+			"color": "#ffffff"
+		}
+	}
+}

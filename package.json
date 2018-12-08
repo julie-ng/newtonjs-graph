@@ -7,11 +7,14 @@
   "scripts": {
     "webpack": "webpack",
     "server": "webpack-dev-server --open",
+    "docs": "jsdoc -c jsdoc.json",
+    "docs:watch": "nodemon -w newton --exec 'npm run docs'",
+    "docs:server": "live-server docs",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "lint:watch": "nodemon -w . --exec 'npm run lint'",
+    "lint:watch": "nodemon -w newton --exec 'npm run lint'",
     "test": "jest",
-    "test:watch": "nodemon -w . --exec 'npm test'"
+    "test:watch": "nodemon -w newton --exec 'npm test'"
   },
   "dependencies": {
     "d3": "^5.7.0",
@@ -26,10 +29,13 @@
     "handlebars-loader": "^1.7.0",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^23.6.0",
+    "jsdoc": "^3.5.5",
+    "live-server": "^1.2.1",
     "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "^4.10.0",
     "nodemon": "^1.18.7",
     "sass-loader": "^7.1.0",
+    "tidy-jsdoc": "^0.2.2",
     "webpack": "^4.26.0",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
