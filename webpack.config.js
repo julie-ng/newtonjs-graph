@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
 	mode: 'development',
-	entry: './preview.js',
+	entry: './demo/index.js',
 	output: {
 		filename: '[name].js',
 		path: path.resolve(__dirname, 'dist')
@@ -46,9 +46,9 @@ module.exports = {
 		}),
 		new HtmlWebpackPlugin({
 			templateParameters: {
-				title: 'Microservices Dashboard Protoype',
+				title: 'Microservices Dashboard Protoype (Demo)',
 			},
-			template: 'preview.hbs',
+			template: 'demo/index.hbs',
 			filename: 'index.html'
 		})
 	]

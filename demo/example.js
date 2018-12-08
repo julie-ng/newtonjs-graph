@@ -1,5 +1,5 @@
-const Graph = require('./graph')
-const data = require('./scratch/data')
+const Graph = require('./../newton/graph')
+const data = require('./data')
 const margin = 40
 
 const graph = new Graph(data, {

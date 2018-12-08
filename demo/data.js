@@ -59,7 +59,7 @@ const elements = [
 		status: "up",
 		label: "Magnesium"
 	}
-];
+]
 
 // links by reference
 const linksMap = [
@@ -73,21 +73,21 @@ const linksMap = [
 	{ source: 'E', target: 'P' },
 	{ source: 'H', target: 'M' },
 	{ source: 'H', target: 'C' },
-];
+]
 
-const links = [];
+const links = []
 linksMap.forEach((l) => {
 	links.push({
 		source: findNode(l.source),
 		target: findNode(l.target),
-	});
-});
+	})
+})
 
-function findNode(id) {
-	return elements.findIndex((node) => node.id === id);
+function findNode (id) {
+	return elements.findIndex((node) => node.id === id)
 }
 
 module.exports = {
 	nodes: elements,
 	links: links
-};
+}
