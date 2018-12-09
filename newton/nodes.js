@@ -1,30 +1,27 @@
 const d3 = require('d3')
-const NodeUI = require('./node-ui')
+
+const Renderer = require('./renderer')
 const Transitions = require('./transitions')
+const NodeUI = require('./node-ui')
 
 /**
  * Encapsulates what is needed to create the nodes of a network graph,
  * namely rendering, positioning and animation of nodes based on data.
+ *
+ * @extends Renderer
  */
-class Nodes {
+class Nodes extends Renderer {
 	/**
 	 * @param {Object} options
 	 * @param {d3adapter} options.adapter - reference to layout adapter (webcola). required to enable dragging of nodes
 	 * @param {String} [options.container] - HTML identifier used by for d3
 	 */
 	constructor (options = {}) {
+		super()
 		this.adapter = options.adapter
 		this.container = options.container || 'svg'
 	}
 
-	bindGraph (graph) {
-		graph.on('tick', () => this.position())
-		graph.on('update', (data) => this.render(data))
-	}
-
-	/**
-	 * Renders the nodes, updating existing and drawing new nodes.
-	 */
 	render (data) {
 		let nodes = d3.select(this.container)
 			.selectAll('circle')
@@ -51,10 +48,6 @@ class Nodes {
 		this.animate()
 	}
 
-	/**
-	 * Calculates node positions using current data.
-	 * Actual positioning is done in the `Graph` class.
-	 */
 	position () {
 		this.nodes
 			.attr('cx', (d) => d.x)

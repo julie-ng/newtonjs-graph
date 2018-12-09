@@ -20,12 +20,12 @@ const _publish = Symbol('publish')
  * ]
  * ```
  *
- * This wrapper lets you calculate links dynamically based on a reference key, e.g. `id`, so we can use this structure instead:
+ * This wrapper lets you calculate links dynamically based on a reference key, e.g. `id`, so we can use this kind of structure instead:
  *
  * ```
  * const links = [
  * 	{ source: 'A', target: 'B' },
- * 	{ source: '1', target: '2' }
+ * 	{ source: 'frontend', target: 'middleware' }
  * ]
  * ```
  *

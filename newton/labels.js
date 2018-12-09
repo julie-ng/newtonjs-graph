@@ -1,4 +1,5 @@
 const d3 = require('d3')
+const Renderer = require('./renderer')
 const Transitions = require('./transitions')
 
 const fixedRadius = 12
@@ -13,25 +14,20 @@ const calculateFontSize = (node) => {
 /**
  * Encapsulates what is needed to create the labels of nodes
  * of the network graph
+ *
+ * @extends Renderer
  */
-class Labels {
+class Labels extends Renderer {
 	/**
 	 *
 	 * @param {Object} options
 	 * @param {String} [options.container] - HTML identifier used by for d3
 	 */
 	constructor (options = {}) {
+		super()
 		this.container = options.container || 'svg'
 	}
 
-	bindGraph (graph) {
-		graph.on('tick', () => this.position())
-		graph.on('update', (data) => this.render(data))
-	}
-
-	/**
-	 * Renders the labels, updating existing and drawing new labels.
-	 */
 	render (data) {
 		let t1 = d3.transition()
 			.duration(250)
@@ -66,10 +62,6 @@ class Labels {
 		this.labels = labels
 	}
 
-	/**
-	 * Calculates label positions using current data.
-	 * Actual positioning is done in the `Graph` class.
-	 */
 	position () {
 		this.labels
 			.attr('x', (d) => d.x)

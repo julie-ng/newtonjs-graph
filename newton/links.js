@@ -1,28 +1,24 @@
 const d3 = require('d3')
-const SELECTOR = '.link'
+const Renderer = require('./renderer')
 const Transitions = require('./transitions')
 
+const SELECTOR = '.link'
 /**
  * Encapsulates what is needed to create the links between
  * nodes of a network graph, namely rendering and positioning
+ *
+ * @extends Renderer
  */
-class Links {
+class Links extends Renderer {
 	/**
 	 * @param {Object} options
 	 * @param {String} [options.container] - HTML identifier used by for d3
 	 */
 	constructor (options = {}) {
+		super()
 		this.container = options.container || 'svg'
 	}
 
-	bindGraph (graph) {
-		graph.on('tick', () => this.position())
-		graph.on('update', (data) => this.render(data))
-	}
-
-	/**
-	 * Renders the links, updating existing and drawing new links.
-	 */
 	render (data) {
 		let t = d3.transition()
 			.duration(100)
@@ -47,10 +43,6 @@ class Links {
 		this.links = links
 	}
 
-	/**
-	 * Calculates link positions using current data.
-	 * Actual positioning is done in the `Graph` class.
-	 */
 	position () {
 		this.links
 			.attr('x1', (d) => d.source.x)
