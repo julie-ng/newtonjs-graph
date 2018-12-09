@@ -7,7 +7,7 @@
   "scripts": {
     "webpack": "webpack",
     "server": "webpack-dev-server --open",
-    "docs": "jsdoc -c jsdoc.json --private",
+    "docs": "jsdoc -c jsdoc.json",
     "docs:watch": "nodemon -w newton --exec 'npm run docs'",
     "docs:server": "live-server docs",
     "lint": "eslint .",
