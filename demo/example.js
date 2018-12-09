@@ -1,37 +1,20 @@
 const Graph = require('./../newton/graph')
-const GraphData = require('./../newton/graph-data')
+const Network = require('./../newton/network')
+const data = require('./data')
 
-const source = require('./data')
-const data = new GraphData({
-	nodes: source.nodes,
-	map: source.linksMap,
-	key: 'id'
-})
+const graph = new Graph({ width: window.innerWidth })
+const network = new Network(data.nodes, data.linksMap, { uid: 'id' })
 
-const margin = 40
-const graph = new Graph(data, {
-	margin: margin,
-	height: 550,
-	width: window.innerWidth - margin
-})
+graph.bind(network)
+network.triggerUpdate()
 
-graph.render()
-
-// Fake Data Updata
+// Fake Data Update
 document.querySelector('#js-update')
 	.addEventListener('click', () => {
-		// magnesium -> fail
-		data.nodes[data.nodes.length-2].status = "down"
-
-		graph.updateData(data)
-		graph.render()
+		network.demoUpdate()
 	})
 
 document.querySelector('#js-delete')
 	.addEventListener('click', () => {
-		data.nodes.pop()
-		data.links.pop()
-
-		graph.updateData(data)
-		graph.render()
+		network.demoDelete()
 	})

@@ -8,48 +8,29 @@ const Transitions = require('./transitions')
  */
 class Links {
 	/**
-	 * @param {Object} data
-	 * @param {Array} data.nodes - Array of node data
-	 * @param {Object} opts
-	 * @param {d3Element} opts.container - d3 element from `select()`
+	 * @param {Object} options
+	 * @param {String} [options.container] - HTML identifier used by for d3
 	 */
-	constructor (data, opts) {
-		this.setData(data)
-		this.container = opts.container
+	constructor (options = {}) {
+		this.container = options.container || 'svg'
 	}
 
-	/**
-	 * A small wrapper until the data interface stabilizes, i.e. for the moment, `.links` property is expected to contain links data.
-	 *
-	 * Theoretically necessary to have other data, for advanced visualizations etc.
-	 *
-	 * @private
-	 * @param {Array} data.links - list of links
-	 */
-	setData (data) {
-		this.data = data.links
-	}
-
-	/**
-	 * Updates node data
-	 *
-	 * @param {Object} data
-	 */
-	updateData (data) {
-		this.setData(data)
+	bindGraph (graph) {
+		graph.on('tick', () => this.position())
+		graph.on('update', (data) => this.render(data))
 	}
 
 	/**
 	 * Renders the links, updating existing and drawing new links.
-	 * TODO: return self
 	 */
-	render () {
+	render (data) {
 		let t = d3.transition()
-		.duration(100)
-		.ease(d3.easeLinear)
+			.duration(100)
+			.ease(d3.easeLinear)
 
-		let links = this.container.selectAll(SELECTOR)
-		.data(this.data)
+		let links = d3.select(this.container)
+			.selectAll(SELECTOR)
+			.data(data.links)
 
 		links.exit()
 			.transition(t)

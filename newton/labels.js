@@ -17,49 +17,29 @@ const calculateFontSize = (node) => {
 class Labels {
 	/**
 	 *
-	 * @param {Object} data
-	 * @param {Array} data.nodes - list of nodes
-	 * @param {Object} opts
-	 * @param {d3Element} opts.container - d3 element from `select()`
+	 * @param {Object} options
+	 * @param {String} [options.container] - HTML identifier used by for d3
 	 */
-	constructor (data, opts = {}) {
-		this.setData(data)
-		this.container = opts.container
+	constructor (options = {}) {
+		this.container = options.container || 'svg'
 	}
 
-	/**
-	 * A small wrapper until the data interface stabilizes, i.e. for the moment, `.nodes` property is expected to contain node data.
-	 *
-	 * Theoretically necessary to have other data, for advanced visualizations etc.
-	 *
-	 * @private
-	 * @param {Array} data.nodes - list of nodes
-	 */
-	setData (data) {
-		this.data = data.nodes
-	}
-
-
-	/**
-	 * Updates Label data
-	 *
-	 * @param {Object} data
-	 */
-	updateData (data) {
-		this.setData(data)
+	bindGraph (graph) {
+		graph.on('tick', () => this.position())
+		graph.on('update', (data) => this.render(data))
 	}
 
 	/**
 	 * Renders the labels, updating existing and drawing new labels.
-	 * TODO: return self
 	 */
-	render () {
+	render (data) {
 		let t1 = d3.transition()
-		.duration(250)
-		.ease(d3.easeLinear)
+			.duration(250)
+			.ease(d3.easeLinear)
 
-		let labels = this.container.selectAll('text')
-			.data(this.data)
+		let labels = d3.select(this.container)
+			.selectAll('text')
+			.data(data.nodes)
 
 		labels.exit()
 			.transition(t1)

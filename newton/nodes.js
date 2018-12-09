@@ -8,48 +8,27 @@ const Transitions = require('./transitions')
  */
 class Nodes {
 	/**
-	 * @param {Object} data
-	 * @param {Array} data.nodes - Array of node data
-	 * @param {Object} opts
-	 * @param {d3Element} opts.container - d3 element from `select()`
-	 * @param {d3adapter} opts.adapter - reference to layout adapter (webcola). required to enable dragging of nodes
+	 * @param {Object} options
+	 * @param {d3adapter} options.adapter - reference to layout adapter (webcola). required to enable dragging of nodes
+	 * @param {String} [options.container] - HTML identifier used by for d3
 	 */
-	constructor (data, opts) {
-		this.setData(data)
-		this.container = opts.container
-		this.adapter = opts.adapter
+	constructor (options = {}) {
+		this.adapter = options.adapter
+		this.container = options.container || 'svg'
 	}
 
-	/**
-	 * A small wrapper until the data interface stabilizes, i.e. for the moment, `.nodes` property is expected to contain node data.
-	 *
-	 * Theoretically necessary to have other data, for advanced visualizations etc.
-	 *
-	 * @private
-	 * @param {Array} data.nodes - list of nodes
-	 */
-	setData (data) {
-		this.data = data.nodes
-	}
-
-	/**
-	 * Updates node data
-	 *
-	 * @param {Object} data
-	 */
-	updateData (data) {
-		this.setData(data)
+	bindGraph (graph) {
+		graph.on('tick', () => this.position())
+		graph.on('update', (data) => this.render(data))
 	}
 
 	/**
 	 * Renders the nodes, updating existing and drawing new nodes.
-	 * TODO: return self
 	 */
-	render () {
-		console.log('Nodes.render()')
-
-		let nodes = this.container.selectAll('circle')
-			.data(this.data, (d) => d.id)
+	render (data) {
+		let nodes = d3.select(this.container)
+			.selectAll('circle')
+			.data(data.nodes, (d) => d.id)
 
 		let t = d3.transition()
 			.duration(300)
@@ -69,6 +48,7 @@ class Nodes {
 				.call(this.adapter.drag)
 
 		this.nodes = nodes
+		this.animate()
 	}
 
 	/**
@@ -76,8 +56,8 @@ class Nodes {
 	 * Actual positioning is done in the `Graph` class.
 	 */
 	position () {
-		// console.log('Nodes.position()')
-		this.nodes.attr('cx', (d) => d.x)
+		this.nodes
+			.attr('cx', (d) => d.x)
 			.attr('cy', (d) => d.y)
 	}
 
@@ -85,11 +65,13 @@ class Nodes {
 	 * (Re)starts any animations using current data.
 	 */
 	animate () {
-		this.nodes.filter('.status-down')
-			.call(NodeUI.flash)
+		this.nodes
+			.filter('.status-down')
+				.call(NodeUI.flash)
 
-		this.nodes.filter('.status-deploying')
-			.call(NodeUI.pulse, 3)
+		this.nodes
+			.filter('.status-deploying')
+				.call(NodeUI.pulse, 3)
 	}
 }
 
