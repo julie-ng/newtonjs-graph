@@ -14,7 +14,7 @@
     "lint:fix": "eslint --fix .",
     "lint:watch": "nodemon -w newton --exec 'npm run lint'",
     "test": "jest",
-    "test:watch": "nodemon -w newton --exec 'npm test'"
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "d3": "^5.7.0",
