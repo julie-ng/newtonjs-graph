@@ -40,6 +40,7 @@ class Graph extends EventEmitter {
 	 */
 	constructor (opts = {}) {
 		super()
+
 		this.margin = opts.margin || defaults.margin
 		this.height = opts.height || defaults.height
 		this.width = (opts.width || defaults.width) - this.margin
@@ -100,7 +101,6 @@ class Graph extends EventEmitter {
 	 * @private
 	 */
 	[_render] (data) {
-		console.log('first render?')
 		this.links.render(data)
 		this.nodes.render(data)
 		this.labels.render(data)

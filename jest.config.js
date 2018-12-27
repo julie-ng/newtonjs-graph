@@ -29,6 +29,9 @@ module.exports = {
 	// An array of regexp pattern strings used to skip coverage collection
 	coveragePathIgnorePatterns: [
 		"/node_modules/",
+		"/docs/",
+		"/demo/",
+		"jest.config.js",
 		"jsdoc.json"
 	],
 
@@ -140,9 +143,10 @@ module.exports = {
 	// ],
 
 	// An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
-	// testPathIgnorePatterns: [
-	//   "/node_modules/"
-	// ],
+	testPathIgnorePatterns: [
+		"/node_modules/",
+		"/docs/"
+	],
 
 	// The regexp pattern Jest uses to detect test files
 	// testRegex: "",
@@ -174,7 +178,9 @@ module.exports = {
 	// verbose: null,
 
 	// An array of regexp patterns that are matched against all source file paths before re-running tests in watch mode
-	// watchPathIgnorePatterns: [],
+	watchPathIgnorePatterns: [
+		"docs"
+	],
 
 	// Whether to use watchman for file crawling
 	// watchman: true,
