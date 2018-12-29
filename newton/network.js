@@ -41,13 +41,39 @@ class Network extends EventEmitter {
 	 */
 	constructor (nodes, relationships, options = {}) {
 		super()
+
+		/**
+		 * Cache for building links via unique IDs instead of array indexes.
+		 */
 		this[_cache] = {}
+
+		/**
+		 * Array that maps relationships between nodes using
+		 * references to array indexes (original d3.js interface).
+		 * @private
+		 */
 		this[_links] = []
 
+		/**
+		 * Array of nodes. See d3.js documentation.
+		 */
 		this[_nodes] = nodes
-		this[_relationships] = relationships
-		this[_uid] = options.uid || 'id'
 
+		/**
+		 * Array that maps relationships between nodes using
+		 * referenes to unique identifier in the `uid` property.
+		 * This is what Newton commonly refers to as `links` in its interface.
+		 *
+		 * @private
+		 */
+		this[_relationships] = relationships
+
+		/**
+		 * Unique identifier to reference nodes when calculating links
+		 *
+		 * @private
+		 */
+		this[_uid] = options.uid || 'id'
 		this[_createLinks]()
 	}
 
