@@ -1,5 +1,5 @@
 const d3 = require('d3')
-const colors = require('./config/colors')
+const colors = require('./colors')
 
 /**
  * @module NodeUI

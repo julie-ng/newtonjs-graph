@@ -3,9 +3,9 @@ const EventEmitter = require('events').EventEmitter
 // const Cola = require('webcola')
 const Graph = require('./graph')
 const Network = require('./network')
-const Labels = require('./labels')
-const Links = require('./links')
-const Nodes = require('./nodes')
+const Labels = require('./components/labels')
+const Links = require('./components/links')
+const Nodes = require('./components/nodes')
 
 const nodesMockData = [
 	{ id: 1, name: 'foo' },

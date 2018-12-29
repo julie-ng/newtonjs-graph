@@ -2,7 +2,7 @@ const d3 = require('d3')
 
 const Renderer = require('./renderer')
 const Transitions = require('./transitions')
-const NodeUI = require('./node-ui')
+const NodeUI = require('./styles/node.ui')
 
 /**
  * Encapsulates what is needed to create the nodes of a network graph,

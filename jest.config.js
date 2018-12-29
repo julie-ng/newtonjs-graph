@@ -31,6 +31,7 @@ module.exports = {
 		"/node_modules/",
 		"/docs/",
 		"/demo/",
+		"/config/",
 		"jest.config.js",
 		"jsdoc.json"
 	],
