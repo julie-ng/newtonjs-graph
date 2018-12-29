@@ -55,11 +55,6 @@ class Graph extends EventEmitter {
 		this.labels = new Labels()
 		this.links = new Links()
 		this.nodes = new Nodes({ adapter: this.cola })
-
-		// Order here determines how elements are stacked in svg
-		this.links.bindGraph(this)
-		this.nodes.bindGraph(this)
-		this.labels.bindGraph(this)
 	}
 
 	/**
@@ -74,6 +69,11 @@ class Graph extends EventEmitter {
 			.links(network.get('links'))
 			.jaccardLinkLengths(100,0.8)
 			.start(30)
+
+		// Order here determines how elements are stacked in svg
+		this.links.bindGraph(this)
+		this.nodes.bindGraph(this)
+		this.labels.bindGraph(this)
 
 		/**
 		 * Tick event used to constrain layout using webcola.
