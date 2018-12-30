@@ -1,12 +1,4 @@
 const EventEmitter = require('events').EventEmitter
-const _uid = Symbol('uid')
-const _cache = Symbol('cache')
-const _nodes = Symbol('nodes')
-const _links = Symbol('links')
-const _relationships = Symbol('relationships')
-const _findIndex = Symbol('findIndex')
-const _createLinks = Symbol('createLinks')
-const _publish = Symbol('publish')
 
 /**
  * Data Wrapper for Graphs, useful for dynamically calculating links between nodes.
@@ -35,29 +27,29 @@ class Network extends EventEmitter {
 	 * Creates a Network
 	 *
 	 * @param {Array} nodes - Array of Nodes
-	 * @param {Array} relationships - Array of Relationships between nodes using the reference key
+	 * @param {Array} linksMap - Array of Relationships between nodes using the reference key
 	 * @param {Object} options
 	 * @param {String} options.uid - name of the property of your unique identifier, e.g. 'id'
 	 */
-	constructor (nodes, relationships, options = {}) {
+	constructor (nodes, linksMap, options = {}) {
 		super()
 
 		/**
 		 * Cache for building links via unique IDs instead of array indexes.
 		 */
-		this[_cache] = {}
+		this._cache = {}
 
 		/**
 		 * Array that maps relationships between nodes using
 		 * references to array indexes (original d3.js interface).
 		 * @private
 		 */
-		this[_links] = []
+		this._links = []
 
 		/**
 		 * Array of nodes. See d3.js documentation.
 		 */
-		this[_nodes] = nodes
+		this._nodes = nodes
 
 		/**
 		 * Array that maps relationships between nodes using
@@ -66,15 +58,15 @@ class Network extends EventEmitter {
 		 *
 		 * @private
 		 */
-		this[_relationships] = relationships
+		this._linksMap = linksMap
 
 		/**
 		 * Unique identifier to reference nodes when calculating links
 		 *
 		 * @private
 		 */
-		this[_uid] = options.uid || 'id'
-		this[_createLinks]()
+		this._uid = options.uid || 'id'
+		this._createLinks()
 	}
 
 	/**
@@ -86,9 +78,9 @@ class Network extends EventEmitter {
 	 */
 	get (attr) {
 		if (attr === 'links')
-			return this[_links]
+			return this._links
 		else if (attr === 'nodes')
-			return this[_nodes]
+			return this._nodes
 		else
 			return null
 	}
@@ -96,31 +88,31 @@ class Network extends EventEmitter {
 	/**
 	 * Resets cache used to calculate links from relationships for d3.js
 	 */
-	resetCache () {
-		this[_cache] = {}
+	_resetCache () {
+		this._cache = {}
 	}
 
 	// --------------- MOCK --------------- //
 
 	triggerUpdate () {
 		this.emit('update', {
-			nodes: this[_nodes],
-			links: this[_links]
+			nodes: this._nodes,
+			links: this._links
 		})
 	}
 
 	demoUpdate () {
-		let nodes = this[_nodes]
+		let nodes = this._nodes
 		nodes[nodes.length-2].status = 'down'
 
-		this[_publish]('update')
+		this._publish('update')
 	}
 
 	demoDelete () {
-		this[_nodes].pop()
-		this[_links].pop()
+		this._nodes.pop()
+		this._links.pop()
 
-		this[_publish]('update')
+		this._publish('update')
 	}
 
 	// --------------- PRIVATE --------------- //
@@ -131,10 +123,10 @@ class Network extends EventEmitter {
 	 * @private
 	 * @param {String} eventName - Event Name, e.g. `update`
 	 */
-	[_publish] (eventName) {
+	_publish (eventName) {
 		this.emit(eventName, {
-			nodes: this[_nodes],
-			links: this[_links]
+			nodes: this._nodes,
+			links: this._links
 		})
 	}
 
@@ -146,12 +138,12 @@ class Network extends EventEmitter {
 	 * @param {String} id - value to match against key, e.g. `app1` or `bob`
 	 * @returns {Integer} i - index of Node
 	 */
-	[_findIndex] (id) {
-		if (this[_cache].hasOwnProperty(id)) {
-			return this[_cache][id]
+	_findIndex (id) {
+		if (this._cache.hasOwnProperty(id)) {
+			return this._cache[id]
 		} else {
-			let i = this[_nodes].findIndex((n) => n[this[_uid]] === id )
-			this[_cache][id] = i
+			let i = this._nodes.findIndex((n) => n[this._uid] === id )
+			this._cache[id] = i
 			return i
 		}
 	}
@@ -163,18 +155,18 @@ class Network extends EventEmitter {
 	 *
 	 * @private
 	 */
-	[_createLinks] () {
-		this.resetCache()
+	_createLinks () {
+		this._resetCache()
 
 		let links = []
-		this[_relationships].forEach((l) => {
+		this._linksMap.forEach((l) => {
 			links.push({
-				source: this[_findIndex](l.source),
-				target: this[_findIndex](l.target),
+				source: this._findIndex(l.source),
+				target: this._findIndex(l.target),
 			})
 		})
 
-		this[_links] = links
+		this._links = links
 	}
 }
 
