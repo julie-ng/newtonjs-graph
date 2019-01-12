@@ -46,8 +46,8 @@ class Links extends Renderer {
 	position () {
 		this.links
 			.attr('x1', (d) => d.source.x)
-			.attr('y1', (d) => d.source.y)
 			.attr('x2', (d) => d.target.x)
+			.attr('y1', (d) => d.source.y)
 			.attr('y2', (d) => d.target.y)
 	}
 }
