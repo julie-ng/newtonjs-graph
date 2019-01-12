@@ -94,6 +94,13 @@ class Graph extends EventEmitter {
 		 * @property {Array} links
 		 */
 		network.on('update', (data) => this.emit('update', data))
+
+		// First render
+
+		this[_render]({
+			nodes: network.get('nodes'),
+			links: network.get('links')
+		})
 	}
 
 	/**

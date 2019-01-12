@@ -4,9 +4,7 @@ const data = require('./data')
 
 const graph = new Graph({ width: window.innerWidth })
 const network = new Network(data.nodes, data.linksMap, { uid: 'id' })
-
 graph.bind(network)
-network.triggerUpdate()
 
 document.querySelector('#js-delete')
 	.addEventListener('click', () => {

@@ -63,21 +63,14 @@ class Network extends EventEmitter {
 	 * @return {String|null}
 	 */
 	get (attr) {
-		if (attr === 'links')
+		if (attr === 'data')
+			return { links: this._links, nodes: this._nodes }
+		else if (attr === 'links')
 			return this._links
 		else if (attr === 'nodes')
 			return this._nodes
 		else
 			return null
-	}
-
-	// --------------- MOCK --------------- //
-
-	triggerUpdate () {
-		this.emit('update', {
-			nodes: this._nodes,
-			links: this._links
-		})
 	}
 
 	demoDelete (id) {
