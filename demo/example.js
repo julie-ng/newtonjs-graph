@@ -8,12 +8,6 @@ const network = new Network(data.nodes, data.linksMap, { uid: 'id' })
 graph.bind(network)
 network.triggerUpdate()
 
-// Fake Data Update
-// document.querySelector('#js-update')
-// 	.addEventListener('click', () => {
-// 		network.demoUpdate()
-// 	})
-
 document.querySelector('#js-delete')
 	.addEventListener('click', () => {
 		let toDelete = document.querySelector('#js-delete-id').value

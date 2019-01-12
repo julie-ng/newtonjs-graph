@@ -35,11 +35,6 @@ class Network extends EventEmitter {
 		super()
 
 		/**
-		 * Cache for building links via unique IDs instead of array indexes.
-		 */
-		this._cache = {}
-
-		/**
 		 * Array that maps relationships between nodes using
 		 * references to array indexes (original d3.js interface).
 		 * @private
@@ -52,21 +47,12 @@ class Network extends EventEmitter {
 		this._nodes = nodes
 
 		/**
-		 * Array that maps relationships between nodes using
-		 * referenes to unique identifier in the `uid` property.
-		 * This is what Newton commonly refers to as `links` in its interface.
-		 *
-		 * @private
-		 */
-		this._linksMap = linksMap
-
-		/**
 		 * Unique identifier to reference nodes when calculating links
 		 *
 		 * @private
 		 */
 		this._uid = options.uid || 'id'
-		this._createLinks()
+		this._createLinks(linksMap)
 	}
 
 	/**
@@ -85,13 +71,6 @@ class Network extends EventEmitter {
 			return null
 	}
 
-	/**
-	 * Resets cache used to calculate links from relationships for d3.js
-	 */
-	_resetCache () {
-		this._cache = {}
-	}
-
 	// --------------- MOCK --------------- //
 
 	triggerUpdate () {
@@ -101,58 +80,79 @@ class Network extends EventEmitter {
 		})
 	}
 
-	demoUpdate () {
-		let nodes = this._nodes
-		nodes[nodes.length-2].status = 'down'
-
-		this._publish('update')
-	}
-
 	demoDelete (id) {
-		let node = this.findNode(id)
-
-		// let links = this.findLinks(node) // don't really need
-		this.removeNodeByIndex(this.findNodeIndex(node))
-		this.removeLinks(node)
-
+		let node = this.findNodeById(id)
+		this.removeNode(node)
 		this._publish('update')
-	}
-
-	findNode (nodeId) {
-		return this._nodes.find((n) => n.id === nodeId)
 	}
 
 	/**
-	 *
-	 * @param {String|Object} node - unique identifier of node or node data objet itself
+	 * @param {String} id
+	 * @return {Object} node data object
+	 */
+	findNodeById (id) {
+		return this._nodes.find((n) => n[this._uid] === id)
+	}
+
+	/**
+	 * Finds index of node either by it's unique identifier, e.g. `id` or the node data object itself.
+	 * @param {String|Object} node - id or data object
 	 * @return {Integer} index of matched node or `-1` if not found
 	 */
 	findNodeIndex (node) {
-		let id
-		if (typeof node === 'object') {
-			id = node[this._uid]
-		} else {
-			id = node
-		}
-
+		let id = (typeof node === 'object')
+			? node[this._uid]
+			: node
 		return this._nodes.findIndex((n) => n[this._uid] === id)
 	}
 
+	/**
+	 * Removes node and its links from the graph
+	 * @param {Object} node - node data object
+	 */
+	removeNode (node) {
+		const i = this.findNodeIndex(node)
+		this.removeNodeByIndex(i)
+		this.removeLinks(node)
+	}
+
+	/**
+	 * Removes a node by its index in the network's `nodes` array.
+	 * @param {Integer} index
+	 */
 	removeNodeByIndex (index) {
 		this._nodes.splice(index, 1)
 	}
 
+	/**
+	 * Finds links a given node has. Example results are `[{source: node, target: node}]`
+	 *
+	 * @param {Object} node - node data object
+	 * @return {Array} of link objets
+	 */
+	findLinks (node) {
+		let links = []
+		this._links.forEach((link, i) => {
+			if (link.source === node || link.target === node) {
+				links.push(link)
+			}
+		})
+		return links
+	}
+
+	/**
+	 * Removes links for a given node
+	 *
+	 * @param {Object} node - node data object
+	 */
 	removeLinks (node) {
 		let links = this._links
 		for (let i = links.length; i--; i >= 0) {
-			if (links[i].source === node || links[i].target === node)
-			// if (includesNode(linksData[i], node)) {
+			if (links[i].source === node || links[i].target === node) {
 				links.splice(i, 1)
-			// }
+			}
 		}
 	}
-
-	// --------------- PRIVATE --------------- //
 
 	/**
 	 * Emits an event
@@ -168,61 +168,19 @@ class Network extends EventEmitter {
 	}
 
 	/**
-	 * Finds and returns index of a Node. Returns `-1` if not found.
-	 * TODO: throw/catch node not found
-	 *
-	 * @private
-	 * @param {String} id - value to match against key, e.g. `app1` or `bob`
-	 * @returns {Integer} i - index of Node
-	 */
-	_findIndex (id) {
-		if (this._cache.hasOwnProperty(id)) {
-			return this._cache[id]
-		} else {
-			let i = this._nodes.findIndex((n) => n[this._uid] === id )
-			this._cache[id] = i
-			return i
-		}
-	}
-
-	/**
 	 * Re-calculates links via array indicies for D3.
 	 * This should be invoked if you update your data and
 	 * nodes and/or relationships might have changed.
 	 *
 	 * @private
 	 */
-	_createLinks () {
-		this._resetCache()
-
-		let links = []
-		this._linksMap.forEach((l) => {
-			links.push({
-				source: this._findIndex(l.source),
-				target: this._findIndex(l.target),
+	_createLinks (linksMap) {
+		linksMap.forEach((l) => {
+			this._links.push({
+				source: this.findNodeById(l.source),
+				target: this.findNodeById(l.target),
 			})
 		})
-
-		this._links = links
-	}
-
-	findLinks (node) {
-		let matches = []
-		this._links.forEach((link, i) => {
-			if (link.source === node || link.target === node) {
-				matches.push(i)
-			}
-		})
-
-		let links = []
-		matches.forEach((m) => {
-			links.push(this._links[m])
-		})
-
-		return {
-			links: links,
-			matches: matches
-		}
 	}
 }
 
