@@ -1,5 +1,5 @@
 const d3 = require('d3')
-const Renderer = require('./renderer')
+const View = require('./view')
 const Transitions = require('./transitions')
 
 const SELECTOR = '.link'
@@ -7,9 +7,9 @@ const SELECTOR = '.link'
  * Encapsulates what is needed to create the links between
  * nodes of a network graph, namely rendering and positioning
  *
- * @extends Renderer
+ * @extends View
  */
-class Links extends Renderer {
+class Links extends View {
 	/**
 	 * @param {Object} options
 	 * @param {String} [options.container] - HTML identifier used by for d3

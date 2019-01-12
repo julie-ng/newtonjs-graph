@@ -2,11 +2,11 @@
  * Base Class to force interface to be implemented
  */
 
-class Renderer {
+class View {
 	constructor () {}
 
 	/**
-	 * Binds this renderer to a graph so we can react to
+	 * Binds this view to a graph so we can react to
 	 * changes and re-render and adjust the graph as necessary.
 	 *
 	 * @param {Graph} graph - graph to listen to for changes
@@ -49,7 +49,7 @@ class Renderer {
 }
 
 function interfaceError (methodName) {
-	return `Renderer interface error - subclasses must implement the ${methodName}() method`
+	return `View interface error - subclasses must implement the ${methodName}() method`
 }
 
-module.exports = Renderer
+module.exports = View

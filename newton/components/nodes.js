@@ -1,6 +1,6 @@
 const d3 = require('d3')
 
-const Renderer = require('./renderer')
+const View = require('./view')
 const Transitions = require('./transitions')
 const NodeUI = require('./styles/node.ui')
 
@@ -8,9 +8,9 @@ const NodeUI = require('./styles/node.ui')
  * Encapsulates what is needed to create the nodes of a network graph,
  * namely rendering, positioning and animation of nodes based on data.
  *
- * @extends Renderer
+ * @extends View
  */
-class Nodes extends Renderer {
+class Nodes extends View {
 	/**
 	 * @param {Object} options
 	 * @param {d3adapter} options.adapter - reference to layout adapter (webcola). required to enable dragging of nodes
