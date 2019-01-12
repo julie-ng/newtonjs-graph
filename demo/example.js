@@ -9,5 +9,5 @@ graph.bind(network)
 document.querySelector('#js-delete')
 	.addEventListener('click', () => {
 		let toDelete = document.querySelector('#js-delete-id').value
-		network.demoDelete(toDelete.toString())
+		network.removeNodeById(toDelete.toString())
 	})

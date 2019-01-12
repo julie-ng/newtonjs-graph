@@ -73,12 +73,6 @@ class Network extends EventEmitter {
 			return null
 	}
 
-	demoDelete (id) {
-		let node = this.findNodeById(id)
-		this.removeNode(node)
-		this._publish('update')
-	}
-
 	/**
 	 * @param {String} id
 	 * @return {Object} node data object
@@ -105,16 +99,18 @@ class Network extends EventEmitter {
 	 */
 	removeNode (node) {
 		const i = this.findNodeIndex(node)
-		this.removeNodeByIndex(i)
+		this._nodes.splice(i, 1)
 		this.removeLinks(node)
 	}
 
 	/**
-	 * Removes a node by its index in the network's `nodes` array.
-	 * @param {Integer} index
+	 * Removes node by id
+	 * @param {String} id
 	 */
-	removeNodeByIndex (index) {
-		this._nodes.splice(index, 1)
+	removeNodeById (id) {
+		let node = this.findNodeById(id)
+		this.removeNode(node)
+		this._publish('update')
 	}
 
 	/**
