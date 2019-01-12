@@ -25,7 +25,7 @@ class Nodes extends Renderer {
 	render (data) {
 		let nodes = d3.select(this.container)
 			.selectAll('circle')
-			.data(data.nodes, (d) => d.id)
+			.data(data.nodes, (d) => 'node-' + d.id)
 
 		let t = d3.transition()
 			.duration(300)

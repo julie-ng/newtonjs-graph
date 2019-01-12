@@ -26,7 +26,7 @@ class Links extends Renderer {
 
 		let links = d3.select(this.container)
 			.selectAll(SELECTOR)
-			.data(data.links)
+			.data(data.links, (d) => 'link-' + d.source.id + '-' + d.target.id)
 
 		links.exit()
 			.transition(t)

@@ -35,7 +35,7 @@ class Labels extends Renderer {
 
 		let labels = d3.select(this.container)
 			.selectAll('text')
-			.data(data.nodes)
+			.data(data.nodes, (d) => 'label-' + d.id)
 
 		labels.exit()
 			.transition(t1)
