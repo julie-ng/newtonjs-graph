@@ -108,11 +108,48 @@ class Network extends EventEmitter {
 		this._publish('update')
 	}
 
-	demoDelete () {
-		this._nodes.pop()
-		this._links.pop()
+	demoDelete (id) {
+		let node = this.findNode(id)
+
+		// let links = this.findLinks(node) // don't really need
+		this.removeNodeByIndex(this.findNodeIndex(node))
+		this.removeLinks(node)
 
 		this._publish('update')
+	}
+
+	findNode (nodeId) {
+		return this._nodes.find((n) => n.id === nodeId)
+	}
+
+	/**
+	 *
+	 * @param {String|Object} node - unique identifier of node or node data objet itself
+	 * @return {Integer} index of matched node or `-1` if not found
+	 */
+	findNodeIndex (node) {
+		let id
+		if (typeof node === 'object') {
+			id = node[this._uid]
+		} else {
+			id = node
+		}
+
+		return this._nodes.findIndex((n) => n[this._uid] === id)
+	}
+
+	removeNodeByIndex (index) {
+		this._nodes.splice(index, 1)
+	}
+
+	removeLinks (node) {
+		let links = this._links
+		for (let i = links.length; i--; i >= 0) {
+			if (links[i].source === node || links[i].target === node)
+			// if (includesNode(linksData[i], node)) {
+				links.splice(i, 1)
+			// }
+		}
 	}
 
 	// --------------- PRIVATE --------------- //
@@ -167,6 +204,25 @@ class Network extends EventEmitter {
 		})
 
 		this._links = links
+	}
+
+	findLinks (node) {
+		let matches = []
+		this._links.forEach((link, i) => {
+			if (link.source === node || link.target === node) {
+				matches.push(i)
+			}
+		})
+
+		let links = []
+		matches.forEach((m) => {
+			links.push(this._links[m])
+		})
+
+		return {
+			links: links,
+			matches: matches
+		}
 	}
 }
 

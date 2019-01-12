@@ -9,12 +9,13 @@ graph.bind(network)
 network.triggerUpdate()
 
 // Fake Data Update
-document.querySelector('#js-update')
-	.addEventListener('click', () => {
-		network.demoUpdate()
-	})
+// document.querySelector('#js-update')
+// 	.addEventListener('click', () => {
+// 		network.demoUpdate()
+// 	})
 
 document.querySelector('#js-delete')
 	.addEventListener('click', () => {
-		network.demoDelete()
+		let toDelete = document.querySelector('#js-delete-id').value
+		network.demoDelete(toDelete.toString())
 	})

@@ -28,6 +28,14 @@ h1 {
 	font-weight: 500;
 }
 
+.input-txt {
+	display: inline-block;
+	margin: 0 1em;
+	height: 1.5em;
+	padding: 3px 6px;
+	border: 1px soild $graphLinkColor;
+}
+
 .btn {
 	margin-top: .5em;
 	display: inline-block;
