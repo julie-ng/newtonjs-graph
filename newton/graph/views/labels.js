@@ -1,5 +1,5 @@
 const d3 = require('d3')
-const Renderer = require('./renderer')
+const View = require('./view')
 const Transitions = require('./transitions')
 
 const fixedRadius = 12
@@ -15,9 +15,9 @@ const calculateFontSize = (node) => {
  * Encapsulates what is needed to create the labels of nodes
  * of the network graph
  *
- * @extends Renderer
+ * @extends View
  */
-class Labels extends Renderer {
+class Labels extends View {
 	/**
 	 *
 	 * @param {Object} options

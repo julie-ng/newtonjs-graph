@@ -3,9 +3,9 @@ const EventEmitter = require('events').EventEmitter
 // const Cola = require('webcola')
 const Graph = require('./graph')
 const Network = require('./network')
-const Labels = require('./components/labels')
-const Links = require('./components/links')
-const Nodes = require('./components/nodes')
+const Labels = require('./views/labels')
+const Links = require('./views/links')
+const Nodes = require('./views/nodes')
 
 const nodesMockData = [
 	{ id: 1, name: 'foo' },
@@ -69,7 +69,7 @@ describe ('Graph', function () {
 			expect(graph.hasOwnProperty('svg')).toBe(true)
 		})
 
-		describe ('Components', function () {
+		describe ('Views', function () {
 			it ('sets nodes', () => {
 				expect(g.nodes instanceof Nodes).toBe(true)
 			})
@@ -101,7 +101,7 @@ describe ('Graph', function () {
 	describe ('Bindings', () => {
 		xit ("forwards cola's tick event", () => {})
 
-		describe ('Components', () => {
+		describe ('Views', () => {
 			let nodesSpy, linksSpy, labelsSpy
 
 			beforeEach(() => {

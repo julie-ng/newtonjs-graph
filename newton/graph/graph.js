@@ -3,9 +3,9 @@ const d3 = require('d3')
 const Cola = require('webcola')
 
 const _render = Symbol('render')
-const Labels = require('./components/labels')
-const Links = require('./components/links')
-const Nodes = require('./components/nodes')
+const Labels = require('./views/labels')
+const Links = require('./views/links')
+const Nodes = require('./views/nodes')
 
 const defaults = {
 	margin: 40,
