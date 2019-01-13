@@ -2,7 +2,10 @@ const Graph = require('./../../newton').Graph
 const Network = require('./../../newton').Network
 const data = require('./architecture.data')
 
-const graph = new Graph({ width: window.innerWidth })
+const graph = new Graph({
+	width: window.innerWidth,
+	flow: 'horizontal'
+})
 const network = new Network(data.nodes, data.linksMap, { uid: 'id' })
 graph.bind(network)
 

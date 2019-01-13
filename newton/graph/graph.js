@@ -44,6 +44,7 @@ class Graph extends EventEmitter {
 		this.margin = opts.margin || defaults.margin
 		this.height = opts.height || defaults.height
 		this.width = (opts.width || defaults.width) - this.margin
+		this.options = opts
 
 		// Initialize Layout
 		this.cola = Cola.d3adaptor(d3).size([this.width, this.height])
@@ -70,7 +71,12 @@ class Graph extends EventEmitter {
 			.avoidOverlaps(true)
 			.handleDisconnected(false)
 			.jaccardLinkLengths(100,0.8)
-			.start(30)
+
+		if (this.options.flow === 'horizontal') {
+			this.cola. flowLayout('x', 150)
+		}
+
+		this.cola.start(30)
 
 		// Order here determines how elements are stacked in svg
 		this.links.bindGraph(this)
