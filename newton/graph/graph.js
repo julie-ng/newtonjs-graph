@@ -67,6 +67,8 @@ class Graph extends EventEmitter {
 		this.cola
 			.nodes(network.get('nodes'))
 			.links(network.get('links'))
+			.avoidOverlaps(true)
+			.handleDisconnected(false)
 			.jaccardLinkLengths(100,0.8)
 			.start(30)
 
@@ -93,7 +95,10 @@ class Graph extends EventEmitter {
 		 * @property {Array} nodes
 		 * @property {Array} links
 		 */
-		network.on('update', (data) => this.emit('update', data))
+		network.on('update', (data) => {
+			this.emit('update', data)
+			this.cola.start()
+		})
 
 		// First render
 
