@@ -50,7 +50,7 @@ class Labels extends View {
 			.attr('font-size', calculateFontSize)
 
 		labels = labels.enter().append('text')
-			.text((node) => node.label + ' (' + node.id + ')')
+			.text((node) => node.label)
 				.attr('text-anchor', 'middle')
 				.attr('alignment-baseline', 'central')
 				.attr('font-size', calculateFontSize)
