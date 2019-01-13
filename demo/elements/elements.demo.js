@@ -1,6 +1,6 @@
-const Graph = require('./../newton').Graph
-const Network = require('./../newton').Network
-const data = require('./data')
+const Graph = require('./../../newton').Graph
+const Network = require('./../../newton').Network
+const data = require('./elements.data')
 
 const graph = new Graph({ width: window.innerWidth })
 const network = new Network(data.nodes, data.linksMap, { uid: 'id' })
