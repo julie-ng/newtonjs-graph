@@ -1,5 +1,5 @@
-const Graph = require('./../newton/graph')
-const Network = require('./../newton/network')
+const Graph = require('./../newton').Graph
+const Network = require('./../newton').Network
 const data = require('./data')
 
 const graph = new Graph({ width: window.innerWidth })
