@@ -75,10 +75,8 @@ class Graph extends EventEmitter {
 		if (this.options.flow === 'horizontal') {
 			this.cola. flowLayout('x', 150)
 		}
-
 		this.cola.start(30)
 
-		// Order here determines how elements are stacked in svg
 		this.links.bindGraph(this)
 		this.nodes.bindGraph(this)
 		this.labels.bindGraph(this)
@@ -107,7 +105,6 @@ class Graph extends EventEmitter {
 		})
 
 		// First render
-
 		this[_render]({
 			nodes: network.get('nodes'),
 			links: network.get('links')
@@ -119,6 +116,7 @@ class Graph extends EventEmitter {
 	 * @private
 	 */
 	[_render] (data) {
+		// Order here determines how elements are stacked in svg
 		this.links.render(data)
 		this.nodes.render(data)
 		this.labels.render(data)
