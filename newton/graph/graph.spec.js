@@ -1,8 +1,7 @@
 const d3 = require('d3')
 const EventEmitter = require('events').EventEmitter
-// const Cola = require('webcola')
 const Graph = require('./graph')
-const Network = require('./network')
+const Network = require('./../network/network')
 const Labels = require('./views/labels')
 const Links = require('./views/links')
 const Nodes = require('./views/nodes')
