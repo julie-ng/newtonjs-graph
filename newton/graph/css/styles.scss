@@ -2,7 +2,8 @@
 @import "demo";
 
 .link {
-  stroke: $graphLinkColor;
+	stroke: $graphLinkColor;
+	stroke-width: 2px;
 }
 
 svg,

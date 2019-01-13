@@ -38,7 +38,6 @@ class Links extends View {
 			.append('line')
 			.merge(links)
 				.attr('class', 'link')
-				.style('stroke-width', 1)
 
 		this.links = links
 	}
