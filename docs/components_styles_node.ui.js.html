@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Newton Graph Library: components/styles/node.ui.js</title>
+    <link type="text/css" rel="stylesheet" href="styles/styles.css">
+    <style>
+      
+      .layout-header {
+        background: #102027;
+        color: #ffffff;
+        
+      }
+      
+    </style>
+</head>
+<body>
+
+<header class="layout-header">
+  
+  <h1>
+    <a href="./">
+      Newton Graph Library
+    </a>
+  </h1>
+</header>
+
+<nav class="layout-nav">
+  <ul><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Graph.html">Graph</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Graph.html#bind">bind<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Graph.html#event:tick">tick</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Graph.html#event:update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Labels.html">Labels</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#bindGraph">bindGraph<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#position">position<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#render">render<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Links.html">Links</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#bindGraph">bindGraph<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#position">position<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#render">render<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Network.html">Network</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findLinks">findLinks<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findNodeById">findNodeById<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findNodeIndex">findNodeIndex<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#get">get<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeLinks">removeLinks<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeNode">removeNode<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeNodeById">removeNodeById<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Nodes.html">Nodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#animate">animate<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#bindGraph">bindGraph<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#position">position<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#render">render<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Renderer.html">Renderer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Renderer.html#bindGraph">bindGraph<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Renderer.html#position">position<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Renderer.html#render">render<span class="method-parens">()</span></a></span></li></ul><ul><li class="nav-heading">Modules</li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-NodeUI.html">NodeUI</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Transitions.html">Transitions</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Transitions.html#~fadeOut">fadeOut<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="Transitions-module_FadeDown.html">FadeDown</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Transitions-module_FadeDown.html#~circle">circle<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Transitions-module_FadeDown.html#~link">link<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Transitions-module_FadeDown.html#~text">text<span class="method-parens">()</span></a></span></li></ul><ul><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="Transitions.html">Transitions</a></span></li></ul>
+</nav>
+
+<main class="layout-content layout-content--source">
+  <p class="page-kind">source</p>
+  <h1 class="page-title">components/styles/node.ui.js</h1>
+  
+
+
+
+    
+
+<section>
+    <article>
+        <pre id="source" class="source-page line-numbers"><code class="language-js">const d3 = require('d3')
+const colors = require('./colors')
+
+/**
+ * @module NodeUI
+ */
+
+const fixedRadius = 12
+
+const flashColors = {
+	original: {
+		fill: colors.statusColors.down.fill,
+		stroke: colors.statusColors.down.stroke
+	},
+	target: {
+		fill: '#700000',
+		stroke: '#700000'
+	}
+}
+
+function fillColor (node) {
+	return colors.statusColors[node.status].fill
+}
+
+function strokeColor (node) {
+	return colors.statusColors[node.status].stroke
+}
+
+const calculateRadius = function (node) {
+	return fixedRadius // temp
+}
+
+const NodeUI = {
+	styleNode: function (selection) {
+		selection.attr('class', (node) => 'node status-' + node.status)
+			.attr('fill', fillColor)
+			.attr('stroke', strokeColor)
+			.attr('stroke-width', '3px')
+			.attr('r', fixedRadius)
+	},
+
+	/**
+	 * Flashes a circle inifinitely
+	 * @private
+	 * @param {node} circle - d3 selected elememt/node to animate
+	 * @param {Object} opts - map of colors
+	 */
+	flash: function (circle, opts = flashColors) {
+		circle.transition()
+			.on('start', function repeat (d) {
+				d3.active(this)
+					.duration(200)
+					.attr('fill', opts.target.fill)
+					.attr('stroke', opts.target.stroke)
+				.transition()
+					.duration(350)
+					.attr('fill', opts.original.fill)
+					.attr('stroke', opts.original.stroke)
+				.transition()
+					.delay(200)
+					.on('start', repeat)
+			})
+	},
+
+	/**
+	 * Pulses a circle infinitely
+	 * @private
+	 * @param {node} circle - d3 selected elememt/node to animate
+	 * @param {Integer} delta - amount to increase radius by
+	 */
+	pulse: function (circle, delta) {
+		circle.transition()
+			.on('start', function repeat (d) {
+				let originalRadius = calculateRadius(d)
+				d3.active(this)
+					.duration(300)
+					.attr('r', originalRadius + delta)
+				.transition()
+					.duration(800)
+					.attr('r', originalRadius)
+				.transition()
+					.on('start', repeat)
+			})
+	}
+}
+
+module.exports = NodeUI</code></pre>
+    </article>
+</section>
+
+
+
+
+</main>
+
+<footer style="display: none">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Jan 13 2019 10:43:47 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script src="scripts/prism.dev.js"></script>
+</body>
+</html>

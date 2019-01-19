@@ -1,0 +1,152 @@
+$layout-padding: 20px;
+$header-height: 50px;
+$header-offset: $header-height + $layout-padding;
+$nav-width: 280px;
+
+.layout-header {
+  background: #0a3d62;
+  color: #fff;
+  position: fixed;
+  height: $header-height;
+  line-height: $header-height;
+  padding: 0 $layout-padding;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  font-size: 14px;
+  z-index: 10;
+
+  a {
+    color: #fff;
+  }
+
+  h1 {
+    display: inline-block;
+    font-weight: 400;
+    font-size: 1.2rem;
+    line-height: $header-height;
+  }
+}
+
+.layout-header-logo {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: $layout-padding/2;
+  max-height: $header-height - $layout-padding/2;
+}
+
+.layout-nav {
+  padding: 0.5em $layout-padding 0;
+  width: $nav-width;
+  border-right: 1px solid #e5e5e5;
+  position: fixed;
+  left: 0;
+  top: $header-height;
+  bottom: 0;
+  overflow-x: scroll;
+
+  ul {
+    margin: 0 0 2em;
+    padding: 0;
+  }
+
+  li {
+    list-style-type: none;
+    margin-left: $layout-padding/2;
+    margin-bottom: 0.25em;
+    font-size: 0.95em;
+
+    &.nav-heading:first-child {
+      margin-left: 0;
+      margin-bottom: 1em;
+      text-transform: uppercase;
+      color: #aaa;
+      font-size: 0.85em;
+    }
+  }
+
+  a {
+    color: #666;
+
+    &:link, a:visited {
+      color: #666;
+    }
+  }
+}
+
+.layout-content {
+  padding-top: $header-height + $layout-padding;
+  padding-left: $nav-width + $layout-padding*2;
+  padding-right: $layout-padding*2;
+  max-width: 1200px;
+}
+
+.layout-content--source {
+  max-width: none;
+}
+
+// Offset fixed header
+:target:before {
+  content:"";
+  display:block;
+  height: $header-offset;
+  margin: $header-offset*-1 0 0;
+}
+
+.nav-heading {
+  margin-top: 1em;
+
+  .nav-item-name {
+    font-weight: 600;
+
+    a {
+      color: #333;
+      &:link, &:visited {
+        color: #333;
+      }
+    }
+  }
+
+  .nav-item-type {
+    font-size: 0.9em;
+  }
+}
+
+// colors based on esdoc
+.nav-item-type {
+  display: inline-block;
+  font-size: 0.9em;
+  width: 1.2em;
+  height: 1.2em;
+  line-height: 1.2em;
+  display: inline-block;
+  text-align: center;
+  border-radius: 0.2em;
+  margin-right: 0.5em;
+
+  &.type-class {
+    color: #39b739;
+    background-color: #d5efd5;
+  }
+
+  &.type-function {
+    color: #549ab9;
+    background-color: #e1f6ff;
+  }
+
+  &.type-namespace {
+    color: #eb6420;
+    background-color: #fad8c7;
+  }
+
+  &.type-module {
+    color: #964cb1;
+    background-color: #f2e4f7;
+  }
+
+  &.type-event {
+    color: #948b34;
+    background-color: #fff6a6;
+  }
+}

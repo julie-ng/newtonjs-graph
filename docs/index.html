@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Newton Graph Library: </title>
+    <link type="text/css" rel="stylesheet" href="styles/styles.css">
+    <style>
+      
+      .layout-header {
+        background: #102027;
+        color: #ffffff;
+        
+      }
+      
+    </style>
+</head>
+<body>
+
+<header class="layout-header">
+  
+  <h1>
+    <a href="./">
+      Newton Graph Library
+    </a>
+  </h1>
+</header>
+
+<nav class="layout-nav">
+  <ul><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Graph.html">Graph</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Graph.html#bind">bind<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Graph.html#event:tick">tick</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Graph.html#event:update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Labels.html">Labels</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#bindGraph">bindGraph<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#position">position<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#render">render<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Links.html">Links</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#bindGraph">bindGraph<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#position">position<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#render">render<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Network.html">Network</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findLinks">findLinks<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findNodeById">findNodeById<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findNodeIndex">findNodeIndex<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#get">get<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeLinks">removeLinks<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeNode">removeNode<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeNodeById">removeNodeById<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Nodes.html">Nodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#animate">animate<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#bindGraph">bindGraph<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#position">position<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#render">render<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="View.html">View</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#bindGraph">bindGraph<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#position">position<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#render">render<span class="method-parens">()</span></a></span></li></ul><ul><li class="nav-heading">Modules</li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-NodeUI.html">NodeUI</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Transitions.html">Transitions</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Transitions.html#~fadeOut">fadeOut<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="Transitions-module_FadeDown.html">FadeDown</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Transitions-module_FadeDown.html#~circle">circle<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Transitions-module_FadeDown.html#~link">link<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Transitions-module_FadeDown.html#~text">text<span class="method-parens">()</span></a></span></li></ul><ul><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="Transitions.html">Transitions</a></span></li></ul>
+</nav>
+
+<main class="layout-content">
+  <p class="page-kind"></p>
+  <h1 class="page-title"></h1>
+  
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section class="readme">
+        <article><h1>Newton Graph Prototype</h1><p><a href="https://travis-ci.org/julie-ng/architecture-graph-prototype"><img src="https://travis-ci.org/julie-ng/architecture-graph-prototype.svg?branch=master" alt="Build Status"></a>
+<a href="https://coveralls.io/github/julie-ng/architecture-graph-prototype?branch=master"><img src="https://coveralls.io/repos/github/julie-ng/architecture-graph-prototype/badge.svg?branch=master" alt="Coverage Status"></a>
+<a href="https://snyk.io/test/github/julie-ng/architecture-graph-prototype?targetFile=package.json"><img src="https://snyk.io/test/github/julie-ng/architecture-graph-prototype/badge.svg?targetFile=package.json" alt="Known Vulnerabilities"></a>
+<a href="https://codeclimate.com/github/julie-ng/architecture-graph-prototype/maintainability"><img src="https://api.codeclimate.com/v1/badges/4f444f7b1046eb4aafda/maintainability" alt="Maintainability"></a></p>
+<p>This repository contains learning and prototype code for a high-level dashboard for architects and stakeholders.</p>
+<p>The goal is to illustrate <em>product and service dependencies</em> in a software architecture.</p>
+<ul>
+<li><a href="https://github.com/pages/julie-ng/architecture-graph-prototype">View API Documentation</a></li>
+</ul>
+<h2>Example Usage</h2><h3>Network - Data Wrapper</h3><p>A <code>Network</code> is essentially a data wrapper. Its biggest advantage is that it dynamically calculating links between nodes, based on a unique identifier <code>uid</code>, instead of array indexes.</p>
+<p>The basic data format is as so:</p>
+<pre class="prettyprint source lang-javascript"><code>const nodes = [
+    { id: 1, name: 'foo' },
+    { id: 2, name: 'bar' }
+]
+
+const linksMap = [
+    { source: 1, target: 2 }
+]
+
+const network = new Network(nodes, linksMap, { uid: 'id' })</code></pre><h3>Graph - Visualization</h3><p>While <code>Network</code> handles the data, <code>Graph</code> handles the visualizations, including layout, animations, etc.</p>
+<pre class="prettyprint source lang-javascript"><code>const graph = new Graph({ 
+    width: window.innerWidth 
+})
+
+graph.bind(network)</code></pre><p>Note that <code>Graph</code> is <strong>event-driven</strong> means that it listens for events, e.g. <code>update</code> and updates the visualization automatically depending on the bound network data.</p>
+<h2>Development</h2><h3>Install dependencies</h3><p>First install the dependencies required:</p>
+<pre class="prettyprint source"><code>npm install</code></pre><h3>Preview</h3><p>To view the prototype in the browser, run</p>
+<pre class="prettyprint source"><code>npm run server</code></pre><p>which starts the webpack dev server and automatically opens <a href="http://localhost:9000">http://localhost:9000</a> in a browser window.</p></article>
+    </section>
+
+
+
+
+
+
+</main>
+
+<footer style="display: none">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jan 19 2019 12:05:48 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script src="scripts/prism.dev.js"></script>
+</body>
+</html>

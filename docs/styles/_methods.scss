@@ -1,0 +1,64 @@
+@import "vars";
+
+article {
+  &.event,
+  &.method {
+    padding: 2em 0 1em;
+    margin: 1em 0;
+    border-top: 1px solid #ddd;
+  }
+}
+
+.event-name,
+.method-name {
+  font-size: 1.4rem;
+  font-family: $code-font;
+  font-weight: 500;
+
+	// parentheses and params
+  // [class*="signature"] {
+  //   color: #666;
+  // }
+
+	// set in publish.js in convoluted manner...
+	// still needed?
+  // .method-type-signature {
+  //   display: none;
+  // }
+
+  .return-type-signature {
+    color: #aaa;
+  }
+
+  // e.g. "opt"
+  .signature-attributes {
+    display: inline-block;
+    margin-left: 0.25em;
+    font-size: 60%;
+    color: #999;
+    font-style: italic;
+    font-weight: lighter;
+  }
+}
+
+.event-type,
+.method-type {
+  .method-type-signature:not(:empty) {
+    display: inline-block;
+    margin-bottom: 0.75em;
+    background: #ecf0f1;
+    color: #95a5a6;
+    padding: 0.25em 0.5em 0.35em;
+    font-weight: lighter;
+    font-size: 0.8rem;
+  }
+}
+
+.method-params-heading {
+  margin: 1em 0;
+}
+
+.event-description,
+.method-description {
+  margin: 0 0 2em;
+}

@@ -1,0 +1,56 @@
+ul.params,
+ul.properties {
+  list-style-type: square;
+
+  li {
+    margin-bottom: 1em;
+
+    & > ul {
+      margin-top: 0;
+    }
+    li {
+      list-style-type: circle;
+    }
+  }
+}
+
+.param-name,
+.property-name {
+  color: #333;
+}
+
+.param-types,
+.property-types {
+  display: inline-block;
+  margin: 0 0.5em 0 .25em;
+  color: #999;
+}
+
+// optional tag
+.param-attr,
+.property-attr {
+  display: inline-block;
+  padding: 0.2em 0.5em;
+  border: 1px solid #eee;
+  color: #aaa;
+  font-weight: 300;
+  font-size: 0.8em;
+  vertical-align: baseline;
+}
+
+.property-name {
+  color: #292b2c;
+}
+
+.properties-table {
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.param-name,
+.property-name {
+  background-color: #f5f5f5;
+  padding: 0.25em 0.5em 0.2em;
+  border-radius: 3px;
+}
