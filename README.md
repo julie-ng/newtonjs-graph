@@ -9,6 +9,8 @@ This repository contains learning and prototype code for a high-level dashboard 
 
 The goal is to illustrate *product and service dependencies* in a software architecture.
 
+- [View API Documentation](https://github.com/pages/julie-ng/architecture-graph-prototype)
+
 ## Example Usage
 
 ### Network - Data Wrapper
