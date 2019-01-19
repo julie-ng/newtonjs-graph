@@ -1,5 +1,9 @@
 # Newton Graph Prototype 
 
+<a href="https://travis-ci.org/julie-ng/architecture-graph-prototype" target="_blank">
+  <img src="https://travis-ci.org/julie-ng/architecture-graph-prototype.svg?branch=master">
+</a>
+
 This repository contains learning and prototype code for a high-level dashboard for architects and stakeholders.
 
 The goal is to illustrate *product and service dependencies* in a software architecture.
