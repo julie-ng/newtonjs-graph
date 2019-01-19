@@ -1,9 +1,6 @@
 # Newton Graph Prototype 
 
-<a href="https://travis-ci.org/julie-ng/architecture-graph-prototype" target="_blank">
-  <img src="https://travis-ci.org/julie-ng/architecture-graph-prototype.svg?branch=master">
-</a>
-
+[![Build Status](https://travis-ci.org/julie-ng/architecture-graph-prototype.svg?branch=master)](https://travis-ci.org/julie-ng/architecture-graph-prototype)
 [![Coverage Status](https://coveralls.io/repos/github/julie-ng/architecture-graph-prototype/badge.svg?branch=master)](https://coveralls.io/github/julie-ng/architecture-graph-prototype?branch=master)
 
 This repository contains learning and prototype code for a high-level dashboard for architects and stakeholders.
