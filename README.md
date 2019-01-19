@@ -4,6 +4,8 @@
   <img src="https://travis-ci.org/julie-ng/architecture-graph-prototype.svg?branch=master">
 </a>
 
+[![Coverage Status](https://coveralls.io/repos/github/julie-ng/architecture-graph-prototype/badge.svg?branch=master)](https://coveralls.io/github/julie-ng/architecture-graph-prototype?branch=master)
+
 This repository contains learning and prototype code for a high-level dashboard for architects and stakeholders.
 
 The goal is to illustrate *product and service dependencies* in a software architecture.
