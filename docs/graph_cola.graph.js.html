@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Newton Graph Library: graph/views/transitions/fade-down.js</title>
+    <title>Newton Graph Library: graph/cola.graph.js</title>
     <link type="text/css" rel="stylesheet" href="styles/styles.css">
     <style>
       
@@ -31,7 +31,7 @@
 
 <main class="layout-content layout-content--source">
   <p class="page-kind">source</p>
-  <h1 class="page-title">graph/views/transitions/fade-down.js</h1>
+  <h1 class="page-title">graph/cola.graph.js</h1>
   
 
 
@@ -40,50 +40,65 @@
 
 <section>
     <article>
-        <pre id="source" class="source-page line-numbers"><code class="language-js">/** @namespace Transitions */
+        <pre id="source" class="source-page line-numbers"><code class="language-js">const d3 = require('d3')
+const Cola = require('webcola')
+const Graph = require('./graph')
 
 /**
- * @module FadeDown
- * @memberOf Transitions
- * @inner
- */
-
-/**
+ * Cola.js Network Graph
  *
- * @param {d3Transition} transition
- * @param {Integer} [offset] - distance along y-axis to fade down
  */
-function circle (transition, offset = 5) {
-	transition
-		.attr('cy', (d) => d.y + offset)
+class ColaGraph extends Graph {
+
+	/**
+	 * Also initializes graph
+	 *
+	 * @param {Object} [opts] - options
+	 * @param {Object} [opts.margin] - graph margins
+	 * @param {Object} [opts.height] - height of network graph
+	 * @param {Object} [opts.width] - width of network graph
+	 */
+	constructor (opts = {}) {
+		super()
+	}
+
+	init () {
+		this.cola = Cola.d3adaptor(d3).size([this.width, this.height])
+		this.layout = this.cola
+		super.init()
+		return this
+	}
+
+	/**
+	 * Binds graph to network `update` and passes along cola's
+	 * `tick` event.
+	 *
+	 * @param {Object|GraphData} data - network graph data
+	 */
+	bind (network) {
+		this.cola
+			.nodes(network.get('nodes'))
+			.links(network.get('links'))
+			.avoidOverlaps(true)
+			.handleDisconnected(false)
+			.jaccardLinkLengths(115,0.8)
+
+		if (this.options.flow === 'horizontal') {
+			this.cola. flowLayout('x', 120)
+		}
+		this.cola.start(30)
+
+		// restart cola, so layout always pretty
+		this.on('update', (data) => this.cola.start())
+
+		// make nodes draggable
+		this.nodes.on('update', (nodes) => nodes.call(this.cola.drag))
+		super.bind(network)
+	}
 }
 
-/**
- *
- * @param {d3Transition} transition
- * @param {Integer} [offset] - distance along y-axis to fade down
- */
-function link (transition, offset = 2) {
-	transition
-		.attr('y1', (d) => d.source.y + offset)
-		.attr('y2', (d) => d.target.y + offset)
-}
-
-/**
- *
- * @param {d3Transition} transition
- * @param {Integer} [offset] - distance along y-axis to fade down
- */
-function text (transition, offset = 5) {
-	transition
-		.attr('y', (d) => d.y + offset)
-}
-
-module.exports = {
-	circle: circle,
-	link: link,
-	text: text
-}</code></pre>
+module.exports = ColaGraph
+</code></pre>
     </article>
 </section>
 
