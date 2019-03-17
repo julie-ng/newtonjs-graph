@@ -4,6 +4,7 @@ const d3 = require('d3')
 const Labels = require('./views/labels')
 const Links = require('./views/links')
 const Nodes = require('./views/nodes')
+const _bind = Symbol('bind')
 const _render = Symbol('render')
 
 const defaults = {
@@ -91,6 +92,18 @@ class Graph extends EventEmitter {
 			this.initDefaultLayout(network)
 		}
 
+		this[_bind](network)
+		return this
+	}
+
+	/**
+	 * Binds graph to network `update` and passes along cola's
+	 * `tick` event.
+	 *
+	 * @private
+	 * @param {Object|GraphData} network - network graph data
+	 */
+	[_bind] (network) {
 		this.links.bindGraph(this)
 		this.nodes.bindGraph(this)
 		this.labels.bindGraph(this)
@@ -113,18 +126,13 @@ class Graph extends EventEmitter {
 		 * @property {Array} nodes
 		 * @property {Array} links
 		 */
-		network.on('update', (data) => {
-			this.emit('update', data)
-			// this.cola.start()
-		})
+		network.on('update', (data) => this.emit('update', data))
 
 		// First render
 		this[_render]({
 			nodes: network.get('nodes'),
 			links: network.get('links')
 		})
-
-		return this
 	}
 
 	/**
