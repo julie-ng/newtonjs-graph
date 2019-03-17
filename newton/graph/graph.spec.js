@@ -17,14 +17,15 @@ const linksMockData = [
 describe ('Graph', function () {
 	let g
 	const network = new Network(nodesMockData, linksMockData, { uid: 'id' })
-	// prevent memory link in tests
+	// prevent memory leak in tests
 	network.setMaxListeners(1)
 
 	beforeEach(() => {
 		g = new Graph(nodesMockData, linksMockData)
+		g.initialize()
 		g.bind(network)
 
-		// prevent memory link in tests
+		// prevent memory leak in tests
 		g.setMaxListeners(2)
 	})
 
