@@ -42,7 +42,7 @@ class Nodes extends View {
 				.attr('data-title', (d) => d.label)
 			.merge(nodes)
 				.call(NodeUI.styleNode)
-				.call(this.adapter.drag)
+				// .call(this.adapter.drag)
 
 		this.nodes = nodes
 		this.animate()
