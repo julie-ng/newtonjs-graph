@@ -70,10 +70,10 @@ class Graph extends EventEmitter {
 			.links(network.get('links'))
 			.avoidOverlaps(true)
 			.handleDisconnected(false)
-			.jaccardLinkLengths(100,0.8)
+			.jaccardLinkLengths(115,0.8)
 
 		if (this.options.flow === 'horizontal') {
-			this.cola. flowLayout('x', 150)
+			this.cola. flowLayout('x', 120)
 		}
 		this.cola.start(30)
 
