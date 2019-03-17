@@ -7,7 +7,7 @@ const elements = [
 	{
 		id: "2",
 		status: "up",
-		label: "Middleware"
+		label: "API Gateway"
 	},
 	{
 		id: "3",
@@ -22,7 +22,22 @@ const elements = [
 	{
 		id: "5",
 		status: "up",
-		label: "Database"
+		label: "Main Database"
+	},
+	{
+		id: "6",
+		status: "up",
+		label: "Auth Service"
+	},
+	{
+		id: "7",
+		status: "up",
+		label: "Users Database"
+	},
+	{
+		id: "8",
+		status: "up",
+		label: "Payment Service"
 	}
 ]
 
@@ -32,7 +47,10 @@ const linksMap = [
 	{ source: '2', target: '3' },
 	{ source: '2', target: '4' },
 	{ source: '3', target: '5' },
-	{ source: '4', target: '5' }
+	{ source: '4', target: '5' },
+	{ source: '2', target: '6' },
+	{ source: '6', target: '7' },
+	{ source: '2', target: '8' }
 ]
 
 module.exports = {
