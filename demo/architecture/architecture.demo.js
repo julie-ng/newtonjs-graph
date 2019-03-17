@@ -1,9 +1,8 @@
 const Graph = require('./../../newton').Graph
-const ColaGraph = require('./../../newton').ColaGraph
 const Network = require('./../../newton').Network
 const data = require('./architecture.data')
 
-const graph = new ColaGraph({
+const graph = new Graph({
 	width: window.innerWidth,
 	height: window.innerHeight - 250,
 	flow: 'horizontal'
