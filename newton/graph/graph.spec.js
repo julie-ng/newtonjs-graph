@@ -17,14 +17,14 @@ const linksMockData = [
 describe ('Graph', function () {
 	let g
 	const network = new Network(nodesMockData, linksMockData, { uid: 'id' })
-	// prevent memory link in tests
+	// prevent memory leak in tests
 	network.setMaxListeners(1)
 
 	beforeEach(() => {
 		g = new Graph(nodesMockData, linksMockData)
-		g.bind(network)
+		g.init().bind(network)
 
-		// prevent memory link in tests
+		// prevent memory leak in tests
 		g.setMaxListeners(2)
 	})
 
@@ -39,6 +39,7 @@ describe ('Graph', function () {
 	describe ('Constructor', function () {
 		it ('has defaults', () => {
 			let graph = new Graph()
+			graph.init()
 			expect(graph.margin).toEqual(40)
 			expect(graph.height).toEqual(550)
 			expect(graph.width).toEqual(760)
@@ -57,13 +58,10 @@ describe ('Graph', function () {
 			expect(graph.width).toEqual(opts.width - opts.margin)
 		})
 
-		it ('sets cola with a d3 context', () => {
-			expect(g.cola.hasOwnProperty('d3Context')).toBe(true)
-		})
-
 		it ('sets svg', () => {
 			let spy = jest.spyOn(d3, 'select')
 			let graph = new Graph()
+			graph.init()
 			expect(spy).toHaveBeenCalled()
 			expect(graph.hasOwnProperty('svg')).toBe(true)
 		})
@@ -83,28 +81,29 @@ describe ('Graph', function () {
 		})
 	})
 
-	it ('uses cola layout', () => {
-		let nodesSpy = jest.spyOn(g.cola, 'nodes')
-		let linksSpy = jest.spyOn(g.cola, 'links')
-		let jaccardSpy = jest.spyOn(g.cola, 'jaccardLinkLengths')
-		let startSpy = jest.spyOn(g.cola, 'start')
+	it('is has an init() method', () => {
+		expect(typeof g.init).toEqual('function')
+	})
 
-		g.bind(network)
+	describe ('Chaining', () => {
+		it ('init() can be chained', () => {
+			expect(g.init()).toEqual(g)
+		})
 
-		expect(nodesSpy).toHaveBeenCalled()
-		expect(linksSpy).toHaveBeenCalled()
-		expect(jaccardSpy).toHaveBeenCalled()
-		expect(startSpy).toHaveBeenCalled()
+		it ('bind() can be chained', () => {
+			expect(g.bind(network)).toEqual(g)
+		})
 	})
 
 	describe ('Bindings', () => {
-		xit ("forwards cola's tick event", () => {})
+		xit ("forwards layout's tick event", () => {})
 
 		describe ('Views', () => {
 			let nodesSpy, linksSpy, labelsSpy
 
 			beforeEach(() => {
 				g = new Graph(nodesMockData, linksMockData)
+				g.init()
 				labelsSpy = jest.spyOn(g.labels, 'bindGraph')
 				linksSpy = jest.spyOn(g.links, 'bindGraph')
 				nodesSpy = jest.spyOn(g.nodes, 'bindGraph')

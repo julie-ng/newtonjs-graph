@@ -1,11 +1,11 @@
 const EventEmitter = require('events').EventEmitter
 const d3 = require('d3')
-const Cola = require('webcola')
 
-const _render = Symbol('render')
 const Labels = require('./views/labels')
 const Links = require('./views/links')
 const Nodes = require('./views/nodes')
+const _bind = Symbol('bind')
+const _render = Symbol('render')
 
 const defaults = {
 	margin: 40,
@@ -22,7 +22,7 @@ const defaults = {
  * @property {Integer} margin - Layout Margin
  * @property {Integer} width - Graph Width
  * @property {Integer} height - Graph Height
- * @property {cola} cola - Layout Constraint Adapter
+ * @property {*} layout - layout adapter, e.g. cola.js or simulation engine, e.g. d3-force
  * @property {d3} svg - d3.js container selection that holds our svg elements, incl. labels, links and nodes.
  * @property {Labels} labels - Labels for network nodes to be drawn
  * @property {Links} links - Network links to be drawn
@@ -45,38 +45,65 @@ class Graph extends EventEmitter {
 		this.height = opts.height || defaults.height
 		this.width = (opts.width || defaults.width) - this.margin
 		this.options = opts
+	}
 
-		// Initialize Layout
-		this.cola = Cola.d3adaptor(d3).size([this.width, this.height])
+	/**
+	 * Initializes layouts, new views for links, noes, etc.
+	 *
+	 * @return {this}
+	 */
+	init () {
 		this.svg = d3.select('svg')
 			.attr('width', this.width)
 			.attr('height', this.height)
 
-		// Initialize d3 components
 		this.labels = new Labels()
 		this.links = new Links()
-		this.nodes = new Nodes({ adapter: this.cola })
+		this.nodes = new Nodes()
+
+		return this
+	}
+
+	/**
+	 * Default Layout: d3-force
+	 *
+	 * @param {Object|GraphData} network - Network instance
+	 */
+	initDefaultLayout (network) {
+		this.layout = d3.forceSimulation(network.get('nodes'))
+			.force('link', d3.forceLink(
+				network.get('links'))
+					.id(d => d.id)
+					.distance(100)
+					.strength(0.1)
+			)
+			.force('charge', d3.forceManyBody())
+			.force('center', d3.forceCenter(this.width / 2, this.height / 2))
 	}
 
 	/**
 	 * Binds graph to network `update` and passes along cola's
 	 * `tick` event.
 	 *
-	 * @param {Object|GraphData} data - network graph data
+	 * @param {Object|GraphData} network - network graph data
 	 */
 	bind (network) {
-		this.cola
-			.nodes(network.get('nodes'))
-			.links(network.get('links'))
-			.avoidOverlaps(true)
-			.handleDisconnected(false)
-			.jaccardLinkLengths(115,0.8)
-
-		if (this.options.flow === 'horizontal') {
-			this.cola. flowLayout('x', 120)
+		if (typeof this.layout === 'undefined') {
+			this.initDefaultLayout(network)
 		}
-		this.cola.start(30)
 
+		this[_bind](network)
+		return this
+	}
+
+	/**
+	 * Binds graph to network `update` and passes along cola's
+	 * `tick` event.
+	 *
+	 * @private
+	 * @param {Object|GraphData} network - network graph data
+	 */
+	[_bind] (network) {
 		this.links.bindGraph(this)
 		this.nodes.bindGraph(this)
 		this.labels.bindGraph(this)
@@ -87,7 +114,7 @@ class Graph extends EventEmitter {
 		 *
 		 * @event Graph#tick
 		 */
-		this.cola.on('tick', () => this.emit('tick'))
+		this.layout.on('tick', () => this.emit('tick'))
 
 		/**
 		 * Update event which passes on network data so graph elements,
@@ -99,10 +126,7 @@ class Graph extends EventEmitter {
 		 * @property {Array} nodes
 		 * @property {Array} links
 		 */
-		network.on('update', (data) => {
-			this.emit('update', data)
-			this.cola.start()
-		})
+		network.on('update', (data) => this.emit('update', data))
 
 		// First render
 		this[_render]({

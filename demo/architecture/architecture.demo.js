@@ -8,7 +8,8 @@ const graph = new Graph({
 	flow: 'horizontal'
 })
 const network = new Network(data.nodes, data.linksMap, { uid: 'id' })
-graph.bind(network)
+
+graph.init().bind(network)
 
 document.querySelector('#js-delete')
 	.addEventListener('click', () => {

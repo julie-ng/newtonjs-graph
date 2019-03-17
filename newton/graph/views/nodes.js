@@ -22,6 +22,14 @@ class Nodes extends View {
 		this.container = options.container || 'svg'
 	}
 
+	/**
+	 * Renders network graphs and passes hooks to d3.js's general update pattern via events.
+	 *
+	 * For more information on the general update pattern, see:
+	 * https://bost.ocks.org/mike/join/
+	 *
+	 * @param {*} data - Network data with `nodes` and `links`
+	 */
 	render (data) {
 		let nodes = d3.select(this.container)
 			.selectAll('circle')
@@ -31,18 +39,40 @@ class Nodes extends View {
 			.duration(300)
 			.ease(d3.easeLinear)
 
+		/**
+		 * @event Nodes#exit
+		 * @property {Nodes} nodes - Exiting nodes per d3.js [general update pattern](https://bl.ocks.org/mbostock/3808218).
+		 * @example
+		 * nodes.on('exit', function (n) {
+		 *   n.call(Transitions.fadeOut)
+		 *    .call(Transitions.fadeDown)
+		 * })
+		 */
+		this.emit('exit', nodes.exit())
 		nodes.exit()
 			.transition(t)
 				.call(Transitions.fadeOut)
 				.call(Transitions.FadeDown.circle, 5)
 			.remove()
 
+		/**
+		 * @event Nodes#enter
+		 * @property {Nodes} nodes - Entering nodes per d3.js [general update pattern](https://bl.ocks.org/mbostock/3808218).
+		 */
+		this.emit('enter', nodes.enter())
 		nodes = nodes.enter()
 			.append('circle')
 				.attr('data-title', (d) => d.label)
 			.merge(nodes)
 				.call(NodeUI.styleNode)
-				.call(this.adapter.drag)
+
+		/**
+		 * @event Nodes#update
+		 * @property {Nodes} nodes - Updating nodes (post merge with enter) per d3.js [general update pattern](https://bl.ocks.org/mbostock/3808218).
+		 * @example
+		 * nodes.on('update', (n) => n.call(webcola.drag))
+		 */
+		this.emit('update', nodes)
 
 		this.nodes = nodes
 		this.animate()
