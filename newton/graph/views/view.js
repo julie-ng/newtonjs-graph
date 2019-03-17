@@ -1,9 +1,12 @@
+const EventEmitter = require('events').EventEmitter
 /**
  * Base Class to force interface to be implemented
  */
 
-class View {
-	constructor () {}
+class View extends EventEmitter {
+	constructor () {
+		super()
+	}
 
 	/**
 	 * Binds this view to a graph so we can react to

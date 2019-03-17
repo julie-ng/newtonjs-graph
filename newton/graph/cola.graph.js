@@ -46,7 +46,11 @@ class ColaGraph extends Graph {
 		}
 		this.cola.start(30)
 
-		this.on('update', (data) => this.cola.start()) // restart cola
+		// restart cola, so layout always pretty
+		this.on('update', (data) => this.cola.start())
+
+		// make nodes draggable
+		this.nodes.on('update', (nodes) => nodes.call(this.cola.drag))
 		super.bind(network)
 	}
 }
