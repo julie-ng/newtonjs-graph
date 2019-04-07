@@ -4,21 +4,18 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- master
-
-pool:
-  vmImage: 'Ubuntu-16.04'
-
-# variables:
-# - group: coveralls
-
-trigger:
   branches:
     include:
     - master
     - dev
     exclude:
     - wip/*
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+# variables:
+# - group: coveralls
 
 steps:
 - task: NodeTool@0
