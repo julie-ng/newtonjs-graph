@@ -16,17 +16,17 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    npm install    
+    npm install
   displayName: 'npm install'
 
-- script: |
-    npm run audit
+- script: npm run audit
+  displayName: 'audit'
 
-- script: |
-    npm run lint
+- script: npm run lint
+  displayName: lint
 
-- script: |
-    npm run test
+- script: npm run test
+  displayName: test
 
-- script: |
-    npm run coveralls        
+- script: npm run coveralls
+  displayName: coveralls
