@@ -1,3 +1,4 @@
+
 // For a detailed explanation regarding each configuration property, visit:
 // https://jestjs.io/docs/en/configuration.html
 
@@ -37,12 +38,13 @@ module.exports = {
 	],
 
 	// A list of reporter names that Jest uses when writing coverage reports
-	// coverageReporters: [
-	//   "json",
-	//   "text",
-	//   "lcov",
-	//   "clover"
-	// ],
+	coverageReporters: [
+	  "json",
+	  "text",
+	  "lcov",
+		"clover",
+		"cobertura"
+	],
 
 	// An object that configures minimum threshold enforcement for coverage results
 	// coverageThreshold: null,

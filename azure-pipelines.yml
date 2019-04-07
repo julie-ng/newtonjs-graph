@@ -27,5 +27,10 @@ steps:
 - script: npm run test
   displayName: 'Unit Tests'
 
-# - script: npm run coveralls
-#   displayName: 'Code Coverage Report'
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: cobertura
+    summaryFileLocation: './coverage/cobertura-coverage.xml'
+    reportDirectory: './coverage/lcov-report'
+    #additionalCodeCoverageFiles: # Optional
+    #failIfCoverageEmpty: false # Optional
