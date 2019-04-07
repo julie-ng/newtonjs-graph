@@ -12,6 +12,14 @@ pool:
 # variables:
 # - group: coveralls
 
+trigger:
+  branches:
+    include:
+    - master
+    - dev
+    exclude:
+    - wip/*
+
 steps:
 - task: NodeTool@0
   inputs:
