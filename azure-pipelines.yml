@@ -27,10 +27,20 @@ steps:
 - script: npm run test
   displayName: 'Unit Tests'
 
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: cobertura
-    summaryFileLocation: './coverage/cobertura-coverage.xml'
-    reportDirectory: './coverage/lcov-report'
-    #additionalCodeCoverageFiles: # Optional
-    #failIfCoverageEmpty: false # Optional
+- script: npm run coveralls
+  displayName: 'Publish Coverage to Coveralls.io'
+  env:
+    COVERALLS_SERVICE_NAME: 'Azure Pipelines'
+    COVERALLS_SERVICE_JOB_ID: ${Build.BuildId}
+
+# - task: PublishCodeCoverageResults@1
+#   displayName: 'Publish Code Coverage'
+#   env:
+#     COVERALLS_SERVICE_NAME: 'Azure Pipelines'
+#     COVERALLS_SERVICE_JOB_ID: ${Build.BuildId}
+#   inputs:
+#     codeCoverageTool: cobertura
+#     summaryFileLocation: './coverage/cobertura-coverage.xml'
+#     reportDirectory: './coverage/lcov-report'
+#     #additionalCodeCoverageFiles: # Optional
+#     #failIfCoverageEmpty: false # Optional
