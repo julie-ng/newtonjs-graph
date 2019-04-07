@@ -20,7 +20,7 @@ steps:
   displayName: 'npm install'
 
 - script: npm audit
-  displayName: 'audit'
+  displayName: 'npm audit'
 
 - script: npm run lint
   displayName: lint
@@ -29,4 +29,3 @@ steps:
   displayName: test
 
 - script: npm run coveralls
-  displayName: coveralls
