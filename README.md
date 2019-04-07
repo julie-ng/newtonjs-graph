@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/julie-ng/newtonjs-graph.svg?branch=master)](https://travis-ci.org/julie-ng/newtonjs-graph)
 [![Coverage Status](https://coveralls.io/repos/github/julie-ng/newtonjs-graph/badge.svg?branch=master)](https://coveralls.io/github/julie-ng/newtonjs-graph?branch=master)
 [![Known Vulnerabilities](https://snyk.io/test/github/julie-ng/newtonjs-graph/badge.svg?targetFile=package.json)](https://snyk.io/test/github/julie-ng/newtonjs-graph?targetFile=package.json)
+[![Build Status](https://dev.azure.com/julie-ng/newton/_apis/build/status/julie-ng.newtonjs-graph?branchName=master)](https://dev.azure.com/julie-ng/newton/_build/latest?definitionId=1&branchName=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/7a3975197c576202fe08/maintainability)](https://codeclimate.com/github/julie-ng/newtonjs-graph/maintainability)
 
 This repository contains learning and prototype code for a high-level dashboard for architects and stakeholders.
