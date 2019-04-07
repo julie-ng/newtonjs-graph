@@ -15,17 +15,17 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
-- script: |
-    npm install
+- script: npm install
   displayName: 'npm install'
 
 - script: npm audit
-  displayName: 'npm audit'
+  displayName: 'Dependency Audit'
 
 - script: npm run lint
-  displayName: lint
+  displayName: 'Lint Code'
 
 - script: npm run test
-  displayName: test
+  displayName: 'Unit Tests'
 
-- script: npm run coveralls
+# - script: npm run coveralls
+#   displayName: 'Code Coverage Report'
