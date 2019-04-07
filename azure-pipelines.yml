@@ -19,7 +19,7 @@ steps:
     npm install
   displayName: 'npm install'
 
-- script: npm run audit
+- script: npm audit
   displayName: 'audit'
 
 - script: npm run lint
