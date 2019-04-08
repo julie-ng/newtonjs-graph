@@ -28,20 +28,24 @@ class Nodes extends View {
 	 * For more information on the general update pattern, see:
 	 * https://bost.ocks.org/mike/join/
 	 *
-	 * @param {*} data - Network data with `nodes` and `links`
+	 * @param {Object} data - Network data with `nodes` attribute
 	 */
 	render (data) {
-		let nodes = d3.select(this.container)
-			.selectAll('circle')
-			.data(data.nodes, (d) => 'node-' + d.id)
+		if (data.nodes === undefined) { throw 'Error: missing `nodes` attribute on parameter.' }
 
 		let t = d3.transition()
 			.duration(300)
 			.ease(d3.easeLinear)
 
+		// -- Pattern: JOIN --
+		let nodes = d3.select(this.container)
+			.selectAll('circle')
+			.data(data.nodes, (d) => 'node-' + d.id)
+
+		// -- Pattern: REMOVE --
 		/**
 		 * @event Nodes#exit
-		 * @property {Nodes} nodes - Exiting nodes per d3.js [general update pattern](https://bl.ocks.org/mbostock/3808218).
+		 * @property {Nodes} nodes - Exiting nodes per d3.js [general update pattern, III](https://bl.ocks.org/mbostock/3808234).
 		 * @example
 		 * nodes.on('exit', function (n) {
 		 *   n.call(Transitions.fadeOut)
@@ -55,9 +59,10 @@ class Nodes extends View {
 				.call(Transitions.FadeDown.circle, 5)
 			.remove()
 
+		// -- Pattern: ENTER + UPDATE (merge()) --
 		/**
 		 * @event Nodes#enter
-		 * @property {Nodes} nodes - Entering nodes per d3.js [general update pattern](https://bl.ocks.org/mbostock/3808218).
+		 * @property {Nodes} nodes - Entering nodes per d3.js [general update pattern, III](https://bl.ocks.org/mbostock/3808234).
 		 */
 		this.emit('enter', nodes.enter())
 		nodes = nodes.enter()
@@ -66,19 +71,21 @@ class Nodes extends View {
 			.merge(nodes)
 				.call(NodeUI.styleNode)
 
-		/**
-		 * @event Nodes#update
-		 * @property {Nodes} nodes - Updating nodes (post merge with enter) per d3.js [general update pattern](https://bl.ocks.org/mbostock/3808218).
-		 * @example
-		 * nodes.on('update', (n) => n.call(webcola.drag))
-		 */
-		this.emit('update', nodes)
+		// /**
+		//  * @event Nodes#update
+		//  * @property {Nodes} nodes - Updating nodes (post merge with enter) per d3.js [general update pattern, III](https://bl.ocks.org/mbostock/3808234).
+		//  * @example
+		//  * nodes.on('update', (n) => n.call(webcola.drag))
+		//  */
+		// this.emit('update', nodes)
 
 		this.nodes = nodes
 		this.animate()
 	}
 
 	position () {
+		if (this.nodes === undefined) { throw 'Error: `nodes` attribute not set. Please render with data first.' }
+
 		this.nodes
 			.attr('cx', (d) => d.x)
 			.attr('cy', (d) => d.y)
