@@ -1,7 +1,3 @@
-<p align="center">
- <img src="images/newton-logo.png" width="200" height="200" alt="Newton Graph Logo">
-</p>
-
 # Newton Graph Prototype 
 
 [![Build Status](https://travis-ci.org/julie-ng/newtonjs-graph.svg?branch=master)](https://travis-ci.org/julie-ng/newtonjs-graph)
@@ -10,11 +6,13 @@
 [![Build Status](https://dev.azure.com/julie-ng/newton/_apis/build/status/julie-ng.newtonjs-graph?branchName=master)](https://dev.azure.com/julie-ng/newton/_build/latest?definitionId=1&branchName=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/7a3975197c576202fe08/maintainability)](https://codeclimate.com/github/julie-ng/newtonjs-graph/maintainability)
 
-This repository contains learning and prototype code for a high-level dashboard for architects and stakeholders.
+This repository contains learning and prototype code for a high-level dashboard for architects and stakeholders. The goal is to illustrate *product and service dependencies* in a software architecture.
 
-The goal is to illustrate *product and service dependencies* in a software architecture.
+<p align="center">
+ <img src="images/newton-logo.png" width="200" height="200" alt="Newton Graph Logo">
+</p>
 
-- [View API Documentation](https://julie-ng.github.io/newtonjs-graph/)
+[View API Documentation &rarr;](https://julie-ng.github.io/newtonjs-graph/)
 
 ## Example Usage
 
