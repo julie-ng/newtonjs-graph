@@ -1,3 +1,7 @@
+<p align="center">
+ <img src="images/newton-logo.png" width="200" height="200" alt="Newton Graph Logo">
+</p>
+
 # Newton Graph Prototype 
 
 [![Build Status](https://travis-ci.org/julie-ng/newtonjs-graph.svg?branch=master)](https://travis-ci.org/julie-ng/newtonjs-graph)
