@@ -12,10 +12,12 @@ const SELECTOR = '.link'
 class Links extends View {
 	/**
 	 * @param {Object} options
+	 * @param {String} [options.dom=window.document] - DOM reference, required for testing
 	 * @param {String} [options.container] - HTML identifier used by for d3
 	 */
 	constructor (options = {}) {
 		super()
+		this.dom = options.dom || window.document
 		this.container = options.container || 'svg'
 	}
 
@@ -24,21 +26,25 @@ class Links extends View {
 			.duration(100)
 			.ease(d3.easeLinear)
 
-		let links = d3.select(this.container)
+		let links = d3.select(this.dom)
+			.select(this.container)
 			.selectAll(SELECTOR)
 			.data(data.links, (d) => 'link-' + d.source.id + '-' + d.target.id)
 
+		this.emit('exit', links.exit())
 		links.exit()
 			.transition(t)
 				.call(Transitions.fadeOut)
 				.call(Transitions.FadeDown.link)
 			.remove()
 
+		this.emit('enter', links.enter())
 		links = links.enter()
 			.append('line')
 			.merge(links)
 				.attr('class', 'link')
 
+		this.emit('update', links)
 		this.links = links
 	}
 
