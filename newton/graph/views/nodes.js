@@ -14,12 +14,15 @@ class Nodes extends View {
 	/**
 	 * @param {Object} options
 	 * @param {d3adapter} options.adapter - reference to layout adapter (webcola). required to enable dragging of nodes
+	 * @param {String} [options.dom=window.document] - DOM reference, required for testing
 	 * @param {String} [options.container] - HTML identifier used by for d3
 	 */
 	constructor (options = {}) {
 		super()
 		this.adapter = options.adapter
+		this.dom = options.dom || window.document
 		this.container = options.container || 'svg'
+
 	}
 
 	/**
@@ -38,7 +41,8 @@ class Nodes extends View {
 			.ease(d3.easeLinear)
 
 		// -- Pattern: JOIN --
-		let nodes = d3.select(this.container)
+		let nodes = d3.select(this.dom)
+			.select(this.container)
 			.selectAll('circle')
 			.data(data.nodes, (d) => 'node-' + d.id)
 
@@ -71,13 +75,13 @@ class Nodes extends View {
 			.merge(nodes)
 				.call(NodeUI.styleNode)
 
-		// /**
-		//  * @event Nodes#update
-		//  * @property {Nodes} nodes - Updating nodes (post merge with enter) per d3.js [general update pattern, III](https://bl.ocks.org/mbostock/3808234).
-		//  * @example
-		//  * nodes.on('update', (n) => n.call(webcola.drag))
-		//  */
-		// this.emit('update', nodes)
+		/**
+		 * @event Nodes#update
+		 * @property {Nodes} nodes - Updating nodes (post merge with enter) per d3.js [general update pattern, III](https://bl.ocks.org/mbostock/3808234).
+		 * @example
+		 * nodes.on('update', (n) => n.call(webcola.drag))
+		 */
+		this.emit('update', nodes)
 
 		this.nodes = nodes
 		this.animate()
