@@ -21,10 +21,12 @@ class Labels extends View {
 	/**
 	 *
 	 * @param {Object} options
+	 * @param {String} [options.dom=window.document] - DOM reference, required for testing
 	 * @param {String} [options.container] - HTML identifier used by for d3
 	 */
 	constructor (options = {}) {
 		super()
+		this.dom = options.dom || window.document
 		this.container = options.container || 'svg'
 	}
 
@@ -33,10 +35,12 @@ class Labels extends View {
 			.duration(250)
 			.ease(d3.easeLinear)
 
-		let labels = d3.select(this.container)
+		let labels = d3.select(this.dom)
+			.select(this.container)
 			.selectAll('text')
 			.data(data.nodes, (d) => 'label-' + d.id)
 
+		this.emit('exit', labels.exit())
 		labels.exit()
 			.transition(t1)
 				.call(Transitions.fadeOut)
@@ -49,6 +53,7 @@ class Labels extends View {
 		labels.transition(t2)
 			.attr('font-size', calculateFontSize)
 
+		this.emit('enter', labels.enter())
 		labels = labels.enter().append('text')
 			.text((node) => node.label)
 				.attr('text-anchor', 'middle')
@@ -59,6 +64,7 @@ class Labels extends View {
 				.attr('dy', (node) => node.cy)
 				.attr('class', (node) => 'label status-' + node.status)
 
+		this.emit('update', labels)
 		this.labels = labels
 	}
 
