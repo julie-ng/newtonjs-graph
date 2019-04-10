@@ -19,11 +19,13 @@ const flashColors = {
 }
 
 function fillColor (node) {
-	return colors.statusColors[node.status].fill
+	let status = node.status || 'up'
+	return colors.statusColors[status].fill
 }
 
 function strokeColor (node) {
-	return colors.statusColors[node.status].stroke
+	let status = node.status || 'up'
+	return colors.statusColors[status].stroke
 }
 
 const calculateRadius = function (node) {
