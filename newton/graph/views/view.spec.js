@@ -5,6 +5,7 @@ describe ('View', () => {
 
 	beforeEach(() => {
 		view = new View()
+		view.setMaxListeners(0)
 	})
 
 	it ('has a constructor', () => {

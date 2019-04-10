@@ -18,14 +18,14 @@ describe ('Graph', function () {
 	let g
 	const network = new Network(nodesMockData, linksMockData, { uid: 'id' })
 	// prevent memory leak in tests
-	network.setMaxListeners(1)
+	network.setMaxListeners(0)
 
 	beforeEach(() => {
 		g = new Graph(nodesMockData, linksMockData)
 		g.init().bind(network)
 
 		// prevent memory leak in tests
-		g.setMaxListeners(2)
+		g.setMaxListeners(0)
 	})
 
 	it ('extends EventEmitter', () => {

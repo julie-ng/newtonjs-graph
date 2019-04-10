@@ -33,7 +33,7 @@ describe ('Network', function () {
 		network = new Network(nodesMockData, linksMockData, { uid: 'id' })
 
 		// prevent memory link in tests
-		network.setMaxListeners(1)
+		network.setMaxListeners(0)
 	})
 
 	describe ('Constructor', function () {
