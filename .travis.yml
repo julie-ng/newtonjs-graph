@@ -5,6 +5,13 @@ node_js:
 dist: trusty
 sudo: false
 
+before_install:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+
+before_script:
+  - ./cc-test-reporter before-build
+
 install:
   - npm ci
 
@@ -17,3 +24,9 @@ script:
   - npm run lint
   - npm run test
   - npm run coveralls
+
+# Pipe the coverage data to Code Climate
+# See https://docs.codeclimate.com/docs/travis-ci-test-coverage
+after_script:
+  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter format-coverage -t simplecov -o ./coverage/codeclimate.$CI_NODE_INDEX.json ./coverage/spec/.resultset.json; fi
+  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter sum-coverage --output - --parts $CI_NODE_TOTAL coverage/codeclimate.*.json | ./cc-test-reporter upload-coverage --input -; fi
