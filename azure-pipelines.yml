@@ -26,8 +26,9 @@ steps:
 - script: npm install
   displayName: 'npm install'
 
-- script: npm audit
-  displayName: 'Dependency Audit'
+# Currently audit via npmjs.org unreliable
+# - script: npm audit
+#   displayName: 'Dependency Audit'
 
 - script: npm run lint
   displayName: 'Lint Code'

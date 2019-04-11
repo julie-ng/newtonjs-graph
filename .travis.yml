@@ -20,7 +20,8 @@ cache:
     - node_modules
 
 script:
-  - npm audit
+  # Currently audit via npmjs.org unreliable
+  # - npm audit
   - npm run lint
   - npm run test
   - npm run coveralls
