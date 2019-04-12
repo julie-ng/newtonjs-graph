@@ -31,12 +31,12 @@ const elements = [
 	},
 	{
 		id: "7",
-		status: "up",
+		status: "deploying",
 		label: "Users Database"
 	},
 	{
 		id: "8",
-		status: "up",
+		status: "down",
 		label: "Payment Service"
 	}
 ]

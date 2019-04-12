@@ -68,11 +68,11 @@ module.exports = {
 		}),
 		new HtmlWebpackPlugin({
 			templateParameters: {
-				title: 'Prototype Demo: Architecture',
+				title: 'Newton.JS Demo',
 			},
 			chunks: ['architecture'],
 			template: 'demo/architecture/architecture.demo.hbs',
-			filename: 'demo/architecture.html'
+			filename: 'index.html'
 		})
 	]
 }

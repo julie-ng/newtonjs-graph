@@ -7,10 +7,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-	<header>
+	<header class="demo-header">
+		<img src="./images/newton-logo.png" class="demo-logo" alt="Newton.JS Logo">
 		<h1>{{ title }}</h1>
-		<input type="text" id="js-delete-id" style="width:20px" class="input-txt"><button id="js-delete" class="btn">Delete</button>
 	</header>
-	<svg class="dashboard-svg" width="960" height="600"></svg>
+	<div class="demo-delete">
+		<input type="text" id="js-delete-id" class="input-txt" placeholder="id, e.g. '1'">
+		<button id="js-delete" class="btn">Delete</button>
+	</div>
+	<svg class="graph-svg" width="960" height="600"></svg>
 </body>
 </html>

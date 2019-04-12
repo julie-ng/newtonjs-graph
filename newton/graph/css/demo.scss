@@ -1,3 +1,6 @@
+$margin: 20px;
+$header-height: 60px;
+
 body {
 	font-family: 'Fira Sans', Arial, sans-serif;
 	margin: 0;
@@ -13,19 +16,57 @@ body {
 	margin: 1em auto;
 }
 
-.dashboard-svg {
+.graph-svg {
+	position: fixed;
+	top: $header-height;
+	left: 0;
+	width: 100%;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-header {
-	text-align: center;
+.demo-header {
+	padding: 0 $margin;
+	background: #fff;
+	color: #333;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: $header-height;
+	overflow: hidden;
+
+	img, h1 {
+		display: inline-block;
+    vertical-align: middle;
+	}
+
+	img {
+		height: $header-height - 10;
+		margin-right: 5px;
+	}
+
+	h1 {
+		margin: 0;
+		font-weight: 500;
+		font-size: 24px;
+		line-height: $header-height;
+	}
 }
 
-h1 {
-	margin: 1em 0 0;
-	font-weight: 500;
+.demo-delete {
+	position: fixed;
+	top: $header-height;
+	right: 0;
+	height: 60px;
+	width: 200px;
+	background:#eee;
+	z-index: 9999; // above d3, webcola
+
+	input {
+		width: 60px;
+	}
 }
 
 .input-txt {

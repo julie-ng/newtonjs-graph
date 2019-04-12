@@ -5,8 +5,9 @@ const data = require('./architecture.data')
 
 const graph = new Graph({
 	width: window.innerWidth,
-	height: window.innerHeight - 250,
-	flow: 'horizontal'
+	height: window.innerHeight, // top in css
+	flow: 'horizontal',
+	draggable: true
 })
 const network = new Network(data.nodes, data.linksMap, { uid: 'id' })
 
