@@ -4,6 +4,11 @@
   "description": "Architecture Graph",
   "author": "Julie Ng <hello@julie.io>",
   "private": true,
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/julie-ng/newtonjs-graph"
+  },
   "scripts": {
     "webpack": "webpack",
     "server": "webpack-dev-server --open",
