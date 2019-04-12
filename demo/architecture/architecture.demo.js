@@ -1,4 +1,5 @@
-const Graph = require('./../../newton').Graph
+// const Graph = require('./../../newton').Graph
+const Graph = require('./../../newton').ColaGraph
 const Network = require('./../../newton').Network
 const data = require('./architecture.data')
 

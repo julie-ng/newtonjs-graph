@@ -17,7 +17,7 @@ class ColaGraph extends Graph {
 	 * @param {Object} [opts.width] - width of network graph
 	 */
 	constructor (opts = {}) {
-		super()
+		super(opts)
 	}
 
 	init () {
