@@ -5,7 +5,7 @@ const data = require('./architecture.data')
 
 const graph = new Graph({
 	width: window.innerWidth,
-	height: window.innerHeight - 200, // top in css
+	height: window.innerHeight - 60, // top in css
 	flow: 'horizontal',
 	draggable: true
 })
