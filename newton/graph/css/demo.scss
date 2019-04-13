@@ -55,45 +55,45 @@ body {
 	}
 }
 
-.demo-delete {
-	position: fixed;
-	top: $header-height;
-	right: 0;
-	height: 60px;
-	width: 200px;
-	background:#eee;
-	z-index: 9999; // above d3, webcola
+// .demo-delete {
+// 	position: fixed;
+// 	top: $header-height;
+// 	right: 0;
+// 	height: 60px;
+// 	width: 200px;
+// 	background:#eee;
+// 	z-index: 9999; // above d3, webcola
 
-	input {
-		width: 60px;
-	}
-}
+// 	input {
+// 		width: 60px;
+// 	}
+// }
 
-.input-txt {
-	display: inline-block;
-	margin: 0 1em;
-	height: 1.5em;
-	padding: 3px 6px;
-	border: 1px soild $graphLinkColor;
-}
+// .input-txt {
+// 	display: inline-block;
+// 	margin: 0 1em;
+// 	height: 1.5em;
+// 	padding: 3px 6px;
+// 	border: 1px soild $graphLinkColor;
+// }
 
-.btn {
-	margin-top: .5em;
-	display: inline-block;
-	background: #28405a;
-	border: 1px solid #435f7d;
-	padding: 0.35em 0.75em 0.45em;
-	border-radius: 3px;
-	font-size: 14px;
-	color: #ddd;
-	cursor: pointer;
+// .btn {
+// 	margin-top: .5em;
+// 	display: inline-block;
+// 	background: #28405a;
+// 	border: 1px solid #435f7d;
+// 	padding: 0.35em 0.75em 0.45em;
+// 	border-radius: 3px;
+// 	font-size: 14px;
+// 	color: #ddd;
+// 	cursor: pointer;
 
-	&:focus {
-		outline: none;
-		background: $orange;
-	}
+// 	&:focus {
+// 		outline: none;
+// 		background: $orange;
+// 	}
 
-	&:hover {
-		background: lighten(#28405a, 10%);
-	}
-}
+// 	&:hover {
+// 		background: lighten(#28405a, 10%);
+// 	}
+// }
