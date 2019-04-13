@@ -94,7 +94,7 @@ npm install
 To view the prototype in the browser, run
 
 ```
-npm run server
+npm run dev:demo
 ```
 
 which starts the webpack dev server and automatically opens [http://localhost:9000](http://localhost:9000) in a browser window.

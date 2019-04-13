@@ -11,7 +11,7 @@
   },
   "scripts": {
     "webpack": "webpack",
-    "server": "webpack-dev-server --open",
+    "dev:demo": "webpack-dev-server --open",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "docs": "jsdoc --readme ./README.md -c jsdoc.json",
     "docs:watch": "nodemon -w newton --exec 'npm run docs'",
