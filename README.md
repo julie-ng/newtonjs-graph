@@ -1,3 +1,7 @@
+<p align="center">
+ <img src="images/newton-logo.png" width="100" height="100" alt="Newton Graph Logo">
+</p>
+
 # Newton Graph Prototype 
 
 [![Build Status](https://travis-ci.org/julie-ng/newtonjs-graph.svg?branch=master)](https://travis-ci.org/julie-ng/newtonjs-graph)
@@ -8,15 +12,16 @@
 
 This repository contains learning and prototype code for a high-level dashboard for architects and stakeholders. The goal is to illustrate *product and service dependencies* in a software architecture.
 
-<p align="center">
- <img src="images/newton-logo.png" width="200" height="200" alt="Newton Graph Logo">
-</p>
-
 [View API Documentation &rarr;](https://julie-ng.github.io/newtonjs-graph/)
 
-## Example Usage
+![Demo Screenshot](./images/screenshots/demo-1.png)
 
-### Network - Data Wrapper
+The goal is to visualize architectures in large organizations as organisms that live and breath with deployments, problems, etc. These type of visualization could instead, over time:
+
+- reveal insights about how [Conway's Law](https://en.wikipedia.org/wiki/Conway%27s_law) applies to the organization.
+- visual _domain_ (as opposed to technical) dependencies across teams.
+
+## Network - Data Wrapper
 
 A `Network` is essentially a data wrapper. Its biggest advantage is that it dynamically calculating links between nodes, based on a unique identifier `uid`, instead of array indexes.
 
@@ -24,31 +29,59 @@ The basic data format is as so:
 
 ```javascript
 const nodes = [
-	{ id: 1, name: 'foo' },
-	{ id: 2, name: 'bar' }
+	{
+		id: "1",
+		status: "up",
+		label: "Frontend"
+	},
+	{
+		id: "2",
+		status: "up",
+		label: "API Gateway"
+	}
 ]
 
 const linksMap = [
-	{ source: 1, target: 2 }
+	{ 
+		source: 1, 
+		target: 2 
+	}
 ]
 
-const network = new Network(nodes, linksMap, { uid: 'id' })
+const network = new Network(nodes, linksMap)
 ```
 
-### Graph - Visualization
+## Graph - Visualization
 
 While `Network` handles the data, `Graph` handles the visualizations, including layout, animations, etc.
 
 
 ```javascript
-const graph = new Graph({ 
-	width: window.innerWidth 
+const graph = new Graph({
+	width: window.innerWidth,
+	height: window.innerHeight - 60,
+	flow: 'horizontal',
+	draggable: true
 })
+const network = new Network(data.nodes, data.linksMap, { uid: 'id' })
 
-graph.bind(network)
+graph.init().bind(network)
 ```
 
-Note that `Graph` is **event-driven** means that it listens for events, e.g. `update` and updates the visualization automatically depending on the bound network data.
+### Event Driven
+
+Note that `Graph` is **event-driven** means that it listens for events, e.g. `update` and updates the visualization automatically depending on the bound network data. 
+
+Example
+
+```javascript
+network.on('update', (data) => {
+	this.nodes.render(data)
+	this.labels.render(data)
+	this.links.render(data)
+	this.emit('update', data)
+})
+```
 
 ## Development
 
