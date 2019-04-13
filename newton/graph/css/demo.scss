@@ -55,6 +55,34 @@ body {
 	}
 }
 
+.demo-nav {
+	float: right;
+	margin-right: $margin;
+
+	ul {
+		margin: 0;
+		padding: 0;
+	}
+
+	li {
+		display: inline-block;
+		padding: 0 1em;
+		line-height: $header-height;
+	}
+
+	a {
+		color: $blue;
+
+		&:link, &:visited {
+			text-decoration: none;
+		}
+
+		&:hover, &:active {
+			text-decoration: underline;
+		}
+	}
+}
+
 // .demo-delete {
 // 	position: fixed;
 // 	top: $header-height;
