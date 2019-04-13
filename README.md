@@ -1,7 +1,3 @@
-<p align="center">
- <img src="images/newton-logo.png" width="100" height="100" alt="Newton Graph Logo">
-</p>
-
 # Newton Graph Prototype 
 
 [![Build Status](https://travis-ci.org/julie-ng/newtonjs-graph.svg?branch=master)](https://travis-ci.org/julie-ng/newtonjs-graph)
@@ -14,7 +10,7 @@ This repository contains learning and prototype code for a high-level dashboard 
 
 [View API Documentation &rarr;](https://julie-ng.github.io/newtonjs-graph/)
 
-![Demo Screenshot](./images/screenshots/demo-1.png)
+<img src="./images/screenshots/demo-1.png" alt="Demo Screenshot" style="border:1px solid #ddd">
 
 The goal is to visualize architectures in large organizations as organisms that live and breath with deployments, problems, etc. These type of visualization could instead, over time:
 
