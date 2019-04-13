@@ -4,8 +4,10 @@ const EventEmitter = require('events').EventEmitter
  */
 
 class View extends EventEmitter {
-	constructor () {
+	constructor (options = {}) {
 		super()
+		this.dom = options.dom || window.document
+		this.container = options.container || 'svg'
 	}
 
 	/**

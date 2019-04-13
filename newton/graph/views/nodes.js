@@ -18,11 +18,8 @@ class Nodes extends View {
 	 * @param {String} [options.container] - HTML identifier used by for d3
 	 */
 	constructor (options = {}) {
-		super()
+		super(options)
 		this.adapter = options.adapter
-		this.dom = options.dom || window.document
-		this.container = options.container || 'svg'
-
 	}
 
 	/**
