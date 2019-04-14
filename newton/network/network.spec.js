@@ -1,5 +1,6 @@
 const EventEmitter = require('events').EventEmitter
 const Network = require('./network')
+// const Neighbors = require('./neighbors')
 
 describe ('Network', function () {
 	let network

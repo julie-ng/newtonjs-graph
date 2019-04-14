@@ -1,4 +1,5 @@
 const EventEmitter = require('events').EventEmitter
+// const Neighbors = require('./neighbors')
 
 /**
  * Data Wrapper for Graphs, useful for dynamically calculating links between nodes.
@@ -52,7 +53,13 @@ class Network extends EventEmitter {
 		 * @private
 		 */
 		this._uid = options.uid || 'id'
+
 		this._createLinks(linksMap)
+
+		this._neighbors = {}
+		this._mapNeighbors()
+		console.log('links:', this._links)
+		console.log('neighbors:', this._neighbors)
 	}
 
 	/**
@@ -170,6 +177,38 @@ class Network extends EventEmitter {
 				target: this.findNodeById(l.target),
 			})
 		})
+	}
+
+	// ----- Neighbors -----
+
+	_mapNeighbors () {
+		this._neighbors = {}
+		this._links.forEach((d) => {
+			let key = this.findNodeIndex(d.source)
+				+ ','
+				+ this.findNodeIndex(d.target)
+			// console.log('key: ', key)
+			this._neighbors[key] = true
+		})
+	}
+
+	// a & b are nodes
+	areNeighbors (a, b) {
+		return this.isTargetNeighbor(a, b)
+			|| this.isSourceNeighbor(a, b)
+			|| this.isEqualNode(a, b)
+	}
+
+	isSourceNeighbor (a, b) {
+		return this._neighbors[`${a.index},${b.index}`]
+	}
+
+	isTargetNeighbor (a, b) {
+		return this._neighbors[`${b.index},${a.index}`]
+	}
+
+	isEqualNode (a, b) {
+		return a.index === b.index
 	}
 }
 

@@ -52,14 +52,14 @@ class Graph extends EventEmitter {
 	 *
 	 * @return {this}
 	 */
-	init () {
+	init (options = {}) {
 		this.svg = d3.select('svg')
 			.attr('width', this.width)
 			.attr('height', this.height)
 
 		this.labels = new Labels()
 		this.links = new Links()
-		this.nodes = new Nodes()
+		this.nodes = new Nodes({ network: options.network })
 
 		return this
 	}
@@ -88,10 +88,12 @@ class Graph extends EventEmitter {
 	 * @param {Object|GraphData} network - network graph data
 	 */
 	bind (network) {
+		// this.network = network
+		this.nodes.setNetwork(network)
+
 		if (typeof this.layout === 'undefined') {
 			this.initDefaultLayout(network)
 		}
-
 		this[_bind](network)
 		return this
 	}
