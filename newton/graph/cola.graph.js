@@ -34,6 +34,8 @@ class ColaGraph extends Graph {
 	 * @param {Object|GraphData} data - network graph data
 	 */
 	bind (network) {
+		super.bind(network)
+
 		this.cola
 			.nodes(network.get('nodes'))
 			.links(network.get('links'))
@@ -50,11 +52,9 @@ class ColaGraph extends Graph {
 		this.on('update', (data) => this.cola.start())
 
 		// make nodes draggable
-
 		if (this.options.draggable) {
 			this.nodes.on('update', (nodes) => nodes.call(this.cola.drag))
 		}
-		super.bind(network)
 	}
 }
 

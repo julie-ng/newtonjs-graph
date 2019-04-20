@@ -22,9 +22,6 @@ class Nodes extends View {
 		this.adapter = options.adapter
 	}
 
-	setNetwork (network) {
-		this.network = network
-	}
 	/**
 	 * Renders network graphs and passes hooks to d3.js's general update pattern via events.
 	 *

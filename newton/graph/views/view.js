@@ -21,6 +21,10 @@ class View extends EventEmitter {
 		graph.on('update', (data) => this.render(data))
 	}
 
+	setNetwork (network) {
+		this.network = network
+	}
+
 	/**
 	 * Renders all elements, including related transitions and animations based on data parameters, which should be references to real time data.
 	 *

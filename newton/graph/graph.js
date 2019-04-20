@@ -59,7 +59,7 @@ class Graph extends EventEmitter {
 
 		this.labels = new Labels()
 		this.links = new Links()
-		this.nodes = new Nodes({ network: options.network })
+		this.nodes = new Nodes()
 
 		return this
 	}
