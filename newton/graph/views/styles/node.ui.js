@@ -58,7 +58,7 @@ const NodeUI = {
 	},
 
 	styleNode: function (selection) {
-		console.log('styleNode', selection)
+		// console.log('styleNode', selection)
 		selection.attr('class', (node) => 'node status-' + node.status)
 			.attr('fill', fillColor)
 			.attr('stroke', strokeColor)
