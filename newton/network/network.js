@@ -203,6 +203,10 @@ class Network extends EventEmitter {
 		return this._neighbors[`${s.index},${t.index}`]
 	}
 
+	isDeepSourceNeighbor (s, t) {
+		return this.findDeepSources(t).includes(s)
+	}
+
 	isTargetNeighbor (s, t) {
 		return this._neighbors[`${t.index},${s.index}`]
 	}
@@ -221,18 +225,22 @@ class Network extends EventEmitter {
 		return sources
 	}
 
-	findDeepSources (n, sources = []) {
+	findDeepSources (n, sources = [], level = 0) {
 		// console.log(`-- findDeepSources(${n.label}) --`)
 		this._links.forEach((l) => {
 			if (l.target === n) {
-				sources.push(l.source)
+				if (level !== 0) {
+					sources.push(l.source)
+				}
 
 				let parents = this.findSources(n)
 				if (parents.length === 0) { return }
-				parents.forEach((a) => this.findDeepSources(a, sources))
+				parents.forEach((a) => this.findDeepSources(a, sources, level + 1))
 			}
 		})
-		return sources
+
+		const uniques = [...new Set(sources)]
+		return uniques
 	}
 
 	getRelationship (node, neighbor) {

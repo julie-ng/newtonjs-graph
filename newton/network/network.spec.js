@@ -124,17 +124,19 @@ describe ('Network', function () {
 		})
 
 		describe ('Sources', () => {
-			let nodes = [
-				{ id: 'a', label: 'a' },
-				{ id: 'b', label: 'b' },
-				{ id: 'c', label: 'c' },
-				{ id: 'd', label: 'd' }
-			]
+			const a = { id: 'a' }
+			const b = { id: 'b' }
+			const c = { id: 'c' }
+			const d = { id: 'd' }
+			const e = { id: 'e' }
 
+			let nodes = [a, b, c, d, e]
 			let links = [
 				{ source: 'a', target: 'b' },
 				{ source: 'a', target: 'c' },
-				{ source: 'b', target: 'd' }
+				{ source: 'b', target: 'd' },
+				{ source: 'c', target: 'e' },
+				{ source: 'd', target: 'e' }
 			]
 
 			let network
@@ -143,20 +145,26 @@ describe ('Network', function () {
 			})
 
 			it ('find source nodes', () => {
-				let n = network.findNodeById('b')
-				let sources = network.findSources(n)
-				expect(sources).toEqual([{ id: 'a', label: 'a' }])
+				expect(network.findSources(b)).toEqual([a])
+				expect(network.findSources(b)).toEqual([a])
 			})
 
-			it ('finds all source nodes', () => {
-				let n = network.findNodeById('d')
-				let sources = network.findDeepSources(n)
-				// a -> b -> d
-				const matchSet = [
-					{ id: 'b', label: 'b' },
-					{ id: 'a', label: 'a' }
-				]
-				expect(nodesSetMatches(sources, matchSet)).toEqual(true)
+			it ('finds ancestor source nodes', () => {
+				// a -> b -> d -> e
+				let ancestors = network.findDeepSources(e)
+				let directNeighbor = d
+				let deepNeighbors = [a, b]
+
+				expect(ancestors.includes(directNeighbor)).toBe(false)
+				expect(nodesSetMatches(ancestors, deepNeighbors)).toBe(true)
+			})
+
+			it ('can compare for deep ancestors', () => {
+				expect(network.isDeepSourceNeighbor(a, d)).toBe(true)
+				expect(network.isDeepSourceNeighbor(d, a)).toBe(false)
+				expect(network.isDeepSourceNeighbor(a, b)).toBe(false)
+				expect(network.isDeepSourceNeighbor(a, e)).toBe(true)
+				expect(network.isDeepSourceNeighbor(b, e)).toBe(true)
 			})
 		})
 	})
@@ -207,9 +215,11 @@ describe ('Network', function () {
 })
 
 function nodesSetMatches (setA, setB) {
+	// console.log('setA', setA)
+	// console.log('setB', setB)
 	if (setA.length !== setB.length) return false
-	setA.forEach((a) => {
+	for (let a of setA) {
 		if (!setB.includes(a)) return false
-	})
+	}
 	return true
 }
