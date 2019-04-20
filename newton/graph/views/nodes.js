@@ -114,8 +114,8 @@ class Nodes extends View {
 		// now go through and style all nodes
 		nodes
 			.transition(500)
-				.style('fill', (i) => NodeUI.relationshipColor('fill', this.network.getRelationship(n, i)))
-				.style('stroke', (i) => NodeUI.relationshipColor('stroke', this.network.getRelationship(n, i)))
+				.style('fill', (i) => NodeUI.relationshipColor('fill', i, this.network.getRelationship(n, i)))
+				.style('stroke', (i) => NodeUI.relationshipColor('stroke', i, this.network.getRelationship(n, i)))
 		// TODO: deploying node colors are overwritten completely
 	}
 

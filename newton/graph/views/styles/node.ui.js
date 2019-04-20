@@ -46,11 +46,15 @@ const calculateRadius = function (node) {
 }
 
 const NodeUI = {
-	relationshipColor: function (prop, rel) {
-		let key = rel + '-' + prop
-		return relationshipColors.hasOwnProperty(key)
-			? relationshipColors[key]
-			: ''
+	relationshipColor: function (prop, node, rel) {
+		if (node.status !== 'up' && prop === 'stroke') {
+			return strokeColor(node)
+		} else {
+			let key = rel + '-' + prop
+			return relationshipColors.hasOwnProperty(key)
+				? relationshipColors[key]
+				: ''
+		}
 	},
 
 	styleNode: function (selection) {
