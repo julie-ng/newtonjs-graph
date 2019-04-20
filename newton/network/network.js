@@ -192,23 +192,23 @@ class Network extends EventEmitter {
 		})
 	}
 
-	// a & b are nodes
-	areNeighbors (a, b) {
-		return this.isTargetNeighbor(a, b)
-			|| this.isSourceNeighbor(a, b)
-			|| this.isEqualNode(a, b)
+	// s & t are nodes
+	areNeighbors (s, t) {
+		return this.isTargetNeighbor(s, t)
+			|| this.isSourceNeighbor(s, t)
+			|| this.isEqualNode(s, t)
 	}
 
-	isSourceNeighbor (a, b) {
-		return this._neighbors[`${a.index},${b.index}`]
+	isSourceNeighbor (s, t) {
+		return this._neighbors[`${s.index},${t.index}`]
 	}
 
-	isTargetNeighbor (a, b) {
-		return this._neighbors[`${b.index},${a.index}`]
+	isTargetNeighbor (s, t) {
+		return this._neighbors[`${t.index},${s.index}`]
 	}
 
-	isEqualNode (a, b) {
-		return a.index === b.index
+	isEqualNode (s, t) {
+		return s.index === t.index
 	}
 
 	findSources (n) {
