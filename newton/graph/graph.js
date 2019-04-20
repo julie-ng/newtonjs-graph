@@ -90,6 +90,8 @@ class Graph extends EventEmitter {
 	bind (network) {
 		// this.network = network
 		this.nodes.setNetwork(network)
+		this.links.setNetwork(network)
+		this.labels.setNetwork(network)
 
 		if (typeof this.layout === 'undefined') {
 			this.initDefaultLayout(network)

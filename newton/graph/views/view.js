@@ -8,6 +8,9 @@ class View extends EventEmitter {
 		super()
 		this.dom = options.dom || window.document
 		this.container = options.container || 'svg'
+		if (options.hasOwnProperty('network')) {
+			this.network = options.network
+		}
 	}
 
 	/**
@@ -54,6 +57,14 @@ class View extends EventEmitter {
 	 */
 	position (data) {
 		throw interfaceError('position')
+	}
+
+	resetStyles (data) {
+		throw interfaceError('resetStyles')
+	}
+
+	highlightNeighbors (data) {
+		throw interfaceError('resetStyles')
 	}
 }
 

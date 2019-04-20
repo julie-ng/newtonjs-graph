@@ -55,6 +55,22 @@ class ColaGraph extends Graph {
 		if (this.options.draggable) {
 			this.nodes.on('update', (nodes) => nodes.call(this.cola.drag))
 		}
+
+		// Nodes entry point for user interaction
+		// pass these to links and labels
+		this.bindUI()
+	}
+
+	bindUI () {
+		this.nodes.on('style:highlightNeighbors', (node) => {
+			this.labels.highlightNeighbors(node)
+			this.links.highlightNeighbors(node)
+		})
+
+		this.nodes.on('style:reset', () => {
+			this.labels.resetStyles()
+			this.links.resetStyles()
+		})
 	}
 }
 

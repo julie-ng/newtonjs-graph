@@ -109,17 +109,19 @@ class Nodes extends View {
 
 	onMouseover (n) {
 		this.highlightNeighbors(n)
+		this.emit('style:highlightNeighbors', n)
 	}
 
 	onMouseout (n) {
 		this.resetStyles()
+		this.emit('style:reset')
 	}
 
 	highlightNeighbors (node) {
 		this.nodes
 			.transition(500)
-				.style('fill', (i) => NodeUI.relationshipColor('fill', i, this.network.getRelationship(node, i)))
-				.style('stroke', (i) => NodeUI.relationshipColor('stroke', i, this.network.getRelationship(node, i)))
+				.style('fill', (i) => NodeUI.relationshipColor('fill', i, this.network.getRelationship(i, node)))
+				.style('stroke', (i) => NodeUI.relationshipColor('stroke', i, this.network.getRelationship(i, node)))
 	}
 
 	resetStyles () {
