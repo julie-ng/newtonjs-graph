@@ -74,8 +74,8 @@ class Nodes extends View {
 				.attr('data-title', (d) => d.label)
 			.merge(nodes)
 				.call(NodeUI.styleNode)
-				.on('mouseover', (n) => this.onMouseover(n, nodes))
-				.on('mouseout', (n) => this.onMouseout(n, nodes))
+				.on('mouseover', (n) => this.onMouseover(n))
+				.on('mouseout', (n) => this.onMouseout(n))
 
 		/**
 		 * @event Nodes#update
@@ -110,18 +110,23 @@ class Nodes extends View {
 				.call(NodeUI.pulse, 3)
 	}
 
-	onMouseover (n, nodes) {
-		// now go through and style all nodes
-		nodes
-			.transition(500)
-				.style('fill', (i) => NodeUI.relationshipColor('fill', i, this.network.getRelationship(n, i)))
-				.style('stroke', (i) => NodeUI.relationshipColor('stroke', i, this.network.getRelationship(n, i)))
-		// TODO: deploying node colors are overwritten completely
+	onMouseover (n) {
+		this.highlightNeighbors(n)
 	}
 
-	onMouseout (n, nodes) {
-		// Remove `style` attributes, which overwrite normal `fill` attribute.
-		nodes.transition(500)
+	onMouseout (n) {
+		this.resetStyles()
+	}
+
+	highlightNeighbors (node) {
+		this.nodes
+			.transition(500)
+				.style('fill', (i) => NodeUI.relationshipColor('fill', i, this.network.getRelationship(node, i)))
+				.style('stroke', (i) => NodeUI.relationshipColor('stroke', i, this.network.getRelationship(node, i)))
+	}
+
+	resetStyles () {
+		this.nodes.transition(500)
 			.style('fill', '')
 			.style('stroke', '')
 			.call(NodeUI.styleNode)
