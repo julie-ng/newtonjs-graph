@@ -1,5 +1,5 @@
 const backgroundColor = '#102027'
-const backgroundOffsetColor = '#263238'
+const backgroundOffsetColor = '#20354a' // '#263238'
 const darkNodeBg = '#162b35'
 const green = '#168600'
 const blue = '#00838f'

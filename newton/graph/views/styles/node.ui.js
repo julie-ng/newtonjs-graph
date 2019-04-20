@@ -22,13 +22,13 @@ const relationshipColors = {}
 relationshipColors['is-source-and-target-fill'] = colors.green
 relationshipColors['is-source-fill'] 						= colors.red
 relationshipColors['is-target-fill'] 						= colors.orange
-relationshipColors['has-no-relationship-fill'] 	= '#111'
+relationshipColors['has-no-relationship-fill'] 	= colors.backgroundOffsetColor
 relationshipColors['is-same-node-fill'] 				= ''
 
 relationshipColors['is-source-and-target-stroke'] = colors.lightenDarkenColor(colors.green, 20)
 relationshipColors['is-source-stroke'] 						= colors.lightenDarkenColor(colors.red, 20)
 relationshipColors['is-target-stroke'] 						= colors.lightenDarkenColor(colors.orange, 20)
-relationshipColors['has-no-relationship-stroke'] 	= colors.lightenDarkenColor('#111', 30)
+relationshipColors['has-no-relationship-stroke'] 	= colors.lightenDarkenColor(colors.backgroundOffsetColor, 20)
 relationshipColors['is-same-node-stroke'] 				= ''
 
 function fillColor (node) {
