@@ -8,19 +8,10 @@ relationshipColors['has-no-relationship']  = colors.backgroundOffsetColor
 // relationshipColors['is-same-node'] 				 = ''
 
 const LinksUI = {
-	relationshipColor: function (node, rel) {
-		console.log(`relationshipColor(${node.label})`)
-
-		let c = relationshipColors.hasOwnProperty(rel)
+	relationshipColor: function (link, rel) {
+		return relationshipColors.hasOwnProperty(rel)
 			? relationshipColors[rel]
 			: ''
-
-		// if (node.status !== 'up') {
-		// 	console.log(`${node.label} is ${node.status}`)
-
-		// 	c = colors.statusColors[node.status].fill
-		// }
-		return c
 	}
 }
 

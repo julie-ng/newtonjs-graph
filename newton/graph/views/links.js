@@ -56,7 +56,7 @@ class Links extends View {
 	}
 
 	highlightNeighbors (n) {
-		console.log(`links.highlightNeighbors(${n.label})`)
+		// console.log(`links.highlightNeighbors(${n.label})`)
 
 		this.links
 			.style('stroke-width', 1)
