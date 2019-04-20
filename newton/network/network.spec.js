@@ -122,6 +122,43 @@ describe ('Network', function () {
 				expect(network.get('links')).toEqual([])
 			})
 		})
+
+		describe ('Sources', () => {
+			let nodes = [
+				{ id: 'a', label: 'a' },
+				{ id: 'b', label: 'b' },
+				{ id: 'c', label: 'c' },
+				{ id: 'd', label: 'd' }
+			]
+
+			let links = [
+				{ source: 'a', target: 'b' },
+				{ source: 'a', target: 'c' },
+				{ source: 'b', target: 'd' }
+			]
+
+			let network
+			beforeEach (() => {
+				network = new Network(nodes, links)
+			})
+
+			it ('find source nodes', () => {
+				let n = network.findNodeById('b')
+				let sources = network.findSources(n)
+				expect(sources).toEqual([{ id: 'a', label: 'a' }])
+			})
+
+			it ('finds all source nodes', () => {
+				let n = network.findNodeById('d')
+				let sources = network.findDeepSources(n)
+				// a -> b -> d
+				const matchSet = [
+					{ id: 'b', label: 'b' },
+					{ id: 'a', label: 'a' }
+				]
+				expect(nodesSetMatches(sources, matchSet)).toEqual(true)
+			})
+		})
 	})
 
 	describe ('Links', () => {
@@ -168,3 +205,11 @@ describe ('Network', function () {
 		})
 	})
 })
+
+function nodesSetMatches (setA, setB) {
+	if (setA.length !== setB.length) return false
+	setA.forEach((a) => {
+		if (!setB.includes(a)) return false
+	})
+	return true
+}

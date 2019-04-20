@@ -58,8 +58,8 @@ class Network extends EventEmitter {
 
 		this._neighbors = {}
 		this._mapNeighbors()
-		console.log('links:', this._links)
-		console.log('neighbors:', this._neighbors)
+		// console.log('links:', this._links)
+		// console.log('neighbors:', this._neighbors)
 	}
 
 	/**
@@ -209,6 +209,30 @@ class Network extends EventEmitter {
 
 	isEqualNode (a, b) {
 		return a.index === b.index
+	}
+
+	findSources (n) {
+		let sources = []
+		this._links.forEach((i) => {
+			if (i.target === n) {
+				sources.push(i.source)
+			}
+		})
+		return sources
+	}
+
+	findDeepSources (n, sources = []) {
+		// console.log(`-- findDeepSources(${n.label}) --`)
+		this._links.forEach((l) => {
+			if (l.target === n) {
+				sources.push(l.source)
+
+				let parents = this.findSources(n)
+				if (parents.length === 0) { return }
+				parents.forEach((a) => this.findDeepSources(a, sources))
+			}
+		})
+		return sources
 	}
 
 	getRelationship (node, neighbor) {
