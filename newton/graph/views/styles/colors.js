@@ -4,7 +4,8 @@ const darkNodeBg = '#162b35'
 const green = '#168600'
 const blue = '#00838f'
 const red = '#b72022'
-const yellow = '#fdd835'
+const autumnYellow = '#e3b505'
+const brightYellow = '#fdd835'
 const orange = '#d2620b'
 
 // Based on: https://css-tricks.com/snippets/javascript/lighten-darken-color/
@@ -42,7 +43,8 @@ module.exports = {
 	green: green,
 	blue: blue,
 	red: red,
-	yellow: yellow,
+	// autumnYellow: autumnYellow,
+	yellow: autumnYellow,
 	orange: orange,
 	statusColors: {
 		up: {

@@ -21,13 +21,13 @@ const flashColors = {
 const relationshipColors = {}
 relationshipColors['is-source-and-target-fill'] = colors.green
 relationshipColors['is-source-fill'] 						= colors.red
-relationshipColors['is-target-fill'] 						= colors.orange
+relationshipColors['is-target-fill'] 						= colors.lightenDarkenColor(colors.yellow, -40)
 relationshipColors['has-no-relationship-fill'] 	= colors.backgroundOffsetColor
 relationshipColors['is-same-node-fill'] 				= ''
 
 relationshipColors['is-source-and-target-stroke'] = colors.lightenDarkenColor(colors.green, 20)
 relationshipColors['is-source-stroke'] 						= colors.lightenDarkenColor(colors.red, 20)
-relationshipColors['is-target-stroke'] 						= colors.lightenDarkenColor(colors.orange, 20)
+relationshipColors['is-target-stroke'] 						= colors.lightenDarkenColor(colors.yellow, -10)
 relationshipColors['has-no-relationship-stroke'] 	= colors.lightenDarkenColor(colors.backgroundOffsetColor, 20)
 relationshipColors['is-same-node-stroke'] 				= ''
 

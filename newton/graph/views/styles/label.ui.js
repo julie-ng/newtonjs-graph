@@ -3,7 +3,7 @@ const colors = require('./colors')
 const relationshipColors = {}
 // relationshipColors['is-source-and-target'] = colors.green
 relationshipColors['is-source'] 					 = colors.lightenDarkenColor(colors.red, 50)
-relationshipColors['is-target'] 					 = colors.lightenDarkenColor(colors.orange, 50)
+relationshipColors['is-target'] 					 = colors.lightenDarkenColor(colors.yellow, -20)
 relationshipColors['has-no-relationship']  = colors.backgroundOffsetColor
 relationshipColors['is-same-node'] 				 = ''
 
