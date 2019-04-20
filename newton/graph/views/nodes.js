@@ -3,7 +3,6 @@ const d3 = require('d3')
 const View = require('./view')
 const Transitions = require('./transitions')
 const NodeUI = require('./styles/node.ui')
-const colors = require('./styles/colors')
 
 /**
  * Encapsulates what is needed to create the nodes of a network graph,
@@ -112,59 +111,16 @@ class Nodes extends View {
 	}
 
 	onMouseover (n, nodes) {
-		// now go through all nodes
+		// now go through and style all nodes
 		nodes
 			.transition(500)
-				.style('fill', (i) => {
-					let fillColor
-					if (this.network.isTargetNeighbor(i, n) && this.network.isSourceNeighbor(i, n)) {
-						fillColor = colors.green
-					} else if (this.network.isSourceNeighbor(i, n)) {
-						fillColor = colors.red
-					} else if (this.network.isTargetNeighbor(i, n)) {
-						fillColor = colors.orange
-					} else if (this.network.isEqualNode(i, n)) {
-						// fillColor = 'hotpink' // hovered node
-						fillColor = ''
-					} else {
-						fillColor = '#111' // faded color
-					}
-					return fillColor
-				})
-
-				.style('stroke', (i) => {
-					let strokeColor
-					if (this.network.isTargetNeighbor(i, n) && this.network.isSourceNeighbor(i, n)) {
-						strokeColor = colors.lightenDarkenColor(colors.green, 20)
-					} else if (this.network.isSourceNeighbor(i, n)) {
-						strokeColor = colors.lightenDarkenColor(colors.red, 20)
-					} else if (this.network.isTargetNeighbor(i, n)) {
-						strokeColor = colors.lightenDarkenColor(colors.orange, 20)
-					} else if (this.network.isEqualNode(i, n)) {
-						// strokeColor = 'hotpink' // hovered node
-						strokeColor = ''
-					} else {
-						strokeColor = colors.lightenDarkenColor('#111', 30) // faded color
-						console.log('faded color', strokeColor)
-					}
-
-					if (i.status === 'down' || i.status === 'deploying') {
-						strokeColor = ''
-					}
-
-					// TODO: keep rings for deploying and Down nodes
-					return strokeColor
-				})
-
-		// link
-		// 	.transition(500)
-		// 		.style('stroke-opacity', o => (o.source === d || o.target === d ? 1 : 0.2))
-		// 		.transition(500)
-		// 		.attr('marker-end', o => (o.source === d || o.target === d ? 'url(#arrowhead)' : 'url()'))
+				.style('fill', (i) => NodeUI.relationshipColor('fill', this.network.getRelationship(n, i)))
+				.style('stroke', (i) => NodeUI.relationshipColor('stroke', this.network.getRelationship(n, i)))
+		// TODO: deploying node colors are overwritten completely
 	}
 
 	onMouseout (n, nodes) {
-		console.log('mouse out')
+		// Remove `style` attributes, which overwrite normal `fill` attribute.
 		nodes.transition(500)
 			.style('fill', '')
 			.style('stroke', '')

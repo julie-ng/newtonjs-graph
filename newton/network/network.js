@@ -210,6 +210,22 @@ class Network extends EventEmitter {
 	isEqualNode (a, b) {
 		return a.index === b.index
 	}
+
+	getRelationship (node, neighbor) {
+		let rel = ''
+		if (this.isTargetNeighbor(node, neighbor) && this.isSourceNeighbor(node, neighbor)) {
+			rel = 'is-source-and-target'
+		} else if (this.isSourceNeighbor(node, neighbor)) {
+			rel = 'is-source'
+		} else if (this.isTargetNeighbor(node, neighbor)) {
+			rel = 'is-target'
+		} else if (this.isEqualNode(node, neighbor)) {
+			rel = 'is-same-node'
+		} else {
+			rel = 'has-no-relationship'
+		}
+		return rel
+	}
 }
 
 module.exports = Network
