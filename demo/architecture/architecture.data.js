@@ -55,5 +55,5 @@ const linksMap = [
 
 module.exports = {
 	nodes: elements,
-	linksMap: linksMap
+	links: linksMap
 }
