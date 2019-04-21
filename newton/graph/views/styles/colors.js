@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 const backgroundColor = '#102027'
 const backgroundOffsetColor = '#20354a' // '#263238'
 const darkNodeBg = '#162b35'
