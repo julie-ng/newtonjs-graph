@@ -5,7 +5,7 @@ const LabelsUI = require('./styles/label.ui')
 // const colors = require('./styles/colors')
 
 const fixedRadius = 12
-const defaultFontSize = 16
+const defaultFontSize = 14
 
 const calculateFontSize = (node) => {
 	// return (node.status === 'up')

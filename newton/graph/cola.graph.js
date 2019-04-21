@@ -39,7 +39,7 @@ class ColaGraph extends Graph {
 			.links(network.get('links'))
 			.avoidOverlaps(true)
 			.handleDisconnected(false)
-			.jaccardLinkLengths(115,0.8)
+			.jaccardLinkLengths(85,0.8)
 
 		if (this.options.flow === 'horizontal') {
 			this.cola. flowLayout('x', 120)
