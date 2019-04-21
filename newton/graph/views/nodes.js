@@ -31,6 +31,8 @@ class Nodes extends View {
 	 * @param {Object} data - Network data with `nodes` attribute
 	 */
 	render (data) {
+		console.log(' nodes render()')
+
 		if (data.nodes === undefined) { throw 'Error: missing `nodes` attribute on parameter.' }
 
 		let t = d3.transition()
@@ -68,8 +70,9 @@ class Nodes extends View {
 		this.emit('enter', nodes.enter())
 		nodes = nodes.enter()
 			.append('circle')
-				.attr('data-title', (d) => d.label)
+				.attr('data-title', (n) => n.label)
 			.merge(nodes)
+				.attr('class', (n) => 'node status-' + n.status)
 				.call(NodeUI.styleNode)
 				// .on('mouseover', (n) => this.onMouseover(n))
 				// .on('mouseout', (n) => this.onMouseout(n))
@@ -83,7 +86,6 @@ class Nodes extends View {
 		this.emit('update', nodes)
 
 		this.nodes = nodes
-		this.animate()
 	}
 
 	position () {
@@ -94,27 +96,10 @@ class Nodes extends View {
 			.attr('cy', (d) => d.y)
 	}
 
-	/**
-	 * (Re)starts any animations using current data.
-	 */
-	animate () {
-		this.nodes
-			.filter('.status-down')
-				.call(NodeUI.flash)
-
-		this.nodes
-			.filter('.status-deploying')
-				.call(NodeUI.pulse, 3)
-	}
-
 	onMouseover (n) {
-		this.highlightNeighbors(n)
-		this.emit('style:highlightNeighbors', n)
 	}
 
 	onMouseout (n) {
-		this.resetStyles()
-		this.emit('style:reset')
 	}
 
 	highlightNeighbors (node) {
@@ -124,7 +109,11 @@ class Nodes extends View {
 	}
 
 	resetStyles () {
-		this.nodes.transition(1500)
+		let t = d3.transition()
+			.duration(300)
+			.ease(d3.easeLinear)
+
+		this.nodes.transition(t)
 			.style('fill', '')
 			.style('stroke', '')
 			.call(NodeUI.styleNode)
