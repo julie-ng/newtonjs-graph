@@ -56,7 +56,7 @@ class Links extends View {
 	}
 
 	highlightNeighbors (n) {
-		this.links
+		this.links.transition(1000)
 			.style('stroke-width', 1)
 			.style('stroke', (i) => {
 				let rel = ''
@@ -74,7 +74,9 @@ class Links extends View {
 	}
 
 	resetStyles () {
-		this.links.attr('style', '')
+		this.links.transition(1500)
+			.style('stroke-width', '')
+			.style('stroke', '')
 	}
 }
 

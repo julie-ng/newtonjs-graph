@@ -118,14 +118,13 @@ class Nodes extends View {
 	}
 
 	highlightNeighbors (node) {
-		this.nodes
-			.transition(500)
-				.style('fill', (i) => NodeUI.relationshipColor('fill', i, this.network.getRelationship(i, node)))
-				.style('stroke', (i) => NodeUI.relationshipColor('stroke', i, this.network.getRelationship(i, node)))
+		this.nodes.transition(1000)
+			.style('fill', (i) => NodeUI.relationshipColor('fill', i, this.network.getRelationship(i, node)))
+			.style('stroke', (i) => NodeUI.relationshipColor('stroke', i, this.network.getRelationship(i, node)))
 	}
 
 	resetStyles () {
-		this.nodes.transition(500)
+		this.nodes.transition(1500)
 			.style('fill', '')
 			.style('stroke', '')
 			.call(NodeUI.styleNode)

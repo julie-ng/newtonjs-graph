@@ -75,7 +75,7 @@ class Labels extends View {
 	}
 
 	highlightNeighbors (n) {
-		this.labels
+		this.labels.transition(1000)
 			.style('fill', (i) => {
 				let rel = this.network.getRelationship(i, n)
 				return LabelsUI.relationshipColor(i, rel)
@@ -83,7 +83,8 @@ class Labels extends View {
 	}
 
 	resetStyles () {
-		this.labels.attr('style', '')
+		this.labels.transition(1500)
+			.style('fill', '')
 	}
 }
 
