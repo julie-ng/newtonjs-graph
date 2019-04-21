@@ -201,7 +201,7 @@ class Network extends EventEmitter {
 	 * @param {String} eventName - Event Name, e.g. `update`
 	 */
 	_publish (eventName) {
-		console.log(`network.publish(${eventName})`);
+		// console.log(`network.publish(${eventName})`)
 		this.emit(eventName, {
 			nodes: this._nodes,
 			links: this._links
