@@ -13,14 +13,28 @@ const graph = new Graph({
 })
 
 graph.init().bind(network)
-let n
+
+// rename
+data.links = data.linksMap
 
 setTimeout(() => {
-	n = network.findNodeById('4')
-	network.updateNode(n, { status: 'down' })
-	// graph.highlightNeighbors(n)
+	data.nodes.forEach((n) => {
+		n.status = 'deploying'
+	})
+
+	network.resetData(data)  				// render option #1
+	// network._publish('update') 	// render option #2
+
+	let n = network.findNodeById('2')
+	graph.highlightNeighbors(n)
 }, 1000)
 
 setTimeout(() => {
-	network.updateNode(n, { status: 'up' })
+	data.nodes.forEach((n) => {
+		n.status = 'up'
+	})
+
+	data.nodes[1].status = 'down'
+	network.resetData(data)
+	graph.resetStyles()
 }, 3000)
