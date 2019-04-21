@@ -73,6 +73,18 @@ class ColaGraph extends Graph {
 			this.links.resetStyles()
 		})
 	}
+
+	highlightNeighbors (node) {
+		this.nodes.highlightNeighbors(node)
+		this.labels.highlightNeighbors(node)
+		this.links.highlightNeighbors(node)
+	}
+
+	resetStyles () {
+		this.nodes.resetStyles()
+		this.labels.resetStyles()
+		this.links.resetStyles()
+	}
 }
 
 module.exports = ColaGraph

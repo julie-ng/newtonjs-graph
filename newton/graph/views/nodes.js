@@ -71,8 +71,8 @@ class Nodes extends View {
 				.attr('data-title', (d) => d.label)
 			.merge(nodes)
 				.call(NodeUI.styleNode)
-				.on('mouseover', (n) => this.onMouseover(n))
-				.on('mouseout', (n) => this.onMouseout(n))
+				// .on('mouseover', (n) => this.onMouseover(n))
+				// .on('mouseout', (n) => this.onMouseout(n))
 
 		/**
 		 * @event Nodes#update

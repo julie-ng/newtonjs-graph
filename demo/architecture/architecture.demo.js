@@ -14,6 +14,14 @@ const graph = new Graph({
 
 graph.init().bind(network)
 
+setTimeout(() => {
+	graph.highlightNeighbors(network.findNodeById('4'))
+}, 1000)
+
+setTimeout(() => {
+	graph.resetStyles()
+}, 3000)
+
 // document.querySelector('#js-delete')
 // 	.addEventListener('click', () => {
 // 		let toDelete = document.querySelector('#js-delete-id').value
