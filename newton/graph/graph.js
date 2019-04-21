@@ -88,7 +88,7 @@ class Graph extends EventEmitter {
 	 * @param {Object|GraphData} network - network graph data
 	 */
 	bind (network) {
-		// this.network = network
+		this.network = network
 		this.nodes.setNetwork(network)
 		this.links.setNetwork(network)
 		this.labels.setNetwork(network)

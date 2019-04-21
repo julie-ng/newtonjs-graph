@@ -14,8 +14,27 @@ const graph = new Graph({
 
 graph.init().bind(network)
 
-// document.querySelector('#js-delete')
-// 	.addEventListener('click', () => {
-// 		let toDelete = document.querySelector('#js-delete-id').value
-// 		network.removeNodeById(toDelete.toString())
-// 	})
+// rename
+data.links = data.linksMap
+
+setTimeout(() => {
+	data.nodes.forEach((n) => {
+		n.status = 'deploying'
+	})
+
+	network.resetData(data)  				// render option #1
+	// network._publish('update') 	// render option #2
+
+	let n = network.findNodeById('2')
+	graph.highlightNeighbors(n)
+}, 1000)
+
+setTimeout(() => {
+	data.nodes.forEach((n) => {
+		n.status = 'up'
+	})
+
+	data.nodes[1].status = 'down'
+	network.resetData(data)
+	graph.resetStyles()
+}, 3000)

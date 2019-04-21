@@ -8,9 +8,10 @@ const fixedRadius = 12
 const defaultFontSize = 16
 
 const calculateFontSize = (node) => {
-	return (node.status === 'up')
-		? defaultFontSize + 'px'
-		: defaultFontSize + 4 + 'px'
+	// return (node.status === 'up')
+	// 	? defaultFontSize + 'px'
+	// 	: defaultFontSize + 2 + 'px'
+	return defaultFontSize
 }
 
 /**

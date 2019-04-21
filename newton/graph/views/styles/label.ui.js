@@ -13,10 +13,6 @@ const LabelUI = {
 		let c = relationshipColors.hasOwnProperty(rel)
 			? relationshipColors[rel]
 			: ''
-		// if (node.status !== 'up') {
-		// 	statusColor = colors.statusColors[node.status].fill
-		// 	c = colors.lightenDarkenColor(statusColor, -5)
-		// }
 		return c
 	}
 }

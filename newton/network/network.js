@@ -1,5 +1,4 @@
 const EventEmitter = require('events').EventEmitter
-// const Neighbors = require('./neighbors')
 
 /**
  * Data Wrapper for Graphs, useful for dynamically calculating links between nodes.
@@ -36,30 +35,66 @@ class Network extends EventEmitter {
 		super()
 
 		/**
+		 * Unique identifier to reference nodes when calculating links
+		 *
+		 * @property {String} _uid
+		 * @private
+		 */
+		this._uid = options.uid || 'id'
+
+		/**
 		 * Array that maps relationships between nodes using
 		 * references to array indexes (original d3.js interface).
+		 * @property {Array} _links
 		 * @private
 		 */
 		this._links = []
 
 		/**
 		 * Array of nodes. See d3.js documentation.
+		 * @property {Array} _nodes
+		 * @private
 		 */
 		this._nodes = nodes
 
-		/**
-		 * Unique identifier to reference nodes when calculating links
-		 *
-		 * @private
-		 */
-		this._uid = options.uid || 'id'
+		this.resetData({
+			nodes: nodes,
+			links: linksMap,
+			publish: false
+		})
+	}
 
-		this._createLinks(linksMap)
+	/**
+	 * Resets entire network data set
+	 *
+	 * @param {Object} params
+	 * @param {Array} params.nodes - nodes
+	 * @param {Array} params.links - links
+	 * @param {Boolean} [params.linksById = true] - links array maps to nodes via `id` key
+	 * @param {Boolean} [params.publish = true] - publish event after resetting data?
+	 */
+	resetData (params = {}) {
+		const defaults = {
+			linksById: true,
+			publish: true
+		}
+		params = Object.assign({}, defaults, params)
+		console.log(`network.resetData()`, params)
 
-		this._neighbors = {}
+		this._nodes = params.nodes
+
+		if (params.linksById) {
+			this._createLinks(params.links)
+		}
+		if (params.hasOwnProperty('linksByIndex') && params.linksByIndex === true) {
+			this._links = params.links
+		}
+
 		this._mapNeighbors()
-		// console.log('links:', this._links)
-		// console.log('neighbors:', this._neighbors)
+
+		if (params.publish) {
+			this._publish('update')
+		}
 	}
 
 	/**
@@ -98,6 +133,15 @@ class Network extends EventEmitter {
 			? node[this._uid]
 			: node
 		return this._nodes.findIndex((n) => n[this._uid] === id)
+	}
+
+	updateNode (n, attrs) {
+		let node = (typeof n === 'string')
+			? this.findNodeById(n)
+			: n
+		Object.assign(node, attrs)
+		this._publish('update')
+		return this
 	}
 
 	/**
@@ -157,6 +201,7 @@ class Network extends EventEmitter {
 	 * @param {String} eventName - Event Name, e.g. `update`
 	 */
 	_publish (eventName) {
+		// console.log(`network.publish(${eventName})`)
 		this.emit(eventName, {
 			nodes: this._nodes,
 			links: this._links
@@ -171,6 +216,7 @@ class Network extends EventEmitter {
 	 * @private
 	 */
 	_createLinks (linksMap) {
+		this._links = []
 		linksMap.forEach((l) => {
 			this._links.push({
 				source: this.findNodeById(l.source),

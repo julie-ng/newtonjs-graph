@@ -1,0 +1,59 @@
+@import "variables";
+
+/**
+ * Animations based on https://github.com/daneden/animate.css
+ */
+
+@keyframes shake {
+  from,
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translate3d(1px, 0, 0);
+  }
+}
+
+// ----- Flashing Colors -----
+
+@keyframes flashRed {
+  from,
+  50%,
+  to {
+		fill: darken($red, 15%);
+		stroke: darken($red, 10%);
+  }
+
+  25%,
+  75% {
+		fill: lighten($red, 5%);
+		stroke: lighten($red, 8%);
+  }
+}
+
+@keyframes flashBlue {
+  from,
+  50%,
+  to {
+		fill: darken($blue, 10%);
+		stroke: darken($blue, 8%);
+  }
+
+  25%,
+  75% {
+		fill: lighten($blue, 8%);
+		stroke: lighten($blue, 12%);
+  }
+}
