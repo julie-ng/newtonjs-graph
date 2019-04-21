@@ -1,4 +1,5 @@
 const EventEmitter = require('events').EventEmitter
+// const Neighbors = require('./neighbors')
 
 /**
  * Data Wrapper for Graphs, useful for dynamically calculating links between nodes.
@@ -52,7 +53,13 @@ class Network extends EventEmitter {
 		 * @private
 		 */
 		this._uid = options.uid || 'id'
+
 		this._createLinks(linksMap)
+
+		this._neighbors = {}
+		this._mapNeighbors()
+		// console.log('links:', this._links)
+		// console.log('neighbors:', this._neighbors)
 	}
 
 	/**
@@ -170,6 +177,103 @@ class Network extends EventEmitter {
 				target: this.findNodeById(l.target),
 			})
 		})
+	}
+
+	// ----- Neighbors -----
+
+	_mapNeighbors () {
+		this._neighbors = {}
+		this._links.forEach((d) => {
+			let key = this.findNodeIndex(d.source)
+				+ ','
+				+ this.findNodeIndex(d.target)
+			// console.log('key: ', key)
+			this._neighbors[key] = true
+		})
+	}
+
+	// s & t are nodes
+	areNeighbors (s, t) {
+		return this.isTargetNeighbor(s, t)
+			|| this.isSourceNeighbor(s, t)
+			|| this.isEqualNode(s, t)
+	}
+
+	isSourceNeighbor (s, t) {
+		return this._neighbors[`${s.index},${t.index}`] !== undefined
+	}
+
+	isDeepSourceNeighbor (s, t) {
+		// console.log(`isDeepSourceNeighbor(${s.label}, ${t.label})?`);
+
+		let sources = this.findDeepSources(t)
+		// console.log(`Deep sources of ${t.label}:`)
+		// console.table(sources)
+		return sources.length > 0
+			? sources.includes(s)
+			: false
+	}
+
+	isTargetNeighbor (s, t) {
+		return this._neighbors[`${t.index},${s.index}`]
+	}
+
+	isEqualNode (s, t) {
+		return s.index === t.index
+	}
+
+	findSources (n) {
+		let sources = []
+		this._links.forEach((i) => {
+			if (i.target === n) {
+				sources.push(i.source)
+			}
+		})
+		return sources
+	}
+
+	findDeepSources (n, sources = [], level = 0) {
+		// console.log(`-- findDeepSources(${n.label}) --`)
+		this._links.forEach((l) => {
+			if (l.target === n) {
+				if (level !== 0) {
+					sources.push(l.source)
+				}
+
+				let parents = this.findSources(n)
+				if (parents.length === 0) { return }
+				parents.forEach((a) => this.findDeepSources(a, sources, level + 1))
+			}
+		})
+
+		const uniques = [...new Set(sources)]
+		return uniques
+	}
+
+	isDeepSourceLink (link, n) {
+		let sourceIsASource = this.isDeepSourceNeighbor(link.source, n)
+		let targetIsASource = this.isDeepSourceNeighbor(link.target, n) || this.isSourceNeighbor(link.target, n)
+		let isDeepLink = sourceIsASource && targetIsASource
+		// console.log(`Does [${link.source.label}] -> [${link.target.label}] deep link to [${n.label}]? `, isDeepLink)
+		return isDeepLink
+	}
+
+	getRelationship (node, neighbor) {
+		let rel = ''
+		if (this.isTargetNeighbor(node, neighbor) && this.isSourceNeighbor(node, neighbor)) {
+			rel = 'is-source-and-target'
+		} else if (this.isSourceNeighbor(node, neighbor)) {
+			rel = 'is-source'
+		} else if (this.isDeepSourceNeighbor(node, neighbor)) {
+			rel = 'is-deep-source'
+		} else if (this.isTargetNeighbor(node, neighbor)) {
+			rel = 'is-target'
+		} else if (this.isEqualNode(node, neighbor)) {
+			rel = 'is-same-node'
+		} else {
+			rel = 'has-no-relationship'
+		}
+		return rel
 	}
 }
 

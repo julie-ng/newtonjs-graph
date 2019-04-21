@@ -71,6 +71,8 @@ class Nodes extends View {
 				.attr('data-title', (d) => d.label)
 			.merge(nodes)
 				.call(NodeUI.styleNode)
+				.on('mouseover', (n) => this.onMouseover(n))
+				.on('mouseout', (n) => this.onMouseout(n))
 
 		/**
 		 * @event Nodes#update
@@ -103,6 +105,29 @@ class Nodes extends View {
 		this.nodes
 			.filter('.status-deploying')
 				.call(NodeUI.pulse, 3)
+	}
+
+	onMouseover (n) {
+		this.highlightNeighbors(n)
+		this.emit('style:highlightNeighbors', n)
+	}
+
+	onMouseout (n) {
+		this.resetStyles()
+		this.emit('style:reset')
+	}
+
+	highlightNeighbors (node) {
+		this.nodes.transition(1000)
+			.style('fill', (i) => NodeUI.relationshipColor('fill', i, this.network.getRelationship(i, node)))
+			.style('stroke', (i) => NodeUI.relationshipColor('stroke', i, this.network.getRelationship(i, node)))
+	}
+
+	resetStyles () {
+		this.nodes.transition(1500)
+			.style('fill', '')
+			.style('stroke', '')
+			.call(NodeUI.styleNode)
 	}
 }
 

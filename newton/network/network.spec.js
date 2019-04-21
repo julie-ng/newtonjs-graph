@@ -1,5 +1,6 @@
 const EventEmitter = require('events').EventEmitter
 const Network = require('./network')
+// const Neighbors = require('./neighbors')
 
 describe ('Network', function () {
 	let network
@@ -121,6 +122,57 @@ describe ('Network', function () {
 				expect(network.get('links')).toEqual([])
 			})
 		})
+
+		describe ('Sources', () => {
+			const a = { id: 'a' }
+			const b = { id: 'b' }
+			const c = { id: 'c' }
+			const d = { id: 'd' }
+			const e = { id: 'e' }
+			const f = { id: 'f' }
+			let nodes = [a, b, c, d, e, f]
+
+			//        c
+			//       /
+			// a - b - d - f
+			//	    \- e -/
+			let links = [
+				{ source: 'a', target: 'b' },
+				{ source: 'b', target: 'c' },
+				{ source: 'b', target: 'd' },
+				{ source: 'b', target: 'e' },
+				{ source: 'd', target: 'f' },
+				{ source: 'e', target: 'f' }
+			]
+
+			let network
+			beforeEach (() => {
+				network = new Network(nodes, links)
+			})
+
+			it ('find source nodes', () => {
+				expect(network.findSources(b)).toEqual([a])
+				expect(network.findSources(f)).toEqual([d, e])
+			})
+
+			it ('finds ancestor source nodes', () => {
+				let ancestors = network.findDeepSources(f)
+				let directNeighbors = [e, d]
+				let deepNeighbors = [a, b]
+
+				expect(ancestors.includes(directNeighbors[0])).toBe(false)
+				expect(ancestors.includes(directNeighbors[1])).toBe(false)
+				expect(nodesSetMatches(ancestors, deepNeighbors)).toBe(true)
+			})
+
+			it ('can compare for deep ancestors', () => {
+				expect(network.isDeepSourceNeighbor(d, f)).toBe(false)
+				expect(network.isDeepSourceNeighbor(e, f)).toBe(false)
+				expect(network.isDeepSourceNeighbor(a, f)).toBe(true)
+				expect(network.isDeepSourceNeighbor(b, f)).toBe(true)
+				expect(network.isDeepSourceNeighbor(c, f)).toBe(false)
+			})
+		})
 	})
 
 	describe ('Links', () => {
@@ -167,3 +219,13 @@ describe ('Network', function () {
 		})
 	})
 })
+
+function nodesSetMatches (setA, setB) {
+	// console.log('setA', setA)
+	// console.log('setB', setB)
+	if (setA.length !== setB.length) return false
+	for (let a of setA) {
+		if (!setB.includes(a)) return false
+	}
+	return true
+}

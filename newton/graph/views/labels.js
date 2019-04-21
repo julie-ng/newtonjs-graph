@@ -1,6 +1,8 @@
 const d3 = require('d3')
 const View = require('./view')
 const Transitions = require('./transitions')
+const LabelsUI = require('./styles/label.ui')
+// const colors = require('./styles/colors')
 
 const fixedRadius = 12
 const defaultFontSize = 16
@@ -70,6 +72,19 @@ class Labels extends View {
 		this.labels
 			.attr('x', (d) => d.x)
 			.attr('y', (d) => d.y + fixedRadius*2.5)
+	}
+
+	highlightNeighbors (n) {
+		this.labels.transition(1000)
+			.style('fill', (i) => {
+				let rel = this.network.getRelationship(i, n)
+				return LabelsUI.relationshipColor(i, rel)
+			})
+	}
+
+	resetStyles () {
+		this.labels.transition(1500)
+			.style('fill', '')
 	}
 }
 
