@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "d3": "^5.7.0",
+    "socket.io": "^2.2.0",
     "webcola": "^3.3.8"
   },
   "devDependencies": {

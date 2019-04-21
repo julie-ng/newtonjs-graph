@@ -1,3 +1,4 @@
+const io = require('socket.io-client')
 // const Graph = require('./../../newton').Graph
 const Graph = require('./../../newton').ColaGraph
 const Network = require('./../../newton').Network
@@ -38,3 +39,11 @@ setTimeout(() => {
 	network.resetData(data)
 	graph.resetStyles()
 }, 3000)
+
+// --- real time data ---
+
+const socket = io('http://localhost:3000')
+
+socket.on('connect', (data) => {
+	socket.emit('join', 'Newton.js Graph connected')
+})
