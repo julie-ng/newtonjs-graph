@@ -56,16 +56,16 @@ class Links extends View {
 	}
 
 	highlightNeighbors (n) {
-		// console.log(`links.highlightNeighbors(${n.label})`)
-
 		this.links
 			.style('stroke-width', 1)
 			.style('stroke', (i) => {
-				let rel
+				let rel = ''
 				if (i.source === n) {
 					rel = 'is-source'
 				} else if (i.target === n) {
 					rel = 'is-target'
+				} else if (this.network.isDeepSourceLink(i, n)) {
+					rel = 'is-deep-source'
 				} else {
 					rel = 'has-no-relationship'
 				}

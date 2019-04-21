@@ -129,14 +129,20 @@ describe ('Network', function () {
 			const c = { id: 'c' }
 			const d = { id: 'd' }
 			const e = { id: 'e' }
+			const f = { id: 'f' }
+			let nodes = [a, b, c, d, e, f]
 
-			let nodes = [a, b, c, d, e]
+			//        c
+			//       /
+			// a - b - d - f
+			//	    \- e -/
 			let links = [
 				{ source: 'a', target: 'b' },
-				{ source: 'a', target: 'c' },
+				{ source: 'b', target: 'c' },
 				{ source: 'b', target: 'd' },
-				{ source: 'c', target: 'e' },
-				{ source: 'd', target: 'e' }
+				{ source: 'b', target: 'e' },
+				{ source: 'd', target: 'f' },
+				{ source: 'e', target: 'f' }
 			]
 
 			let network
@@ -146,25 +152,25 @@ describe ('Network', function () {
 
 			it ('find source nodes', () => {
 				expect(network.findSources(b)).toEqual([a])
-				expect(network.findSources(b)).toEqual([a])
+				expect(network.findSources(f)).toEqual([d, e])
 			})
 
 			it ('finds ancestor source nodes', () => {
-				// a -> b -> d -> e
-				let ancestors = network.findDeepSources(e)
-				let directNeighbor = d
+				let ancestors = network.findDeepSources(f)
+				let directNeighbors = [e, d]
 				let deepNeighbors = [a, b]
 
-				expect(ancestors.includes(directNeighbor)).toBe(false)
+				expect(ancestors.includes(directNeighbors[0])).toBe(false)
+				expect(ancestors.includes(directNeighbors[1])).toBe(false)
 				expect(nodesSetMatches(ancestors, deepNeighbors)).toBe(true)
 			})
 
 			it ('can compare for deep ancestors', () => {
-				expect(network.isDeepSourceNeighbor(a, d)).toBe(true)
-				expect(network.isDeepSourceNeighbor(d, a)).toBe(false)
-				expect(network.isDeepSourceNeighbor(a, b)).toBe(false)
-				expect(network.isDeepSourceNeighbor(a, e)).toBe(true)
-				expect(network.isDeepSourceNeighbor(b, e)).toBe(true)
+				expect(network.isDeepSourceNeighbor(d, f)).toBe(false)
+				expect(network.isDeepSourceNeighbor(e, f)).toBe(false)
+				expect(network.isDeepSourceNeighbor(a, f)).toBe(true)
+				expect(network.isDeepSourceNeighbor(b, f)).toBe(true)
+				expect(network.isDeepSourceNeighbor(c, f)).toBe(false)
 			})
 		})
 	})
