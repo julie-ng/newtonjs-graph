@@ -100,6 +100,15 @@ class Network extends EventEmitter {
 		return this._nodes.findIndex((n) => n[this._uid] === id)
 	}
 
+	updateNode (n, attrs) {
+		let node = (typeof n === 'string')
+			? this.findNodeById(n)
+			: n
+		Object.assign(node, attrs)
+		this._publish('update')
+		return this
+	}
+
 	/**
 	 * Removes node and its links from the graph
 	 * @param {Object} node - node data object

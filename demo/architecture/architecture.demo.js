@@ -13,17 +13,14 @@ const graph = new Graph({
 })
 
 graph.init().bind(network)
+let n
 
 setTimeout(() => {
-	graph.highlightNeighbors(network.findNodeById('4'))
+	n = network.findNodeById('4')
+	network.updateNode(n, { status: 'down' })
+	// graph.highlightNeighbors(n)
 }, 1000)
 
 setTimeout(() => {
-	graph.resetStyles()
+	network.updateNode(n, { status: 'up' })
 }, 3000)
-
-// document.querySelector('#js-delete')
-// 	.addEventListener('click', () => {
-// 		let toDelete = document.querySelector('#js-delete-id').value
-// 		network.removeNodeById(toDelete.toString())
-// 	})

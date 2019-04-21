@@ -63,15 +63,21 @@ class ColaGraph extends Graph {
 	}
 
 	bindUI () {
-		this.nodes.on('style:highlightNeighbors', (node) => {
-			this.labels.highlightNeighbors(node)
-			this.links.highlightNeighbors(node)
+		// debugging
+		this.nodes.on('update', (d) => {
+			console.log('Event [nodes:update]', d)
 		})
 
-		this.nodes.on('style:reset', () => {
-			this.labels.resetStyles()
-			this.links.resetStyles()
+		this.network.on('update', (data) => {
+			console.log('Event [network:update]', data)
+			this.render(data)
 		})
+	}
+
+	render (data) {
+		this.nodes.render(data)
+		this.labels.render(data)
+		this.links.render(data)
 	}
 
 	highlightNeighbors (node) {
