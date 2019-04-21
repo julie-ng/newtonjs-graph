@@ -8,6 +8,7 @@ const blue = '#00838f'
 const red = '#b72022'
 const autumnYellow = '#e3b505'
 const brightYellow = '#fdd835'
+const darkOrange = '#9a5b11'
 const orange = '#d2620b'
 
 // Based on: https://css-tricks.com/snippets/javascript/lighten-darken-color/
@@ -45,6 +46,7 @@ module.exports = {
 	green: green,
 	blue: blue,
 	red: red,
+	darkOrange: darkOrange,
 	// autumnYellow: autumnYellow,
 	yellow: autumnYellow,
 	orange: orange,

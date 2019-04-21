@@ -49,6 +49,8 @@ const NodeUI = {
 	relationshipColor: function (prop, node, rel) {
 		if (node.status !== 'up' && prop === 'stroke') {
 			return strokeColor(node)
+		} if (node.status !== 'up' && prop === 'fill') {
+			return fillColor(node)
 		} else {
 			let key = rel + '-' + prop
 			return relationshipColors.hasOwnProperty(key)
