@@ -71,10 +71,14 @@ class ColaGraph extends EventEmitter {
 	}
 
 	_bindNetwork () {
+		this.nodes.setNetwork(this.network)
+		this.links.setNetwork(this.network)
+		this.labels.setNetwork(this.network)
+
 		this.network.on('update', (data) => {
 			// console.log(`[graph event] received: network > 'update':`)
 			this.render()
-			// this.cola.start() // breaks layout
+			// this.cola.start() // breaks layout on network updates
 		})
 	}
 
