@@ -63,14 +63,17 @@ class Network extends EventEmitter {
 	/**
 	 * Updates entire network data set
 	 *
-	 * @param {Object} params
-	 * @param {Array} params.nodes - nodes
-	 * @param {Array} params.links - links
-	 * @param {Boolean} [params.publish = true] - publish event after resetting data?
+	 * @param {Array} nodes - nodes data
+	 * @param {Array} links - links data
+	 * @param {String} [opts.event = 'update'] - event name after setting data
+	 * @param {Boolean} [opts.publish = true] - publish event after resetting data?
 	 */
-	updateData (params = { publish: true }) {
-		console.log('updateData()', params)
-		this._setData(params.nodes, params.links)
+	updateData (nodes, links, opts = {}) {
+		// console.log('updateData()', nodes, links)
+		// console.log(`[DEBUG]: updateData(nodes, links)`)
+		// console.log('    nodes:', nodes)
+		// console.log('    links:', links)
+		this._setData(nodes, links, opts)
 	}
 
 	/**
@@ -91,7 +94,16 @@ class Network extends EventEmitter {
 			return null
 	}
 
-	_setData (nodes, links, opts = { publish: true, event: 'update' }) {
+	_setData (nodes, links, opts = {}) {
+		// console.log(`[DEBUG]: _setData(nodes, links)`)
+		// console.log('    nodes:', nodes)
+		// console.log('    links:', links)
+		const defaults = {
+			publish: true,
+			event: 'update'
+		}
+		opts = Object.assign({}, defaults, opts)
+
 		this._nodes = nodes
 		this._links = links
 		this._validateLinks()
@@ -240,7 +252,7 @@ class Network extends EventEmitter {
 	 * @param {String} eventName - Event Name, e.g. `update`
 	 */
 	_publish (eventName) {
-		// console.log(`network.publish(${eventName})`)
+		console.log(`[network event] publish: '${eventName}'`)
 		this.emit(eventName, {
 			nodes: this._nodes,
 			links: this._links
