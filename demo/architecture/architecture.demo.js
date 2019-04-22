@@ -1,10 +1,47 @@
 const io = require('socket.io-client')
-// const Graph = require('./../../newton').Graph
 const Graph = require('./../../newton').ColaGraph
 const Network = require('./../../newton').Network
-const data = require('./architecture.data')
 
-const network = new Network(data.nodes, data.linksMap, { uid: 'id' })
+// ----------- MOCK DATA ----------- //
+
+// const data = require('./architecture.data')
+// const updatedData = require('./updated-data')
+
+const data = {
+	nodes: [
+		{ id: "a", status: "up", label: "Alpha" },
+		{ id: "b", status: "up", label: "Beta" },
+		{ id: "c", status: "up", label: "Gamma" },
+		{ id: "d", status: "up", label: "Delta" },
+		{ id: "e", status: "up", label: "Epsilon" }
+	],
+	links: [
+		{ source: 'a', target: 'b' },
+		{ source: 'b', target: 'c' },
+		{ source: 'c', target: 'd' },
+		{ source: 'c', target: 'e' }
+	]
+}
+
+const updatedDta = {
+	nodes: [
+		{ id: "a", status: "up", label: "Alpha" },
+		{ id: "b", status: "up", label: "Beta" },
+		{ id: "c", status: "up", label: "Gamma" },
+		{ id: "d", status: "down", label: "Delta" },
+		{ id: "e", status: "up", label: "Epsilon" }
+	],
+	links: [
+		{ source: 'a', target: 'b' },
+		{ source: 'b', target: 'c' },
+		{ source: 'c', target: 'd' },
+		{ source: 'c', target: 'e' }
+	]
+}
+
+// ----------- SETUP AND BIND ----------- //
+
+const network = new Network(data.nodes, data.links, { uid: 'id' })
 const graph = new Graph({
 	width: window.innerWidth,
 	height: window.innerHeight - 60, // top in css
@@ -12,38 +49,45 @@ const graph = new Graph({
 	draggable: true
 	// network: network
 })
-
 graph.init().bind(network)
 
-// rename
-data.links = data.linksMap
 
-setTimeout(() => {
-	data.nodes.forEach((n) => {
-		n.status = 'deploying'
-	})
+// ----------- CHANGES ----------- //
 
-	network.resetData(data)  				// render option #1
-	// network._publish('update') 	// render option #2
+function update () {
+	console.log('update()')
+}
 
-	let n = network.findNodeById('2')
-	graph.highlightNeighbors(n)
-}, 1000)
+function reset () {
+	console.log('reset()')
+}
 
-setTimeout(() => {
-	data.nodes.forEach((n) => {
-		n.status = 'up'
-	})
+setTimeout(update, 1000)
+setTimeout(reset, 3000)
 
-	data.nodes[1].status = 'down'
-	network.resetData(data)
-	graph.resetStyles()
-}, 3000)
-
-// --- real time data ---
+// ----------- REAL TIME UPDATES ----------- //
 
 const socket = io('http://localhost:3000')
 
 socket.on('connect', (data) => {
 	socket.emit('join', 'Newton.js Graph connected')
 })
+
+// socket.on('network:data', function (d) {
+// 	console.log('--- network data received ---')
+// 	// console.log('before', network.get('data'))
+// 	// delete data.links
+// 	// console.log(data)
+// 	console.log(d)
+// 	// console.log(data == d)
+// 	// network._links.pop()
+// 	// network._links.pop()
+// 	network._nodes = d.nodes
+// 	network._publish('update')
+
+// 	// network.resetData(d)
+// 	// network._nodes = d.nodes
+// 	// network._createLinks(d.links)
+
+// 	// console.log('after', network.get('data'))
+// })
