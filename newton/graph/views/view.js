@@ -21,7 +21,7 @@ class View extends EventEmitter {
 	 */
 	bindGraph (graph) {
 		graph.on('tick', () => this.position())
-		graph.on('update', (data) => this.render(data))
+		// graph.on('update', (data) => this.render(data))
 	}
 
 	/**
