@@ -1,69 +1,19 @@
 const io = require('socket.io-client')
 const Graph = require('./../../newton').ColaGraph
 const Network = require('./../../newton').Network
-
-// ----------- MOCK DATA ----------- //
-
-// const data = require('./architecture.data')
-// const updatedData = require('./updated-data')
-
-const data = {
-	nodes: [
-		{ id: "a", status: "up", label: "Alpha" },
-		{ id: "b", status: "up", label: "Beta" },
-		{ id: "c", status: "up", label: "Gamma" },
-		{ id: "d", status: "up", label: "Delta" },
-		{ id: "e", status: "up", label: "Epsilon" }
-	],
-	links: [
-		{ source: 'a', target: 'b' },
-		{ source: 'b', target: 'c' },
-		{ source: 'c', target: 'd' },
-		{ source: 'c', target: 'e' }
-	]
-}
-
-const updatedDta = {
-	nodes: [
-		{ id: "a", status: "up", label: "Alpha" },
-		{ id: "b", status: "up", label: "Beta" },
-		{ id: "c", status: "up", label: "Gamma" },
-		{ id: "d", status: "down", label: "Delta" },
-		{ id: "e", status: "up", label: "Epsilon" }
-	],
-	links: [
-		{ source: 'a', target: 'b' },
-		{ source: 'b', target: 'c' },
-		{ source: 'c', target: 'd' },
-		{ source: 'c', target: 'e' }
-	]
-}
+const data = require('./architecture.data')
 
 // ----------- SETUP AND BIND ----------- //
 
-const network = new Network(data.nodes, data.links, { uid: 'id' })
+const network = new Network(data.nodes, data.links)
 const graph = new Graph({
 	width: window.innerWidth,
 	height: window.innerHeight - 60, // top in css
 	flow: 'horizontal',
-	draggable: true
-	// network: network
+	draggable: true,
+	network: network
 })
-graph.init().bind(network)
-
-
-// ----------- CHANGES ----------- //
-
-function update () {
-	console.log('update()')
-}
-
-function reset () {
-	console.log('reset()')
-}
-
-setTimeout(update, 1000)
-setTimeout(reset, 3000)
+graph.init()
 
 // ----------- REAL TIME UPDATES ----------- //
 
@@ -73,21 +23,19 @@ socket.on('connect', (data) => {
 	socket.emit('join', 'Newton.js Graph connected')
 })
 
-// socket.on('network:data', function (d) {
-// 	console.log('--- network data received ---')
-// 	// console.log('before', network.get('data'))
-// 	// delete data.links
-// 	// console.log(data)
-// 	console.log(d)
-// 	// console.log(data == d)
-// 	// network._links.pop()
-// 	// network._links.pop()
-// 	network._nodes = d.nodes
-// 	network._publish('update')
+socket.on('network:data', function (d) {
+	console.log('[demo] data received')
+	console.log(d)
 
-// 	// network.resetData(d)
-// 	// network._nodes = d.nodes
-// 	// network._createLinks(d.links)
+	if (isValidData(d)) {
+		network.updateData(d.nodes, d.links)
+	}
+})
 
-// 	// console.log('after', network.get('data'))
-// })
+function isValidData (data) {
+	if (data.hasOwnProperty('nodes') && data.hasOwnProperty('links')) {
+		return true
+	} else {
+		throw 'ERROR [Socket] - invalid data received. `nodes` and `links` properties are required.'
+	}
+}
