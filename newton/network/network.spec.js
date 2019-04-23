@@ -217,7 +217,7 @@ describe ('Network', function () {
 				{ source: 1, target: 2 }  // invalid
 			]
 			let n = new Network(nodes, links)
-			expect(n._links).toEqual([{ source: a, target: b}])
+			expect(n._links).toEqual([{ source: a, target: b }])
 		})
 	})
 

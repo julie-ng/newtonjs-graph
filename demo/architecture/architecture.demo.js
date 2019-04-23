@@ -16,17 +16,17 @@ const graph = new Graph({
 graph.init()
 
 
-function highlight () {
-	let n = network.findNodeById('8')
-	graph.highlightNeighbors(n)
-}
+// function highlight () {
+// 	let n = network.findNodeById('8')
+// 	graph.highlightNeighbors(n)
+// }
 
-function reset () {
-	graph.resetStyles()
-}
+// function reset () {
+// 	graph.resetStyles()
+// }
 
-setTimeout(highlight, 1000)
-setTimeout(reset, 3000)
+// setTimeout(highlight, 1000)
+// setTimeout(reset, 3000)
 
 // ----------- REAL TIME UPDATES ----------- //
 
