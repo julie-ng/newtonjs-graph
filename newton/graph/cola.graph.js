@@ -81,7 +81,7 @@ class ColaGraph extends EventEmitter {
 			this.cola
 				.nodes(data.nodes)
 				.links(data.links)
-				.start(10)
+				.start(20)
 
 			this.render()
 			// this.cola.start() // breaks layout on network updates
