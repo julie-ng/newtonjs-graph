@@ -27,11 +27,11 @@ class Network extends EventEmitter {
 	 * Creates a Network
 	 *
 	 * @param {Array} nodes - Array of Nodes
-	 * @param {Array} linksMap - Array of Relationships between nodes using the reference key
+	 * @param {Array} links - Array of Relationships between nodes using the reference key, or array indexes
 	 * @param {Object} options
 	 * @param {String} options.uid - name of the property of your unique identifier, e.g. 'id'
 	 */
-	constructor (nodes, linksMap, options = {}) {
+	constructor (nodes, links, options = {}) {
 		super()
 
 		/**
@@ -55,46 +55,25 @@ class Network extends EventEmitter {
 		 * @property {Array} _nodes
 		 * @private
 		 */
-		this._nodes = nodes
+		this._nodes = []
 
-		this.resetData({
-			nodes: nodes,
-			links: linksMap,
-			publish: false
-		})
+		this._setData(nodes, links, { event: 'created' })
 	}
 
 	/**
-	 * Resets entire network data set
+	 * Updates entire network data set
 	 *
-	 * @param {Object} params
-	 * @param {Array} params.nodes - nodes
-	 * @param {Array} params.links - links
-	 * @param {Boolean} [params.linksById = true] - links array maps to nodes via `id` key
-	 * @param {Boolean} [params.publish = true] - publish event after resetting data?
+	 * @param {Array} nodes - nodes data
+	 * @param {Array} links - links data
+	 * @param {String} [opts.event = 'update'] - event name after setting data
+	 * @param {Boolean} [opts.publish = true] - publish event after resetting data?
 	 */
-	resetData (params = {}) {
-		const defaults = {
-			linksById: true,
-			publish: true
-		}
-		params = Object.assign({}, defaults, params)
-		console.log(`network.resetData()`, params)
-
-		this._nodes = params.nodes
-
-		if (params.linksById) {
-			this._createLinks(params.links)
-		}
-		if (params.hasOwnProperty('linksByIndex') && params.linksByIndex === true) {
-			this._links = params.links
-		}
-
-		this._mapNeighbors()
-
-		if (params.publish) {
-			this._publish('update')
-		}
+	updateData (nodes, links, opts = {}) {
+		// console.log('updateData()', nodes, links)
+		// console.log(`[DEBUG]: updateData(nodes, links)`)
+		// console.log('    nodes:', nodes)
+		// console.log('    links:', links)
+		this._setData(nodes, links, opts)
 	}
 
 	/**
@@ -115,11 +94,33 @@ class Network extends EventEmitter {
 			return null
 	}
 
+	_setData (nodes, links, opts = {}) {
+		// console.log(`[DEBUG]: _setData(nodes, links)`)
+		// console.log('    nodes:', nodes)
+		// console.log('    links:', links)
+		const defaults = {
+			publish: true,
+			event: 'update'
+		}
+		opts = Object.assign({}, defaults, opts)
+
+		this._nodes = nodes
+		this._links = links
+		this._validateLinks()
+		this._mapNeighbors()
+		if (opts.publish) {
+			this._publish(opts.event)
+		}
+	}
+
+	// =========== Nodes ===========
+
 	/**
 	 * @param {String} id
 	 * @return {Object} node data object
 	 */
 	findNodeById (id) {
+		// console.log(`findNodeById(${id})`)
 		return this._nodes.find((n) => n[this._uid] === id)
 	}
 
@@ -164,6 +165,8 @@ class Network extends EventEmitter {
 		this._publish('update')
 	}
 
+	// =========== Links ===========
+
 	/**
 	 * Finds links a given node has. Example results are `[{source: node, target: node}]`
 	 *
@@ -194,6 +197,54 @@ class Network extends EventEmitter {
 		}
 	}
 
+	_isIndexBasedLink (link) {
+		let hasZeroIndex = (link.source === 0) || (link.target === 0)
+		let isNumber = (typeof link.source === 'number') && (typeof link.target === 'number')
+		return isNumber || hasZeroIndex
+	}
+
+	/**
+	 * Validates links:
+	 * - validates have `source` and `target` properties
+	 * - converts references by `id` or array index to nodes themselves
+	 * - removes links with invalid (missing) source or target nodes
+	 *
+	 * @private
+	 */
+	_validateLinks () {
+		// console.log('_validateLinks()')
+		let missing = []
+		this._links.forEach((link, i) => {
+			verifyLinkFormat(link)
+			let isIndexBased = this._isIndexBasedLink(link)
+			let s = isIndexBased ? this._nodes[link.source] : this.findNodeById(link.source)
+			let t = isIndexBased ? this._nodes[link.target] : this.findNodeById(link.target)
+
+			if (s !== undefined && t !== undefined) {
+				this._links[i] = { source: s, target: t }
+			} else {
+				// console.log('link is invalid', link)
+				missing.push(i)
+			}
+		})
+
+		this._removeLinksByIndex(missing)
+	}
+
+	/**
+	 * Removes array by indexes
+	 *
+	 * @private
+	 * @param {Array} indexes - array of indexes sorted low to high, e.g. [1, 5, 10]
+	 */
+	_removeLinksByIndex (indexes) {
+		for (let i = indexes.length; i--; i >= 0) {
+			this._links.splice(indexes[i], 1)
+		}
+	}
+
+	// =========== Events =========== //
+
 	/**
 	 * Emits an event
 	 *
@@ -201,31 +252,14 @@ class Network extends EventEmitter {
 	 * @param {String} eventName - Event Name, e.g. `update`
 	 */
 	_publish (eventName) {
-		// console.log(`network.publish(${eventName})`)
+		// console.log(`[network event] publish: '${eventName}'`)
 		this.emit(eventName, {
 			nodes: this._nodes,
 			links: this._links
 		})
 	}
 
-	/**
-	 * Re-calculates links via array indicies for D3.
-	 * This should be invoked if you update your data and
-	 * nodes and/or relationships might have changed.
-	 *
-	 * @private
-	 */
-	_createLinks (linksMap) {
-		this._links = []
-		linksMap.forEach((l) => {
-			this._links.push({
-				source: this.findNodeById(l.source),
-				target: this.findNodeById(l.target),
-			})
-		})
-	}
-
-	// ----- Neighbors -----
+	// =========== Neighbors =========== //
 
 	_mapNeighbors () {
 		this._neighbors = {}
@@ -323,4 +357,12 @@ class Network extends EventEmitter {
 	}
 }
 
+function verifyLinkFormat (link) {
+	if (!(link.hasOwnProperty('source') && link.hasOwnProperty('target'))) {
+		throw {
+			error: 'Improperly formatted link',
+			link: link
+		}
+	}
+}
 module.exports = Network

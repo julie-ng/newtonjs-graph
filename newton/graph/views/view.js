@@ -8,9 +8,11 @@ class View extends EventEmitter {
 		super()
 		this.dom = options.dom || window.document
 		this.container = options.container || 'svg'
-		if (options.hasOwnProperty('network')) {
-			this.network = options.network
-		}
+	}
+
+	// must be set later for drag binding to work
+	setNetwork (network) {
+		this.network = network
 	}
 
 	/**
@@ -21,11 +23,7 @@ class View extends EventEmitter {
 	 */
 	bindGraph (graph) {
 		graph.on('tick', () => this.position())
-		graph.on('update', (data) => this.render(data))
-	}
-
-	setNetwork (network) {
-		this.network = network
+		// graph.on('update', (data) => this.render(data))
 	}
 
 	/**

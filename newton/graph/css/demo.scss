@@ -22,14 +22,18 @@ body {
 	left: 0;
 	width: 100%;
 	display: block;
+	margin-top: -1px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
 .demo-header {
+	z-index: 9999;
 	padding: 0 $margin;
-	background: #fff;
-	color: #333;
+	// background: #fff;
+	// color: #333;
+	background: $darkBlue; // #e3b505;
+	color: #fff;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -49,7 +53,7 @@ body {
 
 	h1 {
 		margin: 0;
-		font-weight: 500;
+		font-weight: 400;
 		font-size: 24px;
 		line-height: $header-height;
 	}
@@ -71,7 +75,7 @@ body {
 	}
 
 	a {
-		color: $blue;
+		color: #c5dbe7;
 
 		&:link, &:visited {
 			text-decoration: none;

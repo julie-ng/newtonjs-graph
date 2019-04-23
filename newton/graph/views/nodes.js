@@ -31,7 +31,7 @@ class Nodes extends View {
 	 * @param {Object} data - Network data with `nodes` attribute
 	 */
 	render (data) {
-		console.log(' nodes render()')
+		// console.log(' nodes render()')
 
 		if (data.nodes === undefined) { throw 'Error: missing `nodes` attribute on parameter.' }
 
