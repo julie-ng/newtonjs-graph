@@ -107,7 +107,7 @@ class Nodes extends View {
 
 	highlightNeighbors (node) {
 		// console.log(`[node] highlightNeighbors(${node.label})`)
-		this.nodes.transition(1000)
+		this.nodes
 			.style('stroke', (i) => NodeUI.relationshipColor('stroke', i, this.network.getRelationship(i, node)))
 			.style('fill', (i) => NodeUI.relationshipColor('fill', i, this.network.getRelationship(i, node)))
 	}
@@ -118,7 +118,7 @@ class Nodes extends View {
 			.duration(300)
 			.ease(d3.easeLinear)
 
-		this.nodes.transition(t)
+		this.nodes
 			.style('fill', '')
 			.style('stroke', '')
 			.call(NodeUI.styleNode)

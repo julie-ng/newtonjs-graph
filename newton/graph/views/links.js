@@ -72,7 +72,7 @@ class Links extends View {
 	}
 
 	resetStyles () {
-		this.links.transition(1500)
+		this.links
 			.style('stroke-width', '')
 			.style('stroke', '')
 	}

@@ -84,7 +84,7 @@ class Labels extends View {
 	}
 
 	resetStyles () {
-		this.labels.transition(1500)
+		this.labels
 			.style('fill', '')
 	}
 }
