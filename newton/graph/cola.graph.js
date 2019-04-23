@@ -63,7 +63,7 @@ class ColaGraph extends EventEmitter {
 
 	_setNetwork (opts) {
 		if (opts.network) {
-			console.log('[graph] constructor - network set')
+			// console.log('[graph] constructor - network set')
 			this.network = opts.network
 		} else {
 			throw `ERROR: graph requires network for data`
@@ -132,7 +132,7 @@ class ColaGraph extends EventEmitter {
 
 	render (data) {
 		this.renders++
-		console.log(`[graph] renders count: ${this.renders}`)
+		// console.log(`[graph] renders count: ${this.renders}`)
 		data = (data !== undefined) ? data : this.network.get('data')
 
 		this.links.render(data) // technically does not need nodes

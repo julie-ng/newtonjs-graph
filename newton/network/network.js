@@ -262,6 +262,7 @@ class Network extends EventEmitter {
 	// =========== Neighbors =========== //
 
 	_mapNeighbors () {
+		// console.log('[network] _mapNeighbors()')
 		this._neighbors = {}
 		this._links.forEach((d) => {
 			this._neighbors[`${d.source.id},${d.target.id}`] = true

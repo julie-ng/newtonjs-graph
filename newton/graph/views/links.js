@@ -3,7 +3,6 @@ const View = require('./view')
 const Transitions = require('./transitions')
 const LinksUI = require('./styles/links.ui')
 
-const SELECTOR = '.link'
 /**
  * Encapsulates what is needed to create the links between
  * nodes of a network graph, namely rendering and positioning

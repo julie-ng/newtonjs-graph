@@ -78,9 +78,9 @@ class Labels extends View {
 
 	highlightNeighbors (n) {
 		this.labels.style('fill', (i) => {
-				let rel = this.network.getRelationship(i, n)
-				return LabelsUI.relationshipColor(i, rel)
-			})
+			let rel = this.network.getRelationship(i, n)
+			return LabelsUI.relationshipColor(i, rel)
+		})
 	}
 
 	resetStyles () {
