@@ -42,8 +42,8 @@ class Nodes extends View {
 		// -- Pattern: JOIN --
 		let nodes = d3.select(this.dom)
 			.select(this.container)
-			.selectAll('circle')
-			.data(data.nodes, (d) => 'node-' + d.id)
+			.selectAll('.node')
+			.data(data.nodes, (d) => d.id)
 
 		// -- Pattern: REMOVE --
 		/**

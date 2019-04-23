@@ -38,8 +38,8 @@ class Labels extends View {
 
 		let labels = d3.select(this.dom)
 			.select(this.container)
-			.selectAll('text')
-			.data(data.nodes, (d) => 'label-' + d.id)
+			.selectAll('.label')
+			.data(data.nodes, (d) => d.id)
 
 		this.emit('exit', labels.exit())
 		labels.exit()

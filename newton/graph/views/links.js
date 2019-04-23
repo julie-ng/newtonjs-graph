@@ -24,11 +24,10 @@ class Links extends View {
 		let t = d3.transition()
 			.duration(100)
 			.ease(d3.easeLinear)
-
 		let links = d3.select(this.dom)
 			.select(this.container)
-			.selectAll(SELECTOR)
-			.data(data.links, (d) => 'link-' + d.source.id + '-' + d.target.id)
+			.selectAll('.link')
+			.data(data.links, (d) => d.source.id + '-' + d.target.id) // key function
 
 		this.emit('exit', links.exit())
 		links.exit()
