@@ -77,6 +77,12 @@ class ColaGraph extends EventEmitter {
 
 		this.network.on('update', (data) => {
 			// console.log(`[graph event] received: network > 'update':`)
+
+			this.cola
+				.nodes(data.nodes)
+				.links(data.links)
+				.start(10)
+
 			this.render()
 			// this.cola.start() // breaks layout on network updates
 		})
@@ -96,11 +102,11 @@ class ColaGraph extends EventEmitter {
 			.nodes(this.network.get('nodes'))
 			.links(this.network.get('links'))
 			.avoidOverlaps(true)
-			.handleDisconnected(false)
+			.handleDisconnected(true)
 			.jaccardLinkLengths(85,0.8)
 
 		if (this.options.flow === 'horizontal') {
-			this.cola. flowLayout('x', 120)
+			this.cola.flowLayout('x', 120)
 		}
 		this.cola.start(30)
 	}
