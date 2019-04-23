@@ -6,8 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 module.exports = {
 	mode: 'development',
 	entry: {
-		elements: './demo/elements/index.js',
-		architecture: './demo/architecture/index.js'
+		architecture: './demo/entry.js'
 	},
 	output: {
 		filename: '[name].js',
@@ -60,18 +59,10 @@ module.exports = {
 		}),
 		new HtmlWebpackPlugin({
 			templateParameters: {
-				title: 'Prototype Demo: Network with Elements',
-			},
-			chunks: ['elements'],
-			template: 'demo/elements/elements.demo.hbs',
-			filename: 'demo/elements.html'
-		}),
-		new HtmlWebpackPlugin({
-			templateParameters: {
 				title: 'Newton.js Demo',
 			},
 			chunks: ['architecture'],
-			template: 'demo/architecture/architecture.demo.hbs',
+			template: 'demo/demo.layout.hbs',
 			filename: 'index.html'
 		})
 	]
