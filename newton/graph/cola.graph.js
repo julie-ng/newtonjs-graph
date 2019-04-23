@@ -49,8 +49,7 @@ class ColaGraph extends EventEmitter {
 		this._initLayout()
 		this._bindGraphToViews()
 
-		// must come before _bindNetwork for dragging to work
-		// note: dragging breaks after data update
+		// must bind layout before network for dragging to work
 		this._bindLayout()
 		this._bindNetwork()
 
@@ -74,17 +73,12 @@ class ColaGraph extends EventEmitter {
 		this.nodes.setNetwork(this.network)
 		this.links.setNetwork(this.network)
 		this.labels.setNetwork(this.network)
-
 		this.network.on('update', (data) => {
-			// console.log(`[graph event] received: network > 'update':`)
-
 			this.cola
 				.nodes(data.nodes)
 				.links(data.links)
 				.start(20)
-
 			this.render()
-			// this.cola.start() // breaks layout on network updates
 		})
 	}
 
@@ -115,7 +109,7 @@ class ColaGraph extends EventEmitter {
 		// let views re-position themselves on cola `tick`
 		this.layout.on('tick', () => this.emit('tick'))
 
-		// make nodes draggable - broken after data update
+		// make nodes draggable
 		if (this.options.draggable) {
 			this.nodes.on('update', (nodes) => nodes.call(this.cola.drag))
 		}
