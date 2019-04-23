@@ -56,14 +56,15 @@ class Labels extends View {
 
 		this.emit('enter', labels.enter())
 		labels = labels.enter().append('text')
-			.text((node) => node.label)
 				.attr('text-anchor', 'middle')
 				.attr('alignment-baseline', 'central')
 				.attr('font-size', calculateFontSize)
 			.merge(labels)
+				.text((node) => node.label)
+				.attr('id', (node) => 'label-' + node.id)
+				.attr('class', (node) => 'label status-' + node.status)
 				.attr('dx', (node) => node.cx)
 				.attr('dy', (node) => node.cy)
-				.attr('class', (node) => 'label status-' + node.status)
 
 		this.emit('update', labels)
 		this.labels = labels
@@ -76,8 +77,7 @@ class Labels extends View {
 	}
 
 	highlightNeighbors (n) {
-		this.labels.transition(1000)
-			.style('fill', (i) => {
+		this.labels.style('fill', (i) => {
 				let rel = this.network.getRelationship(i, n)
 				return LabelsUI.relationshipColor(i, rel)
 			})

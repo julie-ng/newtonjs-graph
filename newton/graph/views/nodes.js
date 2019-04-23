@@ -70,8 +70,9 @@ class Nodes extends View {
 		this.emit('enter', nodes.enter())
 		nodes = nodes.enter()
 			.append('circle')
-				.attr('data-title', (n) => n.label)
+				.attr('id', (n) => 'node-' + n.id)
 			.merge(nodes)
+				.attr('data-title', (n) => n.label)
 				.attr('class', (n) => 'node status-' + n.status)
 				.call(NodeUI.styleNode)
 				.on('mouseover', (n) => this.onMouseover(n))
@@ -105,9 +106,10 @@ class Nodes extends View {
 	}
 
 	highlightNeighbors (node) {
+		// console.log(`[node] highlightNeighbors(${node.label})`)
 		this.nodes.transition(1000)
-			.style('fill', (i) => NodeUI.relationshipColor('fill', i, this.network.getRelationship(i, node)))
 			.style('stroke', (i) => NodeUI.relationshipColor('stroke', i, this.network.getRelationship(i, node)))
+			.style('fill', (i) => NodeUI.relationshipColor('fill', i, this.network.getRelationship(i, node)))
 	}
 
 	// Todo: reset by node, not by all

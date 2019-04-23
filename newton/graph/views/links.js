@@ -40,6 +40,7 @@ class Links extends View {
 		links = links.enter()
 			.append('line')
 			.merge(links)
+				.attr('id', (l) => 'link-' + l.source.id + '-' + l.target.id)
 				.attr('class', 'link')
 
 		this.emit('update', links)
@@ -55,8 +56,7 @@ class Links extends View {
 	}
 
 	highlightNeighbors (n) {
-		this.links.transition(1000)
-			.style('stroke-width', 1)
+		this.links.style('stroke-width', 1)
 			.style('stroke', (i) => {
 				let rel = ''
 				if (i.source === n) {
