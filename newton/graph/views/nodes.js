@@ -114,10 +114,6 @@ class Nodes extends View {
 
 	// Todo: reset by node, not by all
 	resetStyles () {
-		let t = d3.transition()
-			.duration(300)
-			.ease(d3.easeLinear)
-
 		this.nodes
 			.style('fill', '')
 			.style('stroke', '')
