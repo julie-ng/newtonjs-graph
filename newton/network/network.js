@@ -264,11 +264,7 @@ class Network extends EventEmitter {
 	_mapNeighbors () {
 		this._neighbors = {}
 		this._links.forEach((d) => {
-			let key = this.findNodeIndex(d.source)
-				+ ','
-				+ this.findNodeIndex(d.target)
-			// console.log('key: ', key)
-			this._neighbors[key] = true
+			this._neighbors[`${d.source.id},${d.target.id}`] = true
 		})
 	}
 
@@ -280,26 +276,22 @@ class Network extends EventEmitter {
 	}
 
 	isSourceNeighbor (s, t) {
-		return this._neighbors[`${s.index},${t.index}`] !== undefined
+		return this._neighbors[`${s.id},${t.id}`] !== undefined
 	}
 
 	isDeepSourceNeighbor (s, t) {
-		// console.log(`isDeepSourceNeighbor(${s.label}, ${t.label})?`);
-
 		let sources = this.findDeepSources(t)
-		// console.log(`Deep sources of ${t.label}:`)
-		// console.table(sources)
 		return sources.length > 0
 			? sources.includes(s)
 			: false
 	}
 
 	isTargetNeighbor (s, t) {
-		return this._neighbors[`${t.index},${s.index}`]
+		return this._neighbors[`${t.id},${s.id}`]
 	}
 
 	isEqualNode (s, t) {
-		return s.index === t.index
+		return s.id === t.id
 	}
 
 	findSources (n) {
@@ -340,9 +332,7 @@ class Network extends EventEmitter {
 
 	getRelationship (node, neighbor) {
 		let rel = ''
-		if (this.isTargetNeighbor(node, neighbor) && this.isSourceNeighbor(node, neighbor)) {
-			rel = 'is-source-and-target'
-		} else if (this.isSourceNeighbor(node, neighbor)) {
+		if (this.isSourceNeighbor(node, neighbor)) {
 			rel = 'is-source'
 		} else if (this.isDeepSourceNeighbor(node, neighbor)) {
 			rel = 'is-deep-source'
