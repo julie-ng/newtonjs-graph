@@ -74,8 +74,8 @@ class Nodes extends View {
 			.merge(nodes)
 				.attr('class', (n) => 'node status-' + n.status)
 				.call(NodeUI.styleNode)
-				// .on('mouseover', (n) => this.onMouseover(n))
-				// .on('mouseout', (n) => this.onMouseout(n))
+				.on('mouseover', (n) => this.onMouseover(n))
+				.on('mouseout', (n) => this.onMouseout(n))
 
 		/**
 		 * @event Nodes#update
@@ -97,9 +97,11 @@ class Nodes extends View {
 	}
 
 	onMouseover (n) {
+		this.emit('node:mouseover', n)
 	}
 
 	onMouseout (n) {
+		this.emit('node:mouseout', n)
 	}
 
 	highlightNeighbors (node) {
@@ -108,6 +110,7 @@ class Nodes extends View {
 			.style('stroke', (i) => NodeUI.relationshipColor('stroke', i, this.network.getRelationship(i, node)))
 	}
 
+	// Todo: reset by node, not by all
 	resetStyles () {
 		let t = d3.transition()
 			.duration(300)
