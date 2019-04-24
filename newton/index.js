@@ -1,9 +1,7 @@
-const graph = require('./graph/graph')
-const colaGraph = require('./graph/cola.graph')
-const network = require('./network/network')
+const Graph = require('./graph/graph')
+const Network = require('./network/network')
 
 module.exports = {
-	Graph: graph,
-	ColaGraph: colaGraph,
-	Network: network
+	Graph: Graph,
+	Network: Network
 }

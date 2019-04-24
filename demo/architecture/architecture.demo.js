@@ -1,5 +1,5 @@
 const io = require('socket.io-client')
-const Graph = require('./../../newton').ColaGraph
+const Graph = require('./../../newton').Graph
 const Network = require('./../../newton').Network
 const data = require('./architecture.data')
 
@@ -10,6 +10,7 @@ const graph = new Graph({
 	width: window.innerWidth,
 	height: window.innerHeight - 60, // top in css
 	flow: 'horizontal',
+	// engine: 'd3',
 	draggable: true,
 	network: network
 })
