@@ -97,10 +97,11 @@ class ColaGraph extends EventEmitter {
 			.links(this.network.get('links'))
 			.avoidOverlaps(true)
 			.handleDisconnected(true)
+			// .symmetricDiffLinkLengths(50,0.5)
 			.jaccardLinkLengths(85,0.8)
 
 		if (this.options.flow === 'horizontal') {
-			this.cola.flowLayout('x', 120)
+			this.cola.flowLayout('x', 100)
 		}
 		this.cola.start(30)
 	}
