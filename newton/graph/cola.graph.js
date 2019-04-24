@@ -70,9 +70,6 @@ class ColaGraph extends EventEmitter {
 	}
 
 	_bindNetwork () {
-		this.nodes.setNetwork(this.network)
-		this.links.setNetwork(this.network)
-		this.labels.setNetwork(this.network)
 		this.network.on('update', (data) => {
 			this.cola
 				.nodes(data.nodes)
@@ -80,6 +77,14 @@ class ColaGraph extends EventEmitter {
 				.start(20)
 			this.render()
 		})
+	}
+
+	isDeepSourceLink (s, t) {
+		return this.network.isDeepSourceLink(s, t)
+	}
+
+	getRelationship (s, t) {
+		return this.network.getRelationship(s, t)
 	}
 
 	// ------- WEBCOLA ------- //

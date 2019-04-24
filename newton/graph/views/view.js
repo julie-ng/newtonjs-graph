@@ -10,11 +10,6 @@ class View extends EventEmitter {
 		this.container = options.container || 'svg'
 	}
 
-	// must be set later for drag binding to work
-	setNetwork (network) {
-		this.network = network
-	}
-
 	/**
 	 * Binds this view to a graph so we can react to
 	 * changes and re-render and adjust the graph as necessary.
@@ -22,7 +17,8 @@ class View extends EventEmitter {
 	 * @param {Graph} graph - graph to listen to for changes
 	 */
 	bindGraph (graph) {
-		graph.on('tick', () => this.position())
+		this.graph = graph
+		this.graph.on('tick', () => this.position())
 		// graph.on('update', (data) => this.render(data))
 	}
 

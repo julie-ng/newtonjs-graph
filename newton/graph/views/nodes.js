@@ -108,8 +108,8 @@ class Nodes extends View {
 	highlightNeighbors (node) {
 		// console.log(`[node] highlightNeighbors(${node.label})`)
 		this.nodes
-			.style('stroke', (i) => NodeUI.relationshipColor('stroke', i, this.network.getRelationship(i, node)))
-			.style('fill', (i) => NodeUI.relationshipColor('fill', i, this.network.getRelationship(i, node)))
+			.style('stroke', (i) => NodeUI.relationshipColor('stroke', i, this.graph.getRelationship(i, node)))
+			.style('fill', (i) => NodeUI.relationshipColor('fill', i, this.graph.getRelationship(i, node)))
 	}
 
 	// Todo: reset by node, not by all
