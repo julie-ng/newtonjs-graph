@@ -13,13 +13,11 @@ const NodeUI = require('./styles/node.ui')
 class Nodes extends View {
 	/**
 	 * @param {Object} options
-	 * @param {d3adapter} options.adapter - reference to layout adapter (webcola). required to enable dragging of nodes
-	 * @param {String} [options.dom=window.document] - DOM reference, required for testing
+	 * @param {String} [options.dom = window.document] - DOM reference, required for testing
 	 * @param {String} [options.container] - HTML identifier used by for d3
 	 */
 	constructor (options = {}) {
 		super(options)
-		this.adapter = options.adapter
 	}
 
 	/**

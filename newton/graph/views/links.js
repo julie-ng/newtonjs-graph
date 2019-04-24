@@ -12,7 +12,7 @@ const LinksUI = require('./styles/links.ui')
 class Links extends View {
 	/**
 	 * @param {Object} options
-	 * @param {String} [options.dom=window.document] - DOM reference, required for testing
+	 * @param {String} [options.dom = window.document] - DOM reference, required for testing
 	 * @param {String} [options.container] - HTML identifier used by for d3
 	 */
 	constructor (options = {}) {
