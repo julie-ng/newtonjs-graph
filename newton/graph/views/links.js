@@ -41,6 +41,7 @@ class Links extends View {
 			.merge(links)
 				.attr('id', (l) => 'link-' + l.source.id + '-' + l.target.id)
 				.attr('class', 'link')
+				.attr('marker-end', 'url(#end)')
 
 		this.emit('update', links)
 		this.links = links
@@ -55,27 +56,34 @@ class Links extends View {
 	}
 
 	highlightNeighbors (n) {
-		this.links.style('stroke-width', 1)
-			.style('stroke', (i) => {
-				let rel = ''
-				if (i.source === n) {
-					rel = 'is-source'
-				} else if (i.target === n) {
-					rel = 'is-target'
-				} else if (this.graph.isDeepSourceLink(i, n)) {
-					rel = 'is-deep-source'
-				} else {
-					rel = 'has-no-relationship'
-				}
-				return LinksUI.relationshipColor(i, rel)
-			})
+		this.links
+			.style('stroke', (i) =>  LinksUI.relationshipColor(i, this._getRelationship(i, n)))
+			.attr('class', (i) => 'link ' + this._getRelationship(i, n))
+			.attr('marker-end', (i) => `url(#${this._getRelationship(i, n)})`)
 	}
 
 	resetStyles () {
 		this.links
 			.style('stroke-width', '')
 			.style('stroke', '')
+			.attr('marker-end', '')
+	}
+
+	_getRelationship (link, n) {
+		let rel = ''
+		if (link.source === n) {
+			rel = 'is-source'
+		} else if (link.target === n) {
+			rel = 'is-target'
+		} else if (this.graph.isDeepSourceLink(link, n)) {
+			rel = 'is-deep-source'
+		} else {
+			rel = 'has-no-relationship'
+		}
+		return rel
 	}
 }
+
+
 
 module.exports = Links

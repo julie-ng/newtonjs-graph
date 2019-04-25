@@ -1,10 +1,29 @@
-$yellow: #fdd835;
-$green: #2ca02c;
-$orange: #d2620b;
-$red: #af282a;
-$blue: #00838f;
-$darkBlue: #044b7f;
+$yellow: 			#fdd835;
+$brightGreen: #2ca02c;
+$green: 			#168600;
+$orange: 			#d2620b;
+$red: 				#af282a;
+$blue: 				#00838f;
+$darkBlue: 		#044b7f;
 
-$pageBgColor: #102027;
-$graphLinkColor: #37474f;
-$graphLabelColor: #56707c
+$pageBgColor: 		#102027;
+$graphLinkColor: 	#37474f;
+$graphLabelColor: #56707c;
+
+$darkNodeBg: 	#162b35;
+$autumnYellow:#e3b505;
+$darkOrange: 	#9a5b11;
+
+// from colors.js
+
+$statusUpFill:				 	$green;
+$statusUpStroke: 				$green;
+$statusDeployingFill:  #00838f;
+$statusDeployingStroke:#009aa9;
+$statusDownFill: 				$red;
+$statusDownStroke:		 #c42d2f;
+
+$backgroundOffsetColor: #20354a;  // '#263238'
+// const green = '#168600' // different
+// const blue = '#00838f' // different
+// const red = '#b72022' // different

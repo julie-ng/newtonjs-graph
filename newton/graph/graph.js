@@ -100,6 +100,12 @@ class ColaGraph extends EventEmitter {
 			.attr('width', this.width)
 			.attr('height', this.height)
 
+		this._addArrows([
+			'is-source',
+			'is-deep-source',
+			'is-target'
+		])
+
 		this.force = (this.engine === 'cola')
 			? this._colaForce()
 			: this._d3Force()
@@ -186,6 +192,27 @@ class ColaGraph extends EventEmitter {
 		this.labels.resetStyles()
 		this.links.resetStyles()
 	}
+
+	_addArrows (stylesArray) {
+
+		// 20 for radius 6
+		// 24 for radius 10
+		this.svg.append("svg:defs")
+			.selectAll('marker')
+			.data(stylesArray)
+		.enter().append('svg:marker')
+			.attr('id', String)
+			.attr('viewBox', '0 -4 8 8')
+			.attr('refX', 20)
+			.attr('refY', 0)
+			.attr('markerWidth', 6)
+			.attr('markerHeight', 6)
+			.attr('orient', 'auto')
+		.append('svg:path')
+			.attr('d', 'M0,-5L10,0L0,5')
+	}
 }
+
+
 
 module.exports = ColaGraph

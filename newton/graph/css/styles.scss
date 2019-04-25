@@ -3,11 +3,32 @@
 
 .link {
 	stroke: $graphLinkColor;
-	stroke-width: 2px;
+	stroke-width: 1px;
 }
 
 svg {
 	border: 1px solid #20354a;
+	marker {
+		&#end { // arrow
+			fill: currentColor; //	 $graphLinkColor;
+		}
+
+		.red {
+			fill: red;
+		}
+
+		&#is-source {
+			fill: rgb(177, 131, 0); // $yellow;
+		}
+
+		&#is-deep-source {
+			fill: $orange;
+		}
+
+		&#is-target {
+			fill: rgb(183, 32, 34); // $red;
+		}
+	}
 }
 
 svg,
