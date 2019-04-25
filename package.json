@@ -12,7 +12,7 @@
   "scripts": {
     "build": "webpack --mode=production",
     "demo:server": "node ./demo/server.js",
-    "dev:demo": "webpack-dev-server --open",
+    "demo:dev": "webpack-dev-server --open",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "docs": "jsdoc --readme ./README.md -c jsdoc.json",
     "docs:watch": "nodemon -w newton --exec 'npm run docs'",
