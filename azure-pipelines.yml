@@ -1,54 +1,74 @@
-# Node.js
-# Build a general Node.js project with npm.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
 trigger:
-  branches:
-    include:
-    - master
-    - feat/*
-    exclude:
-    - wip/*
+  - master
+  - feat/*
+
+variables:
+  azureSubscriptionEndpoint: julie-ng-connection
+  azureContainerRegistry: julie.azurecr.io
+  registryName: $(azureContainerRegistry)/$(Build.Repository.Name)
+  imageTag: $(registryName):$(Build.BuildId)
+  appName: newton-graph-demo
 
 pool:
-  vmImage: 'Ubuntu-16.04'
-
-# variables:
-# - group: coveralls
+  vmImage: 'ubuntu-latest'
 
 steps:
+
+# -------------
+# Node.js Steps
+# -------------
+
 - task: NodeTool@0
   inputs:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
 - script: npm install
-  displayName: 'npm install'
+  displayName: npm install
 
-# Currently audit via npmjs.org unreliable
-# - script: npm audit
-#   displayName: 'Dependency Audit'
-
-- script: npm run lint
-  displayName: 'Lint Code'
+- script: npm lint
+  displayName: lint code
 
 - script: npm run test
-  displayName: 'Unit Tests'
+  displayName: run unit tests
 
-# # Does not work - coveralls does not recognize repo, even with token
-# - script: npm run coveralls
-#   displayName: 'Publish Coverage to Coveralls.io'
-#   env:
-#     COVERALLS_SERVICE_NAME: 'Azure Pipelines'
-#     COVERALLS_SERVICE_JOB_ID: ${Build.BuildId}
+- script: npm build
+  displayName: build static demo files
 
-# See https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/test/publish-code-coverage-results?view=azure-devops&viewFallbackFrom=vsts
-- task: PublishCodeCoverageResults@1
-  displayName: 'Save Code Coverage'
+# ----------------------------
+# Docker Image: Build and Push
+# ----------------------------
+
+- script: |
+    echo '##vso[task.setvariable variable=buildSha]'$(git rev-parse --short HEAD)''
+    echo 'buildSha set to $(buildSha)'
+  displayName: Get build git sha
+
+- script: docker build --tag $(imageTag)-$(buildSha) .
+  displayName: 'Docker: Build and tag image'
+
+# Use the task to avoid embedding credentials in pipeline
+- task: Docker@1
+  displayName: 'Docker: login ACR'
   inputs:
-    codeCoverageTool: cobertura
-    summaryFileLocation: './coverage/cobertura-coverage.xml'
-    reportDirectory: './coverage/lcov-report'
-    #additionalCodeCoverageFiles: # Optional
-    #failIfCoverageEmpty: false # Optional
+    command: login
+    azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
+    azureContainerRegistry: $(azureContainerRegistry)
+
+- script: docker push $(imageTag)-$(buildSha)
+  displayName: 'Docker: Push image'
+
+- script: docker logout $(azureContainerRegistry)
+  displayName: 'Docker: logout ACR'
+
+# ----------------------------
+# Deploy to Azure App Services
+# ----------------------------
+
+- task: AzureWebAppContainer@1
+  displayName: Deploy container as Azure Web App
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) # (master branch and succesful builds only)
+  inputs:
+    appName: $(appName)
+    azureSubscription: $(azureSubscriptionEndpoint)
+    imageName: $(imageTag)-$(buildSha)
