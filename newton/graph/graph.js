@@ -92,7 +92,7 @@ class ColaGraph extends EventEmitter {
 		this.force
 			.nodes(data.nodes)
 			.links(data.links)
-			.start(20)
+			.start(20) // required if new nodes or new links, reposition alone not enough.
 	}
 
 	_initLayout () {
