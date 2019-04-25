@@ -10,7 +10,7 @@
     "url": "https://github.com/julie-ng/newtonjs-graph"
   },
   "scripts": {
-    "webpack": "webpack",
+    "build": "webpack --mode=production",
     "dev:demo": "webpack-dev-server --open",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "docs": "jsdoc --readme ./README.md -c jsdoc.json",
