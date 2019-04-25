@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 module.exports = {
 	mode: 'development',
 	entry: {
-		architecture: './demo/entry.js'
+		demo: './demo/entry.js'
 	},
 	output: {
 		filename: '[name].js',
@@ -61,7 +61,7 @@ module.exports = {
 			templateParameters: {
 				title: 'Newton.js Demo',
 			},
-			chunks: ['architecture'],
+			chunks: ['demo'],
 			template: 'demo/demo.layout.hbs',
 			filename: 'index.html'
 		})
