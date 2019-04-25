@@ -26,13 +26,13 @@ steps:
 - script: npm install
   displayName: npm install
 
-- script: npm lint
+- script: npm run lint
   displayName: lint code
 
 - script: npm run test
   displayName: run unit tests
 
-- script: npm build
+- script: npm run build
   displayName: build static demo files
 
 # ----------------------------
