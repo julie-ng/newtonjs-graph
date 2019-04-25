@@ -16,7 +16,6 @@ const graph = new Graph({
 })
 graph.init()
 
-
 // function highlight () {
 // 	let n = network.findNodeById('8')
 // 	graph.highlightNeighbors(n)
@@ -31,20 +30,29 @@ graph.init()
 
 // ----------- REAL TIME UPDATES ----------- //
 
-const socket = io('http://localhost:3000')
+let dataServer = new URLSearchParams(window.location.search).get('data-server')
+if (dataServer === null ) {
+	console.warn('Please provide a `data-server` via query parameter to use real-time demo.')
+} else {
+	initRealtimeDemo()
+}
 
-socket.on('connect', (data) => {
-	socket.emit('join', 'Newton.js Graph connected')
-})
+function initRealtimeDemo () {
+	const socket = io(dataServer)
 
-socket.on('network:data', function (d) {
-	console.log('[demo] data received')
-	console.log(d)
+	socket.on('connect', (data) => {
+		socket.emit('join', 'Newton.js Graph connected')
+	})
 
-	if (isValidData(d)) {
-		network.updateData(d.nodes, d.links)
-	}
-})
+	socket.on('network:data', function (d) {
+		console.log('[demo] data received')
+		console.log(d)
+
+		if (isValidData(d)) {
+			network.updateData(d.nodes, d.links)
+		}
+	})
+}
 
 function isValidData (data) {
 	if (data.hasOwnProperty('nodes') && data.hasOwnProperty('links')) {
