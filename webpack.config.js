@@ -10,11 +10,11 @@ module.exports = {
 	},
 	output: {
 		filename: '[name].js',
-		path: path.resolve(__dirname, 'dist')
+		path: path.resolve(__dirname, 'demo/dist')
 	},
 	devtool: 'inline-source-map',
 	devServer: {
-		contentBase: path.join(__dirname, 'dist'),
+		contentBase: path.join(__dirname, 'demo/dist'),
 		compress: true,
 		port: 9000
 	},
@@ -53,7 +53,7 @@ module.exports = {
 		]
 	},
 	plugins: [
-		new CleanWebpackPlugin(['dist']),
+		new CleanWebpackPlugin(['demo/dist']),
 		new MiniCssExtractPlugin({
 			filename: '[name].css'
 		}),
