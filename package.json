@@ -11,6 +11,7 @@
   },
   "scripts": {
     "build": "webpack --mode=production",
+    "demo:server": "node ./demo/server.js",
     "dev:demo": "webpack-dev-server --open",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "docs": "jsdoc --readme ./README.md -c jsdoc.json",
@@ -25,6 +26,9 @@
   },
   "dependencies": {
     "d3": "^5.7.0",
+    "express": "^4.16.4",
+    "helmet": "^3.16.0",
+    "morgan": "^1.9.1",
     "socket.io": "^2.2.0",
     "webcola": "^3.3.8"
   },
