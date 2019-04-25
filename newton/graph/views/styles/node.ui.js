@@ -5,7 +5,7 @@ const colors = require('./colors')
  * @module NodeUI
  */
 
-const defaultRadius = 10
+const defaultRadius = 6
 
 const relationshipColors = {}
 relationshipColors['is-source-and-target-fill'] = colors.green
