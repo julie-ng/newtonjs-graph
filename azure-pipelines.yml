@@ -3,7 +3,7 @@ trigger:
   - feat/*
 
 variables:
-  azureSubscriptionEndpoint: julie-ng-connection
+  azureSubscriptionEndpoint: newton-connection
   azureContainerRegistry: julie.azurecr.io
   registryName: $(azureContainerRegistry)/$(Build.Repository.Name)
   imageTag: $(registryName):$(Build.BuildId)
