@@ -132,7 +132,7 @@ class ColaGraph extends EventEmitter {
 		if (this.options.flow === 'horizontal') {
 			force.flowLayout('x', 100)
 		}
-		force.start(100)
+		force.start(50)
 
 		return force
 	}
@@ -145,12 +145,10 @@ class ColaGraph extends EventEmitter {
 				.distance(100)
 				.strength(0.5)
 		)
-		.force('charge', d3.forceManyBody(-50))
+		.force('charge', d3.forceManyBody(-30))
 		.force('center', d3.forceCenter(this.width / 2, this.height / 2))
 		.force('collide', d3.forceCollide(50))
-		.force('position', d3.forceRadial(50))
-		// .force("attractForce",attractForce)
-		// .force("collisionForce",f)
+		.force('position', d3.forceRadial(20))
 		return force
 	}
 

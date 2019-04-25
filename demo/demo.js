@@ -8,9 +8,9 @@ const data = require('./demo.data')
 const network = new Network(data.nodes, data.links)
 const graph = new Graph({
 	width: window.innerWidth,
-	height: window.innerHeight, //- 60, // top in css
+	height: window.innerHeight,
 	flow: 'horizontal',
-	engine: 'd3',
+	// engine: 'd3',
 	draggable: true,
 	network: network
 })
