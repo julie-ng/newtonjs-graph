@@ -1,6 +1,7 @@
 const io = require('socket.io-client')
 const Graph = require('./../newton').Graph
 const Network = require('./../newton').Network
+// const data = require('./data/relationships')
 const data = require('./demo.data')
 
 // ----------- SETUP AND BIND ----------- //
@@ -16,17 +17,31 @@ const graph = new Graph({
 })
 graph.init()
 
-// function highlight () {
-// 	let n = network.findNodeById('8')
-// 	graph.highlightNeighbors(n)
-// }
+// ----- FAKE TIMELINE ----- //
 
-// function reset () {
-// 	graph.resetStyles()
-// }
+// let index, delay, highlight
 
-// setTimeout(highlight, 1000)
-// setTimeout(reset, 3000)
+// setInterval(() => {
+// 	clearTimeout(highlight)
+// 	index = getRandomInt(0, data.nodes.length - 1)
+// 	delay = setTimeout(highlightRandomNode(index), getRandomInt(1, 3))
+// }, 6000)
+
+
+// function highlightRandomNode (i) {
+// 	console.log(`highlight ${data.nodes[i].label}`)
+
+// 	clearTimeout(delay)
+// 	let node = data.nodes[i]
+// 	node.status = 'down'
+// 	graph.render(data)
+// 	graph.highlightNeighbors(node)
+// 	highlight = setTimeout(() => {
+// 		node.status = 'up'
+// 		graph.render(data)
+// 		graph.resetStyles()
+// 	}, 3000)
+// }
 
 // ----------- REAL TIME UPDATES ----------- //
 
@@ -61,3 +76,9 @@ function isValidData (data) {
 		throw 'ERROR [Socket] - invalid data received. `nodes` and `links` properties are required.'
 	}
 }
+
+// function getRandomInt (min, max) {
+// 	min = Math.ceil(min)
+// 	max = Math.floor(max)
+// 	return Math.floor(Math.random() * (max - min + 1)) + min
+// }

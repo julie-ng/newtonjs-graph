@@ -92,7 +92,7 @@ class ColaGraph extends EventEmitter {
 		this.force
 			.nodes(data.nodes)
 			.links(data.links)
-			.start(20) // required if new nodes or new links, reposition alone not enough.
+			// .start(20) // required if new nodes or new links, reposition alone not enough.
 	}
 
 	_initLayout () {
@@ -138,8 +138,8 @@ class ColaGraph extends EventEmitter {
 		if (this.options.flow === 'horizontal') {
 			force.flowLayout('x', 100)
 		}
-		force.start(50)
 
+		force.start(50)
 		return force
 	}
 
@@ -177,6 +177,17 @@ class ColaGraph extends EventEmitter {
 		this.links.render(data) // technically does not need nodes
 		this.nodes.render(data) // technically does not need links
 		this.labels.render(data) // technically does not need links
+
+		let hasFailures = false
+		data.nodes.forEach((n) => {
+			if (n.status !== 'up') {
+				this.highlightNeighbors(n)
+				hasFailures = true
+			}
+		})
+		if (!hasFailures) {
+			this.resetStyles()
+		}
 	}
 
 	highlightNeighbors (node) {
