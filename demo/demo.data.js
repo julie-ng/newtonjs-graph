@@ -82,9 +82,10 @@ const links = [
 	{ source: 'products-service', target: 'products-db' },
 
 	{ source: 'invoice-service', target: 'pdf-generator' },
+	{ source: 'invoice-service', target: 'documents-service' },
 	{ source: 'pdf-generator', target: 'pdf-queue' },
 	{ source: 'receipts-service', target: 'receipts-db' },
-	{ source: 'documents-service', target: 'receipts-service' },
+	{ source: 'receipts-service', target: 'documents-service' },
 	{ source: 'documents-service', target: 'documents-db' },
 	{ source: 'documents-service', target: 'uploads-service' },
 	{ source: 'documents-service', target: 'ocr-service' },
