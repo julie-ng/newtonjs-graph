@@ -73,7 +73,9 @@ class ColaGraph extends EventEmitter {
 
 	_bindNetwork () {
 		this.network.on('update', (data) => {
-			this._restartForce(data)
+			this.force
+				.nodes(data.nodes)
+				.links(data.links)
 			this.render()
 		})
 	}
@@ -87,13 +89,6 @@ class ColaGraph extends EventEmitter {
 	}
 
 	// ------- FORCE ENGINES ------- //
-
-	_restartForce (data) {
-		this.force
-			.nodes(data.nodes)
-			.links(data.links)
-			// .start(20) // required if new nodes or new links, reposition alone not enough.
-	}
 
 	_initLayout () {
 		this.svg = d3.select('svg')
@@ -115,6 +110,12 @@ class ColaGraph extends EventEmitter {
 		// let views re-position themselves on cola `tick`
 		this.force.on('tick', () => this.emit('tick'))
 
+		// recalcuate forces if nodes count changes
+		this.nodes.on('enter', (s) => this._adjustForce(s))
+		this.nodes.on('exit', (s) => this._adjustForce(s))
+		this.links.on('enter', (s) => this._adjustForce(s))
+		this.links.on('exit', (s) => this._adjustForce(s))
+
 		// make nodes draggable
 		if (this.options.draggable && this.engine === 'cola') {
 			this.nodes.on('update', (nodes) => nodes.call(this.force.drag))
@@ -123,6 +124,12 @@ class ColaGraph extends EventEmitter {
 		// Demo: Highlight Neighbors
 		this.nodes.on('node:mouseover', (n) => this.highlightNeighbors(n))
 		this.nodes.on('node:mouseout', (n) => this.resetStyles())
+	}
+
+	_adjustForce (selection) {
+		if (selection.size() > 0) {
+			this.force.start(20)
+		}
 	}
 
 	_colaForce () {

@@ -50,7 +50,6 @@ class Nodes extends View {
 				.on('mouseout', (n) => this.onMouseout(n))
 
 		this.emit('update', nodes)
-
 		this.nodes = nodes
 	}
 
