@@ -69,7 +69,7 @@ class Nodes extends View {
 		this.emit('node:mouseout', n)
 	}
 
-	highlightNeighbors (node) {
+	highlightDependencies (node) {
 		this.nodes
 			.attr('data-rel', (i) => this.graph.getRelationship(i, node))
 	}

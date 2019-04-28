@@ -122,7 +122,7 @@ class ColaGraph extends EventEmitter {
 		}
 
 		// Demo: Highlight Neighbors
-		this.nodes.on('node:mouseover', (n) => this.highlightNeighbors(n))
+		this.nodes.on('node:mouseover', (n) => this.highlightDependencies(n))
 		this.nodes.on('node:mouseout', (n) => this.resetStyles())
 	}
 
@@ -187,8 +187,8 @@ class ColaGraph extends EventEmitter {
 
 		let hasFailures = false
 		data.nodes.forEach((n) => {
-			if (n.status !== 'up') {
-				this.highlightNeighbors(n)
+			if (n.status === 'down') {
+				this.highlightDependencies(n)
 				hasFailures = true
 			}
 		})
@@ -197,11 +197,11 @@ class ColaGraph extends EventEmitter {
 		}
 	}
 
-	highlightNeighbors (node) {
-		// console.log(`[graph] highlightNeighbors(${node.label})`)
-		this.nodes.highlightNeighbors(node)
-		this.labels.highlightNeighbors(node)
-		this.links.highlightNeighbors(node)
+	highlightDependencies (node) {
+		// console.log(`[graph] highlightDependencies(${node.label})`)
+		this.nodes.highlightDependencies(node)
+		this.labels.highlightDependencies(node)
+		this.links.highlightDependencies(node)
 	}
 
 	resetStyles () {
