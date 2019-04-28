@@ -48,4 +48,8 @@ svg {
 	&[data-rel="is-same-node"] {
 		fill: '#fff';
 	}
+
+	&[data-hidden="1"] {
+		visibility: hidden;
+	}
 }

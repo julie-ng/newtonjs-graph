@@ -123,6 +123,7 @@ class ColaGraph extends EventEmitter {
 		// Demo: Highlight Neighbors
 		this.nodes.on('node:mouseover', (n) => this.highlightNeighbors(n))
 		this.nodes.on('node:mouseout', (n) => this.resetStyles())
+		this.nodes.on('node:click', (n) => this.showRelevantNetwork(n))
 	}
 
 	_colaForce () {
@@ -195,6 +196,13 @@ class ColaGraph extends EventEmitter {
 		this.nodes.highlightNeighbors(node)
 		this.labels.highlightNeighbors(node)
 		this.links.highlightNeighbors(node)
+	}
+
+	showRelevantNetwork (node) {
+		// console.log(`[graph] highlightNeighbors(${node.label})`)
+		this.nodes.showRelevantNetwork(node)
+		this.labels.showRelevantNetwork(node)
+		this.links.showRelevantNetwork(node)
 	}
 
 	resetStyles () {

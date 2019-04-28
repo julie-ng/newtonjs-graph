@@ -17,4 +17,8 @@
 	&[data-rel="has-no-relationship"] {
 		stroke: $backgroundOffsetColor;
 	}
+
+	&[data-hidden="1"] {
+		visibility: hidden;
+	}
 }

@@ -48,6 +48,7 @@ class Nodes extends View {
 				.attr('r', (n) => n.status === 'up' ? 6 : 10)
 				.on('mouseover', (n) => this.onMouseover(n))
 				.on('mouseout', (n) => this.onMouseout(n))
+				.on('click', (n) => this.onClick(n))
 
 		this.emit('update', nodes)
 
@@ -70,14 +71,27 @@ class Nodes extends View {
 		this.emit('node:mouseout', n)
 	}
 
+	onClick(n) {
+		this.emit('node:click', n)
+	}
+
 	highlightNeighbors (node) {
 		this.nodes
 			.attr('data-rel', (i) => this.graph.getRelationship(i, node))
 	}
 
+	showRelevantNetwork (node) {
+		this.nodes
+			.attr('data-hidden', (i) => this.graph.getRelationship(i, node) === 'has-no-relationship'
+				? '1'
+				: ''
+			)
+	}
+
 	resetStyles () {
 		this.nodes
 			.attr('data-rel', '')
+			.attr('data-hidden', '')
 	}
 }
 
