@@ -1,0 +1,20 @@
+.link {
+	stroke: $graphLinkColor;
+	stroke-width: 1px;
+
+	&[data-rel="is-source"] {
+		stroke: $yellow; // lightenDarkenColor(stroke: yellow, -50)
+	}
+
+	&[data-rel="is-deep-source"] {
+		stroke: $darkOrange;
+	}
+
+	&[data-rel="is-target"] {
+		stroke: $red;
+	}
+
+	&[data-rel="has-no-relationship"] {
+		stroke: $backgroundOffsetColor;
+	}
+}

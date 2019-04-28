@@ -1,7 +1,5 @@
 const d3 = require('d3')
 const View = require('./view')
-const Transitions = require('./transitions')
-const LinksUI = require('./styles/links.ui')
 
 /**
  * Encapsulates what is needed to create the links between
@@ -20,9 +18,6 @@ class Links extends View {
 	}
 
 	render (data) {
-		let t = d3.transition()
-			.duration(100)
-			.ease(d3.easeLinear)
 		let links = d3.select(this.dom)
 			.select(this.container)
 			.selectAll('.link')
@@ -30,9 +25,6 @@ class Links extends View {
 
 		this.emit('exit', links.exit())
 		links.exit()
-			.transition(t)
-				.call(Transitions.fadeOut)
-				.call(Transitions.FadeDown.link)
 			.remove()
 
 		this.emit('enter', links.enter())
@@ -57,15 +49,13 @@ class Links extends View {
 
 	highlightNeighbors (n) {
 		this.links
-			.style('stroke', (i) =>  LinksUI.relationshipColor(i, this._getRelationship(i, n)))
-			.attr('class', (i) => 'link ' + this._getRelationship(i, n))
+			.attr('data-rel', (i) => this._getRelationship(i, n))
 			.attr('marker-end', (i) => `url(#${this._getRelationship(i, n)})`)
 	}
 
 	resetStyles () {
 		this.links
-			.style('stroke-width', '')
-			.style('stroke', '')
+			.attr('data-rel', '')
 			.attr('marker-end', '')
 	}
 

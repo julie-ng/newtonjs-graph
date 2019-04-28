@@ -1,18 +1,7 @@
 const d3 = require('d3')
 const View = require('./view')
-const Transitions = require('./transitions')
-const LabelsUI = require('./styles/label.ui')
-// const colors = require('./styles/colors')
 
 const fixedRadius = 12
-const defaultFontSize = 14
-
-const calculateFontSize = (node) => {
-	// return (node.status === 'up')
-	// 	? defaultFontSize + 'px'
-	// 	: defaultFontSize + 2 + 'px'
-	return defaultFontSize
-}
 
 /**
  * Encapsulates what is needed to create the labels of nodes
@@ -32,10 +21,6 @@ class Labels extends View {
 	}
 
 	render (data) {
-		let t1 = d3.transition()
-			.duration(250)
-			.ease(d3.easeLinear)
-
 		let labels = d3.select(this.dom)
 			.select(this.container)
 			.selectAll('.label')
@@ -43,22 +28,12 @@ class Labels extends View {
 
 		this.emit('exit', labels.exit())
 		labels.exit()
-			.transition(t1)
-				.call(Transitions.fadeOut)
-				.call(Transitions.FadeDown.text, fixedRadius*2.5 + 5)
 			.remove()
 
-		let t2 = d3.transition()
-				.duration(250)
-				.ease(d3.easeLinear)
-		labels.transition(t2)
-			.attr('font-size', calculateFontSize)
-
 		this.emit('enter', labels.enter())
-		labels = labels.enter().append('text')
-				.attr('text-anchor', 'middle')
-				.attr('alignment-baseline', 'central')
-				.attr('font-size', calculateFontSize)
+		labels = labels
+			.enter()
+				.append('text')
 			.merge(labels)
 				.text((node) => node.label)
 				.attr('id', (node) => 'label-' + node.id)
@@ -77,15 +52,13 @@ class Labels extends View {
 	}
 
 	highlightNeighbors (n) {
-		this.labels.style('fill', (i) => {
-			let rel = this.graph.getRelationship(i, n)
-			return LabelsUI.relationshipColor(i, rel)
-		})
+		this.labels
+			.attr('data-rel', (i) => this.graph.getRelationship(i, n))
 	}
 
 	resetStyles () {
 		this.labels
-			.style('fill', '')
+			.attr('data-rel', '')
 	}
 }
 

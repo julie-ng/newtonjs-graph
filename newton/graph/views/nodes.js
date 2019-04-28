@@ -1,8 +1,5 @@
 const d3 = require('d3')
-
 const View = require('./view')
-const Transitions = require('./transitions')
-const NodeUI = require('./styles/node.ui')
 
 /**
  * Encapsulates what is needed to create the nodes of a network graph,
@@ -30,41 +27,17 @@ class Nodes extends View {
 	 */
 	render (data) {
 		// console.log(' nodes render()')
-
 		if (data.nodes === undefined) { throw 'Error: missing `nodes` attribute on parameter.' }
 
-		let t = d3.transition()
-			.duration(300)
-			.ease(d3.easeLinear)
-
-		// -- Pattern: JOIN --
 		let nodes = d3.select(this.dom)
 			.select(this.container)
 			.selectAll('.node')
 			.data(data.nodes, (d) => d.id)
 
-		// -- Pattern: REMOVE --
-		/**
-		 * @event Nodes#exit
-		 * @property {Nodes} nodes - Exiting nodes per d3.js [general update pattern, III](https://bl.ocks.org/mbostock/3808234).
-		 * @example
-		 * nodes.on('exit', function (n) {
-		 *   n.call(Transitions.fadeOut)
-		 *    .call(Transitions.fadeDown)
-		 * })
-		 */
 		this.emit('exit', nodes.exit())
 		nodes.exit()
-			.transition(t)
-				.call(Transitions.fadeOut)
-				.call(Transitions.FadeDown.circle, 5)
 			.remove()
 
-		// -- Pattern: ENTER + UPDATE (merge()) --
-		/**
-		 * @event Nodes#enter
-		 * @property {Nodes} nodes - Entering nodes per d3.js [general update pattern, III](https://bl.ocks.org/mbostock/3808234).
-		 */
 		this.emit('enter', nodes.enter())
 		nodes = nodes.enter()
 			.append('circle')
@@ -72,16 +45,10 @@ class Nodes extends View {
 			.merge(nodes)
 				.attr('data-title', (n) => n.label)
 				.attr('class', (n) => 'node status-' + n.status)
-				.call(NodeUI.styleNode)
+				.attr('r', (n) => n.status === 'up' ? 6 : 10)
 				.on('mouseover', (n) => this.onMouseover(n))
 				.on('mouseout', (n) => this.onMouseout(n))
 
-		/**
-		 * @event Nodes#update
-		 * @property {Nodes} nodes - Updating nodes (post merge with enter) per d3.js [general update pattern, III](https://bl.ocks.org/mbostock/3808234).
-		 * @example
-		 * nodes.on('update', (n) => n.call(webcola.drag))
-		 */
 		this.emit('update', nodes)
 
 		this.nodes = nodes
@@ -104,18 +71,13 @@ class Nodes extends View {
 	}
 
 	highlightNeighbors (node) {
-		// console.log(`[node] highlightNeighbors(${node.label})`)
 		this.nodes
-			.style('stroke', (i) => NodeUI.relationshipColor('stroke', i, this.graph.getRelationship(i, node)))
-			.style('fill', (i) => NodeUI.relationshipColor('fill', i, this.graph.getRelationship(i, node)))
+			.attr('data-rel', (i) => this.graph.getRelationship(i, node))
 	}
 
-	// Todo: reset by node, not by all
 	resetStyles () {
 		this.nodes
-			.style('fill', '')
-			.style('stroke', '')
-			.call(NodeUI.styleNode)
+			.attr('data-rel', '')
 	}
 }
 
