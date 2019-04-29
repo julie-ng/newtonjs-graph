@@ -7,7 +7,7 @@ variables:
   azureContainerRegistry: julie.azurecr.io
   registryName: $(azureContainerRegistry)/$(Build.Repository.Name)
   imageTag: $(registryName):$(Build.BuildId)
-  appName: newton-graph-demo
+  appName: newton-demo
 
 pool:
   vmImage: 'ubuntu-latest'
