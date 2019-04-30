@@ -1,5 +1,7 @@
+// const d3 = require('./../d3')
 const d3 = require('d3')
 const Cola = require('webcola')
+
 const EventEmitter = require('events').EventEmitter
 
 const Labels = require('./views/labels')
@@ -111,10 +113,12 @@ class ColaGraph extends EventEmitter {
 		this.force.on('tick', () => this.emit('tick'))
 
 		// recalcuate forces if nodes count changes
-		this.nodes.on('enter', (s) => this._adjustForce(s))
-		this.nodes.on('exit', (s) => this._adjustForce(s))
-		this.links.on('enter', (s) => this._adjustForce(s))
-		this.links.on('exit', (s) => this._adjustForce(s))
+		if (this.engine === 'cola') {
+			this.nodes.on('enter', (s) => this._adjustForce(s))
+			this.nodes.on('exit', (s) => this._adjustForce(s))
+			this.links.on('enter', (s) => this._adjustForce(s))
+			this.links.on('exit', (s) => this._adjustForce(s))
+		}
 
 		// make nodes draggable
 		if (this.options.draggable && this.engine === 'cola') {
@@ -230,7 +234,5 @@ class ColaGraph extends EventEmitter {
 			.attr('d', 'M0,-5L10,0L0,5')
 	}
 }
-
-
 
 module.exports = ColaGraph
