@@ -18,7 +18,7 @@ const defaults = {
  * Cola.js Network Graph
  *
  */
-class ColaGraph extends EventEmitter {
+class Graph extends EventEmitter {
 
 	/**
 	 * Also initializes graph
@@ -235,4 +235,4 @@ class ColaGraph extends EventEmitter {
 	}
 }
 
-module.exports = ColaGraph
+module.exports = Graph
