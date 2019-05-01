@@ -56,7 +56,7 @@ class Labels extends View {
 			.attr('data-rel', (i) => this.graph.getRelationship(i, n))
 	}
 
-	showRelevantNetwork (n) {
+	showDependencies (n) {
 		this.labels
 			.attr('data-hidden', (i) => this.graph.getRelationship(i, n) === 'has-no-relationship'
 				? '1'

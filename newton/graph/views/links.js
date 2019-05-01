@@ -53,7 +53,7 @@ class Links extends View {
 			.attr('marker-end', (i) => `url(#${this._getRelationship(i, n)})`)
 	}
 
-	showRelevantNetwork(n) {
+	showDependencies (n) {
 		this.links
 			.attr('data-hidden', (i) => this._getRelationship(i, n) === 'has-no-relationship'
 				? '1'

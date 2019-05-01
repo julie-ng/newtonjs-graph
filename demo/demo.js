@@ -17,6 +17,10 @@ const graph = new Graph({
 })
 graph.init()
 
+graph.on('node:click', (node) => {
+	graph.showDependencies(node)
+})
+
 // ----- FAKE TIMELINE ----- //
 
 // let index, delay, highlight

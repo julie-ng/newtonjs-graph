@@ -79,7 +79,7 @@ class Nodes extends View {
 			.attr('data-rel', (i) => this.graph.getRelationship(i, node))
 	}
 
-	showRelevantNetwork (node) {
+	showDependencies (node) {
 		this.nodes
 			.attr('data-hidden', (i) => this.graph.getRelationship(i, node) === 'has-no-relationship'
 				? '1'
