@@ -51,7 +51,7 @@ class Labels extends View {
 			.attr('y', (d) => d.y + fixedRadius*2.5)
 	}
 
-	highlightNeighbors (n) {
+	highlightDependencies (n) {
 		this.labels
 			.attr('data-rel', (i) => this.graph.getRelationship(i, n))
 	}

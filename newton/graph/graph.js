@@ -1,5 +1,7 @@
+// const d3 = require('./../d3')
 const d3 = require('d3')
 const Cola = require('webcola')
+
 const EventEmitter = require('events').EventEmitter
 
 const Labels = require('./views/labels')
@@ -16,7 +18,7 @@ const defaults = {
  * Cola.js Network Graph
  *
  */
-class ColaGraph extends EventEmitter {
+class Graph extends EventEmitter {
 
 	/**
 	 * Also initializes graph
@@ -73,7 +75,9 @@ class ColaGraph extends EventEmitter {
 
 	_bindNetwork () {
 		this.network.on('update', (data) => {
-			this._restartForce(data)
+			this.force
+				.nodes(data.nodes)
+				.links(data.links)
 			this.render()
 		})
 	}
@@ -87,13 +91,6 @@ class ColaGraph extends EventEmitter {
 	}
 
 	// ------- FORCE ENGINES ------- //
-
-	_restartForce (data) {
-		this.force
-			.nodes(data.nodes)
-			.links(data.links)
-			// .start(20) // required if new nodes or new links, reposition alone not enough.
-	}
 
 	_initLayout () {
 		this.svg = d3.select('svg')
@@ -115,15 +112,29 @@ class ColaGraph extends EventEmitter {
 		// let views re-position themselves on cola `tick`
 		this.force.on('tick', () => this.emit('tick'))
 
+		// recalcuate forces if nodes count changes
+		if (this.engine === 'cola') {
+			this.nodes.on('enter', (s) => this._adjustForce(s))
+			this.nodes.on('exit', (s) => this._adjustForce(s))
+			this.links.on('enter', (s) => this._adjustForce(s))
+			this.links.on('exit', (s) => this._adjustForce(s))
+		}
+
 		// make nodes draggable
 		if (this.options.draggable && this.engine === 'cola') {
 			this.nodes.on('update', (nodes) => nodes.call(this.force.drag))
 		}
 
 		// Demo: Highlight Neighbors
-		this.nodes.on('node:mouseover', (n) => this.highlightNeighbors(n))
+		this.nodes.on('node:mouseover', (n) => this.highlightDependencies(n))
 		this.nodes.on('node:mouseout', (n) => this.resetStyles())
 		this.nodes.on('node:click', (n) => this.showRelevantNetwork(n))
+	}
+
+	_adjustForce (selection) {
+		if (selection.size() > 0) {
+			this.force.start(20)
+		}
 	}
 
 	_colaForce () {
@@ -181,8 +192,8 @@ class ColaGraph extends EventEmitter {
 
 		let hasFailures = false
 		data.nodes.forEach((n) => {
-			if (n.status !== 'up') {
-				this.highlightNeighbors(n)
+			if (n.status === 'down') {
+				this.highlightDependencies(n)
 				hasFailures = true
 			}
 		})
@@ -191,11 +202,11 @@ class ColaGraph extends EventEmitter {
 		}
 	}
 
-	highlightNeighbors (node) {
-		// console.log(`[graph] highlightNeighbors(${node.label})`)
-		this.nodes.highlightNeighbors(node)
-		this.labels.highlightNeighbors(node)
-		this.links.highlightNeighbors(node)
+	highlightDependencies (node) {
+		// console.log(`[graph] highlightDependencies(${node.label})`)
+		this.nodes.highlightDependencies(node)
+		this.labels.highlightDependencies(node)
+		this.links.highlightDependencies(node)
 	}
 
 	showRelevantNetwork (node) {
@@ -232,6 +243,4 @@ class ColaGraph extends EventEmitter {
 	}
 }
 
-
-
-module.exports = ColaGraph
+module.exports = Graph

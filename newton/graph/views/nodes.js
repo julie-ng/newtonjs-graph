@@ -51,7 +51,6 @@ class Nodes extends View {
 				.on('click', (n) => this.onClick(n))
 
 		this.emit('update', nodes)
-
 		this.nodes = nodes
 	}
 
@@ -71,11 +70,11 @@ class Nodes extends View {
 		this.emit('node:mouseout', n)
 	}
 
-	onClick(n) {
+	onClick (n) {
 		this.emit('node:click', n)
 	}
 
-	highlightNeighbors (node) {
+	highlightDependencies (node) {
 		this.nodes
 			.attr('data-rel', (i) => this.graph.getRelationship(i, node))
 	}

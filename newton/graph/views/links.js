@@ -47,7 +47,7 @@ class Links extends View {
 			.attr('y2', (d) => d.target.y)
 	}
 
-	highlightNeighbors (n) {
+	highlightDependencies (n) {
 		this.links
 			.attr('data-rel', (i) => this._getRelationship(i, n))
 			.attr('marker-end', (i) => `url(#${this._getRelationship(i, n)})`)

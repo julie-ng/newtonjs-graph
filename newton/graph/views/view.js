@@ -57,8 +57,8 @@ class View extends EventEmitter {
 		throw interfaceError('resetStyles')
 	}
 
-	highlightNeighbors (data) {
-		throw interfaceError('resetStyles')
+	highlightDependencies (data) {
+		throw interfaceError('highlightDependencies')
 	}
 }
 
