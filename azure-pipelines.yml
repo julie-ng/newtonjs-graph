@@ -4,7 +4,7 @@ trigger:
 
 variables:
   azureSubscriptionEndpoint: newton-connection
-  azureContainerRegistry: julie.azurecr.io
+  azureContainerRegistry: newton.azurecr.io
   registryName: $(azureContainerRegistry)/$(Build.Repository.Name)
   imageTag: $(registryName):$(Build.BuildId)
   appName: newton-demo
