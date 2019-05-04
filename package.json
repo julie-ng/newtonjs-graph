@@ -13,7 +13,6 @@
     "build": "webpack --config webpack.build.js",
     "demo:server": "node ./demo/server.js",
     "demo:dev": "webpack-dev-server --config webpack.demo.js --open",
-    "coveralls": "cat ./coverage/lcov.info | coveralls",
     "docs": "jsdoc --readme ./README.md -c jsdoc.json",
     "docs:watch": "nodemon -w newton --exec 'npm run docs'",
     "docs:server": "live-server docs",
@@ -35,7 +34,6 @@
   "devDependencies": {
     "clean-webpack-plugin": "^1.0.0",
     "copy-webpack-plugin": "^4.6.0",
-    "coveralls": "^3.0.2",
     "css-loader": "^1.0.1",
     "eslint": "^5.9.0",
     "file-loader": "^3.0.1",
