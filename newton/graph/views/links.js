@@ -53,10 +53,19 @@ class Links extends View {
 			.attr('marker-end', (i) => `url(#${this._getRelationship(i, n)})`)
 	}
 
+	showDependencies (n) {
+		this.links
+			.attr('data-hidden', (i) => this._getRelationship(i, n) === 'has-no-relationship'
+				? '1'
+				: ''
+			)
+	}
+
 	resetStyles () {
 		this.links
 			.attr('data-rel', '')
 			.attr('marker-end', '')
+			.attr('data-hidden', '')
 	}
 
 	_getRelationship (link, n) {

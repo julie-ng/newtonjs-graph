@@ -128,6 +128,7 @@ class Graph extends EventEmitter {
 		// Demo: Highlight Neighbors
 		this.nodes.on('node:mouseover', (n) => this.highlightDependencies(n))
 		this.nodes.on('node:mouseout', (n) => this.resetStyles())
+		this.nodes.on('node:click', (n) => this.emit('node:click', n))
 	}
 
 	_adjustForce (selection) {
@@ -206,6 +207,13 @@ class Graph extends EventEmitter {
 		this.nodes.highlightDependencies(node)
 		this.labels.highlightDependencies(node)
 		this.links.highlightDependencies(node)
+	}
+
+	showDependencies (node) {
+		// console.log(`[graph] highlightNeighbors(${node.label})`)
+		this.nodes.showDependencies(node)
+		this.labels.showDependencies(node)
+		this.links.showDependencies(node)
 	}
 
 	resetStyles () {
