@@ -112,36 +112,25 @@ describe ('Nodes', () => {
 	})
 
 	describe ('position()', () => {
-		describe ('without `nodes` property', () => {
-			it ('throws', () => {
-				expect(typeof nodes.nodes).toEqual('undefined')
-				expect(() => {
-					nodes.position()
-				}).toThrow('Error: `nodes` attribute not set. Please render with data first.')
-			})
+		let attrSpy
+
+		beforeEach (() => {
+			nodes.selection = d3.select('svg').selectAll('circle')
+			attrSpy = jest.spyOn(nodes.selection, 'attr')
 		})
 
-		describe ('with `nodes` property', () => {
-			let attrSpy
+		afterEach (() => {
+			attrSpy.mockRestore()
+		})
 
-			beforeEach (() => {
-				nodes.nodes = d3.select('svg').selectAll('circle')
-				attrSpy = jest.spyOn(nodes.nodes, 'attr')
-			})
+		it ('calls `attr()` on d3 nodes', () => {
+			nodes.position()
+			const firstParam = attrSpy.mock.calls[0][0]
+			const secondParam = attrSpy.mock.calls[1][0]
 
-			afterEach (() => {
-				attrSpy.mockRestore()
-			})
-
-			it ('calls `attr()` on d3 nodes', () => {
-				nodes.position()
-				const firstParam = attrSpy.mock.calls[0][0]
-				const secondParam = attrSpy.mock.calls[1][0]
-
-				expect(attrSpy).toHaveBeenCalledTimes(2)
-				expect(firstParam).toEqual('cx')
-				expect(secondParam).toEqual('cy')
-			})
+			expect(attrSpy).toHaveBeenCalledTimes(2)
+			expect(firstParam).toEqual('cx')
+			expect(secondParam).toEqual('cy')
 		})
 	})
 })

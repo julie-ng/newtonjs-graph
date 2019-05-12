@@ -51,13 +51,11 @@ class Nodes extends View {
 				.on('click', (n) => this.onClick(n))
 
 		this.emit('update', nodes)
-		this.nodes = nodes
+		this.selection = nodes
 	}
 
 	position () {
-		if (this.nodes === undefined) { throw 'Error: `nodes` attribute not set. Please render with data first.' }
-
-		this.nodes
+		this.selection
 			.attr('cx', (d) => d.x)
 			.attr('cy', (d) => d.y)
 	}
@@ -72,24 +70,6 @@ class Nodes extends View {
 
 	onClick (n) {
 		this.emit('node:click', n)
-	}
-
-	setRelationships (node) {
-		this.nodes.attr('data-rel', (i) => this.graph.getRelationship(i, node))
-	}
-
-	hideUnrelated (node) {
-		this.nodes.attr('data-hidden', (i) => {
-			(this.graph.getRelationship(i, node) === 'has-no-relationship')
-				? '1'
-				: ''
-		})
-	}
-
-	resetStyles () {
-		this.nodes
-			.attr('data-rel', '')
-			.attr('data-hidden', '')
 	}
 }
 

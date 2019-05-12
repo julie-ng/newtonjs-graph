@@ -36,11 +36,11 @@ class Links extends View {
 				.attr('marker-end', 'url(#end)')
 
 		this.emit('update', links)
-		this.links = links
+		this.selection = links
 	}
 
 	position () {
-		this.links
+		this.selection
 			.attr('x1', (d) => d.source.x)
 			.attr('x2', (d) => d.target.x)
 			.attr('y1', (d) => d.source.y)
@@ -48,26 +48,24 @@ class Links extends View {
 	}
 
 	setRelationships (n) {
-		this.links.attr('data-rel', (i) => this._getRelationship(i, n))
+		this.selection.attr('data-rel', (i) => this._getRelationship(i, n))
 	}
 
 	hideUnrelated (n) {
-		this.links.attr('data-hidden', (i) => this._setHidden(i, n))
+		this.selection.attr('data-hidden', (i) => this._setHidden(i, n))
 	}
 
 	showArrows (n, opts = {}) {
-		this.links.attr('marker-end', (i) => this._getMarkerEnd(i, n, opts))
+		this.selection.attr('marker-end', (i) => this._getMarkerEnd(i, n, opts))
 	}
 
 	showAll () {
-		this.links.attr('data-hidden', null)
+		this.selection.attr('data-hidden', null)
 	}
 
 	resetStyles () {
-		this.links
-			.attr('data-rel', '')
-			.attr('marker-end', '')
-			.attr('data-hidden', '')
+		super.resetStyles()
+		this.selection.attr('marker-end', '')
 	}
 
 	_setHidden (i, n) {

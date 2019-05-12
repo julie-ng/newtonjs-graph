@@ -42,31 +42,13 @@ class Labels extends View {
 				.attr('dy', (node) => node.cy)
 
 		this.emit('update', labels)
-		this.labels = labels
+		this.selection = labels
 	}
 
 	position () {
-		this.labels
+		this.selection
 			.attr('x', (d) => d.x)
 			.attr('y', (d) => d.y + fixedRadius*2.5)
-	}
-
-	setRelationships (n) {
-		this.labels.attr('data-rel', (i) => this.graph.getRelationship(i, n))
-	}
-
-	hideUnrelated (n) {
-		this.labels.attr('data-hidden', (i) => {
-			(this.graph.getRelationship(i, n) === 'has-no-relationship')
-				? '1'
-				: ''
-		})
-	}
-
-	resetStyles () {
-		this.labels
-			.attr('data-rel', '')
-			.attr('data-hidden', '')
 	}
 }
 

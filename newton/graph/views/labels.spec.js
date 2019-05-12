@@ -95,8 +95,8 @@ describe ('Labels', () => {
 		let spy
 
 		beforeEach (() => {
-			labels.labels = d3.select('svg').selectAll('circle')
-			spy = jest.spyOn(labels.labels, 'attr')
+			labels.selection = d3.select('svg').selectAll('circle')
+			spy = jest.spyOn(labels.selection, 'attr')
 		})
 
 		afterEach (() => {

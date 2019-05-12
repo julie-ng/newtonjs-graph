@@ -53,20 +53,26 @@ class View extends EventEmitter {
 		throw interfaceError('position')
 	}
 
-	resetStyles (data) {
-		throw interfaceError('resetStyles')
-	}
-
 	highlightDependencies (data) {
 		throw interfaceError('highlightDependencies')
 	}
 
-	setRelationships () {
-		throw interfaceError('setRelationships')
+	setRelationships (node) {
+		this.selection.attr('data-rel', (i) => this.graph.getRelationship(i, node))
 	}
 
-	hideUnrelated () {
-		throw interfaceError('hideUnrelated')
+	hideUnrelated (node) {
+		this.selection.attr('data-hidden', (i) => {
+			(this.graph.getRelationship(i, node) === 'has-no-relationship')
+				? '1'
+				: ''
+		})
+	}
+
+	resetStyles () {
+		this.selection
+			.attr('data-rel', '')
+			.attr('data-hidden', '')
 	}
 }
 

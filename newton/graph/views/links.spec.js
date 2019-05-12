@@ -20,7 +20,7 @@ describe ('Links', () => {
 			container: 'svg'
 		})
 
-		links.links = d3.select('svg').selectAll('line')
+		links.selection = d3.select('svg').selectAll('line')
 
 		// prevent memory link in tests
 		links.setMaxListeners(1)
@@ -91,8 +91,8 @@ describe ('Links', () => {
 		let spy
 
 		beforeEach (() => {
-			links.links = d3.select('svg').selectAll('line')
-			spy = jest.spyOn(links.links, 'attr')
+			links.selection = d3.select('svg').selectAll('line')
+			spy = jest.spyOn(links.selection, 'attr')
 		})
 
 		afterEach (() => {
@@ -125,7 +125,7 @@ describe ('Links', () => {
 		let attrSpy
 
 		beforeEach (() => {
-			attrSpy = jest.spyOn(links.links, 'attr')
+			attrSpy = jest.spyOn(links.selection, 'attr')
 		})
 
 		afterEach (() => {
@@ -198,7 +198,7 @@ describe ('Links', () => {
 			let attrSpy
 
 			beforeEach (() => {
-				attrSpy = jest.spyOn(links.links, 'attr')
+				attrSpy = jest.spyOn(links.selection, 'attr')
 			})
 
 			afterEach (() => {
@@ -320,8 +320,8 @@ describe ('Links', () => {
 					const calls = attrSpy.mock.calls
 					expect(attrSpy).toHaveBeenCalledTimes(3)
 					expect(calls[0][0]).toEqual('data-rel')
-					expect(calls[1][0]).toEqual('marker-end')
-					expect(calls[2][0]).toEqual('data-hidden')
+					expect(calls[1][0]).toEqual('data-hidden')
+					expect(calls[2][0]).toEqual('marker-end')
 				})
 			})
 		})
