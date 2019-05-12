@@ -19,6 +19,6 @@
 	}
 
 	&[data-hidden="1"] {
-		visibility: hidden;
+		stroke: $hiddenLinkColor;
 	}
 }

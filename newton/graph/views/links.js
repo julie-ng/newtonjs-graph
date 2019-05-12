@@ -47,18 +47,12 @@ class Links extends View {
 			.attr('y2', (d) => d.target.y)
 	}
 
-	highlightDependencies (n) {
-		this.links
-			.attr('data-rel', (i) => this._getRelationship(i, n))
-			.attr('marker-end', (i) => `url(#${this._getRelationship(i, n)})`)
+	setRelationships (n) {
+		this.links.attr('data-rel', (i) => this._getRelationship(i, n))
 	}
 
-	showDependencies (n) {
-		this.links
-			.attr('data-hidden', (i) => this._getRelationship(i, n) === 'has-no-relationship'
-				? '1'
-				: ''
-			)
+	hideUnrelated (n) {
+		this.links.attr('data-hidden', (i) => this._setHidden(i, n))
 	}
 
 	resetStyles () {

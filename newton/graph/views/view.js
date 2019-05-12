@@ -60,6 +60,14 @@ class View extends EventEmitter {
 	highlightDependencies (data) {
 		throw interfaceError('highlightDependencies')
 	}
+
+	setRelationships () {
+		throw interfaceError('setRelationships')
+	}
+
+	hideUnrelated () {
+		throw interfaceError('hideUnrelated')
+	}
 }
 
 function interfaceError (methodName) {

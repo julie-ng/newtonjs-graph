@@ -203,16 +203,9 @@ class Graph extends EventEmitter {
 
 	highlightDependencies (node) {
 		// console.log(`[graph] highlightDependencies(${node.label})`)
-		this.nodes.highlightDependencies(node)
-		this.labels.highlightDependencies(node)
-		this.links.highlightDependencies(node)
-	}
-
-	showDependencies (node) {
-		// console.log(`[graph] highlightNeighbors(${node.label})`)
-		this.nodes.showDependencies(node)
-		this.labels.showDependencies(node)
-		this.links.showDependencies(node)
+		this.nodes.setRelationships(node)
+		this.labels.setRelationships(node)
+		this.links.setRelationships(node)
 	}
 
 	resetStyles () {

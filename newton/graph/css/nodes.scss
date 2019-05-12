@@ -10,6 +10,16 @@
 	transform-origin: center center;
 	animation-iteration-count: infinite;
 
+	@mixin fadeNode() {
+		fill: $backgroundOffsetColor;
+		stroke: lighten($backgroundOffsetColor, 10%);
+	}
+
+	@mixin hideNode() {
+		fill: darken($backgroundOffsetColor, 6%);
+		stroke: darken($backgroundOffsetColor, 4%);
+	}
+
 	// --- Uptime Status ---
 
 	&.status-down {
@@ -51,14 +61,10 @@
 	}
 
 	&[data-rel="has-no-relationship"] {
-		fill: $backgroundOffsetColor;
-		stroke: lighten($backgroundOffsetColor, 10%);
+		@include fadeNode();
 	}
-	// &[data=rel="is-same-node"] {
-	// 	fill: $
-	// }
 
 	&[data-hidden="1"] {
-		visibility: hidden;
+		@include hideNode();
 	}
 }

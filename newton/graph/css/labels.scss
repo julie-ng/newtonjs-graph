@@ -41,15 +41,12 @@ svg {
 		fill: $autumnYellow;
 	}
 
+	&[data-hidden="1"],
 	&[data-rel="has-no-relationship"] {
 		fill: $backgroundOffsetColor;
 	}
 
 	&[data-rel="is-same-node"] {
 		fill: '#fff';
-	}
-
-	&[data-hidden="1"] {
-		visibility: hidden;
 	}
 }

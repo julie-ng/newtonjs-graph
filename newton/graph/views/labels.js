@@ -51,17 +51,16 @@ class Labels extends View {
 			.attr('y', (d) => d.y + fixedRadius*2.5)
 	}
 
-	highlightDependencies (n) {
-		this.labels
-			.attr('data-rel', (i) => this.graph.getRelationship(i, n))
+	setRelationships (n) {
+		this.labels.attr('data-rel', (i) => this.graph.getRelationship(i, n))
 	}
 
-	showDependencies (n) {
-		this.labels
-			.attr('data-hidden', (i) => this.graph.getRelationship(i, n) === 'has-no-relationship'
+	hideUnrelated (n) {
+		this.labels.attr('data-hidden', (i) => {
+			(this.graph.getRelationship(i, n) === 'has-no-relationship')
 				? '1'
 				: ''
-			)
+		})
 	}
 
 	resetStyles () {

@@ -74,17 +74,16 @@ class Nodes extends View {
 		this.emit('node:click', n)
 	}
 
-	highlightDependencies (node) {
-		this.nodes
-			.attr('data-rel', (i) => this.graph.getRelationship(i, node))
+	setRelationships (node) {
+		this.nodes.attr('data-rel', (i) => this.graph.getRelationship(i, node))
 	}
 
-	showDependencies (node) {
-		this.nodes
-			.attr('data-hidden', (i) => this.graph.getRelationship(i, node) === 'has-no-relationship'
+	hideUnrelated (node) {
+		this.nodes.attr('data-hidden', (i) => {
+			(this.graph.getRelationship(i, node) === 'has-no-relationship')
 				? '1'
 				: ''
-			)
+		})
 	}
 
 	resetStyles () {

@@ -17,7 +17,7 @@ const graph = new Graph({
 })
 graph.init()
 
-graph.on('node:click', (n) => graph.showDependencies(n, { arrows: true }))
+graph.on('node:click', (n) => graph.highlightDependencies(n, { arrows: true }))
 // graph.on('node:mouseover', (n) => graph.showDependencies(n))
 // graph.on('node:mouseout', graph.resetStyles)
 
