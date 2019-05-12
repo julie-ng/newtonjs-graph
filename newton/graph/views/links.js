@@ -55,11 +55,47 @@ class Links extends View {
 		this.links.attr('data-hidden', (i) => this._setHidden(i, n))
 	}
 
+	showArrows (n, opts = {}) {
+		this.links.attr('marker-end', (i) => this._getMarkerEnd(i, n, opts))
+	}
+
+	showAll () {
+		this.links.attr('data-hidden', null)
+	}
+
 	resetStyles () {
 		this.links
 			.attr('data-rel', '')
 			.attr('marker-end', '')
 			.attr('data-hidden', '')
+	}
+
+	_setHidden (i, n) {
+		return (this._getRelationship(i, n) === 'has-no-relationship')
+			? '1'
+			: ''
+	}
+
+	_getMarkerEnd (link, n, opts = {}) {
+		let defaults = {
+			color: true,
+			showAll: true,
+		}
+		opts = Object.assign({}, defaults, opts)
+
+		let relationship 	  = this._getRelationship(link, n)
+		let hasRelationship	= (relationship !== 'has-no-relationship')
+		let defaultStyle 		= 'url(#is-default)'
+		let unrelatedStyle 	= (opts.showAll) ? defaultStyle : ''
+		let colorStyle 			= `url(#${relationship})`
+
+		if (hasRelationship) {
+			return (opts.color)
+				? colorStyle
+				: defaultStyle
+		}
+
+		return unrelatedStyle
 	}
 
 	_getRelationship (link, n) {
@@ -76,7 +112,5 @@ class Links extends View {
 		return rel
 	}
 }
-
-
 
 module.exports = Links

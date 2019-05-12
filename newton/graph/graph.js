@@ -98,6 +98,7 @@ class Graph extends EventEmitter {
 			.attr('height', this.height)
 
 		this._addArrows([
+			'is-default',
 			'is-source',
 			'is-deep-source',
 			'is-target'
@@ -201,11 +202,14 @@ class Graph extends EventEmitter {
 		}
 	}
 
-	highlightDependencies (node) {
+	highlightDependencies (node, opts = {}) {
 		// console.log(`[graph] highlightDependencies(${node.label})`)
 		this.nodes.setRelationships(node)
 		this.labels.setRelationships(node)
 		this.links.setRelationships(node)
+		if (opts.arrows) {
+			this.links.showArrows(node, { color: true, showAll: false })
+		}
 	}
 
 	resetStyles () {
