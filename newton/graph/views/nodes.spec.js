@@ -133,6 +133,40 @@ describe ('Nodes', () => {
 			expect(secondParam).toEqual('cy')
 		})
 	})
+
+	describe ('event callbacks', () => {
+		let spy
+		let n = ''
+
+		beforeEach(() => {
+			spy = jest.spyOn(nodes, 'emit')
+		})
+
+		afterEach (() => {
+			spy.mockRestore()
+		})
+
+		it ('emits `mouseover`', () => {
+			nodes.onMouseover(n)
+			const call = spy.mock.calls[0]
+			expect(call[0]).toEqual('node:mouseover')
+			expect(call[1]).toBe(n)
+		})
+
+		it ('emits `mouseout`', () => {
+			nodes.onMouseout(n)
+			const call = spy.mock.calls[0]
+			expect(call[0]).toEqual('node:mouseout')
+			expect(call[1]).toBe(n)
+		})
+
+		it ('emits `click`', () => {
+			nodes.onClick(n)
+			const call = spy.mock.calls[0]
+			expect(call[0]).toEqual('node:click')
+			expect(call[1]).toBe(n)
+		})
+	})
 })
 
 // -- Helpers --
