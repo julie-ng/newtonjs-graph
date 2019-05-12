@@ -17,9 +17,11 @@ const graph = new Graph({
 })
 graph.init()
 
-graph.on('node:click', (node) => {
-	graph.showDependencies(node)
-})
+graph.on('node:click', (n) => graph.showDependencies(n, { arrows: true }))
+// graph.on('node:mouseover', (n) => graph.showDependencies(n))
+// graph.on('node:mouseout', graph.resetStyles)
+
+
 
 // ----- FAKE TIMELINE ----- //
 

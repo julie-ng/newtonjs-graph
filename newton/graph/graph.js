@@ -125,9 +125,8 @@ class Graph extends EventEmitter {
 			this.nodes.on('update', (nodes) => nodes.call(this.force.drag))
 		}
 
-		// Demo: Highlight Neighbors
-		this.nodes.on('node:mouseover', (n) => this.highlightDependencies(n))
-		this.nodes.on('node:mouseout', (n) => this.resetStyles())
+		this.nodes.on('node:mouseover', (n) => this.emit('node:mouseover', n))
+		this.nodes.on('node:mouseout', (n) => this.emit('node:mouseout', n))
 		this.nodes.on('node:click', (n) => this.emit('node:click', n))
 	}
 
