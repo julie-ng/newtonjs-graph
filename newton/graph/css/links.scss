@@ -3,7 +3,7 @@
 	stroke-width: 1px;
 
 	&[data-rel="is-source"] {
-		stroke: $yellow; // lightenDarkenColor(stroke: yellow, -50)
+		stroke: $yellow;
 	}
 
 	&[data-rel="is-deep-source"] {
@@ -15,7 +15,7 @@
 	}
 
 	&[data-rel="has-no-relationship"] {
-		stroke: $backgroundOffsetColor;
+		stroke: $noRelationshipLinkColor;
 	}
 
 	&[data-hidden="1"] {
