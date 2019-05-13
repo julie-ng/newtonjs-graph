@@ -11,6 +11,7 @@
   },
   "scripts": {
     "build": "webpack --config webpack.build.js",
+    "demo:build": "webpack --config webpack.demo.js",
     "demo:server": "node ./demo/server.js",
     "demo:dev": "webpack-dev-server --config webpack.demo.js --open",
     "docs": "jsdoc --readme ./README.md -c jsdoc.json",

@@ -3,10 +3,11 @@ trigger:
   - feat/*
 
 variables:
-  azureSubscriptionEndpoint: newton-connection
+  azureSubscriptionEndpoint: azure-newton
   azureContainerRegistry: newton.azurecr.io
   registryName: $(azureContainerRegistry)/$(Build.Repository.Name)
   imageTag: $(registryName):$(Build.BuildId)
+  devTag: $(Build.Repository.Name):dev
   appName: newton-demo
 
 pool:
@@ -33,7 +34,11 @@ steps:
   displayName: run unit tests
 
 - script: npm run build
-  displayName: build static demo files
+  displayName: build library
+
+- script: npm run demo:build
+  displayName: build demo
+
 
 # ----------------------------
 # Docker Image: Build and Push
@@ -44,7 +49,9 @@ steps:
     echo 'buildSha set to $(buildSha)'
   displayName: Get build git sha
 
-- script: docker build --tag $(imageTag)-$(buildSha) .
+- script: |
+    docker build --tag $(imageTag)-$(buildSha) .
+    docker tag $(imageTag)-$(buildSha) $(devTag)
   displayName: 'Docker: Build and tag image'
 
 # Use the task to avoid embedding credentials in pipeline
