@@ -4,7 +4,7 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/7a3975197c576202fe08/test_coverage)](https://codeclimate.com/github/julie-ng/newtonjs-graph/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/7a3975197c576202fe08/maintainability)](https://codeclimate.com/github/julie-ng/newtonjs-graph/maintainability)
 [![Known Vulnerabilities](https://snyk.io/test/github/julie-ng/newtonjs-graph/badge.svg?targetFile=package.json)](https://snyk.io/test/github/julie-ng/newtonjs-graph?targetFile=package.json)
-[![Build Status](https://dev.azure.com/julie-ng/newton/_apis/build/status/julie-ng.newtonjs-graph?branchName=master)](https://dev.azure.com/julie-ng/newton/_build/latest?definitionId=1&branchName=master)
+[![Build Status](https://dev.azure.com/newtonjs/newton-graph/_apis/build/status/julie-ng.newtonjs-graph?branchName=master)](https://dev.azure.com/newtonjs/newton-graph/_build/latest?definitionId=1&branchName=master)
 
 This repository contains learning and prototype code for a high-level dashboard for architects and stakeholders. The goal is to illustrate *product and service dependencies* in a software architecture.
 
