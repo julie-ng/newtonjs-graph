@@ -2,7 +2,7 @@ const io = require('socket.io-client')
 const Graph = require('./../newton').Graph
 const Network = require('./../newton').Network
 // const data = require('./data/relationships')
-const data = require('./demo.data')
+const data = require('./data')
 
 // ----------- SETUP AND BIND ----------- //
 
