@@ -12,7 +12,6 @@
   "scripts": {
     "build": "webpack --config webpack.build.js",
     "demo:build": "webpack --config webpack.demo.js",
-    "demo:server": "node ./demo/server.js",
     "demo:dev": "webpack-dev-server --config webpack.demo.js --open",
     "docs": "jsdoc --readme ./README.md -c jsdoc.json",
     "docs:watch": "nodemon -w newton --exec 'npm run docs'",
@@ -26,9 +25,6 @@
   },
   "dependencies": {
     "d3": "^5.7.0",
-    "express": "^4.16.4",
-    "helmet": "^3.16.0",
-    "morgan": "^1.9.1",
     "socket.io": "^2.2.0",
     "webcola": "^3.3.8"
   },
