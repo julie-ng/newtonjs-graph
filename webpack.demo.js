@@ -74,7 +74,7 @@ module.exports = {
 				title: 'Newton.js Demo',
 			},
 			chunks: ['demo'],
-			template: 'demo/demo.layout.hbs',
+			template: 'demo/index.hbs',
 			filename: 'index.html'
 		})
 	]
