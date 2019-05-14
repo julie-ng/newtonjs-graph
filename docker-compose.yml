@@ -1,0 +1,10 @@
+version: '3'
+services:
+  demo:
+    build: .
+    image: nginx
+    ports:
+      - 8080:80
+    # volumes:
+    #   - ${PWD}/demo/dist:/usr/share/nginx/html
+
