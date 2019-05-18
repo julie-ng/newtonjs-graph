@@ -14,6 +14,7 @@
     "demo:build": "webpack --config webpack.demo.js",
     "demo:dev": "webpack-dev-server --config webpack.demo.dev.js --open",
     "docs": "jsdoc --readme ./README.md -c jsdoc.json",
+    "docs:dev": "concurrently --kill-others 'npm:docs:watch' 'npm:docs:server'",
     "docs:watch": "nodemon -w newton --exec 'npm run docs'",
     "docs:server": "live-server docs",
     "lint": "eslint .",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "clean-webpack-plugin": "^1.0.0",
+    "concurrently": "^4.1.0",
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^1.0.1",
     "eslint": "^5.9.0",
