@@ -46,7 +46,6 @@ class Graph extends EventEmitter {
 		this.nodes = new Nodes()
 
 		this.renders = 0
-		this.nodesRenders = 0
 	}
 
 	init () {
