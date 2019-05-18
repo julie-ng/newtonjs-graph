@@ -4,21 +4,41 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-	mode: 'development',
+	mode: 'production',
 	entry: {
-		demo: './demo/entry.js',
-		d3: './newton/d3.js'
+		demo: './demo/entry.js'
+		// newton: './newton/index.js'
 	},
 	output: {
-		filename: '[name].js',
+		filename: '[name].bundle.js',
+		chunkFilename: '[name].bundle.js',
 		path: path.resolve(__dirname, 'demo/dist')
 	},
-	devtool: 'inline-source-map',
-	devServer: {
-		contentBase: path.join(__dirname, 'demo/dist'),
-		compress: true,
-		port: 9000
-	},
+	// optimization: {
+	// 	splitChunks: {
+	// 		chunks: 'all'
+	// 	}
+	// },
+	// optimization: {
+	// 	runtimeChunk: true,
+  //   splitChunks: {
+	// 		chunks: 'all',
+	// 		cacheGroups: {
+  //       vendor: {
+  //         test: /[\\/]node_modules[\\/](d3|webcola|socket.io-client)[\\/]/,
+  //         name: 'vendor',
+  //         chunks: 'all',
+  //       }
+  //     }
+	// 		// cacheGroups: {
+  //     //   commons: {
+  //     //     test: /[\\/]node_modules[\\/]/,
+  //     //     name: 'vendors',
+  //     //     chunks: 'all'
+  //     //   }
+  //     // }
+	// 	}
+  // },
 	module: {
 		rules: [
 			{
@@ -73,7 +93,7 @@ module.exports = {
 			templateParameters: {
 				title: 'Newton.js Demo',
 			},
-			chunks: ['demo'],
+			chunks: ['demo', 'newton'],
 			template: 'demo/index.hbs',
 			filename: 'index.html'
 		})

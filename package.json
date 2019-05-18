@@ -10,9 +10,9 @@
     "url": "https://github.com/julie-ng/newtonjs-graph"
   },
   "scripts": {
-    "build": "webpack --config webpack.lib.js",
+    "build": "webpack --config webpack.lib.js && rm ./build/css.min.js",
     "demo:build": "webpack --config webpack.demo.js",
-    "demo:dev": "webpack-dev-server --config webpack.demo.js --open",
+    "demo:dev": "webpack-dev-server --config webpack.demo.dev.js --open",
     "docs": "jsdoc --readme ./README.md -c jsdoc.json",
     "docs:watch": "nodemon -w newton --exec 'npm run docs'",
     "docs:server": "live-server docs",

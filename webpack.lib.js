@@ -17,6 +17,20 @@ module.exports = {
 		libraryTarget: 'umd',
 		umdNamedDefine: true,
 	},
+//   optimization: {
+// 		// runtimeChunk: 'single',
+// 		splitChunks: {
+// 			cacheGroups: {
+// 				vendors: {
+// 					test: /[\\/]node_modules[\\/]/,
+// 					// test: /[\\/]node_modules[\\/](d3|webcola)[\\/]/,
+// 					name: 'vendors',
+// 					enforce: true,
+// 					chunks: 'all'
+// 				}
+// 			}
+// 		}
+// },
 	devtool: 'none',
 	module: {
 		rules: [

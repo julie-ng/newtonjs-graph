@@ -6,6 +6,8 @@ const data = require('./data')
 
 // ----------- SETUP AND BIND ----------- //
 
+console.log('hello world')
+
 const network = new Network(data.nodes, data.links)
 const graph = new Graph({
 	width: window.innerWidth,
