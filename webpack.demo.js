@@ -21,24 +21,24 @@ module.exports = {
 	// },
 	// optimization: {
 	// 	runtimeChunk: true,
-  //   splitChunks: {
+	//   splitChunks: {
 	// 		chunks: 'all',
 	// 		cacheGroups: {
-  //       vendor: {
-  //         test: /[\\/]node_modules[\\/](d3|webcola|socket.io-client)[\\/]/,
-  //         name: 'vendor',
-  //         chunks: 'all',
-  //       }
-  //     }
+	//       vendor: {
+	//         test: /[\\/]node_modules[\\/](d3|webcola|socket.io-client)[\\/]/,
+	//         name: 'vendor',
+	//         chunks: 'all',
+	//       }
+	//     }
 	// 		// cacheGroups: {
-  //     //   commons: {
-  //     //     test: /[\\/]node_modules[\\/]/,
-  //     //     name: 'vendors',
-  //     //     chunks: 'all'
-  //     //   }
-  //     // }
+	//     //   commons: {
+	//     //     test: /[\\/]node_modules[\\/]/,
+	//     //     name: 'vendors',
+	//     //     chunks: 'all'
+	//     //   }
+	//     // }
 	// 	}
-  // },
+	// },
 	module: {
 		rules: [
 			{
