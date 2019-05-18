@@ -48,6 +48,11 @@ class Graph extends EventEmitter {
 		this.renders = 0
 	}
 
+	/**
+	 * Initializes graph and performs first render
+	 *
+	 * @returns this
+	 */
 	init () {
 		this._initLayout()
 		this._bindGraphToViews()
@@ -171,6 +176,7 @@ class Graph extends EventEmitter {
 
 	/**
 	 * Used by View position()
+	 * @private
 	 */
 	_bindGraphToViews () {
 		this.links.bindGraph(this)

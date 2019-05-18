@@ -116,6 +116,8 @@ class Network extends EventEmitter {
 	// =========== Nodes ===========
 
 	/**
+	 * Find node by id
+	 *
 	 * @param {String} id
 	 * @return {Object} node data object
 	 */
@@ -126,6 +128,7 @@ class Network extends EventEmitter {
 
 	/**
 	 * Finds index of node either by it's unique identifier, e.g. `id` or the node data object itself.
+	 *
 	 * @param {String|Object} node - id or data object
 	 * @return {Integer} index of matched node or `-1` if not found
 	 */
@@ -136,6 +139,13 @@ class Network extends EventEmitter {
 		return this._nodes.findIndex((n) => n[this._uid] === id)
 	}
 
+	/**
+	 * Updates data on a specific node
+	 *
+	 * @param {String|Object} node - either `id` of node, or the object itself to update
+	 * @param {Object} attrs - node data attributes to change. This is merged onto existing attributes, so you only need to pass in updated values.
+	 * @return {Object} node
+	 */
 	updateNode (n, attrs) {
 		let node = (typeof n === 'string')
 			? this.findNodeById(n)
@@ -146,8 +156,9 @@ class Network extends EventEmitter {
 	}
 
 	/**
-	 * Removes node and its links from the graph
-	 * @param {Object} node - node data object
+	 * Removes node _and_ its links from the graph.
+	 *
+	 * @param {Object} node - node object
 	 */
 	removeNode (node) {
 		const i = this.findNodeIndex(node)
@@ -156,8 +167,8 @@ class Network extends EventEmitter {
 	}
 
 	/**
-	 * Removes node by id
-	 * @param {String} id
+	 * Removes node by its `id`.
+	 * @param {String} id - id of node to remove
 	 */
 	removeNodeById (id) {
 		let node = this.findNodeById(id)
@@ -269,32 +280,72 @@ class Network extends EventEmitter {
 		})
 	}
 
-	// s & t are nodes
-	areNeighbors (s, t) {
-		return this.isTargetNeighbor(s, t)
-			|| this.isSourceNeighbor(s, t)
-			|| this.isEqualNode(s, t)
+	/**
+	 * Examines the a relationship between the two given nodes. Will return `true` if there is a a source<->target relationship or if the nodes are equal, i.e. the same.
+	 *
+	 * @param {Node} a - first node
+	 * @param {Node} b - second node
+	 * @return {Boolean}
+	 */
+	areNeighbors (a, b) {
+		return this.isTargetNeighbor(a, b)
+			|| this.isSourceNeighbor(a, b)
+			|| this.isEqualNode(a, b)
 	}
 
-	isSourceNeighbor (s, t) {
-		return this._neighbors[`${s.id},${t.id}`] !== undefined
+	/**
+	 * Examines if there is a `source -> target` relationship between two specific nodes.
+	 *
+	 * @param {Node} a - first node
+	 * @param {Node} b - second node
+	 * @return {Boolean}
+	 */
+	isSourceNeighbor (a, b) {
+		return this._neighbors[`${a.id},${b.id}`] !== undefined
 	}
 
-	isDeepSourceNeighbor (s, t) {
-		let sources = this.findDeepSources(t)
+	/**
+	 * Examines if node a is includeed in node b's source tree, i.e. if a `source -> ... -> target` relationship between the two nodes.
+	 *
+	 * @param {Node} a - potential source node
+	 * @param {Node} b - potential target node
+	 * @return {Boolean}
+	 */
+	isDeepSourceNeighbor (a, b) {
+		let sources = this.findDeepSources(b)
 		return sources.length > 0
-			? sources.includes(s)
+			? sources.includes(a)
 			: false
 	}
 
-	isTargetNeighbor (s, t) {
-		return this._neighbors[`${t.id},${s.id}`]
+	/**
+	 * Examines if there is a `b -> a` relationship between two specific nodes.
+	 *
+	 * @param {Node} a - potential `target` node
+	 * @param {Node} b - potential `source` node
+	 * @return {Boolean}
+	 */
+	isTargetNeighbor (a, b) {
+		return this._neighbors[`${b.id},${a.id}`]
 	}
 
-	isEqualNode (s, t) {
-		return s.id === t.id
+	/**
+	 * Returns true if the nodes examined are equal, i.e. the same node
+	 *
+	 * @param {String} a - id of node A
+	 * @param {String} b - id of node B
+	 * @return {Boolean}
+	 */
+	isEqualNode (a, b) {
+		return a.id === b.id
 	}
 
+	/**
+	 * Returns Array of nodes in the source tree of a specific node.
+	 *
+	 * @param {Node} n - node to get source tree
+	 * @return {Array}
+	 */
 	findSources (n) {
 		let sources = []
 		this._links.forEach((i) => {
@@ -305,6 +356,14 @@ class Network extends EventEmitter {
 		return sources
 	}
 
+	/**
+	 * Recursively finds all deep sources of a node, i.e. does not include direct source.
+	 *
+	 * @param {Node} n - node to get source tree
+	 * @param {Array} [sources=[]]
+	 * @param {Array} [level=0]
+	 * @return {Array}
+	 */
 	findDeepSources (n, sources = [], level = 0) {
 		// console.log(`-- findDeepSources(${n.label}) --`)
 		this._links.forEach((l) => {
@@ -323,6 +382,13 @@ class Network extends EventEmitter {
 		return uniques
 	}
 
+	/**
+	 * Returns `true` if link can be found in the node's source tree.
+	 *
+	 * @param {Link} link
+	 * @param {Node} n
+	 * @return {Boolean}
+	 */
 	isDeepSourceLink (link, n) {
 		let sourceIsASource = this.isDeepSourceNeighbor(link.source, n)
 		let targetIsASource = this.isDeepSourceNeighbor(link.target, n) || this.isSourceNeighbor(link.target, n)
@@ -331,6 +397,20 @@ class Network extends EventEmitter {
 		return isDeepLink
 	}
 
+	/**
+	 * Returns relationship type between node and its neighbor. Will return one of the following:
+	 * | Key | Relationship type |
+	 * |:--|:--|
+	 * | `'is-source'` | node -> neighbor |
+	 * | `'is-deep-source'` | node -> … -> neighbor |
+	 * | `'is-target'` | neighbor -> node |
+	 * | `'is-same-node'` | node === neighbor |
+	 * | `'has-no-relationship'` | There is no relationship between the two nodes |
+	 *
+	 * @param {Node} node
+	 * @param {Node} neighbor
+	 * @return {String}
+	 */
 	getRelationship (node, neighbor) {
 		let rel = ''
 		if (this.isSourceNeighbor(node, neighbor)) {
