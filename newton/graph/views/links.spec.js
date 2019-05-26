@@ -207,7 +207,6 @@ describe ('Links', () => {
 		})
 
 		describe ('svg arrowheads', () => {
-			const nodeStub = linksArray[0]
 			let attrSpy
 
 			beforeEach (() => {
@@ -218,39 +217,17 @@ describe ('Links', () => {
 				attrSpy.mockRestore()
 			})
 
-			describe ('setRelationships()', () => {
-				xit ('hides nodes without relations', () => {
-					let spy = jest.spyOn(links, 'hideUnrelated')
-					links.setRelationships()
-					expect(spy).toHaveBeenCalledTimes(1)
+			describe ('showArrows()', () => {
+				it ('sets the `marker-end` attribute', () => {
+					links.showArrows('0')
+					expect(attrSpy).toHaveBeenCalledTimes(1)
+					expect(attrSpy.mock.calls[0][0]).toEqual('marker-end')
 				})
 
-				xdescribe ('option: markers', () => {
-					let spy
-
-					beforeEach(() => {
-						spy = jest.spyOn(links, 'showArrows')
-					})
-
-					afterEach (() => {
-						spy.mockRestore()
-					})
-
-					it ('defaults to true', () => {
-						let emptyOpts = {}
-						links.setRelationships(nodeStub, emptyOpts)
-						expect(spy.mock.calls[0][1].markers).toBe(true)
-					})
-
-					it ('delegates to showArrows() when true', () => {
-						links.setRelationships(nodeStub, { markers: true })
-						expect(spy).toHaveBeenCalledTimes(1)
-					})
-
-					it ('ignores showArrows() when false', () => {
-						links.setRelationships(nodeStub, { markers: false })
-						expect(spy).not.toHaveBeenCalled()
-					})
+				it ('calls `_getMarkerEnd()` helper and passes along options', () => {
+					links.showArrows('0')
+					let code = attrSpy.mock.calls[0][1].toString()
+					expect(code.includes('this._getMarkerEnd(i, n, opts)')).toBe(true)
 				})
 			})
 
@@ -319,8 +296,11 @@ describe ('Links', () => {
 					const calls = attrSpy.mock.calls
 					expect(attrSpy).toHaveBeenCalledTimes(3)
 					expect(calls[0][0]).toEqual('data-rel')
+					expect(calls[0][1]).toEqual('')
 					expect(calls[1][0]).toEqual('data-hidden')
+					expect(calls[1][1]).toEqual('')
 					expect(calls[2][0]).toEqual('marker-end')
+					expect(calls[2][1]).toEqual('')
 				})
 			})
 		})
