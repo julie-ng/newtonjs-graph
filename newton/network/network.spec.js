@@ -10,8 +10,6 @@ describe ('Network', function () {
 	let linksByReference
 	let dataObjMock
 
-
-
 	function resetMockData () {
 		nodesMockData = [
 			{ id: 'foo', name: 'bar' },
@@ -136,59 +134,6 @@ describe ('Network', function () {
 				expect(network.get('links')).toEqual([])
 			})
 		})
-
-		describe ('Sources', () => {
-			const a = { id: 'a' }
-			const b = { id: 'b' }
-			const c = { id: 'c' }
-			const d = { id: 'd' }
-			const e = { id: 'e' }
-			const f = { id: 'f' }
-			const nodes = [a, b, c, d, e, f]
-			const directNeighbors = [e, d]
-			const deepNeighbors = [a, b]
-
-			//        c
-			//       /
-			// a - b - d - f
-			//	    \- e -/
-
-			let links, network
-
-			beforeEach (() => {
-				// must use reference keys
-				links = [
-					{ source: 'a', target: 'b' },
-					{ source: 'b', target: 'c' },
-					{ source: 'b', target: 'd' },
-					{ source: 'b', target: 'e' },
-					{ source: 'd', target: 'f' },
-					{ source: 'e', target: 'f' }
-				]
-				network = new Network(nodes, links)
-			})
-
-			it ('find source nodes', () => {
-				expect(network.findSources(b)).toEqual([a])
-				expect(network.findSources(f)).toEqual([d, e])
-			})
-
-			it ('finds ancestor source nodes', () => {
-				let ancestors = network.findDeepSources(f)
-				expect(ancestors.includes(directNeighbors[0])).toBe(false)
-				expect(ancestors.includes(directNeighbors[1])).toBe(false)
-				expect(ancestors.includes(deepNeighbors[0])).toBe(true)
-				expect(ancestors.includes(deepNeighbors[1])).toBe(true)
-			})
-
-			it ('can compare for deep ancestors', () => {
-				expect(network.isDeepSourceNeighbor(d, f)).toBe(false)
-				expect(network.isDeepSourceNeighbor(e, f)).toBe(false)
-				expect(network.isDeepSourceNeighbor(a, f)).toBe(true)
-				expect(network.isDeepSourceNeighbor(b, f)).toBe(true)
-				expect(network.isDeepSourceNeighbor(c, f)).toBe(false)
-			})
-		})
 	})
 
 	describe ('Links', () => {
@@ -220,6 +165,108 @@ describe ('Network', function () {
 			]
 			let n = new Network(nodes, links)
 			expect(n._links).toEqual([{ source: a, target: b }])
+		})
+	})
+
+	describe ('Relationships', () => {
+		const a = { id: 'a' }
+		const b = { id: 'b' }
+		const c = { id: 'c' }
+		const d = { id: 'd' }
+		const e = { id: 'e' }
+		const f = { id: 'f' }
+		const nodes = [a, b, c, d, e, f]
+		const directNeighbors = [e, d]
+		const deepNeighbors = [a, b]
+
+		//        c
+		//       /
+		// a - b - d - f
+		//	    \- e -/
+
+		let links, network
+
+		beforeEach (() => {
+			// must use reference keys
+			links = [
+				{ source: 'a', target: 'b' },
+				{ source: 'b', target: 'c' },
+				{ source: 'b', target: 'd' },
+				{ source: 'b', target: 'e' },
+				{ source: 'd', target: 'f' },
+				{ source: 'e', target: 'f' }
+			]
+			network = new Network(nodes, links)
+		})
+
+		describe ('findSources()', () => {
+			it ('finds direct source neighbors', () => {
+				expect(network.findSources(b)).toEqual([a])
+				expect(network.findSources(f)).toEqual([d, e])
+			})
+		})
+
+		describe ('findDeepSources()', () =>{
+			it ('finds ancestor source nodes', () => {
+				let ancestors = network.findDeepSources(f)
+				expect(ancestors.includes(directNeighbors[0])).toBe(false)
+				expect(ancestors.includes(directNeighbors[1])).toBe(false)
+				expect(ancestors.includes(deepNeighbors[0])).toBe(true)
+				expect(ancestors.includes(deepNeighbors[1])).toBe(true)
+			})
+		})
+
+		describe ('isDeepSourceNeighbor()', () => {
+			it ('can compare for deep ancestors', () => {
+				expect(network.isDeepSourceNeighbor(d, f)).toBe(false)
+				expect(network.isDeepSourceNeighbor(e, f)).toBe(false)
+				expect(network.isDeepSourceNeighbor(a, f)).toBe(true)
+				expect(network.isDeepSourceNeighbor(b, f)).toBe(true)
+				expect(network.isDeepSourceNeighbor(c, f)).toBe(false)
+			})
+		})
+
+		describe ('isDeepSourceLink()', () => {
+			const link = { source: a, target: b }
+			it ('returns false if node itself in link', () => {
+				expect(network.isDeepSourceLink(link, b)).toBe(false)
+			})
+
+			it (`returns true if link is in node's source tree`, () => {
+				// simple tree
+				expect(network.isDeepSourceLink(link, c)).toBe(true)
+				expect(network.isDeepSourceLink(link, f)).toBe(true)
+			})
+
+			describe (`when BOTH source and target are in node's source tree`, () => {
+				it ('returns true', () => {
+					// indirect tree
+					expect(network.isDeepSourceLink({ source: b, target: e }, f)).toBe(true)
+					expect(network.isDeepSourceLink({ source: b, target: c }, f)).toBe(false) // `c` not in tree
+				})
+			})
+		})
+
+		describe ('getRelationship()', () => {
+			it ('identifies sources', () => {
+				expect(network.getRelationship(a, b)).toEqual('is-source')
+			})
+
+			it ('identifies deep sources', () => {
+				expect(network.getRelationship(a, c)).toEqual('is-deep-source')
+			})
+
+			it ('identifies target', () => {
+				expect(network.getRelationship(b, a)).toEqual('is-target')
+			})
+
+			it ('identifies same node', () => {
+				expect(network.getRelationship(c, c)).toEqual('is-same-node')
+			})
+
+			it ('identifies has no relationship', () => {
+				expect(network.getRelationship(c, d)).toEqual('has-no-relationship')
+			})
 		})
 	})
 
