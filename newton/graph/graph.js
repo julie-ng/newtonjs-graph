@@ -21,13 +21,16 @@ const defaults = {
 class Graph extends EventEmitter {
 
 	/**
-	 * Also initializes graph
+	 * Constructor
 	 *
 	 * @param {Object} [opts] - options
 	 * @param {Number} [opts.margin] - graph margins
 	 * @param {Number} [opts.height] - height of network graph
 	 * @param {Number} [opts.width] - width of network graph
+	 * @param {Network} opts.network
 	 * @param {String} [opts.engine = 'cola'] - force layout engine. Can be `d3` or `cola`.
+	 * @param {String} [opts.flow] - display links in horizontal flow?
+	 * @param {Boolean} [opts.draggable] - make nodes draggable?
 	 */
 	constructor (opts = {}) {
 		super()
@@ -49,7 +52,7 @@ class Graph extends EventEmitter {
 	}
 
 	/**
-	 * Initializes graph and performs first render
+	 * Initializes graph, binds layout and network, and performs first render
 	 *
 	 * @returns this
 	 */
@@ -186,6 +189,11 @@ class Graph extends EventEmitter {
 
 	// ------- RENDERS --------
 
+	/**
+	 * Renders nodes, links and labels for a graph. If nodes have failures, they will be highlighted in graph.
+	 *
+	 * @param {Object} [data] - defaults to network
+	 */
 	render (data) {
 		this.renders++
 		// console.log(`[graph] renders count: ${this.renders}`)
@@ -207,6 +215,12 @@ class Graph extends EventEmitter {
 		}
 	}
 
+	/**
+	 * Highlights dependencies, of nodes
+	 *
+	 * @param {Node} node - node, whose dependencies are to be highlighted
+	 * @param {Boolean} opts.arrows - show directional arrows of source-target relationship?
+	 */
 	highlightDependencies (node, opts = {}) {
 		// console.log(`[graph] highlightDependencies(${node.label})`)
 		this.nodes.setRelationships(node)
@@ -217,6 +231,9 @@ class Graph extends EventEmitter {
 		}
 	}
 
+	/**
+	 * Resets styles, highlights, etc.
+	 */
 	resetStyles () {
 		// console.log('[graph] resetStyles()')
 		this.nodes.resetStyles()
