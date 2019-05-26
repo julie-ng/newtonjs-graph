@@ -94,7 +94,7 @@ describe ('Network', function () {
 		})
 	})
 
-	xdescribe ('Nodes', () => {
+	describe ('Nodes', () => {
 		it ('has a `findNodeById` method', () => {
 			expect(network.findNodeById(nodesMockData[0].id)).toEqual(nodesMockData[0])
 		})
@@ -144,23 +144,27 @@ describe ('Network', function () {
 			const d = { id: 'd' }
 			const e = { id: 'e' }
 			const f = { id: 'f' }
-			let nodes = [a, b, c, d, e, f]
+			const nodes = [a, b, c, d, e, f]
+			const directNeighbors = [e, d]
+			const deepNeighbors = [a, b]
 
 			//        c
 			//       /
 			// a - b - d - f
 			//	    \- e -/
-			let links = [
-				{ source: 'a', target: 'b' },
-				{ source: 'b', target: 'c' },
-				{ source: 'b', target: 'd' },
-				{ source: 'b', target: 'e' },
-				{ source: 'd', target: 'f' },
-				{ source: 'e', target: 'f' }
-			]
 
-			let network
+			let links, network
+
 			beforeEach (() => {
+				// must use reference keys
+				links = [
+					{ source: 'a', target: 'b' },
+					{ source: 'b', target: 'c' },
+					{ source: 'b', target: 'd' },
+					{ source: 'b', target: 'e' },
+					{ source: 'd', target: 'f' },
+					{ source: 'e', target: 'f' }
+				]
 				network = new Network(nodes, links)
 			})
 
@@ -171,12 +175,10 @@ describe ('Network', function () {
 
 			it ('finds ancestor source nodes', () => {
 				let ancestors = network.findDeepSources(f)
-				let directNeighbors = [e, d]
-				let deepNeighbors = [a, b]
-
 				expect(ancestors.includes(directNeighbors[0])).toBe(false)
 				expect(ancestors.includes(directNeighbors[1])).toBe(false)
-				expect(nodesSetMatches(ancestors, deepNeighbors)).toBe(true)
+				expect(ancestors.includes(deepNeighbors[0])).toBe(true)
+				expect(ancestors.includes(deepNeighbors[1])).toBe(true)
 			})
 
 			it ('can compare for deep ancestors', () => {
@@ -245,13 +247,3 @@ describe ('Network', function () {
 		})
 	})
 })
-
-function nodesSetMatches (setA, setB) {
-	// console.log('setA', setA)
-	// console.log('setB', setB)
-	if (setA.length !== setB.length) return false
-	for (let a of setA) {
-		if (!setB.includes(a)) return false
-	}
-	return true
-}
