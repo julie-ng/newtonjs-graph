@@ -54,7 +54,7 @@ describe ('View', () => {
 				view.setRelationships('node')
 				const call = spy.mock.calls[0]
 				expect(call[0]).toEqual('data-rel')
-				expect(call[1].toString().includes('this.graph.getRelationship(i, node)')).toBe(true)
+				expect(call[1].toString().includes('this.graph.network.getRelationship(i, node)')).toBe(true)
 			})
 		})
 
@@ -62,7 +62,7 @@ describe ('View', () => {
 			it ('sets `data-hidden` attribute', () => {
 				view.hideUnrelated('node')
 				const call = spy.mock.calls[0]
-				const checkUnrelated = `this.graph.getRelationship(i, node) === 'has-no-relationship'`
+				const checkUnrelated = `this.graph.network.getRelationship(i, node) === 'has-no-relationship'`
 				expect(call[0]).toEqual('data-hidden')
 				expect(call[1].toString().includes(checkUnrelated)).toBe(true)
 			})

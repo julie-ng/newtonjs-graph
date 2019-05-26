@@ -58,12 +58,12 @@ class View extends EventEmitter {
 	}
 
 	setRelationships (node) {
-		this.selection.attr('data-rel', (i) => this.graph.getRelationship(i, node))
+		this.selection.attr('data-rel', (i) => this.graph.network.getRelationship(i, node))
 	}
 
 	hideUnrelated (node) {
 		this.selection.attr('data-hidden', (i) => {
-			(this.graph.getRelationship(i, node) === 'has-no-relationship')
+			(this.graph.network.getRelationship(i, node) === 'has-no-relationship')
 				? '1'
 				: ''
 		})

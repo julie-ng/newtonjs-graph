@@ -89,14 +89,6 @@ class Graph extends EventEmitter {
 		})
 	}
 
-	isDeepSourceLink (s, t) {
-		return this.network.isDeepSourceLink(s, t)
-	}
-
-	getRelationship (s, t) {
-		return this.network.getRelationship(s, t)
-	}
-
 	// ------- FORCE ENGINES ------- //
 
 	_initLayout () {

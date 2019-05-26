@@ -102,7 +102,7 @@ class Links extends View {
 			rel = 'is-source'
 		} else if (link.target === n) {
 			rel = 'is-target'
-		} else if (this.graph.isDeepSourceLink(link, n)) {
+		} else if (this.graph.network.isDeepSourceLink(link, n)) {
 			rel = 'is-deep-source'
 		} else {
 			rel = 'has-no-relationship'

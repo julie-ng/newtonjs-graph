@@ -12,20 +12,33 @@ const sharedDom = new JSDOM(markup)
 
 describe ('Links', () => {
 	let links
+	const deepSourceMock = jest.fn()
+	const relationMock = jest.fn()
+	const graphStub = {
+		network: {
+			isDeepSourceLink: deepSourceMock,
+			getRelationship: relationMock
+		},
+		on: () => {}
+	}
 
 	beforeEach(() => {
 		links = new Links({
-			// adapter: '',
 			dom: sharedDom.window.document, // different DOMs for parallel tests
 			container: 'svg'
 		})
 
 		links.selection = d3.select('svg').selectAll('line')
+		links.bindGraph(graphStub)
 
 		// prevent memory link in tests
 		links.setMaxListeners(1)
 	})
 
+	afterEach (() => {
+		deepSourceMock.mockRestore()
+		relationMock.mockRestore()
+	})
 
 	describe ('render()', () => {
 		describe ('uses general update pattern', () => {
@@ -249,20 +262,6 @@ describe ('Links', () => {
 					'url(#has-no-relationship)'
 				]
 
-				const deepSourceMock = jest.fn()
-				const graphStub = {
-					isDeepSourceLink: deepSourceMock,
-					on: () => {}
-				}
-
-				beforeEach(() => {
-					links.bindGraph(graphStub)
-				})
-
-				afterEach(() => {
-					deepSourceMock.mockRestore()
-				})
-
 				it ('gets relationship to node', () => {
 					let spy = jest.spyOn(links, '_getRelationship')
 					let l = linksArray[0]
@@ -331,20 +330,6 @@ describe ('Links', () => {
 	describe ('helpers', () => {
 
 		describe ('_getRelationship()', () => {
-			const deepSourceMock = jest.fn()
-			const graphStub = {
-				isDeepSourceLink: deepSourceMock,
-				on: () => {}
-			}
-
-			beforeEach(() => {
-				links.bindGraph(graphStub)
-			})
-
-			afterEach(() => {
-				deepSourceMock.mockRestore()
-			})
-
 			const link = { source: 'a', target: 'b' }
 
 			it ('can identify sources', () => {
