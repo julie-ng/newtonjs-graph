@@ -1,1 +1,26 @@
-$code-font: Consolas, Monaco, 'Andale Mono', monospace;
+:root {
+  // Colors
+  --primary-color: #0664a8;
+  --secondary-color: #107e7d; // #ca2d00;
+  --link-color: var(--primary-color);
+  --link-hover-color: var(--primary-color);
+  --border-color: #eee;
+  --code-color: #666;
+  --code-attention-color: #ca2d00;
+  --text-color: #4a4a4a;
+  --light-font-color: #999;
+  --supporting-color: #7097b5;
+  --heading-background: #f7f7f7;
+  --code-bg-color: #f8f8f8;
+
+  // Layout
+  --max-content-width: 900px;
+  --nav-width: 320px;
+  --padding-unit: 30px;
+
+  // Fonts
+  --base-font-size: 16px;
+  --base-line-height: 1.7;
+  --body-font: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --code-font: Consolas, Monaco, 'Andale Mono', monospace;
+}

@@ -1,43 +1,13 @@
-@import "vars";
+// .method {
+// 	position: relative;
+// }
 
 article {
   &.event,
   &.method {
-    padding: 2em 0 1em;
+    padding: 1em 0 1em;
     margin: 1em 0;
-    border-top: 1px solid #ddd;
-  }
-}
-
-.event-name,
-.method-name {
-  font-size: 1.4rem;
-  font-family: $code-font;
-  font-weight: 500;
-
-	// parentheses and params
-  // [class*="signature"] {
-  //   color: #666;
-  // }
-
-	// set in publish.js in convoluted manner...
-	// still needed?
-  // .method-type-signature {
-  //   display: none;
-  // }
-
-  .return-type-signature {
-    color: #aaa;
-  }
-
-  // e.g. "opt"
-  .signature-attributes {
-    display: inline-block;
-    margin-left: 0.25em;
-    font-size: 60%;
-    color: #999;
-    font-style: italic;
-    font-weight: lighter;
+    border-top: 1px solid var(--border-color);
   }
 }
 
@@ -54,8 +24,20 @@ article {
   }
 }
 
-.method-params-heading {
+.method-heading {
   margin: 1em 0;
+}
+
+.method-params {
+  li {
+    margin-bottom: 1em;
+  }
+}
+
+.method-source {
+  a:link, a:visited {
+    color: var(--light-font-color);
+  }
 }
 
 .event-description,

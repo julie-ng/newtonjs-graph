@@ -1,0 +1,46 @@
+body {
+  font-family: var(--body-font);
+  font-size: var(--base-font-size);
+  line-height: var(--base-line-height);
+  color: var(--text-color);
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: var(--link-color);
+
+  &:hover, &:active {
+    text-decoration: underline;
+    color: var(--link-hover-color);
+  }
+}
+
+img {
+  max-width: 100%;
+
+  & + p {
+    margin-top: 1em;
+  }
+}
+
+ul {
+  margin: 1em 0;
+}
+
+tt, code, kbd, samp {
+  font-family: var(--code-font);
+}
+
+code {
+	display: inline-block;
+  background-color: var(--code-bg-color);
+	padding: 2px 6px 0px;
+	border-radius: 3px;
+	color: var(--code-attention-color);
+}

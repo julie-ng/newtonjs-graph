@@ -4,35 +4,35 @@
     <meta charset="utf-8">
     <title>Newton Graph Library: graph/graph.js</title>
     <link type="text/css" rel="stylesheet" href="styles/styles.css">
-    <style>
-      
-      .layout-header {
-        background: #102027;
-        color: #ffffff;
-        
-      }
-      
-    </style>
+    
 </head>
 <body>
 
 <header class="layout-header">
+  
+    <a href="./">
+      <img
+        src="images/newton-logo.png"
+        alt="Newton Graph Library"
+      >
+    </a>
   
   <h1>
     <a href="./">
       Newton Graph Library
     </a>
   </h1>
+  <nav class="layout-nav">
+    <ul><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Graph.html">Graph</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Graph.html#highlightDependencies">highlightDependencies</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Graph.html#init">init</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Graph.html#render">render</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Graph.html#resetStyles">resetStyles</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Graph.html#event:node:click">node:click</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Graph.html#event:node:mouseout">node:mouseout</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Graph.html#event:node:mouseover">node:mouseover</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Labels.html">Labels</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#bindGraph">bindGraph</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#hideUnrelated">hideUnrelated</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#position">position</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#render">render</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#resetStyles">resetStyles</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#setRelationships">setRelationships</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Labels.html#event:enter">enter</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Labels.html#event:exit">exit</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Labels.html#event:update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Links.html">Links</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#bindGraph">bindGraph</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#hideUnrelated">hideUnrelated</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#position">position</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#render">render</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#resetStyles">resetStyles</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#setRelationships">setRelationships</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#showAll">showAll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#showArrows">showArrows</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Links.html#event:enter">enter</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Links.html#event:exit">exit</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Links.html#event:update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Network.html">Network</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#areNeighbors">areNeighbors</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findDeepSources">findDeepSources</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findLinks">findLinks</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findNodeById">findNodeById</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findNodeIndex">findNodeIndex</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findSources">findSources</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#get">get</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#getRelationship">getRelationship</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#isDeepSourceLink">isDeepSourceLink</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#isDeepSourceNeighbor">isDeepSourceNeighbor</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#isEqualNode">isEqualNode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#isSourceNeighbor">isSourceNeighbor</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#isTargetNeighbor">isTargetNeighbor</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeLinks">removeLinks</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeNode">removeNode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeNodeById">removeNodeById</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#updateData">updateData</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#updateNode">updateNode</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Network.html#event:update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Nodes.html">Nodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#bindGraph">bindGraph</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#hideUnrelated">hideUnrelated</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#onClick">onClick</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#onMouseout">onMouseout</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#onMouseover">onMouseover</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#position">position</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#render">render</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#resetStyles">resetStyles</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#setRelationships">setRelationships</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:click">click</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:enter">enter</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:exit">exit</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:mouseout">mouseout</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:mouseover">mouseover</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="View.html">View</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#bindGraph">bindGraph</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#hideUnrelated">hideUnrelated</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#position">position</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#render">render</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#resetStyles">resetStyles</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#setRelationships">setRelationships</a></span></li></ul><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#d3">d3</a></span></li><li class="nav-item"><span class="nav-item-type type-typedef">T</span><span class="nav-item-name"><a href="global.html#Link">Link</a></span></li><li class="nav-item"><span class="nav-item-type type-typedef">T</span><span class="nav-item-name"><a href="global.html#Node">Node</a></span></li>
+  </nav>
 </header>
 
-<nav class="layout-nav">
-  <ul><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="ColaGraph.html">ColaGraph</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ColaGraph.html#bind">bind<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Graph.html">Graph</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Graph.html#bind">bind<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Graph.html#init">init<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Graph.html#initDefaultLayout">initDefaultLayout<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Graph.html#event:tick">tick</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Graph.html#event:update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Labels.html">Labels</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#bindGraph">bindGraph<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#position">position<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#render">render<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Links.html">Links</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#bindGraph">bindGraph<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#position">position<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#render">render<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Network.html">Network</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findLinks">findLinks<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findNodeById">findNodeById<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findNodeIndex">findNodeIndex<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#get">get<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeLinks">removeLinks<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeNode">removeNode<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeNodeById">removeNodeById<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Nodes.html">Nodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#animate">animate<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#bindGraph">bindGraph<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#position">position<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#render">render<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:enter">enter</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:exit">exit</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="View.html">View</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#bindGraph">bindGraph<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#position">position<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#render">render<span class="method-parens">()</span></a></span></li></ul><ul><li class="nav-heading">Modules</li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-NodeUI.html">NodeUI</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Transitions.html">Transitions</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Transitions.html#~fadeOut">fadeOut<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="Transitions-module_FadeDown.html">FadeDown</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Transitions-module_FadeDown.html#~circle">circle<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Transitions-module_FadeDown.html#~link">link<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Transitions-module_FadeDown.html#~text">text<span class="method-parens">()</span></a></span></li></ul><ul><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="Transitions.html">Transitions</a></span></li></ul>
-</nav>
 
-<main class="layout-content layout-content--source">
-  <p class="page-kind">source</p>
-  <h1 class="page-title">graph/graph.js</h1>
-  
+<main class="layout-main  layout-content--source">
+  <div class="container">
+    <p class="page-kind">source</p>
+    <h1 class="page-title">graph/graph.js</h1>
+    
 
 
 
@@ -40,14 +40,15 @@
 
 <section>
     <article>
-        <pre id="source" class="source-page line-numbers"><code class="language-js">const EventEmitter = require('events').EventEmitter
+        <pre id="source" class="source-page line-numbers"><code class="language-js">// const d3 = require('./../d3')
 const d3 = require('d3')
+const Cola = require('webcola')
+
+const EventEmitter = require('events').EventEmitter
 
 const Labels = require('./views/labels')
 const Links = require('./views/links')
 const Nodes = require('./views/nodes')
-const _bind = Symbol('bind')
-const _render = Symbol('render')
 
 const defaults = {
 	margin: 40,
@@ -56,136 +57,287 @@ const defaults = {
 }
 
 /**
- * Network Graph
- *
- * @fires Graph#tick
- * @fires Graph#update
- *
- * @property {Integer} margin - Layout Margin
- * @property {Integer} width - Graph Width
- * @property {Integer} height - Graph Height
- * @property {*} layout - layout adapter, e.g. cola.js or simulation engine, e.g. d3-force
- * @property {d3} svg - d3.js container selection that holds our svg elements, incl. labels, links and nodes.
- * @property {Labels} labels - Labels for network nodes to be drawn
- * @property {Links} links - Network links to be drawn
- * @property {Nodes} nodes - Network nodes to be drawn
+ * The `Graph` class holds everything together: {@link Nodes}, {@link Links}, {@link Labels} and the {@link Network}.
  */
 class Graph extends EventEmitter {
 
 	/**
-	 * Also initializes graph
+	 * Note that the `opts.network` attribute is required.
 	 *
-	 * @param {Object} [opts] - options
-	 * @param {Object} [opts.margin] - graph margins
-	 * @param {Object} [opts.height] - height of network graph
-	 * @param {Object} [opts.width] - width of network graph
+	 * @param {Object} opts={}
+	 * @param {Number} [opts.margin=40] - Graph margins in pixels.
+	 * @param {Number} [opts.height=550] - Height of network graph in pixels.
+	 * @param {Number} [opts.width=800] - Width of network graph in pixels.
+	 * @param {Network} opts.network
+	 * @param {String} [opts.engine = 'cola'] - Force layout engine. Can be `d3` or `cola`.
+	 * @param {String} [opts.flow] - Display links in horizontal flow?
+	 * @param {Boolean} [opts.draggable] - Make nodes draggable?
 	 */
 	constructor (opts = {}) {
 		super()
-
+		// super(opts)
+		// console.log('[graph] constructor options?', opts)
 		this.margin = opts.margin || defaults.margin
 		this.height = opts.height || defaults.height
 		this.width = (opts.width || defaults.width) - this.margin
+		this.engine = opts.engine || 'cola'
 		this.options = opts
-	}
 
-	/**
-	 * Initializes layouts, new views for links, noes, etc.
-	 *
-	 * @return {this}
-	 */
-	init () {
-		this.svg = d3.select('svg')
-			.attr('width', this.width)
-			.attr('height', this.height)
+		this._setNetwork(opts)
 
 		this.labels = new Labels()
 		this.links = new Links()
 		this.nodes = new Nodes()
 
+		this.renders = 0
+	}
+
+	/**
+	 * Initializes `Graph` layout, binds graph to {@link Network}, and performs first render.
+	 *
+	 * @listens Network#event:update
+	 * @listens Links#event:enter
+	 * @listens Links#event:exit
+	 * @listens Nodes#event:update
+	 * @listens Nodes#event:enter
+	 * @listens Nodes#event:exit
+	 * @listens Nodes#event:click
+	 * @listens Nodes#event:mouseover
+	 * @listens Nodes#event:mouseout
+	 * @returns {this}
+	 */
+	init () {
+		this._initLayout()
+		this._bindGraphToViews()
+
+		// must bind layout before network for dragging to work
+		this._bindLayout()
+		this._bindNetwork()
+
+		// first render
+		this.render()
 		return this
 	}
 
-	/**
-	 * Default Layout: d3-force
-	 *
-	 * @param {Object|GraphData} network - Network instance
-	 */
-	initDefaultLayout (network) {
-		this.layout = d3.forceSimulation(network.get('nodes'))
-			.force('link', d3.forceLink(
-				network.get('links'))
-					.id(d => d.id)
-					.distance(100)
-					.strength(0.1)
-			)
-			.force('charge', d3.forceManyBody())
-			.force('center', d3.forceCenter(this.width / 2, this.height / 2))
-	}
+	// ------- NETWORK ------- //
 
-	/**
-	 * Binds graph to network `update` and passes along cola's
-	 * `tick` event.
-	 *
-	 * @param {Object|GraphData} network - network graph data
-	 */
-	bind (network) {
-		if (typeof this.layout === 'undefined') {
-			this.initDefaultLayout(network)
+	_setNetwork (opts) {
+		if (opts.network) {
+			// console.log('[graph] constructor - network set')
+			this.network = opts.network
+		} else {
+			throw `ERROR: graph requires network for data`
 		}
-
-		this[_bind](network)
-		return this
 	}
 
-	/**
-	 * Binds graph to network `update` and passes along cola's
-	 * `tick` event.
-	 *
-	 * @private
-	 * @param {Object|GraphData} network - network graph data
-	 */
-	[_bind] (network) {
-		this.links.bindGraph(this)
-		this.nodes.bindGraph(this)
-		this.labels.bindGraph(this)
-
-		/**
-		 * Tick event used to constrain layout using webcola.
-		 * Graph elements listen to this event to reposition themselves.
-		 *
-		 * @event Graph#tick
-		 */
-		this.layout.on('tick', () => this.emit('tick'))
-
-		/**
-		 * Update event which passes on network data so graph elements,
-		 * nodes and links can update themselves based on latest
-		 * real-time data.
-		 *
-		 * @event Graph#update
-		 * @type {Object}
-		 * @property {Array} nodes
-		 * @property {Array} links
-		 */
-		network.on('update', (data) => this.emit('update', data))
-
-		// First render
-		this[_render]({
-			nodes: network.get('nodes'),
-			links: network.get('links')
+	_bindNetwork () {
+		this.network.on('update', (data) => {
+			this.force
+				.nodes(data.nodes)
+				.links(data.links)
+			this.render()
 		})
 	}
 
+	// ------- FORCE ENGINES ------- //
+
+	_initLayout () {
+		this.svg = d3.select('svg')
+			.attr('width', this.width)
+			.attr('height', this.height)
+
+		this._addArrows([
+			'is-default',
+			'is-source',
+			'is-deep-source',
+			'is-target'
+		])
+
+		this.force = (this.engine === 'cola')
+			? this._colaForce()
+			: this._d3Force()
+	}
+
+	_bindLayout () {
+		// let views re-position themselves on cola `tick`
+		this.force.on('tick', () => this.emit('tick'))
+
+		// recalcuate forces if nodes count changes
+		if (this.engine === 'cola') {
+			this.nodes.on('enter', (s) => this._adjustForce(s))
+			this.nodes.on('exit', (s) => this._adjustForce(s))
+			this.links.on('enter', (s) => this._adjustForce(s))
+			this.links.on('exit', (s) => this._adjustForce(s))
+		}
+
+		// make nodes draggable
+		if (this.options.draggable &amp;&amp; this.engine === 'cola') {
+			this.nodes.on('update', (nodes) => nodes.call(this.force.drag))
+		}
+
+		/**
+		 * @event Graph#node:mouseover
+		 * @type {Node}
+		 * @example
+		 * graph.on('node:mouseover', (node) => {
+		 * 	console.log('User mouse-overed on node ' + node.name)
+		 * })
+		 */
+		this.nodes.on('mouseover', (n) => this.emit('node:mouseover', n))
+
+		/**
+		 * @event Graph#node:mouseout
+		 * @type {Node}
+		 * @example
+		 * graph.on('node:mouseout', (node) => {
+			* 	console.log('User mouse-outed on node ' + node.name)
+			* })
+			*/
+		this.nodes.on('mouseout', (n) => this.emit('node:mouseout', n))
+
+		/**
+		 * @event Graph#node:click
+		 * @type {Node}
+		 * @example
+		 * graph.on('node:click', (node) => {
+			* 	console.log('User clicked on node ' + node.name)
+			* })
+			*/
+		this.nodes.on('click', (n) => this.emit('node:click', n))
+	}
+
+	_adjustForce (selection) {
+		if (selection.size() > 0) {
+			this.force.start(20)
+		}
+	}
+
 	/**
-	 * Force render the graph. Can be used debugging.
+	 * Initialize Cola.js Engine
+	 *
 	 * @private
 	 */
-	[_render] (data) {
-		// Order here determines how elements are stacked in svg
-		this.links.render(data)
-		this.nodes.render(data)
-		this.labels.render(data)
+	_colaForce () {
+		let force = Cola.d3adaptor(d3).size([this.width, this.height])
+		force
+			.nodes(this.network.get('nodes'))
+			.links(this.network.get('links'))
+			.avoidOverlaps(true)
+			.handleDisconnected(true)
+			// .symmetricDiffLinkLengths(25,0.5)
+			.jaccardLinkLengths(65,0.8)
+
+		if (this.options.flow === 'horizontal') {
+			force.flowLayout('x', 100)
+		}
+
+		force.start(50)
+		return force
+	}
+
+
+	/**
+	 * Initialize d3.js Engine
+	 *
+	 * @private
+	 */
+	_d3Force () {
+		let force = d3.forceSimulation(this.network.get('nodes'))
+		.force('link', d3.forceLink(
+			this.network.get('links'))
+				.id(d => d.id)
+				.distance(100)
+				.strength(0.5)
+		)
+		.force('charge', d3.forceManyBody(-30))
+		.force('center', d3.forceCenter(this.width / 2, this.height / 2))
+		.force('collide', d3.forceCollide(50))
+		.force('position', d3.forceRadial(20))
+		return force
+	}
+
+	/**
+	 * Used by View position()
+	 * @private
+	 */
+	_bindGraphToViews () {
+		this.links.bindGraph(this)
+		this.nodes.bindGraph(this)
+		this.labels.bindGraph(this)
+	}
+
+	// ------- RENDERS --------
+
+	/**
+	 * Renders {@link Nodes}, {@link Links} and {@link Labels} for a `Graph`.
+	 * If nodes have failures, they will be highlighted with colors and animations in the graph.
+	 *
+	 * @param {Object} [data] - Defaults to graph's {@link Network} data.
+	 */
+	render (data) {
+		this.renders++
+		// console.log(`[graph] renders count: ${this.renders}`)
+		data = (data !== undefined) ? data : this.network.get('data')
+
+		this.links.render(data) // technically does not need nodes
+		this.nodes.render(data) // technically does not need links
+		this.labels.render(data) // technically does not need links
+
+		let hasFailures = false
+		data.nodes.forEach((n) => {
+			if (n.status === 'down') {
+				this.highlightDependencies(n)
+				hasFailures = true
+			}
+		})
+		if (!hasFailures) {
+			this.resetStyles()
+		}
+	}
+
+	/**
+	 * Highlights dependencies, of nodes
+	 *
+	 * @param {Node} node - Node, whose dependencies are to be highlighted
+	 * @param {Object} [options={}]
+	 * @param {Boolean} [options.arrows=null] - Show directional arrows of source-target relationship?
+	 */
+	highlightDependencies (node, options = {}) {
+		// console.log(`[graph] highlightDependencies(${node.label})`)
+		this.nodes.setRelationships(node)
+		this.labels.setRelationships(node)
+		this.links.setRelationships(node)
+		if (options.arrows) {
+			this.links.showArrows(node, { color: true, showAll: false })
+		}
+	}
+
+	/**
+	 * Resets styles, highlights, removing colors, arrows, etc.
+	 */
+	resetStyles () {
+		// console.log('[graph] resetStyles()')
+		this.nodes.resetStyles()
+		this.labels.resetStyles()
+		this.links.resetStyles()
+	}
+
+	_addArrows (stylesArray) {
+		// 20 for radius 6
+		// 24 for radius 10
+		this.svg.append("svg:defs")
+			.selectAll('marker')
+			.data(stylesArray)
+		.enter().append('svg:marker')
+			.attr('id', String)
+			.attr('viewBox', '0 -4 8 8')
+			.attr('refX', 20)
+			.attr('refY', 0)
+			.attr('markerWidth', 6)
+			.attr('markerHeight', 6)
+			.attr('orient', 'auto')
+		.append('svg:path')
+			.attr('d', 'M0,-5L10,0L0,5')
 	}
 }
 
@@ -197,11 +349,16 @@ module.exports = Graph
 
 
 
+  </div>
 </main>
 
-<footer style="display: none">
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Apr 10 2019 11:40:24 GMT+0200 (Central European Summer Time)
+<footer class="layout-footer">
+  <div class="container">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.1</a> on Sun Jun 02 2019 21:38:56 GMT+0200 (Central European Summer Time)
+  </div>
 </footer>
+
+
 
 <script src="scripts/prism.dev.js"></script>
 </body>

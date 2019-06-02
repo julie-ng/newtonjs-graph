@@ -4,35 +4,35 @@
     <meta charset="utf-8">
     <title>Newton Graph Library: graph/views/nodes.js</title>
     <link type="text/css" rel="stylesheet" href="styles/styles.css">
-    <style>
-      
-      .layout-header {
-        background: #102027;
-        color: #ffffff;
-        
-      }
-      
-    </style>
+    
 </head>
 <body>
 
 <header class="layout-header">
+  
+    <a href="./">
+      <img
+        src="images/newton-logo.png"
+        alt="Newton Graph Library"
+      >
+    </a>
   
   <h1>
     <a href="./">
       Newton Graph Library
     </a>
   </h1>
+  <nav class="layout-nav">
+    <ul><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Graph.html">Graph</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Graph.html#highlightDependencies">highlightDependencies</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Graph.html#init">init</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Graph.html#render">render</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Graph.html#resetStyles">resetStyles</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Graph.html#event:node:click">node:click</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Graph.html#event:node:mouseout">node:mouseout</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Graph.html#event:node:mouseover">node:mouseover</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Labels.html">Labels</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#bindGraph">bindGraph</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#hideUnrelated">hideUnrelated</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#position">position</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#render">render</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#resetStyles">resetStyles</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#setRelationships">setRelationships</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Labels.html#event:enter">enter</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Labels.html#event:exit">exit</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Labels.html#event:update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Links.html">Links</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#bindGraph">bindGraph</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#hideUnrelated">hideUnrelated</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#position">position</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#render">render</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#resetStyles">resetStyles</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#setRelationships">setRelationships</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#showAll">showAll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#showArrows">showArrows</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Links.html#event:enter">enter</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Links.html#event:exit">exit</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Links.html#event:update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Network.html">Network</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#areNeighbors">areNeighbors</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findDeepSources">findDeepSources</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findLinks">findLinks</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findNodeById">findNodeById</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findNodeIndex">findNodeIndex</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findSources">findSources</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#get">get</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#getRelationship">getRelationship</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#isDeepSourceLink">isDeepSourceLink</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#isDeepSourceNeighbor">isDeepSourceNeighbor</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#isEqualNode">isEqualNode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#isSourceNeighbor">isSourceNeighbor</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#isTargetNeighbor">isTargetNeighbor</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeLinks">removeLinks</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeNode">removeNode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeNodeById">removeNodeById</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#updateData">updateData</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#updateNode">updateNode</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Network.html#event:update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Nodes.html">Nodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#bindGraph">bindGraph</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#hideUnrelated">hideUnrelated</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#onClick">onClick</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#onMouseout">onMouseout</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#onMouseover">onMouseover</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#position">position</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#render">render</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#resetStyles">resetStyles</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#setRelationships">setRelationships</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:click">click</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:enter">enter</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:exit">exit</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:mouseout">mouseout</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:mouseover">mouseover</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="View.html">View</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#bindGraph">bindGraph</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#hideUnrelated">hideUnrelated</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#position">position</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#render">render</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#resetStyles">resetStyles</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#setRelationships">setRelationships</a></span></li></ul><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#d3">d3</a></span></li><li class="nav-item"><span class="nav-item-type type-typedef">T</span><span class="nav-item-name"><a href="global.html#Link">Link</a></span></li><li class="nav-item"><span class="nav-item-type type-typedef">T</span><span class="nav-item-name"><a href="global.html#Node">Node</a></span></li>
+  </nav>
 </header>
 
-<nav class="layout-nav">
-  <ul><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="ColaGraph.html">ColaGraph</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ColaGraph.html#bind">bind<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Graph.html">Graph</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Graph.html#bind">bind<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Graph.html#init">init<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Graph.html#initDefaultLayout">initDefaultLayout<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Graph.html#event:tick">tick</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Graph.html#event:update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Labels.html">Labels</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#bindGraph">bindGraph<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#position">position<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#render">render<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Links.html">Links</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#bindGraph">bindGraph<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#position">position<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#render">render<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Network.html">Network</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findLinks">findLinks<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findNodeById">findNodeById<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findNodeIndex">findNodeIndex<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#get">get<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeLinks">removeLinks<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeNode">removeNode<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeNodeById">removeNodeById<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Nodes.html">Nodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#animate">animate<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#bindGraph">bindGraph<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#position">position<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#render">render<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:enter">enter</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:exit">exit</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="View.html">View</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#bindGraph">bindGraph<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#position">position<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#render">render<span class="method-parens">()</span></a></span></li></ul><ul><li class="nav-heading">Modules</li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-NodeUI.html">NodeUI</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Transitions.html">Transitions</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Transitions.html#~fadeOut">fadeOut<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="Transitions-module_FadeDown.html">FadeDown</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Transitions-module_FadeDown.html#~circle">circle<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Transitions-module_FadeDown.html#~link">link<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Transitions-module_FadeDown.html#~text">text<span class="method-parens">()</span></a></span></li></ul><ul><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="Transitions.html">Transitions</a></span></li></ul>
-</nav>
 
-<main class="layout-content layout-content--source">
-  <p class="page-kind">source</p>
-  <h1 class="page-title">graph/views/nodes.js</h1>
-  
+<main class="layout-main  layout-content--source">
+  <div class="container">
+    <p class="page-kind">source</p>
+    <h1 class="page-title">graph/views/nodes.js</h1>
+    
 
 
 
@@ -41,10 +41,27 @@
 <section>
     <article>
         <pre id="source" class="source-page line-numbers"><code class="language-js">const d3 = require('d3')
-
 const View = require('./view')
-const Transitions = require('./transitions')
-const NodeUI = require('./styles/node.ui')
+
+/**
+ * @typedef {Object} Node
+ *
+ * A node is an `Object` with node properties e.g. name, status, etc. These attributes are user defined.
+ * The standard and minimum attributes include:
+ *
+ * ```javascript
+ * let node = {
+ * 	status: 'up',				// used for styling
+ * 	id: 'web-frontend',			// identifier used in in links
+ * 	label: 'Web Frontend'		// text label
+ * }
+ * ```
+ * Note that `id`s must be unique and are used in referencing {@link Link}s.
+ *
+ * @property {String} id - Identifier referenced in {@link Link}s.
+ * @property {String} label - Text label for the Node.
+ * @property {String} status - This can be `up`, `down` or `deploying` and is used for styling.
+ */
 
 /**
  * Encapsulates what is needed to create the nodes of a network graph,
@@ -55,99 +72,132 @@ const NodeUI = require('./styles/node.ui')
 class Nodes extends View {
 	/**
 	 * @param {Object} options
-	 * @param {d3adapter} options.adapter - reference to layout adapter (webcola). required to enable dragging of nodes
-	 * @param {String} [options.dom=window.document] - DOM reference, required for testing
+	 * @param {String} [options.dom = window.document] - DOM reference, required for testing
 	 * @param {String} [options.container] - HTML identifier used by for d3
 	 */
 	constructor (options = {}) {
-		super()
-		this.adapter = options.adapter
-		this.dom = options.dom || window.document
-		this.container = options.container || 'svg'
-
+		super(options)
 	}
 
 	/**
 	 * Renders network graphs and passes hooks to d3.js's general update pattern via events.
-	 *
 	 * For more information on the general update pattern, see:
-	 * https://bost.ocks.org/mike/join/
+	 * [https://bost.ocks.org/mike/join/](https://bost.ocks.org/mike/join/)
 	 *
 	 * @param {Object} data - Network data with `nodes` attribute
 	 */
 	render (data) {
+		// console.log(' nodes render()')
 		if (data.nodes === undefined) { throw 'Error: missing `nodes` attribute on parameter.' }
 
-		let t = d3.transition()
-			.duration(300)
-			.ease(d3.easeLinear)
-
-		// -- Pattern: JOIN --
 		let nodes = d3.select(this.dom)
 			.select(this.container)
-			.selectAll('circle')
-			.data(data.nodes, (d) => 'node-' + d.id)
+			.selectAll('.node')
+			.data(data.nodes, (d) => d.id)
 
-		// -- Pattern: REMOVE --
 		/**
+		 * An `Array` of exiting Nodes, i.e. nodes to be removed per d3.js general update pattern.
+		 *
 		 * @event Nodes#exit
-		 * @property {Nodes} nodes - Exiting nodes per d3.js [general update pattern, III](https://bl.ocks.org/mbostock/3808234).
-		 * @example
-		 * nodes.on('exit', function (n) {
-		 *   n.call(Transitions.fadeOut)
-		 *    .call(Transitions.fadeDown)
-		 * })
+		 * @type {Array}
 		 */
 		this.emit('exit', nodes.exit())
 		nodes.exit()
-			.transition(t)
-				.call(Transitions.fadeOut)
-				.call(Transitions.FadeDown.circle, 5)
 			.remove()
 
-		// -- Pattern: ENTER + UPDATE (merge()) --
 		/**
+		 * An `Array` of enter Nodes, i.e. new nodes per d3.js general update pattern.
+		 *
 		 * @event Nodes#enter
-		 * @property {Nodes} nodes - Entering nodes per d3.js [general update pattern, III](https://bl.ocks.org/mbostock/3808234).
+		 * @type {Array}
 		 */
 		this.emit('enter', nodes.enter())
 		nodes = nodes.enter()
 			.append('circle')
-				.attr('data-title', (d) => d.label)
+				.attr('id', (n) => 'node-' + n.id)
 			.merge(nodes)
-				.call(NodeUI.styleNode)
+				.attr('data-title', (n) => n.label)
+				.attr('class', (n) => 'node status-' + n.status)
+				.attr('r', (n) => n.status === 'up' ? 6 : 10)
+				.on('mouseover', (n) => this.onMouseover(n))
+				.on('mouseout', (n) => this.onMouseout(n))
+				.on('click', (n) => this.onClick(n))
 
 		/**
+		 * An `Array` of combined existing and new Nodes, per d3.js general update pattern.
+		 *
 		 * @event Nodes#update
-		 * @property {Nodes} nodes - Updating nodes (post merge with enter) per d3.js [general update pattern, III](https://bl.ocks.org/mbostock/3808234).
-		 * @example
-		 * nodes.on('update', (n) => n.call(webcola.drag))
+		 * @type {Array}
 		 */
 		this.emit('update', nodes)
-
-		this.nodes = nodes
-		this.animate()
+		this.selection = nodes
 	}
 
+	/**
+	 * Positions node `&lt;circle>` at center
+	 */
 	position () {
-		if (this.nodes === undefined) { throw 'Error: `nodes` attribute not set. Please render with data first.' }
-
-		this.nodes
+		this.selection
 			.attr('cx', (d) => d.x)
 			.attr('cy', (d) => d.y)
 	}
 
 	/**
-	 * (Re)starts any animations using current data.
+	 * Event handler for browser `mouseover` event. Handler is defined in [render()]{@link Nodes#render}.
+	 *
+	 * @param {Object} n - Node
+	 * @emits Nodes#mouseover
 	 */
-	animate () {
-		this.nodes
-			.filter('.status-down')
-				.call(NodeUI.flash)
+	onMouseover (n) {
+		/**
+		 * Note: this is a custom event and _not_ a browser event.
+		 *
+		 * @event Nodes#mouseover
+		 * @type {Node}
+		 * @example
+		 * nodes.on('mouseover', (node) => {
+			* 	console.log('User hovered on node ' + node.name)
+			* })
+		 */
+		this.emit('mouseover', n)
+	}
 
-		this.nodes
-			.filter('.status-deploying')
-				.call(NodeUI.pulse, 3)
+	/**
+	 * Event handler for browser `mouseout` event. Handler is defined in [render()]{@link Nodes#render}.
+	 * @param {Object} n - Node
+	 */
+	onMouseout (n) {
+
+		/**
+		 * Note: this is a custom event and _not_ a browser event.
+		 *
+		 * @event Nodes#mouseout
+		 * @type {Node}
+		 * @example
+		 * nodes.on('mouseout', (node) => {
+			* 	console.log('mouse left node ' + node.name)
+			* })
+		 */
+		this.emit('mouseout', n)
+	}
+
+	/**
+	 * Event handler for browser `click` event. Handler is defined in [render()]{@link Nodes#render}.
+	 * @param {Node} n - clicked on node
+	 */
+	onClick (n) {
+
+		/**
+		 * Note: this is a custom event and _not_ a browser event.
+		 *
+		 * @event Nodes#click
+		 * @type {Node}
+		 * @example
+		 * nodes.on('click', (node) => {
+		 * 	console.log('User clicked on node ' + node.name)
+		 * })
+		 */
+		this.emit('click', n)
 	}
 }
 
@@ -158,11 +208,16 @@ module.exports = Nodes</code></pre>
 
 
 
+  </div>
 </main>
 
-<footer style="display: none">
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Apr 10 2019 11:40:24 GMT+0200 (Central European Summer Time)
+<footer class="layout-footer">
+  <div class="container">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.1</a> on Sun Jun 02 2019 21:38:56 GMT+0200 (Central European Summer Time)
+  </div>
 </footer>
+
+
 
 <script src="scripts/prism.dev.js"></script>
 </body>

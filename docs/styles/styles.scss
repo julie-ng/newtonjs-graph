@@ -1,88 +1,43 @@
-@import "vendor/bootstrap-custom";
-@import "vendor/prism.v2";
+// @import "vendor/prism-okaidia";
+// @import "vendor/prism.v2";
+@import "vendor/prism-tomorrow-night";
 @import "vars";
+@import "base";
 @import "layout";
 @import "typography";
+@import "tables";
+@import "readme";
 @import "methods";
-@import "lists";
+@import "params";
 
-ul {
-  margin: 1em 0 2em;
+// Override Prism.js
+
+pre[class*="language-"] {
+  border-radius: 0;
 }
 
-dl.details {
-  font-size: 0.9rem;
+code[class*="language-"],
+pre[class*="language-"] {
+  text-shadow: none;
+  border: none;
+
+	&.source-page {
+		font-size: 0.9em;
+	}
 }
 
-// Hide repeated class name (see also container.tmpl)
-// header.class {
-//   h2 {
-//     display: none;
-//   }
-// }
-
-//// jsdoc - default
-
-tt, code, kbd, samp {
-  font-family: Consolas, Monaco, 'Andale Mono', monospace;
+.line-numbers .line-numbers-rows {
+  border-right: none;
 }
 
-.details {
-  @include clearfix;
-  margin: 2em 0;
-  border-left: 3px solid #eee;
-  padding-left: 1rem;
+.source-page {
+	font-size: 14px;
 
-  &:last-child {
-    margin-bottom: 1em;
-  }
+	code {
+		z-index: 1;
+	}
 
-  a {
-    color: #7097b5;
-  }
-
-  dt {
-    width: 8rem;
-    float: left;
-    font-weight: 400;
-  }
-
-  dd {
-    margin-left: 9rem;
-  }
-}
-
-// Override Bootstrap
-.table {
-  margin-top: 1rem;
-  width: auto;
-  min-width: 400px;
-  max-width: 100%;
-
-  th, h4 {
-    font-weight: 500;
-  }
-
-  th,
-  td {
-    padding: 0.5rem 0.75rem;
-  }
-
-  p:last-child {
-    margin-bottom: 0;
-  }
-}
-
-.table-bordered {
-  thead {
-    th {
-      border-bottom-width: 1px;
-    }
-  }
-
-  th,
-  td {
-    border: none; // override bootstrap
-    border-top: 1px solid #ececec;
-  }
+	.line-height.temporary {
+		z-index: 0;
+	}
 }

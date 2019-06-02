@@ -1,0 +1,15 @@
+.readme {
+	h2 {
+		border-bottom: 1px solid var(--border-color);
+		margin: 1em 0;
+		padding-bottom: 0.5rem;
+
+		& + h3 {
+			margin-top: 0;
+		}
+	}
+
+	h3 {
+		margin: 2rem 0 1rem 0;
+	}
+}

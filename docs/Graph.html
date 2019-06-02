@@ -4,35 +4,35 @@
     <meta charset="utf-8">
     <title>Newton Graph Library: Graph</title>
     <link type="text/css" rel="stylesheet" href="styles/styles.css">
-    <style>
-      
-      .layout-header {
-        background: #102027;
-        color: #ffffff;
-        
-      }
-      
-    </style>
+    
 </head>
 <body>
 
 <header class="layout-header">
+  
+    <a href="./">
+      <img
+        src="images/newton-logo.png"
+        alt="Newton Graph Library"
+      >
+    </a>
   
   <h1>
     <a href="./">
       Newton Graph Library
     </a>
   </h1>
+  <nav class="layout-nav">
+    <ul><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Graph.html">Graph</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Graph.html#highlightDependencies">highlightDependencies</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Graph.html#init">init</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Graph.html#render">render</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Graph.html#resetStyles">resetStyles</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Graph.html#event:node:click">node:click</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Graph.html#event:node:mouseout">node:mouseout</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Graph.html#event:node:mouseover">node:mouseover</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Labels.html">Labels</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#bindGraph">bindGraph</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#hideUnrelated">hideUnrelated</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#position">position</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#render">render</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#resetStyles">resetStyles</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#setRelationships">setRelationships</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Labels.html#event:enter">enter</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Labels.html#event:exit">exit</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Labels.html#event:update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Links.html">Links</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#bindGraph">bindGraph</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#hideUnrelated">hideUnrelated</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#position">position</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#render">render</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#resetStyles">resetStyles</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#setRelationships">setRelationships</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#showAll">showAll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#showArrows">showArrows</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Links.html#event:enter">enter</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Links.html#event:exit">exit</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Links.html#event:update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Network.html">Network</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#areNeighbors">areNeighbors</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findDeepSources">findDeepSources</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findLinks">findLinks</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findNodeById">findNodeById</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findNodeIndex">findNodeIndex</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findSources">findSources</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#get">get</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#getRelationship">getRelationship</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#isDeepSourceLink">isDeepSourceLink</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#isDeepSourceNeighbor">isDeepSourceNeighbor</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#isEqualNode">isEqualNode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#isSourceNeighbor">isSourceNeighbor</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#isTargetNeighbor">isTargetNeighbor</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeLinks">removeLinks</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeNode">removeNode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeNodeById">removeNodeById</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#updateData">updateData</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#updateNode">updateNode</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Network.html#event:update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Nodes.html">Nodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#bindGraph">bindGraph</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#hideUnrelated">hideUnrelated</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#onClick">onClick</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#onMouseout">onMouseout</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#onMouseover">onMouseover</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#position">position</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#render">render</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#resetStyles">resetStyles</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#setRelationships">setRelationships</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:click">click</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:enter">enter</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:exit">exit</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:mouseout">mouseout</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:mouseover">mouseover</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="View.html">View</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#bindGraph">bindGraph</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#hideUnrelated">hideUnrelated</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#position">position</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#render">render</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#resetStyles">resetStyles</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#setRelationships">setRelationships</a></span></li></ul><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#d3">d3</a></span></li><li class="nav-item"><span class="nav-item-type type-typedef">T</span><span class="nav-item-name"><a href="global.html#Link">Link</a></span></li><li class="nav-item"><span class="nav-item-type type-typedef">T</span><span class="nav-item-name"><a href="global.html#Node">Node</a></span></li>
+  </nav>
 </header>
 
-<nav class="layout-nav">
-  <ul><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="ColaGraph.html">ColaGraph</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ColaGraph.html#bind">bind<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Graph.html">Graph</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Graph.html#bind">bind<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Graph.html#init">init<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Graph.html#initDefaultLayout">initDefaultLayout<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Graph.html#event:tick">tick</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Graph.html#event:update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Labels.html">Labels</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#bindGraph">bindGraph<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#position">position<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Labels.html#render">render<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Links.html">Links</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#bindGraph">bindGraph<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#position">position<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Links.html#render">render<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Network.html">Network</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findLinks">findLinks<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findNodeById">findNodeById<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#findNodeIndex">findNodeIndex<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#get">get<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeLinks">removeLinks<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeNode">removeNode<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Network.html#removeNodeById">removeNodeById<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Nodes.html">Nodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#animate">animate<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#bindGraph">bindGraph<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#position">position<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Nodes.html#render">render<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:enter">enter</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:exit">exit</a></span></li><li class="nav-item"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="Nodes.html#event:update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="View.html">View</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#bindGraph">bindGraph<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#position">position<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="View.html#render">render<span class="method-parens">()</span></a></span></li></ul><ul><li class="nav-heading">Modules</li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-NodeUI.html">NodeUI</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Transitions.html">Transitions</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Transitions.html#~fadeOut">fadeOut<span class="method-parens">()</span></a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="Transitions-module_FadeDown.html">FadeDown</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Transitions-module_FadeDown.html#~circle">circle<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Transitions-module_FadeDown.html#~link">link<span class="method-parens">()</span></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Transitions-module_FadeDown.html#~text">text<span class="method-parens">()</span></a></span></li></ul><ul><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="Transitions.html">Transitions</a></span></li></ul>
-</nav>
 
-<main class="layout-content">
-  <p class="page-kind">Class</p>
-  <h1 class="page-title">Graph</h1>
-  
+<main class="layout-main ">
+  <div class="container">
+    <p class="page-kind">Class</p>
+    <h1 class="page-title">Graph</h1>
+    
 
 
 
@@ -50,7 +50,7 @@
         
 
         
-            <div class="class-description"><p>Network Graph</p></div>
+            <div class="class-description"><p>The <code>Graph</code> class holds everything together: <a href="Nodes.html">Nodes</a>, <a href="Links.html">Links</a>, <a href="Labels.html">Labels</a> and the <a href="Network.html">Network</a>.</p></div>
         
     
 </header>
@@ -68,266 +68,6 @@
 
     
 
-        <h3 class="subtitle">Properties</h3>
-        
-
-<table class="properties-table table table-bordered">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th>Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code class="property-name">margin</code></td>
-            
-
-            <td class="type">
-            
-                
-
-
-    <span class="param-type">
-        <code>
-            Integer
-        </code>
-    </span>
-    
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Layout Margin</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code class="property-name">width</code></td>
-            
-
-            <td class="type">
-            
-                
-
-
-    <span class="param-type">
-        <code>
-            Integer
-        </code>
-    </span>
-    
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Graph Width</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code class="property-name">height</code></td>
-            
-
-            <td class="type">
-            
-                
-
-
-    <span class="param-type">
-        <code>
-            Integer
-        </code>
-    </span>
-    
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Graph Height</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code class="property-name">layout</code></td>
-            
-
-            <td class="type">
-            
-                
-
-
-    <span class="param-type">
-        <code>
-            *
-        </code>
-    </span>
-    
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>layout adapter, e.g. cola.js or simulation engine, e.g. d3-force</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code class="property-name">svg</code></td>
-            
-
-            <td class="type">
-            
-                
-
-
-    <span class="param-type">
-        <code>
-            d3
-        </code>
-    </span>
-    
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>d3.js container selection that holds our svg elements, incl. labels, links and nodes.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code class="property-name">labels</code></td>
-            
-
-            <td class="type">
-            
-                
-
-
-    <span class="param-type">
-        <code>
-            <a href="Labels.html">Labels</a>
-        </code>
-    </span>
-    
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Labels for network nodes to be drawn</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code class="property-name">links</code></td>
-            
-
-            <td class="type">
-            
-                
-
-
-    <span class="param-type">
-        <code>
-            <a href="Links.html">Links</a>
-        </code>
-    </span>
-    
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Network links to be drawn</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code class="property-name">nodes</code></td>
-            
-
-            <td class="type">
-            
-                
-
-
-    <span class="param-type">
-        <code>
-            <a href="Nodes.html">Nodes</a>
-        </code>
-    </span>
-    
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Network nodes to be drawn</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-    
-
 
     
     <h3 class="subtitle">Constructor</h3>
@@ -337,12 +77,15 @@
     <span class="method-type-signature"></span>
     </div>
 
-    <h4 class="method-name" id="Graph">new Graph<span class="signature">(opts<span class="signature-attributes">opt</span>)</span><span class="return-type-signature"></span></h4>
+    <h4 class="method-name" id="Graph">new Graph<span class="signature">(opts)</span><span class="return-type-signature"></span>
+    </h4>
+
+
 
 
 
 <div class="method-description">
-    <p>Also initializes graph</p>
+    <p>Note that the <code>opts.network</code> attribute is required.</p>
 </div>
 
 
@@ -353,53 +96,64 @@
 
 
 
-    <h4 class="method-params-heading">Parameters</h4>
+    <h4 class="method-heading">Parameters</h4>
     
 
-<table class="table table-bordered params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
+<ul class="method-params">
     
 
-        <tr>
+        <li>
             
-                <td class="name"><code class="param-name">opts</code></td>
+                <span class="param-name">opts</span>
             
 
-            <td class="type">
             
                 
 
 
     <span class="param-type">
-        <code>
-            Object
-        </code>
+        <code>Object</code>
     </span>
     
 
             
-            </td>
 
             
-                <td class="attributes">
+
+            
+                
+                    <span class="param-default">
+                        {}
+                    </span>
+                
+            
+
+            <div class="param-description"></div>
+            
+                <p class="param-properties">Properties</p>
+                
+
+<ul class="method-params">
+    
+
+        <li>
+            
+                <span class="param-name">margin</span>
+            
+
+            
+                
+
+
+    <span class="param-type">
+        <code>Number</code>
+    </span>
+    
+
+            
+
+            
+                <span class="param-attributes">
                 
                     &lt;optional&gt;<br>
                 
@@ -407,59 +161,41 @@
                 
 
                 
-                </td>
+                </span>
             
 
             
-
-            <td class="description last"><p>options</p>
-                <h4>Properties</h4>
                 
+                    <span class="param-default">
+                        40
+                    </span>
+                
+            
 
-<table class="table table-bordered params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
+            <div class="param-description"><p>Graph margins in pixels.</p></div>
+            
+        </li>
 
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
     
 
-        <tr>
+        <li>
             
-                <td class="name"><code class="param-name">margin</code></td>
+                <span class="param-name">height</span>
             
 
-            <td class="type">
             
                 
 
 
     <span class="param-type">
-        <code>
-            Object
-        </code>
+        <code>Number</code>
     </span>
     
 
             
-            </td>
 
             
-                <td class="attributes">
+                <span class="param-attributes">
                 
                     &lt;optional&gt;<br>
                 
@@ -467,38 +203,41 @@
                 
 
                 
-                </td>
+                </span>
             
 
             
+                
+                    <span class="param-default">
+                        550
+                    </span>
+                
+            
 
-            <td class="description last"><p>graph margins</p></td>
-        </tr>
+            <div class="param-description"><p>Height of network graph in pixels.</p></div>
+            
+        </li>
 
     
 
-        <tr>
+        <li>
             
-                <td class="name"><code class="param-name">height</code></td>
+                <span class="param-name">width</span>
             
 
-            <td class="type">
             
                 
 
 
     <span class="param-type">
-        <code>
-            Object
-        </code>
+        <code>Number</code>
     </span>
     
 
             
-            </td>
 
             
-                <td class="attributes">
+                <span class="param-attributes">
                 
                     &lt;optional&gt;<br>
                 
@@ -506,38 +245,77 @@
                 
 
                 
-                </td>
+                </span>
             
 
             
+                
+                    <span class="param-default">
+                        800
+                    </span>
+                
+            
 
-            <td class="description last"><p>height of network graph</p></td>
-        </tr>
+            <div class="param-description"><p>Width of network graph in pixels.</p></div>
+            
+        </li>
 
     
 
-        <tr>
+        <li>
             
-                <td class="name"><code class="param-name">width</code></td>
+                <span class="param-name">network</span>
             
 
-            <td class="type">
             
                 
 
 
     <span class="param-type">
-        <code>
-            Object
-        </code>
+        <code><a href="Network.html">Network</a></code>
     </span>
     
 
             
-            </td>
 
             
-                <td class="attributes">
+                <span class="param-attributes">
+                
+
+                
+
+                
+                </span>
+            
+
+            
+                
+            
+
+            <div class="param-description"></div>
+            
+        </li>
+
+    
+
+        <li>
+            
+                <span class="param-name">engine</span>
+            
+
+            
+                
+
+
+    <span class="param-type">
+        <code>String</code>
+    </span>
+    
+
+            
+
+            
+                <span class="param-attributes">
                 
                     &lt;optional&gt;<br>
                 
@@ -545,86 +323,103 @@
                 
 
                 
-                </td>
+                </span>
             
 
             
+                
+                    <span class="param-default">
+                        'cola'
+                    </span>
+                
+            
 
-            <td class="description last"><p>width of network graph</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-<dl class="details">
+            <div class="param-description"><p>Force layout engine. Can be <code>d3</code> or <code>cola</code>.</p></div>
+            
+        </li>
 
     
 
+        <li>
+            
+                <span class="param-name">flow</span>
+            
+
+            
+                
+
+
+    <span class="param-type">
+        <code>String</code>
+    </span>
     
 
-    
+            
+
+            
+                <span class="param-attributes">
+                
+                    &lt;optional&gt;<br>
+                
+
+                
+
+                
+                </span>
+            
+
+            
+                
+            
+
+            <div class="param-description"><p>Display links in horizontal flow?</p></div>
+            
+        </li>
 
     
 
+        <li>
+            
+                <span class="param-name">draggable</span>
+            
+
+            
+                
+
+
+    <span class="param-type">
+        <code>Boolean</code>
+    </span>
     
 
-    
+            
+
+            
+                <span class="param-attributes">
+                
+                    &lt;optional&gt;<br>
+                
+
+                
+
+                
+                </span>
+            
+
+            
+                
+            
+
+            <div class="param-description"><p>Make nodes draggable?</p></div>
+            
+        </li>
 
     
+</ul>
+            
+        </li>
 
     
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source">
-        <a href="graph_graph.js.html">graph/graph.js</a>, <a href="graph_graph.js.html#source.31">line 31</a>
-    </dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-<h5>Fires:</h5>
-<ul>
-    <li><a href="Graph.html#event:tick">Graph#event:tick</a></li>
-
-    <li><a href="Graph.html#event:update">Graph#event:update</a></li>
 </ul>
 
 
@@ -632,6 +427,62 @@
 
 
 
+<div class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h4 class="method-heading">Source</h4>
+    <ul>
+        <li class="method-source">
+            <a href="graph_graph.js.html">graph/graph.js</a><a href="graph_graph.js.html#source.34">, line 34</a>
+        </li>
+    </ul>
 
 
 
@@ -668,13 +519,15 @@
     <span class="method-type-signature"></span>
     </div>
 
-    <h4 class="method-name" id="bind">bind<span class="signature">(network)</span><span class="return-type-signature"></span></h4>
+    <h4 class="method-name" id="highlightDependencies">highlightDependencies<span class="signature">(node, options<span class="signature-attributes">opt</span>)</span><span class="return-type-signature"></span>
+    </h4>
+
+
 
 
 
 <div class="method-description">
-    <p>Binds graph to network <code>update</code> and passes along cola's
-<code>tick</code> event.</p>
+    <p>Highlights dependencies, of nodes</p>
 </div>
 
 
@@ -685,104 +538,146 @@
 
 
 
-    <h4 class="method-params-heading">Parameters</h4>
+    <h4 class="method-heading">Parameters</h4>
     
 
-<table class="table table-bordered params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
+<ul class="method-params">
     
 
-        <tr>
+        <li>
             
-                <td class="name"><code class="param-name">network</code></td>
+                <span class="param-name">node</span>
             
 
-            <td class="type">
             
                 
 
 
     <span class="param-type">
-        <code>
-            Object
-        </code>
+        <code><a href="global.html#Node">Node</a></code>
     </span>
-    |
+    
+
+            
+
+            
+                <span class="param-attributes">
+                
+
+                
+
+                
+                </span>
+            
+
+            
+                
+            
+
+            <div class="param-description"><p>Node, whose dependencies are to be highlighted</p></div>
+            
+        </li>
+
+    
+
+        <li>
+            
+                <span class="param-name">options</span>
+            
+
+            
+                
+
 
     <span class="param-type">
-        <code>
-            GraphData
-        </code>
+        <code>Object</code>
     </span>
     
 
             
-            </td>
+
+            
+                <span class="param-attributes">
+                
+                    &lt;optional&gt;<br>
+                
+
+                
+
+                
+                </span>
+            
+
+            
+                
+                    <span class="param-default">
+                        {}
+                    </span>
+                
+            
+
+            <div class="param-description"></div>
+            
+                <p class="param-properties">Properties</p>
+                
+
+<ul class="method-params">
+    
+
+        <li>
+            
+                <span class="param-name">arrows</span>
+            
+
+            
+                
+
+
+    <span class="param-type">
+        <code>Boolean</code>
+    </span>
+    
 
             
 
             
+                <span class="param-attributes">
+                
+                    &lt;optional&gt;<br>
+                
 
-            <td class="description last"><p>network graph data</p></td>
-        </tr>
+                
 
-    
-    </tbody>
-</table>
+                
+                </span>
+            
 
+            
+                
+                    <span class="param-default">
+                        null
+                    </span>
+                
+            
 
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
+            <div class="param-description"><p>Show directional arrows of source-target relationship?</p></div>
+            
+        </li>
 
     
+</ul>
+            
+        </li>
 
     
+</ul>
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source">
-        <a href="graph_graph.js.html">graph/graph.js</a>, <a href="graph_graph.js.html#source.90">line 90</a>
-    </dd>
+<div class="details">
     
 
     
@@ -790,7 +685,29 @@
     
 
     
-</dl>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</div>
 
 
 
@@ -807,6 +724,15 @@
 
 
 
+
+
+
+    <h4 class="method-heading">Source</h4>
+    <ul>
+        <li class="method-source">
+            <a href="graph_graph.js.html">graph/graph.js</a><a href="graph_graph.js.html#source.263">, line 263</a>
+        </li>
+    </ul>
 
 
 
@@ -829,12 +755,15 @@
     <span class="method-type-signature"></span>
     </div>
 
-    <h4 class="method-name" id="init">init<span class="signature">()</span><span class="return-type-signature"> &rarr; {this}</span></h4>
+    <h4 class="method-name" id="init">init<span class="signature">()</span><span class="return-type-signature"> &rarr; {this}</span>
+    </h4>
+
+
 
 
 
 <div class="method-description">
-    <p>Initializes layouts, new views for links, noes, etc.</p>
+    <p>Initializes <code>Graph</code> layout, binds graph to <a href="Network.html">Network</a>, and performs first render.</p>
 </div>
 
 
@@ -850,8 +779,7 @@
 
 
 
-<dl class="details">
-
+<div class="details">
     
 
     
@@ -877,18 +805,11 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source">
-        <a href="graph_graph.js.html">graph/graph.js</a>, <a href="graph_graph.js.html#source.55">line 55</a>
-    </dd>
-    
 
     
 
     
-
-    
-</dl>
+</div>
 
 
 
@@ -902,9 +823,39 @@
 
 
 
+<h4 class="method-heading">Listens to events</h4>
+<ul>
+    <li><a href="Network.html#event:update">Network#event:update</a></li>
+
+    <li><a href="Links.html#event:enter">Links#event:enter</a></li>
+
+    <li><a href="Links.html#event:exit">Links#event:exit</a></li>
+
+    <li><a href="Nodes.html#event:update">Nodes#event:update</a></li>
+
+    <li><a href="Nodes.html#event:enter">Nodes#event:enter</a></li>
+
+    <li><a href="Nodes.html#event:exit">Nodes#event:exit</a></li>
+
+    <li><a href="Nodes.html#event:click">Nodes#event:click</a></li>
+
+    <li><a href="Nodes.html#event:mouseover">Nodes#event:mouseover</a></li>
+
+    <li><a href="Nodes.html#event:mouseout">Nodes#event:mouseout</a></li>
+</ul>
 
 
 
+
+
+
+
+    <h4 class="method-heading">Source</h4>
+    <ul>
+        <li class="method-source">
+            <a href="graph_graph.js.html">graph/graph.js</a><a href="graph_graph.js.html#source.67">, line 67</a>
+        </li>
+    </ul>
 
 
 
@@ -927,12 +878,16 @@
     <span class="method-type-signature"></span>
     </div>
 
-    <h4 class="method-name" id="initDefaultLayout">initDefaultLayout<span class="signature">(network)</span><span class="return-type-signature"></span></h4>
+    <h4 class="method-name" id="render">render<span class="signature">(data<span class="signature-attributes">opt</span>)</span><span class="return-type-signature"></span>
+    </h4>
+
+
 
 
 
 <div class="method-description">
-    <p>Default Layout: d3-force</p>
+    <p>Renders <a href="Nodes.html">Nodes</a>, <a href="Links.html">Links</a> and <a href="Labels.html">Labels</a> for a <code>Graph</code>.
+If nodes have failures, they will be highlighted with colors and animations in the graph.</p>
 </div>
 
 
@@ -943,75 +898,55 @@
 
 
 
-    <h4 class="method-params-heading">Parameters</h4>
+    <h4 class="method-heading">Parameters</h4>
     
 
-<table class="table table-bordered params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
+<ul class="method-params">
     
 
-        <tr>
+        <li>
             
-                <td class="name"><code class="param-name">network</code></td>
+                <span class="param-name">data</span>
             
 
-            <td class="type">
             
                 
 
 
     <span class="param-type">
-        <code>
-            Object
-        </code>
-    </span>
-    |
-
-    <span class="param-type">
-        <code>
-            GraphData
-        </code>
+        <code>Object</code>
     </span>
     
 
             
-            </td>
 
+            
+                <span class="param-attributes">
+                
+                    &lt;optional&gt;<br>
+                
+
+                
+
+                
+                </span>
             
 
             
 
-            <td class="description last"><p>Network instance</p></td>
-        </tr>
+            <div class="param-description"><p>Defaults to graph's <a href="Network.html">Network</a> data.</p></div>
+            
+        </li>
 
     
-    </tbody>
-</table>
+</ul>
 
 
 
 
 
 
-
-<dl class="details">
-
+<div class="details">
     
 
     
@@ -1037,10 +972,83 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source">
-        <a href="graph_graph.js.html">graph/graph.js</a>, <a href="graph_graph.js.html#source.72">line 72</a>
-    </dd>
+
+    
+
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h4 class="method-heading">Source</h4>
+    <ul>
+        <li class="method-source">
+            <a href="graph_graph.js.html">graph/graph.js</a><a href="graph_graph.js.html#source.235">, line 235</a>
+        </li>
+    </ul>
+
+
+
+    </article>
+
+        
+            
+
+    <article class="method">
+
+
+
+
+    
+
+
+    
+
+    <div class="method-type">
+    <span class="method-type-signature"></span>
+    </div>
+
+    <h4 class="method-name" id="resetStyles">resetStyles<span class="signature">()</span><span class="return-type-signature"></span>
+    </h4>
+
+
+
+
+
+<div class="method-description">
+    <p>Resets styles, highlights, removing colors, arrows, etc.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="details">
     
 
     
@@ -1048,7 +1056,29 @@
     
 
     
-</dl>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</div>
 
 
 
@@ -1065,6 +1095,15 @@
 
 
 
+
+
+
+    <h4 class="method-heading">Source</h4>
+    <ul>
+        <li class="method-source">
+            <a href="graph_graph.js.html">graph/graph.js</a><a href="graph_graph.js.html#source.276">, line 276</a>
+        </li>
+    </ul>
 
 
 
@@ -1086,64 +1125,72 @@
 		
 	</div>
 
-	<h4 class="event-name" id="event:tick">
-		tick
+	<h4 class="event-name" id="event:node:click">
+		node:click
 	</h4>
 
 	
-	<div class="event-description">
-			<p>Tick event used to constrain layout using webcola.
-Graph elements listen to this event to reposition themselves.</p>
-	</div>
+
+	
+		<h4 class="method-heading">Type</h4>
+		<ul>
+			<li>
+				
+
+
+    <span class="param-type">
+        <code><a href="global.html#Node">Node</a></code>
+    </span>
+    
+
+			</li>
+		</ul>
 	
 
 	
 
 	
 
+
+<div class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</div>
+
+
 	
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source">
-        <a href="graph_graph.js.html">graph/graph.js</a>, <a href="graph_graph.js.html#source.111">line 111</a>
-    </dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
+		<h4 class="method-heading">Example</h4>
+		
+    <pre><code class="language-js">graph.on('node:click', (node) => {
+	console.log('User clicked on node ' + node.name)
+})</code></pre>
 
 	
 
@@ -1165,29 +1212,21 @@ Graph elements listen to this event to reposition themselves.</p>
 		
 	</div>
 
-	<h4 class="event-name" id="event:update">
-		update
+	<h4 class="event-name" id="event:node:mouseout">
+		node:mouseout
 	</h4>
 
 	
-	<div class="event-description">
-			<p>Update event which passes on network data so graph elements,
-nodes and links can update themselves based on latest
-real-time data.</p>
-	</div>
-	
 
 	
-		<h5>Type:</h5>
+		<h4 class="method-heading">Type</h4>
 		<ul>
 			<li>
 				
 
 
     <span class="param-type">
-        <code>
-            Object
-        </code>
+        <code><a href="global.html#Node">Node</a></code>
     </span>
     
 
@@ -1200,94 +1239,97 @@ real-time data.</p>
 	
 
 
-    <h5>Properties:</h5>
+<div class="details">
+    
 
     
 
-<table class="properties-table table table-bordered">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th>Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
     
 
-        <tr>
-            
-                <td class="name"><code class="property-name">nodes</code></td>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</div>
+
+
+	
+		<h4 class="method-heading">Example</h4>
+		
+    <pre><code class="language-js">graph.on('node:mouseout', (node) => {
+	console.log('User mouse-outed on node ' + node.name)
+})</code></pre>
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</article>
+
+        
             
 
-            <td class="type">
-            
-                
+<article class="event">
+	<div class="event-type">
+		
+	</div>
+
+	<h4 class="event-name" id="event:node:mouseover">
+		node:mouseover
+	</h4>
+
+	
+
+	
+		<h4 class="method-heading">Type</h4>
+		<ul>
+			<li>
+				
 
 
     <span class="param-type">
-        <code>
-            Array
-        </code>
+        <code><a href="global.html#Node">Node</a></code>
     </span>
     
 
-            
-            </td>
+			</li>
+		</ul>
+	
 
-            
+	
 
-            
+	
 
-            <td class="description last"></td>
-        </tr>
 
+<div class="details">
     
 
-        <tr>
-            
-                <td class="name"><code class="property-name">links</code></td>
-            
-
-            <td class="type">
-            
-                
-
-
-    <span class="param-type">
-        <code>
-            Array
-        </code>
-    </span>
     
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-<dl class="details">
 
     
 
@@ -1314,19 +1356,15 @@ real-time data.</p>
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source">
-        <a href="graph_graph.js.html">graph/graph.js</a>, <a href="graph_graph.js.html#source.119">line 119</a>
-    </dd>
-    
+</div>
 
-    
 
-    
-
-    
-</dl>
-
+	
+		<h4 class="method-heading">Example</h4>
+		
+    <pre><code class="language-js">graph.on('node:mouseover', (node) => {
+	console.log('User mouse-overed on node ' + node.name)
+})</code></pre>
 
 	
 
@@ -1349,11 +1387,16 @@ real-time data.</p>
 
 
 
+  </div>
 </main>
 
-<footer style="display: none">
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Apr 10 2019 11:40:24 GMT+0200 (Central European Summer Time)
+<footer class="layout-footer">
+  <div class="container">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.1</a> on Sun Jun 02 2019 21:38:56 GMT+0200 (Central European Summer Time)
+  </div>
 </footer>
+
+
 
 <script src="scripts/prism.dev.js"></script>
 </body>

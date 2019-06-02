@@ -1,0 +1,27 @@
+table {
+  margin-top: 1rem;
+  width: auto;
+  min-width: 400px;
+	max-width: 100%;
+	border-top: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+
+  th, h4 {
+    font-weight: 500;
+  }
+
+  th,
+  td {
+    padding: 0.5rem 0.75rem;
+	}
+
+  th,
+  td {
+    border-left: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}

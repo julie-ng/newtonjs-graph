@@ -1,0 +1,65 @@
+.param-type {
+	code {
+		color: #111;
+	}
+}
+
+.param-name {
+	font-weight: 600;
+	display: inline-block;
+	margin-right: 0.5em;
+}
+
+.param-type,
+.param-default,
+.param-attributes {
+	font-family: var(--code-font);
+}
+
+.param-default {
+	&::before {
+		display: inline-block;
+		content: 'Default:';
+		font-family: var(--body-font);
+	}
+}
+
+.param-attributes {
+	color: var(--light-font-color);
+}
+
+.param-description {
+	p:first-child {
+		margin-top: 0;
+	}
+}
+
+.param-properties {
+	font-weight: 500;
+	margin: 1em 0 0;
+}
+
+.param-types,
+.property-types {
+  display: inline-block;
+  margin: 0 0.5em 0 .25em;
+  color: #999;
+}
+
+// optional tag
+.param-attr,
+.property-attr {
+  display: inline-block;
+  padding: 0.2em 0.5em;
+  border: 1px solid #eee;
+  color: #aaa;
+  font-weight: 300;
+  font-size: 0.8em;
+  vertical-align: baseline;
+}
+
+.properties-table {
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
