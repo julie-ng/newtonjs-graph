@@ -2,8 +2,37 @@ const d3 = require('d3')
 const View = require('./view')
 
 /**
- * Encapsulates what is needed to create the links between
- * nodes of a network graph, namely rendering and positioning
+ * @typedef {Object} Link
+ *
+ * A link is an `Object` with references to source and target {@link Node}s. Consider the following
+ *
+ * ```javascript
+ * const nodes = [
+ * 	{ id: 'a', label: 'Frontend' },
+ * 	{ id: 'b', label: 'Backend' },
+ * 	{ id: 'c', label: 'Database' },
+ * ]
+ *
+ * const links = [
+ * 	{ source: 'a', target: 'b' },	// Frontend requires Backend
+ * 	{ source: 'b', target: 'c' }	// Backend requires Database
+ * ]
+ * ```
+ * Note that identifiers must be `String`s.
+ *
+ * @property {String} source - Reference identifier to source node
+ * @property {String} target - Reference identifier to target node
+ */
+
+/**
+ * Encapsulates what is needed to draw `<line>`s to represent the links between
+ * nodes of a network graph, namely rendering and positioning.
+ *
+ * Styling, including colors and arrowheads are accomplished using CSS on the selectors, including
+ * - `[data-rel="is-source"]`
+ * - `[data-rel="is-target"]`
+ * - `[data-rel="is-deep-source"]`
+ * - `[data-rel="has-no-relationship"]`
  *
  * @extends View
  */
@@ -11,22 +40,39 @@ class Links extends View {
 	/**
 	 * @param {Object} options
 	 * @param {String} [options.dom = window.document] - DOM reference, required for testing
-	 * @param {String} [options.container] - HTML identifier used by for d3
+	 * @param {String} [options.container] - HTML identifier used by d3.js
 	 */
 	constructor (options = {}) {
 		super(options)
 	}
 
+	/**
+	 * Renders links, adding `<line>`s to our `<svg>` canvas.
+	 *
+	 * @param {Object} data
+	 */
 	render (data) {
 		let links = d3.select(this.dom)
 			.select(this.container)
 			.selectAll('.link')
 			.data(data.links, (d) => d.source.id + '-' + d.target.id) // key function
 
+		/**
+		 * An `Array` of exiting links, i.e. links to be removed per d3.js general update pattern.
+		 *
+		 * @event Links#exit
+		 * @type {Array}
+		 */
 		this.emit('exit', links.exit())
 		links.exit()
 			.remove()
 
+		/**
+		 * An `Array` of entering links, i.e. links to be added per d3.js general update pattern.
+		 *
+		 * @event Links#enter
+		 * @type {Array}
+		 */
 		this.emit('enter', links.enter())
 		links = links.enter()
 			.append('line')
@@ -35,6 +81,12 @@ class Links extends View {
 				.attr('class', 'link')
 				.attr('marker-end', 'url(#end)')
 
+		/**
+		 * An `Array` of combined existing and new links, per d3.js general update pattern.
+		 *
+		 * @event Links#update
+		 * @type {Array}
+		 */
 		this.emit('update', links)
 		this.selection = links
 	}
@@ -47,22 +99,48 @@ class Links extends View {
 			.attr('y2', (d) => d.target.y)
 	}
 
-	setRelationships (n) {
-		this.selection.attr('data-rel', (i) => this._getRelationship(i, n))
+	/**
+	 * Classifies all links, based on relationship to node parameter.
+	 * CSS styling is based on `data-rel` attribute set on the `<line>` element.
+	 *
+	 * @param {Node} node
+	 */
+	setRelationships (node) {
+		this.selection.attr('data-rel', (i) => this._getRelationship(i, node))
 	}
 
-	hideUnrelated (n) {
-		this.selection.attr('data-hidden', (i) => this._setHidden(i, n))
+	/**
+	 * Hides all links unrelated to node parameter.
+	 * CSS styling is based on `data-hidden` attribute set on the `<line>` element.
+	 *
+	 * @param {Node} node
+	 */
+	hideUnrelated (node) {
+		this.selection.attr('data-hidden', (i) => this._setHidden(i, node))
 	}
 
-	showArrows (n, opts = {}) {
-		this.selection.attr('marker-end', (i) => this._getMarkerEnd(i, n, opts))
+	/**
+	 * Adds directional arrows to indicate source-target relationship between nodes.
+	 *
+	 * @param {Node} node
+	 * @param {Object} [options={}]
+	 * @param {Boolean} [options.color=true]
+	 * @param {Boolean} [options.showAll=true] - If set to `true`, this view will draw all arrows, even if link has no relationship to `node`.
+	 */
+	showArrows (node, options = {}) {
+		this.selection.attr('marker-end', (i) => this._getMarkerEnd(i, node, options))
 	}
 
+	/**
+	 * Shows all Links, resetting the `data-hidden` attribute used for CSS styling.
+	 */
 	showAll () {
 		this.selection.attr('data-hidden', null)
 	}
 
+	/**
+	 * Reset all styles, e.g. colors and removes arrowheads.
+	 */
 	resetStyles () {
 		super.resetStyles()
 		this.selection.attr('marker-end', '')

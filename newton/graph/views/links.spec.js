@@ -156,7 +156,7 @@ describe ('Links', () => {
 			it ('uses _getRelationship() helper', () => {
 				links.setRelationships()
 				let cb = attrSpy.mock.calls[0][1]
-				expect(cb.toString().includes('_getRelationship(i, n)')).toBe(true)
+				expect(cb.toString().includes('_getRelationship(i, node)')).toBe(true)
 			})
 		})
 
@@ -166,7 +166,7 @@ describe ('Links', () => {
 			it ('uses _setHidden() helper', () => {
 				links.hideUnrelated()
 				let cb = attrSpy.mock.calls[0][1]
-				expect(cb.toString().includes('_setHidden(i, n)')).toBe(true)
+				expect(cb.toString().includes('_setHidden(i, node)')).toBe(true)
 			})
 
 			it ('sets `data-hidden` attribute on element', () => {
@@ -227,7 +227,7 @@ describe ('Links', () => {
 				it ('calls `_getMarkerEnd()` helper and passes along options', () => {
 					links.showArrows('0')
 					let code = attrSpy.mock.calls[0][1].toString()
-					expect(code.includes('this._getMarkerEnd(i, n, opts)')).toBe(true)
+					expect(code.includes('this._getMarkerEnd(i, node, options)')).toBe(true)
 				})
 			})
 

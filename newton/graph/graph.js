@@ -15,22 +15,21 @@ const defaults = {
 }
 
 /**
- * Cola.js Network Graph
- *
+ * The `Graph` class holds everything together: {@link Nodes}, {@link Links}, {@link Labels} and the {@link Network}.
  */
 class Graph extends EventEmitter {
 
 	/**
-	 * Constructor
+	 * Note that the `opts.network` attribute is required.
 	 *
-	 * @param {Object} [opts] - options
-	 * @param {Number} [opts.margin] - graph margins
-	 * @param {Number} [opts.height] - height of network graph
-	 * @param {Number} [opts.width] - width of network graph
+	 * @param {Object} opts={}
+	 * @param {Number} [opts.margin=40] - Graph margins in pixels.
+	 * @param {Number} [opts.height=550] - Height of network graph in pixels.
+	 * @param {Number} [opts.width=800] - Width of network graph in pixels.
 	 * @param {Network} opts.network
-	 * @param {String} [opts.engine = 'cola'] - force layout engine. Can be `d3` or `cola`.
-	 * @param {String} [opts.flow] - display links in horizontal flow?
-	 * @param {Boolean} [opts.draggable] - make nodes draggable?
+	 * @param {String} [opts.engine = 'cola'] - Force layout engine. Can be `d3` or `cola`.
+	 * @param {String} [opts.flow] - Display links in horizontal flow?
+	 * @param {Boolean} [opts.draggable] - Make nodes draggable?
 	 */
 	constructor (opts = {}) {
 		super()
@@ -52,9 +51,18 @@ class Graph extends EventEmitter {
 	}
 
 	/**
-	 * Initializes graph, binds layout and network, and performs first render
+	 * Initializes `Graph` layout, binds graph to {@link Network}, and performs first render.
 	 *
-	 * @returns this
+	 * @listens Network#event:update
+	 * @listens Links#event:enter
+	 * @listens Links#event:exit
+	 * @listens Nodes#event:update
+	 * @listens Nodes#event:enter
+	 * @listens Nodes#event:exit
+	 * @listens Nodes#event:click
+	 * @listens Nodes#event:mouseover
+	 * @listens Nodes#event:mouseout
+	 * @returns {this}
 	 */
 	init () {
 		this._initLayout()
@@ -125,9 +133,35 @@ class Graph extends EventEmitter {
 			this.nodes.on('update', (nodes) => nodes.call(this.force.drag))
 		}
 
-		this.nodes.on('node:mouseover', (n) => this.emit('node:mouseover', n))
-		this.nodes.on('node:mouseout', (n) => this.emit('node:mouseout', n))
-		this.nodes.on('node:click', (n) => this.emit('node:click', n))
+		/**
+		 * @event Graph#node:mouseover
+		 * @type {Node}
+		 * @example
+		 * graph.on('node:mouseover', (node) => {
+		 * 	console.log('User mouse-overed on node ' + node.name)
+		 * })
+		 */
+		this.nodes.on('mouseover', (n) => this.emit('node:mouseover', n))
+
+		/**
+		 * @event Graph#node:mouseout
+		 * @type {Node}
+		 * @example
+		 * graph.on('node:mouseout', (node) => {
+			* 	console.log('User mouse-outed on node ' + node.name)
+			* })
+			*/
+		this.nodes.on('mouseout', (n) => this.emit('node:mouseout', n))
+
+		/**
+		 * @event Graph#node:click
+		 * @type {Node}
+		 * @example
+		 * graph.on('node:click', (node) => {
+			* 	console.log('User clicked on node ' + node.name)
+			* })
+			*/
+		this.nodes.on('click', (n) => this.emit('node:click', n))
 	}
 
 	_adjustForce (selection) {
@@ -136,6 +170,11 @@ class Graph extends EventEmitter {
 		}
 	}
 
+	/**
+	 * Initialize Cola.js Engine
+	 *
+	 * @private
+	 */
 	_colaForce () {
 		let force = Cola.d3adaptor(d3).size([this.width, this.height])
 		force
@@ -154,6 +193,12 @@ class Graph extends EventEmitter {
 		return force
 	}
 
+
+	/**
+	 * Initialize d3.js Engine
+	 *
+	 * @private
+	 */
 	_d3Force () {
 		let force = d3.forceSimulation(this.network.get('nodes'))
 		.force('link', d3.forceLink(
@@ -182,9 +227,10 @@ class Graph extends EventEmitter {
 	// ------- RENDERS --------
 
 	/**
-	 * Renders nodes, links and labels for a graph. If nodes have failures, they will be highlighted in graph.
+	 * Renders {@link Nodes}, {@link Links} and {@link Labels} for a `Graph`.
+	 * If nodes have failures, they will be highlighted with colors and animations in the graph.
 	 *
-	 * @param {Object} [data] - defaults to network
+	 * @param {Object} [data] - Defaults to graph's {@link Network} data.
 	 */
 	render (data) {
 		this.renders++
@@ -210,21 +256,22 @@ class Graph extends EventEmitter {
 	/**
 	 * Highlights dependencies, of nodes
 	 *
-	 * @param {Node} node - node, whose dependencies are to be highlighted
-	 * @param {Boolean} opts.arrows - show directional arrows of source-target relationship?
+	 * @param {Node} node - Node, whose dependencies are to be highlighted
+	 * @param {Object} [options={}]
+	 * @param {Boolean} [options.arrows=null] - Show directional arrows of source-target relationship?
 	 */
-	highlightDependencies (node, opts = {}) {
+	highlightDependencies (node, options = {}) {
 		// console.log(`[graph] highlightDependencies(${node.label})`)
 		this.nodes.setRelationships(node)
 		this.labels.setRelationships(node)
 		this.links.setRelationships(node)
-		if (opts.arrows) {
+		if (options.arrows) {
 			this.links.showArrows(node, { color: true, showAll: false })
 		}
 	}
 
 	/**
-	 * Resets styles, highlights, etc.
+	 * Resets styles, highlights, removing colors, arrows, etc.
 	 */
 	resetStyles () {
 		// console.log('[graph] resetStyles()')
@@ -234,7 +281,6 @@ class Graph extends EventEmitter {
 	}
 
 	_addArrows (stylesArray) {
-
 		// 20 for radius 6
 		// 24 for radius 10
 		this.svg.append("svg:defs")

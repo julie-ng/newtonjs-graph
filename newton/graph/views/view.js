@@ -1,9 +1,14 @@
 const EventEmitter = require('events').EventEmitter
+
 /**
  * Base Class to force interface to be implemented
  */
-
 class View extends EventEmitter {
+	/**
+	 * @param {Object} options
+	 * @param {String} [options.dom = window.document] - DOM reference, required for testing
+	 * @param {String} [options.container] - HTML identifier used by for d3
+	 */
 	constructor (options = {}) {
 		super()
 		this.dom = options.dom || window.document
@@ -57,10 +62,22 @@ class View extends EventEmitter {
 		throw interfaceError('highlightDependencies')
 	}
 
+	/**
+	 * Classifies elements based on relationship to node parameter.
+	 * CSS styling is based on `data-rel` attribute set on the DOM element.
+	 *
+	 * @param {Node} node
+	 */
 	setRelationships (node) {
 		this.selection.attr('data-rel', (i) => this.graph.network.getRelationship(i, node))
 	}
 
+	/**
+	 * Visually hides elements unrelated to node parameter.
+	 * CSS styling is based on `data-hidden` attribute set on the DOM element.
+	 *
+	 * @param {Node} node
+	 */
 	hideUnrelated (node) {
 		this.selection.attr('data-hidden', (i) => {
 			(this.graph.network.getRelationship(i, node) === 'has-no-relationship')
@@ -69,6 +86,9 @@ class View extends EventEmitter {
 		})
 	}
 
+	/**
+	 * Reset all styles, e.g. colors and visibility
+	 */
 	resetStyles () {
 		this.selection
 			.attr('data-rel', '')

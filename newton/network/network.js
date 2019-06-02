@@ -5,7 +5,7 @@ const EventEmitter = require('events').EventEmitter
  * As describe in the [WebCola Wiki](https://github.com/tgdwyer/WebCola/wiki/General-API-notes), the layout adapter
  * follows [d3.layout.force](https://github.com/mbostock/d3/wiki/Force-Layout) conventions and joins nodes via (JavaScript) reference or array indexes, which normally looks like this:
  *
- * ```
+ * ```javascript
  * const links = [
  * 	{ source: 0, target: 1 },
  * 	{ source: 3, target: 5 }
@@ -14,7 +14,7 @@ const EventEmitter = require('events').EventEmitter
  *
  * This wrapper lets you calculate links dynamically based on a reference key, e.g. `id`, so we can use this kind of structure instead:
  *
- * ```
+ * ```javascript
  * const links = [
  * 	{ source: 'A', target: 'B' },
  * 	{ source: 'frontend', target: 'middleware' }
@@ -26,10 +26,10 @@ class Network extends EventEmitter {
 	/**
 	 * Creates a Network
 	 *
-	 * @param {Array} nodes - Array of Nodes
-	 * @param {Array} links - Array of Relationships between nodes using the reference key, or array indexes
+	 * @param {Array} nodes - Array of {@link Node}s
+	 * @param {Array} links - Array of {@link Link}s - relationships between nodes using the reference key, or array indexes
 	 * @param {Object} options
-	 * @param {String} options.uid - name of the property of your unique identifier, e.g. 'id'
+	 * @param {String} options.uid - name of the property of unique identifier, e.g. 'id'
 	 */
 	constructor (nodes, links, options = {}) {
 		super()
@@ -81,7 +81,7 @@ class Network extends EventEmitter {
 	 * Currently used for first binding or rendering
 	 *
 	 * @param {String} attr - attribute to return. Valid attributes are `links` or `nodes`.
-	 * @return {String|null}
+	 * @return {Object|Array|null}
 	 */
 	get (attr) {
 		if (attr === 'data')
@@ -119,7 +119,7 @@ class Network extends EventEmitter {
 	 * Find node by id
 	 *
 	 * @param {String} id
-	 * @return {Object} node data object
+	 * @return {Node} node
 	 */
 	findNodeById (id) {
 		// console.log(`findNodeById(${id})`)
@@ -142,9 +142,9 @@ class Network extends EventEmitter {
 	/**
 	 * Updates data on a specific node
 	 *
-	 * @param {String|Object} node - either `id` of node, or the object itself to update
+	 * @param {String|Node} n - either `id` of node, or the object itself to update
 	 * @param {Object} attrs - node data attributes to change. This is merged onto existing attributes, so you only need to pass in updated values.
-	 * @return {Object} node
+	 * @return {this}
 	 */
 	updateNode (n, attrs) {
 		let node = (typeof n === 'string')
@@ -158,7 +158,7 @@ class Network extends EventEmitter {
 	/**
 	 * Removes node _and_ its links from the graph.
 	 *
-	 * @param {Object} node - node object
+	 * @param {Node} node
 	 */
 	removeNode (node) {
 		const i = this.findNodeIndex(node)
@@ -181,8 +181,8 @@ class Network extends EventEmitter {
 	/**
 	 * Finds links a given node has. Example results are `[{source: node, target: node}]`
 	 *
-	 * @param {Object} node - node data object
-	 * @return {Array} of link objets
+	 * @param {Node} node
+	 * @return {Array} of {@link Link} objets
 	 */
 	findLinks (node) {
 		let links = []
@@ -197,7 +197,7 @@ class Network extends EventEmitter {
 	/**
 	 * Removes links for a given node
 	 *
-	 * @param {Object} node - node data object
+	 * @param {Node} node
 	 */
 	removeLinks (node) {
 		let links = this._links
@@ -264,6 +264,17 @@ class Network extends EventEmitter {
 	 */
 	_publish (eventName) {
 		// console.log(`[network event] publish: '${eventName}'`)
+
+		/**
+		 * Update event which passes on network data so graph elements,
+		 * nodes and links can update themselves based on latest
+		 * real-time data.
+		 *
+		 * @event Network#update
+		 * @type {Object}
+		 * @property {Array} nodes
+		 * @property {Array} links
+		 */
 		this.emit(eventName, {
 			nodes: this._nodes,
 			links: this._links
