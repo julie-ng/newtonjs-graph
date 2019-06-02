@@ -14,7 +14,7 @@
 		"excludePattern": "(^|\\/|\\\\)_"
 	},
 	"opts": {
-		"template": "node_modules/tidy-jsdoc",
+		"template": "./../../../../tidy-jsdoc",
 		"encoding": "utf8",
 		"destination": "./docs/",
 		"recurse": true
@@ -29,9 +29,6 @@
 	},
 	"metadata": {
 		"title": "Newton Graph Library",
-		"header": {
-			"background": "#102027",
-			"color": "#ffffff"
-		}
+		"logo": "images/newton-logo.png"
 	}
 }

@@ -13,7 +13,8 @@
     "build": "webpack --config webpack.lib.js && rm ./build/css.min.js",
     "demo:build": "webpack --config webpack.demo.js",
     "demo:dev": "webpack-dev-server --config webpack.demo.dev.js --open",
-    "docs": "jsdoc --readme ./README.md -c jsdoc.json",
+    "docs": "npm run docs:images && jsdoc --readme ./README.md -c jsdoc.json",
+    "docs:images": "rm -rf docs/images && cp -r images/ docs/images/",
     "docs:dev": "concurrently --kill-others 'npm:docs:watch' 'npm:docs:server'",
     "docs:watch": "nodemon -w newton --exec 'npm run docs'",
     "docs:server": "live-server docs",
@@ -47,7 +48,6 @@
     "node-sass": "^4.12.0",
     "nodemon": "^1.18.7",
     "sass-loader": "^7.1.0",
-    "tidy-jsdoc": "^0.3.1",
     "webpack": "^4.26.0",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.14"
