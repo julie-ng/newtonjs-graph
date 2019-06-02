@@ -8,43 +8,54 @@
 
 This repository contains learning and prototype code for a high-level dashboard for architects and stakeholders. The goal is to illustrate *product and service dependencies* in a software architecture.
 
-[View API Documentation &rarr;](https://julie-ng.github.io/newtonjs-graph/)
-
-<img src="./images/screenshots/demo-1.png" alt="Demo Screenshot" style="border:1px solid #ddd">
-
 The goal is to visualize architectures in large organizations as organisms that live and breath with deployments, problems, etc. These type of visualization could instead, over time:
 
 - reveal insights about how [Conway's Law](https://en.wikipedia.org/wiki/Conway%27s_law) applies to the organization.
 - visual _domain_ (as opposed to technical) dependencies across teams.
 
+### Example Graphs
+
+The following show two different renders from the same demo data set:
+
+| D3.js Engine | Webcola Engine |
+|:--|:--|
+| <img src="./images/screenshots/demo-d3-layout.png" alt="Example Graph with d3.js Layout Engine" width="350" style="max-width:100%"> | <img src="./images/screenshots/demo-cola-layout.png" alt="Example Graph with webcola Layout Engine" width="400" style="max-width:100%"> | 
+| [d3-force](https://github.com/d3/d3-force) creates a "harmonious" distribution of nodes | [cola.js](https://ialab.it.monash.edu/webcola/) can create directional graphs |
+
+### Highlight Relationships with Colors
+
+In both examples above, the "Documents Service" is the **_highlighted node_**. The colors indicate a relationship to this node:
+
+| Color | Relationship | Description |
+|:--|:--|:--|
+| Green | | In this example, the node had a status of `up`, so it is still green. |
+| Red | `is-source` | These nodes directly depend on "Documents Service". |
+| Orange | `is-deep-source` | These nodes do not _directly_ require "Documents Service", but may still be impacted. |
+| Yellow | `is-target` | These nodes do not require "Documents Service", but may still be effected, e.g. decrease in incoming traffic. |
+| Faded Out | `has-no-relationship` | No releationship to highlighted node. |
+
+For more information **[view API Documentation &rarr;](https://julie-ng.github.io/newtonjs-graph/)**
+
 ## Network - Data Wrapper
 
 A `Network` is essentially a data wrapper. Its biggest advantage is that it dynamically calculating links between nodes, based on a unique identifier `uid`, instead of array indexes.
 
-The basic data format is as so:
+Here is an example data set from the [demo](./demo/data/3a.data.js):
 
 ```javascript
-const nodes = [
-	{
-		id: "1",
-		status: "up",
-		label: "Frontend"
-	},
-	{
-		id: "2",
-		status: "up",
-		label: "API Gateway"
-	}
-]
-
-const linksMap = [
-	{ 
-		source: 1, 
-		target: 2 
-	}
-]
-
-const network = new Network(nodes, linksMap)
+const data = {
+	nodes: [
+		{ id: 'w', label: 'Web Frontend' },
+		{ id: 'm', label: 'Mobile Device' },
+		{ id: 'b', label: 'Monolith Backend' },
+		{ id: 'd', label: 'Database' },
+	],
+	links: [
+		{ source: 'w', target: 'b' },
+		{ source: 'm', target: 'b' },
+		{ source: 'b', target: 'd' }
+	]
+}
 ```
 
 ## Graph - Visualization
@@ -53,29 +64,18 @@ While `Network` handles the data, `Graph` handles the visualizations, including 
 
 
 ```javascript
+const network = new Network(data.nodes, data.links)
 const graph = new Graph({
 	width: window.innerWidth,
-	height: window.innerHeight - 60,
-	flow: 'horizontal',
-	draggable: true
+	height: window.innerHeight,
+	flow: 'horizontal',	
+	draggable: true,
+	network: network // required
 })
-const network = new Network(data.nodes, data.linksMap, { uid: 'id' })
 
-graph.init().bind(network)
-```
-
-### Event Driven
-
-Note that `Graph` is **event-driven** means that it listens for events, e.g. `update` and updates the visualization automatically depending on the bound network data. 
-
-Example
-
-```javascript
-network.on('update', (data) => {
-	this.nodes.render(data)
-	this.labels.render(data)
-	this.links.render(data)
-	this.emit('update', data)
+graph.init()
+graph.on('node:click', (n) => {
+	graph.highlightDependencies(n, { arrows: true })
 })
 ```
 
@@ -85,7 +85,7 @@ network.on('update', (data) => {
 
 First install the dependencies required:
 
-```
+```bash
 npm install
 ```
 
@@ -93,8 +93,8 @@ npm install
 
 To view the prototype in the browser, run
 
-```
-npm run dev:demo
+```bash
+npm run demo:dev
 ```
 
 which starts the webpack dev server and automatically opens [http://localhost:9000](http://localhost:9000) in a browser window.
