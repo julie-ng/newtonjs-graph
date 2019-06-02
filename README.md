@@ -1,4 +1,4 @@
-# Newton Graph Prototype 
+# Newton Graph Library 
 
 [![Build Status](https://travis-ci.org/julie-ng/newtonjs-graph.svg?branch=master)](https://travis-ci.org/julie-ng/newtonjs-graph)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/7a3975197c576202fe08/test_coverage)](https://codeclimate.com/github/julie-ng/newtonjs-graph/test_coverage)
@@ -6,12 +6,10 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/julie-ng/newtonjs-graph/badge.svg?targetFile=package.json)](https://snyk.io/test/github/julie-ng/newtonjs-graph?targetFile=package.json)
 [![Build Status](https://dev.azure.com/newtonjs/newton-graph/_apis/build/status/julie-ng.newtonjs-graph?branchName=master)](https://dev.azure.com/newtonjs/newton-graph/_build/latest?definitionId=1&branchName=master)
 
-This repository contains learning and prototype code for a high-level dashboard for architects and stakeholders. The goal is to illustrate *product and service dependencies* in a software architecture.
+This repository contains learning and prototype code for a high-level dashboard for architects and stakeholders. The goal is to visualize architectures in large organizations as organisms that live and breath with deployments, problems, etc. These real-time visualizations could instead reveal insights about how [Conway's Law](https://en.wikipedia.org/wiki/Conway%27s_law) applies to the organization.
 
-The goal is to visualize architectures in large organizations as organisms that live and breath with deployments, problems, etc. These type of visualization could instead, over time:
-
-- reveal insights about how [Conway's Law](https://en.wikipedia.org/wiki/Conway%27s_law) applies to the organization.
-- visual _domain_ (as opposed to technical) dependencies across teams.
+- [Live Demo &rarr;](https://newton-demo.azurewebsites.net/?data-server=https://newton-demo-data-editor.azurewebsites.net/)  	
+- [API Documentation &rarr;](https://julie-ng.github.io/newtonjs-graph/)
 
 ### Example Graphs
 
