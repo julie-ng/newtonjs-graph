@@ -2,6 +2,7 @@ node_modules/
 build/
 coverage/
 dist/
+newton/debug/
 .DS_Store
 *.tmp
 *.log
