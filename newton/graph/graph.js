@@ -43,10 +43,25 @@ class Graph extends EventEmitter {
 
 		this._setNetwork(opts)
 
+		/**
+		 * @property {Labels} labels - reference to Labels used for UI interactions
+		 */
 		this.labels = new Labels()
+
+		/**
+		 * @property {Links} links - reference to Links used for UI interactions
+		 */
 		this.links = new Links()
+
+		/**
+		 * @property {Nodes} nodes - reference to Nodes used for UI interactions
+		 */
 		this.nodes = new Nodes()
 
+
+		/**
+		 * @property {Integer} renders - internal counter used to help decide whether to re-render a layout
+		 */
 		this.renders = 0
 	}
 
