@@ -9,6 +9,8 @@
 This repository contains learning and prototype code for a high-level dashboard for architects and stakeholders. The goal is to visualize architectures in large organizations as organisms that live and breath with deployments, problems, etc. These real-time visualizations could instead reveal insights about how [Conway's Law](https://en.wikipedia.org/wiki/Conway%27s_law) applies to the organization.
 
 - [Live Demo &rarr;](https://newton-demo.azurewebsites.net/?data-server=https://newton-demo-data-editor.azurewebsites.net/)  	
+	- [Graph Frontend &rarr;](https://newton-demo.azurewebsites.net/?data-server=https://newton-demo-data-editor.azurewebsites.net/)  	
+	- [Data Editor &rarr;](https://newton-demo-data-editor.azurewebsites.net/)  	
 - [API Documentation &rarr;](https://julie-ng.github.io/newtonjs-graph/)
 
 ### Example Graphs
