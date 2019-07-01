@@ -1,9 +1,8 @@
 {
-  "name": "@newton/graph",
+  "name": "@newtonjs/graph",
   "version": "0.1.0",
   "description": "Architecture Graph",
   "author": "Julie Ng <hello@julie.io>",
-  "private": true,
   "main": "newton/index.js",
   "repository": {
     "type": "git",
