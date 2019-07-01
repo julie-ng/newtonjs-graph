@@ -1,6 +1,6 @@
 {
   "name": "@newton/graph",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Architecture Graph",
   "author": "Julie Ng <hello@julie.io>",
   "private": true,
