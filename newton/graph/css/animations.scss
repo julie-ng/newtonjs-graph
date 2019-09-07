@@ -32,14 +32,14 @@
   from,
   50%,
   to {
-		fill: darken($red, 15%);
-		stroke: darken($red, 10%);
+		fill: var(--red-darkest);
+		stroke: var(--red-darker);
   }
 
   25%,
   75% {
-		fill: lighten($red, 5%);
-		stroke: lighten($red, 8%);
+		fill: var(--red-lighter);
+		stroke: var(--red-lightest);
   }
 }
 
@@ -47,13 +47,13 @@
   from,
   50%,
   to {
-		fill: darken($blue, 10%);
-		stroke: darken($blue, 8%);
+		fill: var(--teal-darkest);
+		stroke: var(--teal-darker);
   }
 
   25%,
   75% {
-		fill: lighten($blue, 8%);
-		stroke: lighten($blue, 12%);
+		fill: var(--teal-lighter);
+		stroke: var(--teal-lightest);
   }
 }

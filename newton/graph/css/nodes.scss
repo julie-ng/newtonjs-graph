@@ -3,36 +3,26 @@
 		cursor: pointer;
 	}
 
-	fill: $green;
-	stroke: $green;
+	fill: var(--green);
+	stroke: var(--green);
 	stroke-width: 3px;
 
 	transform-origin: center center;
 	animation-iteration-count: infinite;
 
-	@mixin fadeNode() {
-		fill: $backgroundOffsetColor;
-		stroke: lighten($backgroundOffsetColor, 10%);
-	}
-
-	@mixin hideNode() {
-		fill: darken($backgroundOffsetColor, 6%);
-		stroke: darken($backgroundOffsetColor, 4%);
-	}
-
 	// --- Uptime Status ---
 
 	&.status-down {
-		fill: $statusDownFill;
-		stroke: $statusDownStroke;
+		fill: var(--red);
+		stroke: var(--red-lighter);
 		animation-timing-function: ease-in;
 		animation-duration: 1.1s;
 		animation-name: flashRed, shake;
 	}
 
 	&.status-deploying {
-		fill: $statusDeployingFill;
-		stroke: $statusDeployingStroke;
+		fill: var(--teal);
+		stroke: var(--teal-lighter);
 		animation-name: flashBlue;
 		animation-duration: 3s;
 		animation-timing-function: ease;
@@ -41,30 +31,32 @@
 	// --- Relationships ---
 
 	&[data-rel="is-source-and-target"] {
-		fill: $green;
-		stroke: lighten($green, 10%);
+		fill: var(--green);
+		stroke: var(--green-lighter);
 	}
 
 	&[data-rel="is-source"] {
-		fill: $red;
-		stroke: lighten($red, 10%);
+		fill: var(--red);
+		stroke: var(--red-lighter);
 	}
 
 	&[data-rel="is-deep-source"] {
-		fill: $orange;
-		stroke: lighten($orange, 10%);
+		fill: var(--orange);
+		stroke: var(--orange-lighter);
 	}
 
 	&[data-rel="is-target"] {
-		fill: $yellow; // $lightenDarkenColor(colors.yellow, -40)
-		stroke: lighten($yellow, 10%);
+		fill: var(--yellow);
+		stroke: var(--yellow-lighter);
 	}
 
 	&[data-rel="has-no-relationship"] {
-		@include fadeNode();
+		fill: var(--navy);
+		stroke: var(--navy-lighter);
 	}
 
 	&[data-hidden="1"] {
-		@include hideNode();
+		fill: var(--graph-bg-color);
+		stroke: var(--graph-bg-color);
 	}
 }

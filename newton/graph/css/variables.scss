@@ -1,31 +1,32 @@
-$yellow: 			#fdd835;
-$brightGreen: #2ca02c;
-$green: 			#168600;
-$orange: 			#d2620b;
-$red: 				#af282a;
-$blue: 				#00838f;
-$darkBlue: 		#044b7f;
+:root {
+	--white: 					#fff;
+	--grey: 					#37474f;
+	--grey-lighter: 	#56707c;
+	--navy: 					#1a2b3c;
+	--navy-lighter: 	#20354a;
+	--navy-darker: 		#102027; // #172635
 
-$pageBgColor: 		#102027;
-$graphLinkColor: 	#37474f;
-$graphLabelColor: #56707c;
+	--bright-green:		#2ca02c;
+	--green: 					#168600;
+	--green-lighter:	#1eb900;
+	--teal-darkest:		#00545c;
+	--teal-darker:		#00838f;
+	--teal:						#009aa9;
+	--teal-lighter:		#00a8b8;
+	--teal-lightest:	#00bbcc;
 
-$darkNodeBg: 	#162b35;
-$autumnYellow:#e3b505;
-$darkOrange: 	#9a5b11;
-
-$statusUpFill:				 	$green;
-$statusUpStroke: 				$green;
-$statusDeployingFill:  #00838f;
-$statusDeployingStroke:#009aa9;
-$statusDownFill: 			 #b72022;
-$statusDownStroke:		 #c42d2f;
-
-$backgroundOffsetColor: #20354a;  // '#263238'
-// const green = '#168600' // different
-// const blue = '#00838f' // different
-// const red = '#b72022' // different
+	--red-darkest: 		#711a1b;
+	--red-darker: 		#851f20;
+	--red: 						#b72022; // #af282a;
+	--red-lighter:		#d03032; // #c42d2f;
+	--red-lightest: 	#d03032;
+	--orange: 				#d2620b;
+	--orange-lighter: #f37b1d;
+	--orange-darker:	#9a5b11;
+	--yellow: 				#fdd835;
+	--yellow-lighter:	#fee268;
+	--yellow-darker: 	#e3b505;
 
 
-$hiddenLinkColor: darken($backgroundOffsetColor, 6%);
-$noRelationshipLinkColor: $backgroundOffsetColor;
+	--graph-bg-color: --var(--navy-darker);
+}

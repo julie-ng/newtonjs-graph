@@ -2,7 +2,7 @@ svg {
 	font-family: 'Roboto';
 	text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
 	text {
-		fill: $graphLabelColor;
+		fill: var(--grey-lighter);
 	}
 }
 
@@ -17,36 +17,39 @@ svg {
 	// --- Uptime Status ---
 
 	&.status-down {
-		fill: darken($red, 4%);
+		fill: var(--status-down-fill);
 		animation-timing-function: ease-in;
 		animation-duration: 1.1s;
 		animation-name: shake;
 	}
 
 	&.status-deploying {
-		fill: $blue;
+		fill: var(--white);
 	}
 
 	// --- Relationships ---
 
 	&[data-rel="is-source"] {
-		fill: $red;
+		fill: var(--red);
 	}
 
 	&[data-rel="is-deep-source"] {
-		fill: $orange;
+		fill: var(--orange);
 	}
 
 	&[data-rel="is-target"] {
-		fill: $autumnYellow;
+		fill: var(--yellow-darker);
 	}
 
-	&[data-hidden="1"],
 	&[data-rel="has-no-relationship"] {
-		fill: $backgroundOffsetColor;
+		fill: var(--navy-lighter);
+	}
+
+	&[data-hidden="1"] {
+		fill: var(--graph-bg-color);
 	}
 
 	&[data-rel="is-same-node"] {
-		fill: '#fff';
+		fill: var(--white);
 	}
 }

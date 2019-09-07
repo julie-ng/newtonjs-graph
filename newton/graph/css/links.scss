@@ -1,24 +1,24 @@
 .link {
-	stroke: $graphLinkColor;
+	stroke: var(--grey);
 	stroke-width: 1px;
 
 	&[data-rel="is-source"] {
-		stroke: $yellow;
+		stroke: var(--yellow);
 	}
 
 	&[data-rel="is-deep-source"] {
-		stroke: $darkOrange;
+		stroke: var(--orange);
 	}
 
 	&[data-rel="is-target"] {
-		stroke: $red;
+		stroke: var(--red);
 	}
 
 	&[data-rel="has-no-relationship"] {
-		stroke: $noRelationshipLinkColor;
+		stroke: var(--navy-lighter);
 	}
 
 	&[data-hidden="1"] {
-		stroke: $hiddenLinkColor;
+		stroke: var(--graph-bg-color);
 	}
 }
