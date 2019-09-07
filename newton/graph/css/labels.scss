@@ -1,6 +1,6 @@
 svg {
-	font-family: 'Roboto';
-	text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+	font-family: var(--label-font-family);
+	text-shadow: var(--label-text-shadow);
 	text {
 		fill: var(--grey-lighter);
 	}
@@ -10,7 +10,7 @@ svg {
 	transform-origin: center center;
 	animation-iteration-count: infinite;
 
-	font-size: 14px;
+	font-size: var(--label-font-size);
 	text-anchor: middle;
 	vertical-align: middle;
 

@@ -5,7 +5,7 @@
 
 	fill: var(--green);
 	stroke: var(--green);
-	stroke-width: 3px;
+	stroke-width: var(--node-stroke-width);
 
 	transform-origin: center center;
 	animation-iteration-count: infinite;

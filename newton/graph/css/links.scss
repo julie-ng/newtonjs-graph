@@ -1,6 +1,6 @@
 .link {
 	stroke: var(--grey);
-	stroke-width: 1px;
+	stroke-width: var(--link-stroke-width);
 
 	&[data-rel="is-source"] {
 		stroke: var(--yellow);
