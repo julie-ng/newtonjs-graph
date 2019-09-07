@@ -10,27 +10,26 @@ module.exports = {
 		// d3: './newton/d3.js'
 	},
 	output: {
-		filename: '[name].min.js',
-		path: path.resolve(__dirname, 'build'),
+		filename: '[name].bundle.min.js',
+		path: path.resolve(__dirname, 'dist'),
 		library: 'newton',
 		libraryExport: 'default',
 		libraryTarget: 'umd',
 		umdNamedDefine: true,
 	},
-	//   optimization: {
-	// 		// runtimeChunk: 'single',
-	// 		splitChunks: {
-	// 			cacheGroups: {
-	// 				vendors: {
-	// 					test: /[\\/]node_modules[\\/]/,
-	// 					// test: /[\\/]node_modules[\\/](d3|webcola)[\\/]/,
-	// 					name: 'vendors',
-	// 					enforce: true,
-	// 					chunks: 'all'
-	// 				}
-	// 			}
-	// 		}
-	// },
+	optimization: {
+		// runtimeChunk: 'single',
+		// splitChunks: {
+		// 	cacheGroups: {
+		// 		vendors: {
+		// 			test: /[\\/]node_modules[\\/]/,
+		// 			name: 'vendor',
+		// 			enforce: true,
+		// 			chunks: 'all'
+		// 		}
+		// 	}
+		// }
+	},
 	devtool: 'none',
 	module: {
 		rules: [
@@ -52,9 +51,9 @@ module.exports = {
 		]
 	},
 	plugins: [
-		new CleanWebpackPlugin(['build']),
+		new CleanWebpackPlugin(['dist']),
 		new MiniCssExtractPlugin({
-			filename: '[name].css'
+			filename: 'newton.css'
 		}),
 	]
 }

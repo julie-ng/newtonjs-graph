@@ -5,7 +5,7 @@ const config = Object.assign({}, defaults, {
 	mode: 'development',
 	devtool: 'inline-source-map',
 	devServer: {
-		contentBase: path.join(__dirname, 'demo/dist'),
+		contentBase: path.join(__dirname, 'demo/build'),
 		compress: true,
 		port: 9000
 	},

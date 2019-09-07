@@ -12,7 +12,7 @@ module.exports = {
 	output: {
 		filename: '[name].bundle.js',
 		chunkFilename: '[name].bundle.js',
-		path: path.resolve(__dirname, 'demo/dist')
+		path: path.resolve(__dirname, 'demo/build')
 	},
 	// optimization: {
 	// 	splitChunks: {
@@ -85,7 +85,7 @@ module.exports = {
 		]
 	},
 	plugins: [
-		new CleanWebpackPlugin(['demo/dist']),
+		new CleanWebpackPlugin(['demo/build']),
 		new MiniCssExtractPlugin({
 			filename: '[name].css'
 		}),
