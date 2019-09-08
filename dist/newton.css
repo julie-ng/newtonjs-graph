@@ -1,0 +1,206 @@
+:root {
+  --white: 					#fff;
+  --grey: 					#37474f;
+  --grey-lighter: 	#56707c;
+  --navy: 					#1a2b3c;
+  --navy-lighter: 	#20354a;
+  --navy-darker: 		#102027;
+  --bright-green:		#2ca02c;
+  --green: 					#168600;
+  --green-lighter:	#1eb900;
+  --teal-darkest:		#00545c;
+  --teal-darker:		#00838f;
+  --teal:						#009aa9;
+  --teal-lighter:		#00a8b8;
+  --teal-lightest:	#00bbcc;
+  --red-darkest: 		#711a1b;
+  --red-darker: 		#851f20;
+  --red: 						#b72022;
+  --red-lighter:		#d03032;
+  --red-lightest: 	#d03032;
+  --orange: 				#d2620b;
+  --orange-lighter: #f37b1d;
+  --orange-darker:	#9a5b11;
+  --yellow: 				#fdd835;
+  --yellow-lighter:	#fee268;
+  --yellow-darker: 	#e3b505;
+  --graph-bg-color: --var(--navy-darker);
+  --label-font-family: 'Roboto', sans-serif;
+  --label-font-size: 14px;
+  --label-text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+  --link-stroke-width: 1px;
+  --node-stroke-width: 3px; }
+
+:root {
+  --white: 					#fff;
+  --grey: 					#37474f;
+  --grey-lighter: 	#56707c;
+  --navy: 					#1a2b3c;
+  --navy-lighter: 	#20354a;
+  --navy-darker: 		#102027;
+  --bright-green:		#2ca02c;
+  --green: 					#168600;
+  --green-lighter:	#1eb900;
+  --teal-darkest:		#00545c;
+  --teal-darker:		#00838f;
+  --teal:						#009aa9;
+  --teal-lighter:		#00a8b8;
+  --teal-lightest:	#00bbcc;
+  --red-darkest: 		#711a1b;
+  --red-darker: 		#851f20;
+  --red: 						#b72022;
+  --red-lighter:		#d03032;
+  --red-lightest: 	#d03032;
+  --orange: 				#d2620b;
+  --orange-lighter: #f37b1d;
+  --orange-darker:	#9a5b11;
+  --yellow: 				#fdd835;
+  --yellow-lighter:	#fee268;
+  --yellow-darker: 	#e3b505;
+  --graph-bg-color: --var(--navy-darker);
+  --label-font-family: 'Roboto', sans-serif;
+  --label-font-size: 14px;
+  --label-text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+  --link-stroke-width: 1px;
+  --node-stroke-width: 3px; }
+
+/**
+ * Animations based on https://github.com/daneden/animate.css
+ */
+@keyframes shake {
+  from,
+  to {
+    transform: translate3d(0, 0, 0); }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translate3d(-1px, 0, 0); }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translate3d(1px, 0, 0); } }
+
+@keyframes flashRed {
+  from,
+  50%,
+  to {
+    fill: var(--red-darkest);
+    stroke: var(--red-darker); }
+  25%,
+  75% {
+    fill: var(--red-lighter);
+    stroke: var(--red-lightest); } }
+
+@keyframes flashBlue {
+  from,
+  50%,
+  to {
+    fill: var(--teal-darkest);
+    stroke: var(--teal-darker); }
+  25%,
+  75% {
+    fill: var(--teal-lighter);
+    stroke: var(--teal-lightest); } }
+
+svg marker#is-default {
+  fill: var(--graph-link-color); }
+
+svg marker#is-source {
+  fill: var(--yellow); }
+
+svg marker#is-deep-source {
+  fill: var(--orange); }
+
+svg marker#is-target {
+  fill: var(--red); }
+
+.node {
+  fill: var(--green);
+  stroke: var(--green);
+  stroke-width: var(--node-stroke-width);
+  transform-origin: center center;
+  animation-iteration-count: infinite; }
+  .node:hover {
+    cursor: pointer; }
+  .node.status-down {
+    fill: var(--red);
+    stroke: var(--red-lighter);
+    animation-timing-function: ease-in;
+    animation-duration: 1.1s;
+    animation-name: flashRed, shake; }
+  .node.status-deploying {
+    fill: var(--teal);
+    stroke: var(--teal-lighter);
+    animation-name: flashBlue;
+    animation-duration: 3s;
+    animation-timing-function: ease; }
+  .node[data-rel="is-source-and-target"] {
+    fill: var(--green);
+    stroke: var(--green-lighter); }
+  .node[data-rel="is-source"] {
+    fill: var(--red);
+    stroke: var(--red-lighter); }
+  .node[data-rel="is-deep-source"] {
+    fill: var(--orange);
+    stroke: var(--orange-lighter); }
+  .node[data-rel="is-target"] {
+    fill: var(--yellow);
+    stroke: var(--yellow-lighter); }
+  .node[data-rel="has-no-relationship"] {
+    fill: var(--navy);
+    stroke: var(--navy-lighter); }
+  .node[data-hidden="1"] {
+    fill: var(--graph-bg-color);
+    stroke: var(--graph-bg-color); }
+
+.link {
+  stroke: var(--grey);
+  stroke-width: var(--link-stroke-width); }
+  .link[data-rel="is-source"] {
+    stroke: var(--yellow); }
+  .link[data-rel="is-deep-source"] {
+    stroke: var(--orange); }
+  .link[data-rel="is-target"] {
+    stroke: var(--red); }
+  .link[data-rel="has-no-relationship"] {
+    stroke: var(--navy-lighter); }
+  .link[data-hidden="1"] {
+    stroke: var(--graph-bg-color); }
+
+svg {
+  font-family: var(--label-font-family);
+  text-shadow: var(--label-text-shadow); }
+  svg text {
+    fill: var(--grey-lighter); }
+
+.label {
+  transform-origin: center center;
+  animation-iteration-count: infinite;
+  font-size: var(--label-font-size);
+  text-anchor: middle;
+  vertical-align: middle; }
+  .label.status-down {
+    fill: var(--status-down-fill);
+    animation-timing-function: ease-in;
+    animation-duration: 1.1s;
+    animation-name: shake; }
+  .label.status-deploying {
+    fill: var(--white); }
+  .label[data-rel="is-source"] {
+    fill: var(--red); }
+  .label[data-rel="is-deep-source"] {
+    fill: var(--orange); }
+  .label[data-rel="is-target"] {
+    fill: var(--yellow-darker); }
+  .label[data-rel="has-no-relationship"] {
+    fill: var(--navy-lighter); }
+  .label[data-hidden="1"] {
+    fill: var(--graph-bg-color); }
+  .label[data-rel="is-same-node"] {
+    fill: var(--white); }
+
+
+/*# sourceMappingURL=newton.css.map*/
