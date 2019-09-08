@@ -11,6 +11,12 @@ This repository contains learning and prototype code for a high-level dashboard 
 - [Live Demo &rarr;](https://newton-demo.azurewebsites.net/?data-server=https://newton-demo-data-editor.azurewebsites.net/)  	
 	- [Graph Frontend &rarr;](https://newton-demo.azurewebsites.net/?data-server=https://newton-demo-data-editor.azurewebsites.net/)  	
 	- [Data Editor &rarr;](https://newton-demo-data-editor.azurewebsites.net/)  	
+- [Install](#install)
+	- [For Browsers](#for-browsers)
+	- [For Webpack](#for-webpack)
+- [Network](#network---data-wrapper)
+- [Graph](#graph---visualization)
+- [Customize Styles](#customize-styles)
 - [API Documentation &rarr;](https://julie-ng.github.io/newtonjs-graph/)
 
 ### Example Graphs
@@ -35,6 +41,46 @@ In both examples above, the "Documents Service" is the **_highlighted node_**. T
 | Faded Out | `has-no-relationship` | No releationship to highlighted node. |
 
 For more information **[view API Documentation &rarr;](https://julie-ng.github.io/newtonjs-graph/)**
+
+## Install
+
+### For Browsers
+
+Grab the [`newton.bundle.min.js`](./dist/newton.bundle.min.js) and [`newton.css`](./dist/newton.css) files from the [`dist/`](./dist) folder. Then include them in your HTML file.
+
+```html
+<!-- import library as `Newton` global -->
+<script src="./newton.bundle.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+	const network = new Newton.Network(…)
+	const graph = new Newton.Graph(…)
+</script>
+```
+
+Note: the documentation refers to module syntax. If you are using the pre-built distribution, you will need to remember to use the `Newton.Graph` instead of `Graph`, etc.
+
+Then continue directions below to define your [`Network`](#network---data-wrapper) and [`Graph`](#graph---visualization).
+
+### For Webpack
+
+First, install the library
+
+```
+npm install --save @newtonjs/graph
+```
+
+Then in your javascript, include them as you would any other library:
+
+```javascript
+const Graph = require('@newtonjs/graph').Graph
+const Network = require('@newtonjs/graph').Network
+```
+
+And for CSS, you can include the pre-built styles in an SCSS file like so:
+
+```scss
+@import "~@newtonjs/graph/dist/newton.css";
+```
 
 ## Network - Data Wrapper
 
@@ -79,7 +125,32 @@ graph.on('node:click', (n) => {
 })
 ```
 
+## Customize Styles
+
+Starting in version 0.2.0, you can use CSS variables to customize your graph. You should not need to edit the pre-built `newton.css` file.
+
+For example, in your CSS, you can just include the following variables and change them as needed:
+
+```css
+:root {
+	--graph-bg-color: --var(--navy-darker);
+	--label-font-family: 'Roboto', sans-serif;
+	--label-font-size: 14px;
+	--label-text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+	--link-stroke-width: 1px;
+	--node-stroke-width: 3px;
+}
+```
+
+For a list of all available variables, please see [`newton/graph/css/variables.scss`](./newton/graph/css/variables.scss)
+
 ## Development
+
+### Clone this repository
+
+```
+git clone https://github.com/julie-ng/newtonjs-graph
+```
 
 ### Install dependencies
 
