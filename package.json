@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "Architecture Graph",
   "author": "Julie Ng <hello@julie.io>",
-  "main": "newton/index.js",
+  "main": "dist/newton.bundle.min.js",
+  "module": "newton/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/julie-ng/newtonjs-graph"
