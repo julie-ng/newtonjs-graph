@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/julie-ng/newtonjs-graph/compare/v0.1.0...v0.2.0) (2019-09-08)
+
+
+### Build System
+
+* **deps:** bump eslint-utils from 1.3.1 to 1.4.2 ([a9fa0a7](https://github.com/julie-ng/newtonjs-graph/commit/a9fa0a7))
+* **deps:** bump lodash from 4.17.11 to 4.17.14 ([52a44e7](https://github.com/julie-ng/newtonjs-graph/commit/52a44e7))
+* **deps:** bump lodash.template from 4.4.0 to 4.5.0 ([f15dfa8](https://github.com/julie-ng/newtonjs-graph/commit/f15dfa8))
+
+
+### Features
+
+* **css:** set default background color ([6c0001f](https://github.com/julie-ng/newtonjs-graph/commit/6c0001f))
+* **css:**  use css variables for font, stroke styling ([4cf2b57](https://github.com/julie-ng/newtonjs-graph/commit/4cf2b57))
+* **css:**  use css variables for colors, remove sass functions ([a2a5a02](https://github.com/julie-ng/newtonjs-graph/commit/a2a5a02))
+* **build:** add bundle for browsers ([c973e42](https://github.com/julie-ng/newtonjs-graph/commit/c973e42))
+* **build:** output optimized version to dist folder ([48c6e8a](https://github.com/julie-ng/newtonjs-graph/commit/48c6e8a))
+* **build:** refactor config, expose lib as global `Newton` for browsers ([afd8865](https://github.com/julie-ng/newtonjs-graph/commit/afd8865))
+
+
+
 ## 0.1.0 (2019-07-01)
 
 

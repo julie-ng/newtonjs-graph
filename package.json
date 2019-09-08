@@ -1,6 +1,6 @@
 {
   "name": "@newtonjs/graph",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Architecture Graph",
   "author": "Julie Ng <hello@julie.io>",
   "main": "dist/newton.bundle.min.js",
