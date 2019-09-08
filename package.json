@@ -9,7 +9,8 @@
     "url": "https://github.com/julie-ng/newtonjs-graph"
   },
   "scripts": {
-    "build": "webpack --config webpack.lib.js && rm ./dist/css.bundle.min.js",
+    "build": "webpack --config webpack.config.js && npm run build:clean",
+    "build:clean": "rm ./dist/css.bundle.min.js && rm ./dist/css.bundle.min.js.map && rm ./dist/newton.css.map",
     "demo:build": "webpack --config webpack.demo.js",
     "demo:dev": "webpack-dev-server --config webpack.demo.dev.js --open",
     "docs": "npm run docs:images && jsdoc --readme ./README.md -c jsdoc.json",

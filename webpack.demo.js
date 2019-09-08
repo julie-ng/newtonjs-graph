@@ -1,88 +1,50 @@
 const path = require('path')
+const defaults = require('./webpack.config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-module.exports = {
+const loaders = [
+	{
+		test: /\.hbs$/,
+		use: 'handlebars-loader'
+	},
+	{
+		test: /\.(png|svg|jpg|gif)$/,
+		use: [
+			{
+				loader: 'file-loader',
+				options: {
+					name: 'images/[name].[ext]',
+				}
+			}
+		]
+	},
+	{
+		test: /\.(eot|ttf|woff|woff2)$/,
+		use: [
+			{
+				loader: 'file-loader',
+				options: {
+					name: 'fonts/[name].[ext]',
+				}
+			}
+		]
+	}
+]
+
+module.exports = Object.assign({}, defaults, {
 	mode: 'production',
 	entry: {
 		demo: './demo/entry.js'
-		// newton: './newton/index.js'
 	},
 	output: {
 		filename: '[name].bundle.js',
 		chunkFilename: '[name].bundle.js',
 		path: path.resolve(__dirname, 'demo/build')
 	},
-	// optimization: {
-	// 	splitChunks: {
-	// 		chunks: 'all'
-	// 	}
-	// },
-	// optimization: {
-	// 	runtimeChunk: true,
-	//   splitChunks: {
-	// 		chunks: 'all',
-	// 		cacheGroups: {
-	//       vendor: {
-	//         test: /[\\/]node_modules[\\/](d3|webcola|socket.io-client)[\\/]/,
-	//         name: 'vendor',
-	//         chunks: 'all',
-	//       }
-	//     }
-	// 		// cacheGroups: {
-	//     //   commons: {
-	//     //     test: /[\\/]node_modules[\\/]/,
-	//     //     name: 'vendors',
-	//     //     chunks: 'all'
-	//     //   }
-	//     // }
-	// 	}
-	// },
 	module: {
-		rules: [
-			{
-				test: /\.hbs$/,
-				use: 'handlebars-loader'
-			},
-			{
-				test: /\.css$/,
-				use: [
-					MiniCssExtractPlugin.loader,
-					'css-loader'
-				]
-			},
-			{
-				test: /\.scss$/,
-				use: [
-					MiniCssExtractPlugin.loader,
-					'css-loader',
-					'sass-loader'
-				]
-			},
-			{
-				test: /\.(png|svg|jpg|gif)$/,
-				use: [
-					{
-						loader: 'file-loader',
-						options: {
-							name: 'images/[name].[ext]',
-						}
-					}
-				]
-			},
-			{
-				test: /\.(eot|ttf|woff|woff2)$/,
-				use: [
-					{
-						loader: 'file-loader',
-						options: {
-							name: 'fonts/[name].[ext]',
-						}
-					}
-				]
-			}
-		]
+		rules: loaders.concat(defaults.module.rules)
 	},
 	plugins: [
 		new CleanWebpackPlugin(['demo/build']),
@@ -98,4 +60,4 @@ module.exports = {
 			filename: 'index.html'
 		})
 	]
-}
+})
