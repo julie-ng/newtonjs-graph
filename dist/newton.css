@@ -202,5 +202,8 @@ svg {
   .label[data-rel="is-same-node"] {
     fill: var(--white); }
 
+svg {
+  background: var(--navy-darker); }
+
 
 /*# sourceMappingURL=newton.css.map*/
