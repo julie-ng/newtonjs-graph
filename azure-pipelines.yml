@@ -1,6 +1,7 @@
 trigger:
   - master
   - feat/*
+  - fix/*
 
 variables:
   azureContainerRegistry: $(container-registry)
