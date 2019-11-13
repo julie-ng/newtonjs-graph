@@ -3,12 +3,10 @@ trigger:
   - feat/*
 
 variables:
-  azureSubscriptionEndpoint: azure-newton
-  azureContainerRegistry: newton.azurecr.io
+  azureContainerRegistry: $(container-registry)
   registryName: $(azureContainerRegistry)/$(Build.Repository.Name)
   imageTag: $(registryName):$(Build.BuildId)
   devTag: $(Build.Repository.Name):dev
-  appName: newton-demo
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -59,7 +57,7 @@ steps:
   displayName: 'Docker: login ACR'
   inputs:
     command: login
-    azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
+    azureSubscriptionEndpoint: $(service-connection-name)
     azureContainerRegistry: $(azureContainerRegistry)
 
 - script: docker push $(imageTag)-$(buildSha)
@@ -76,6 +74,6 @@ steps:
   displayName: Deploy container as Azure Web App
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) # (master branch and succesful builds only)
   inputs:
-    appName: $(appName)
-    azureSubscription: $(azureSubscriptionEndpoint)
+    appName: $(azure-app-name)
+    azureSubscription: $(service-connection-name)
     imageName: $(imageTag)-$(buildSha)
