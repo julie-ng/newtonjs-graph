@@ -93,18 +93,15 @@ When you are ready and checked you have met all code requirements described abov
 
 ## Styleguides
 
-#### JavaScript Styleguide, Linting
+- #### JavaScript Styleguide, Linting
+	Please be aware the Linting rules are very opinionated (esp. regarding semicolons).
 
-Please be aware the Linting rules are very opinionated (esp. regarding semicolons).
+	Do not change the `.eslintrc` file. Your pull request will be rejected. If you want to change the rules, please open a GitHub issue and we'll discuss it.
 
-Do not change the `.eslintrc` file. Your pull request will be rejected. If you want to change the rules, please open a GitHub issue and we'll discuss it.
+- #### Documentation Styleguide (JSDoc)
+	This library uses [JSDoc](https://jsdoc.app/) for auto generated API documentation. Please document any code changes you make using JSDoc so we can continue to auto-generate the [API docs](https://julie-ng.github.io/newtonjs-graph/) so people can use this project.
 
-#### Documentation Styleguide (JSDoc)
+	If you do not include JSDoc syntax, your pull request may be rejected.
 
-This library uses [JSDoc](https://jsdoc.app/) for auto generated API documentation. Please document any code changes you make using JSDoc so we can continue to auto-generate the [API docs](https://julie-ng.github.io/newtonjs-graph/) so people can use this project.
-
-If you do not include JSDoc syntax, your pull request may be rejected.
-
-#### Git "Conventional Commit" Messages
-
-Please write commit messages per the [Conventional Commits Specification](https://www.conventionalcommits.org/en/v1.0.0/), using prefixes like `docs:`, `feat:` or `fix:` in your git commit messages to help autogenerate the [CHANGELOG.md](./CHANGELOG.md)
+- #### Git "Conventional Commit" Messages
+	Please write commit messages per the [Conventional Commits Specification](https://www.conventionalcommits.org/en/v1.0.0/), using prefixes like `docs:`, `feat:` or `fix:` in your git commit messages to help autogenerate the [CHANGELOG.md](./CHANGELOG.md)
