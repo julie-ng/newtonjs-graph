@@ -8,16 +8,21 @@
 
 This repository contains learning and prototype code for a high-level dashboard for architects and stakeholders. The goal is to visualize architectures in large organizations as organisms that live and breath with deployments, problems, etc. These real-time visualizations could instead reveal insights about how [Conway's Law](https://en.wikipedia.org/wiki/Conway%27s_law) applies to the organization.
 
+This [`newtonjs-graph`](https://github.com/julie-ng/newtonjs-graph) library is **just the frontend**. For details, see the [explanation](#architecture---where-is-the-backend) at the bottom.
+
+#### Readme Contents
+
 - [Live Demo &rarr;](https://newton-demo.azurewebsites.net/?data-server=https://newton-demo-data-editor.azurewebsites.net/)  	
 	- [Graph Frontend &rarr;](https://newton-demo.azurewebsites.net/?data-server=https://newton-demo-data-editor.azurewebsites.net/)  	
-	- [Data Editor &rarr;](https://newton-demo-data-editor.azurewebsites.net/)  	
+	- [Data Editor (interactive BFF mock) &rarr;](https://newton-demo-data-editor.azurewebsites.net/)
 - [Install](#install)
 	- [For Browsers](#for-browsers)
 	- [For Webpack](#for-webpack)
-- [Network](#network---data-wrapper)
-- [Graph](#graph---visualization)
-- [Customize Styles](#customize-styles)
 - [API Documentation &rarr;](https://julie-ng.github.io/newtonjs-graph/)
+	- [Network](#network---data-wrapper)
+	- [Graph](#graph---visualization)
+	- [Customize Styles](#customize-styles)
+- [Architecture - where is the backend?](#architecture---where-is-the-backend) 
 
 ### Example Graphs
 
@@ -169,3 +174,15 @@ npm run demo:dev
 ```
 
 which starts the webpack dev server and automatically opens [http://localhost:9000](http://localhost:9000) in a browser window.
+
+## Architecture - where is the backend?
+
+So how will this work? This project is very much a work in progress, but the current concept is illustrated below. This repository `newton-graph` is "Newton UI" in the diagram.
+
+![Newton Vision](./images/newton-vision.svg)
+
+| Component | Part of Newton? | Description |
+|:--|:--|:--|
+| **Frontend** | Yes | This is this component [`newtonjs-graph`](https://github.com/julie-ng/newtonjs-graph), which can be a simple single page application frontend. It expects JSON data with `nodes` and `links` so it knows what to draw.  |
+| **BFF** | Maybe? | This component feeds the data to the frontend. Theoretically you can use another service or software for this, as long as you provide data in the JSON format [`newtonjs-graph`](https://github.com/julie-ng/newtonjs-graph) needs to draw the visualization. |
+| **Services** | No | These are services _you_ consider to be part of your architecture. They must expose endpoints that can be polled. |
