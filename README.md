@@ -6,7 +6,7 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/julie-ng/newtonjs-graph/badge.svg?targetFile=package.json)](https://snyk.io/test/github/julie-ng/newtonjs-graph?targetFile=package.json)
 [![Build Status](https://dev.azure.com/newtonjs/newton-graph/_apis/build/status/julie-ng.newtonjs-graph?branchName=master)](https://dev.azure.com/newtonjs/newton-graph/_build/latest?definitionId=1&branchName=master)
 
-This repository contains learning and prototype code for a high-level dashboard for architects and stakeholders. The goal is to visualize architectures in large organizations as organisms that live and breath with deployments, problems, etc. These real-time visualizations could instead reveal insights about how [Conway's Law](https://en.wikipedia.org/wiki/Conway%27s_law) applies to the organization.
+This repository contains learning and prototype code for a high-level dashboard for architects and stakeholders. The goal is to visualize architectures in large organizations as organisms that live and breathe with deployments, problems, etc. These real-time visualizations could instead reveal insights about how [Conway's Law](https://en.wikipedia.org/wiki/Conway%27s_law) applies to the organization.
 
 This [`newtonjs-graph`](https://github.com/julie-ng/newtonjs-graph) library is **just the frontend**. For details, see the [explanation](#architecture---where-is-the-backend) at the bottom.
 
