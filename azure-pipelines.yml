@@ -56,7 +56,7 @@ stages:
 # -----
 
 - stage: CI
-  displayName: 'Test (Node.js)'
+  displayName: 'Test'
   jobs:
     - job: Audit
       steps:
@@ -77,10 +77,10 @@ stages:
 # Docker: Build and Push
 # ----------------------
 
-- stage: BuildImage
-  displayName: 'Build'
+- stage: BuildAndDeploy
+  displayName: 'Build and Deploy'
   jobs:
-  - job: build_js
+  - job: build_and_deploy
     displayName: Build JS, Docker and Push
     steps:
     - script: npm install
@@ -118,19 +118,10 @@ stages:
     - script: docker logout $(newton-registry)
       displayName: 'Docker: logout ACR'
 
-# Deploy to App Services
-# ----------------------
-
-- stage: DeployDemo
-  displayName: Deploy Demo
-  jobs:
-  - job: deploy_image
-    displayName: 'Deploy Image (master)'
-    steps:
     - task: AzureWebAppContainer@1
-      displayName: 'App Services: deploy container'
+      displayName: 'App Service: deploy container'
       condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) # (master branch and succesful builds only)
       inputs:
         appName: $(pipeline-app-name) # var set in pipeline
         azureSubscription: $(newton-service-connection)
-        imageName: $(snapshot-tag)
+        imageName: $(snapshot-tag)-$(build-sha)
