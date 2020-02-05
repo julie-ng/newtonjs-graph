@@ -1,84 +1,136 @@
+# Build numbering format
+name: $(BuildID)
+
+pool:
+  vmImage: 'ubuntu-latest'
+
 trigger:
   - master
   - feat/*
   - fix/*
 
+# ---------
+# Schedule
+# ---------
+
+schedules:
+  - cron: "0 0 * * Mon"
+    displayName: Weekly midnight build
+    always: true
+    branches:
+      include:
+      - master
+      - releases/*
+
+# ---------
+# Variables
+# ---------
+
 variables:
-  azureContainerRegistry: $(container-registry)
-  registryName: $(azureContainerRegistry)/$(Build.Repository.Name)
-  imageTag: $(registryName):$(Build.BuildId)
-  devTag: $(Build.Repository.Name):dev
+  # all variables prefixed `newton-` come from library
+  - group: newton-common-vars
 
-pool:
-  vmImage: 'ubuntu-latest'
+  # this pipeline:
+  - name:  image-namespace
+    value: demo
 
-steps:
+  - name:  image-name
+    value: data-editor
 
-# -------------
-# Node.js Steps
-# -------------
+  - name:  docker-image
+    value: $(newton-registry)/$(newton-demo-namespace)/$(image-name)
 
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+  - name: snapshot-tag
+    value: $(docker-image):$(Build.BuildId)
 
-- script: npm install
-  displayName: npm install
+  - name: dev-tag
+    value: $(docker-image):dev
 
-- script: npm audit
-  displayName: audit dependencies
-  continueOnError: true
+# ------
+# Stages
+# ------
 
-- script: npm run lint
-  displayName: lint code
+stages:
 
-- script: npm run test
-  displayName: run unit tests
+# Tests
+# -----
 
-- script: npm run build
-  displayName: build library
+- stage: CI
+  displayName: 'Test (Node.js)'
+  jobs:
+    - job: Audit
+      steps:
+      - script: npm audit
+        displayName: Audit Dependencies
+        continueOnError: true
 
-- script: npm run demo:build
-  displayName: build demo
+    - job: Linter
+      steps:
+      - script: npm ci && npm run lint
+        displayName: Lint Code
 
+    - job: Tests
+      steps:
+      - script: npm ci && npm run test
+        displayName: Unit Tests
 
-# ----------------------------
-# Docker Image: Build and Push
-# ----------------------------
+# Docker: Build and Push
+# ----------------------
 
-- script: |
-    echo '##vso[task.setvariable variable=buildSha]'$(git rev-parse --short HEAD)''
-    echo 'buildSha set to $(buildSha)'
-  displayName: Get build git sha
+- stage: BuildImage
+  displayName: 'Build'
+  jobs:
+  - job: build_js
+    displayName: Build JS, Docker and Push
+    steps:
+    - script: npm install
+      displayName: 'NPM: install'
 
-- script: |
-    docker build --tag $(imageTag)-$(buildSha) .
-    docker tag $(imageTag)-$(buildSha) $(devTag)
-  displayName: 'Docker: Build and tag image'
+    - script: npm run build
+      displayName: 'NPM: build library'
 
-# Use the task to avoid embedding credentials in pipeline
-- task: Docker@1
-  displayName: 'Docker: login ACR'
-  inputs:
-    command: login
-    azureSubscriptionEndpoint: $(service-connection-name)
-    azureContainerRegistry: $(azureContainerRegistry)
+    - script: npm run demo:build
+      displayName: 'NPM: build demo'
 
-- script: docker push $(imageTag)-$(buildSha)
-  displayName: 'Docker: Push image'
+    - script: |
+        echo '##vso[task.setvariable variable=build-sha]'$(git rev-parse --short HEAD)''
+        echo 'buildSha set to $(build-sha)'
+      displayName: 'Git: get commit sha'
 
-- script: docker logout $(azureContainerRegistry)
-  displayName: 'Docker: logout ACR'
+    - script: |
+        docker build --tag $(snapshot-tag)-$(build-sha) .
+        docker tag $(snapshot-tag)-$(build-sha) $(dev-tag)
+      displayName: 'Docker: build and tag image'
 
-# ----------------------------
-# Deploy to Azure App Services
-# ----------------------------
+    - task: Docker@1 # Use the task to avoid embedding credentials in pipeline
+      displayName: 'Docker: login ACR'
+      inputs:
+        command: login
+        azureSubscriptionEndpoint: $(newton-service-connection)
+        azureContainerRegistry: $(newton-registry)
 
-- task: AzureWebAppContainer@1
-  displayName: Deploy container as Azure Web App
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) # (master branch and succesful builds only)
-  inputs:
-    appName: $(azure-app-name)
-    azureSubscription: $(service-connection-name)
-    imageName: $(imageTag)-$(buildSha)
+    - script: docker push $(snapshot-tag)-$(build-sha)
+      displayName: 'Docker: push snapshot'
+
+    - script: docker push $(dev-tag)
+      displayName: 'Docker: push dev'
+
+    - script: docker logout $(newton-registry)
+      displayName: 'Docker: logout ACR'
+
+# Deploy to App Services
+# ----------------------
+
+- stage: DeployDemo
+  displayName: Deploy Demo
+  jobs:
+  - job: deploy_image
+    displayName: 'Deploy Image (master)'
+    steps:
+    - task: AzureWebAppContainer@1
+      displayName: 'App Services: deploy container'
+      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) # (master branch and succesful builds only)
+      inputs:
+        appName: $(pipeline-app-name) # var set in pipeline
+        azureSubscription: $(newton-service-connection)
+        imageName: $(snapshot-tag)
