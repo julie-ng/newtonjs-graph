@@ -35,7 +35,7 @@ variables:
     value: demo
 
   - name:  image-name
-    value: data-editor
+    value: graph
 
   - name:  docker-image
     value: $(newton-registry)/$(newton-demo-namespace)/$(image-name)
