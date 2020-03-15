@@ -134,7 +134,7 @@ stages:
           imageName: $(image-name)
           tagsAsMultilineString: |
             $(image-tag)
-          condition: ${{ variables.is-release }}
+          condition: ${{ variables['is-release'] }}
 
       # 6 - lock release images
       - task: AzureCLI@2
