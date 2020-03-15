@@ -125,7 +125,7 @@ stages:
           variableName: image-tag
           command: 'npm run --silent my-version'
           # Override image tag with versioned release tag
-          condition: $(is-release)
+          condition: ${{ variables['is-release'] }}
 
       # 5 - buld and push images only master or release
       - template: steps/docker-build-push.yml@templates
@@ -134,7 +134,7 @@ stages:
           imageName: $(image-name)
           tagsAsMultilineString: |
             $(image-tag)
-          condition: $(is-release)
+          condition: ${{ variables.is-release }}
 
       # 6 - lock release images
       - task: AzureCLI@2
