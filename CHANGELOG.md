@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/julie-ng/newtonjs-graph/compare/v0.2.0...v0.2.1) (2020-03-15)
+
+
+### Bug Fixes
+
+* docker build for pipeline ([cc3a801](https://github.com/julie-ng/newtonjs-graph/commit/cc3a801))
+
+
+### Features
+
+* **azure-devops:** add audit task, devops vars, fix/* trigger ([98825aa](https://github.com/julie-ng/newtonjs-graph/commit/98825aa))
+* **azure-pipeline:** use templates, refactor conditionals, improve versioning ([d2f2c54](https://github.com/julie-ng/newtonjs-graph/commit/d2f2c54))
+
+
+
 ## [0.2.0](https://github.com/julie-ng/newtonjs-graph/compare/v0.1.0...v0.2.0) (2019-09-08)
 
 
