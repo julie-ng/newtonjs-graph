@@ -22,7 +22,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "lint:watch": "nodemon -w newton --exec 'npm run lint'",
-    "release": "standard-version",
+    "release": "standard-version --sign",
     "test": "jest",
     "test:watch": "jest --watch",
     "preflight": "npm run lint && npm run test && npm run demo:build && npm run build",
