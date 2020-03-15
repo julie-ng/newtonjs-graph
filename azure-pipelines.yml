@@ -144,7 +144,7 @@ stages:
         displayName: 'Lock release image, preventing delete'
         condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/release'), ne(variables['Build.Reason'], 'Schedule'))
         inputs:
-          azureSubscription: $(lib-acr-connection)
+          azureSubscription: $(lib-arm-connection)
           scriptType: bash
           scriptLocation: inlineScript
           inlineScript: |
