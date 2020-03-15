@@ -60,7 +60,7 @@ variables:
     value: $(lib-registry-host)/$(image-name)
 
   - name: is-release
-    value: ${{ and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/release'), ne(variables['Build.Reason'], 'Schedule')) }}
+    value: ${{ and(eq(variables['Build.SourceBranch'], 'refs/heads/release'), ne(variables['Build.Reason'], 'Schedule')) }}
 
 # ------
 # Stages
