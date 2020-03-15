@@ -25,7 +25,8 @@
     "release": "standard-version",
     "test": "jest",
     "test:watch": "jest --watch",
-    "preflight": "npm run lint && npm run test && npm run demo:build && npm run build"
+    "preflight": "npm run lint && npm run test && npm run demo:build && npm run build",
+    "my-version": "node -e \"console.log(require('./package.json').version)\""
   },
   "dependencies": {
     "d3": "^5.7.0",
