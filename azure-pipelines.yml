@@ -38,7 +38,7 @@ resources:
       type: github
       name: julie-ng/azure-pipelines-templates
       endpoint: julie-ng # required, even if public repo
-      ref: refs/tags/v1.1.1
+      ref: refs/tags/v1.2.0
 
 
 # Variables
@@ -127,12 +127,17 @@ stages:
 
       # 5 - buld and push images only master or release
       - template: steps/docker-build-push.yml@templates
-        condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/master', 'refs/heads/release'), ne(variables['Build.Reason'], 'Schedule'))
         parameters:
           registryConnectionName: $(lib-arm-connection)
           imageName: $(image-name)
           tagsAsMultilineString: |
             $(image-tag)
+          condition: |
+            and(
+              succeeded(),
+              in(variables['Build.SourceBranch'], 'refs/heads/master', 'refs/heads/release'),
+              ne(variables['Build.Reason'], 'Schedule')
+            )
 
       # 6 - lock release images
       - task: AzureCLI@2
