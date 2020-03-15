@@ -4,10 +4,16 @@ name: $(BuildID)
 pool:
   vmImage: 'ubuntu-latest'
 
+# Trigger
+# -------
+
 trigger:
-  - master
-  - feat/*
-  - fix/*
+  branches:
+    include:
+    - master
+    - feat/*
+    - refactor/*
+    - release
 
 # ---------
 # Schedule
@@ -22,29 +28,42 @@ schedules:
       - master
       - releases/*
 
-# ---------
+
+# Shared Templates
+# ----------------
+
+resources:
+  repositories:
+    - repository: templates
+      type: github
+      name: julie-ng/azure-pipelines-templates
+      endpoint: julie-ng # required, even if public repo
+      ref: refs/tags/v1.2.0
+
+
 # Variables
 # ---------
 
 variables:
-  # all variables prefixed `newton-` come from library
   - group: newton-common-vars
 
-  # this pipeline:
-  - name:  image-namespace
-    value: demo
+  - name: app-name
+    value: newton-demo
 
-  - name:  image-name
-    value: graph
+  - name: image-tag
+    value: 'dev'
 
-  - name:  docker-image
-    value: $(newton-registry)/$(newton-demo-namespace)/$(image-name)
+  - name: image-name
+    value: $(lib-registry-namespace)/$(app-name)
 
-  - name: snapshot-tag
-    value: $(docker-image):$(Build.BuildId)
+  - name: image-name-with-registry
+    value: $(lib-registry-host)/$(image-name)
 
-  - name: dev-tag
-    value: $(docker-image):dev
+  - name: is-dev
+    value: ${{ eq(variables['Build.SourceBranch'], 'refs/heads/master') }}
+
+  - name: is-release
+    value: ${{ and(eq(variables['Build.SourceBranch'], 'refs/heads/release'), ne(variables['Build.Reason'], 'Schedule')) }}
 
 # ------
 # Stages
@@ -61,8 +80,12 @@ stages:
     - job: Audit
       steps:
       - script: npm audit
-        displayName: Audit Dependencies
+        displayName: Audit Dependencies (all)
         continueOnError: true
+
+      - script: npm audit --production
+        displayName: Audit Dependencies (prod-only)
+        continueOnError: false
 
     - job: Linter
       steps:
@@ -74,54 +97,91 @@ stages:
       - script: npm ci && npm run test
         displayName: Unit Tests
 
+
 # Docker: Build and Push
 # ----------------------
 
-- stage: BuildAndDeploy
-  displayName: 'Build and Deploy'
+# --- Stage: Build and Push Docker image ---
+
+- stage: BuildImage
+  displayName: 'Build (Docker)'
   jobs:
-  - job: build_and_deploy
-    displayName: Build JS, Docker and Push
+    - job: build_and_push
+      displayName: 'Build and Push Image'
+
+      steps:
+      # 1
+      - script: npm install
+        displayName: 'NPM: install'
+
+      # 2
+      - script: npm run build
+        displayName: 'NPM: build library'
+
+      # 3
+      - script: npm run demo:build
+        displayName: 'NPM: build demo'
+
+      # 4
+      - template: steps/set-custom-variable.yml@templates
+        parameters:
+          variableName: image-tag
+          command: 'npm run --silent my-version'
+          # Override image tag with versioned release tag
+          condition: ${{ variables['is-release'] }}
+
+      # 5 - buld and push images only master or release
+      - template: steps/docker-build-push.yml@templates
+        parameters:
+          registryConnectionName: $(lib-acr-connection)
+          imageName: $(image-name)
+          tagsAsMultilineString: |
+            $(image-tag)
+          condition: ${{ or(variables['is-dev'], variables['is-release']) }}
+
+      # 6 - lock release images
+      - task: AzureCLI@2
+        displayName: 'Lock release image, preventing delete'
+        condition: ${{ variables['is-release'] }}
+        inputs:
+          azureSubscription: $(lib-arm-connection)
+          scriptType: bash
+          scriptLocation: inlineScript
+          inlineScript: |
+              az --version
+              az acr repository update \
+                --name $(lib-acr-name) --image $(image-name):$(image-tag) \
+                --write-enabled false
+
+
+# --- Stage: deploy to Azure App Services ---
+
+- stage: DeployImage
+  displayName: Deploy
+  jobs:
+
+  - job: deploy_master
+    displayName: 'Deploy (master)'
+    condition: ${{ variables['is-dev'] }} # TODO: update library
     steps:
-    - script: npm install
-      displayName: 'NPM: install'
+      - template: steps/deploy-app-service.yml@templates
+        parameters:
+          ARMConnectionName: $(lib-arm-connection)
+          dockerImage: $(image-name-with-registry):$(image-tag)
+          appName: $(app-name)-dev # with `-dev` suffix
 
-    - script: npm run build
-      displayName: 'NPM: build library'
+  - job: deploy_release
+    displayName: 'Deploy (release)'
+    condition: ${{ variables['is-release'] }}
+    steps:
+      # Override image tag with versioned release tag
+      - template: steps/set-custom-variable.yml@templates
+        parameters:
+          variableName: image-tag
+          command: 'npm run --silent my-version'
 
-    - script: npm run demo:build
-      displayName: 'NPM: build demo'
-
-    - script: |
-        echo '##vso[task.setvariable variable=build-sha]'$(git rev-parse --short HEAD)''
-        echo 'buildSha set to $(build-sha)'
-      displayName: 'Git: get commit sha'
-
-    - script: |
-        docker build --tag $(snapshot-tag)-$(build-sha) .
-        docker tag $(snapshot-tag)-$(build-sha) $(dev-tag)
-      displayName: 'Docker: build and tag image'
-
-    - task: Docker@1 # Use the task to avoid embedding credentials in pipeline
-      displayName: 'Docker: login ACR'
-      inputs:
-        command: login
-        azureSubscriptionEndpoint: $(newton-service-connection)
-        azureContainerRegistry: $(newton-registry)
-
-    - script: docker push $(snapshot-tag)-$(build-sha)
-      displayName: 'Docker: push snapshot'
-
-    - script: docker push $(dev-tag)
-      displayName: 'Docker: push dev'
-
-    - script: docker logout $(newton-registry)
-      displayName: 'Docker: logout ACR'
-
-    - task: AzureWebAppContainer@1
-      displayName: 'App Service: deploy container'
-      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) # (master branch and succesful builds only)
-      inputs:
-        appName: $(pipeline-app-name) # var set in pipeline
-        azureSubscription: $(newton-service-connection)
-        imageName: $(snapshot-tag)-$(build-sha)
+      - template: steps/deploy-app-service.yml@templates
+        parameters:
+          ARMConnectionName: $(lib-arm-connection)
+          dockerImage: $(image-name-with-registry):$(image-tag)
+          appName: $(app-name)
