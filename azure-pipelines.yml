@@ -128,7 +128,7 @@ stages:
       # 5 - buld and push images only master or release
       - template: steps/docker-build-push.yml@templates
         parameters:
-          registryConnectionName: $(lib-arm-connection)
+          registryConnectionName: $(lib-acr-connection)
           imageName: $(image-name)
           tagsAsMultilineString: |
             $(image-tag)
@@ -144,7 +144,7 @@ stages:
         displayName: 'Lock release image, preventing delete'
         condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/release'), ne(variables['Build.Reason'], 'Schedule'))
         inputs:
-          azureSubscription: $(lib-arm-connection)
+          azureSubscription: $(lib-acr-connection)
           scriptType: bash
           scriptLocation: inlineScript
           inlineScript: |
