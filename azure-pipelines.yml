@@ -54,10 +54,10 @@ variables:
     value: 'dev'
 
   - name: image-name
-    value: $(lib-registry-namespace)/$(app-name)
+    value: julieio/newtonjs-demo
 
-  - name: image-name-with-registry
-    value: $(lib-registry-host)/$(image-name)
+  - name: registry-connection
+    value: docker-hub-julieio-connection
 
   - name: is-dev
     value: ${{ eq(variables['Build.SourceBranch'], 'refs/heads/master') }}
@@ -122,36 +122,21 @@ stages:
       - script: npm run demo:build
         displayName: 'NPM: build demo'
 
-      # 4
+      # 4 - of release, use versioned image tag
       - template: steps/set-custom-variable.yml@templates
         parameters:
+          condition: ${{ variables['is-release'] }}
           variableName: image-tag
           command: 'npm run --silent my-version'
-          # Override image tag with versioned release tag
-          condition: ${{ variables['is-release'] }}
 
       # 5 - buld and push images only master or release
       - template: steps/docker-build-push.yml@templates
         parameters:
-          registryConnectionName: $(lib-acr-connection)
+          condition: ${{ or(variables['is-dev'], variables['is-release']) }}
+          registryConnectionName: $(registry-connection)
           imageName: $(image-name)
           tagsAsMultilineString: |
             $(image-tag)
-          condition: ${{ or(variables['is-dev'], variables['is-release']) }}
-
-      # 6 - lock release images
-      - task: AzureCLI@2
-        displayName: 'Lock release image, preventing delete'
-        condition: ${{ variables['is-release'] }}
-        inputs:
-          azureSubscription: $(lib-arm-connection)
-          scriptType: bash
-          scriptLocation: inlineScript
-          inlineScript: |
-              az --version
-              az acr repository update \
-                --name $(lib-acr-name) --image $(image-name):$(image-tag) \
-                --write-enabled false
 
 
 # --- Stage: deploy to Azure App Services ---
@@ -159,22 +144,20 @@ stages:
 - stage: DeployImage
   displayName: Deploy
   jobs:
-
   - job: deploy_master
     displayName: 'Deploy (master)'
-    condition: ${{ variables['is-dev'] }} # TODO: update library
+    condition: ${{ variables['is-dev'] }}
     steps:
       - template: steps/deploy-app-service.yml@templates
         parameters:
           ARMConnectionName: $(lib-arm-connection)
-          dockerImage: $(image-name-with-registry):$(image-tag)
+          dockerImage: $(image-name):$(image-tag)
           appName: $(app-name)-dev # with `-dev` suffix
 
   - job: deploy_release
     displayName: 'Deploy (release)'
     condition: ${{ variables['is-release'] }}
     steps:
-      # Override image tag with versioned release tag
       - template: steps/set-custom-variable.yml@templates
         parameters:
           variableName: image-tag
@@ -183,5 +166,5 @@ stages:
       - template: steps/deploy-app-service.yml@templates
         parameters:
           ARMConnectionName: $(lib-arm-connection)
-          dockerImage: $(image-name-with-registry):$(image-tag)
+          dockerImage: $(image-name):$(image-tag)
           appName: $(app-name)
