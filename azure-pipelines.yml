@@ -82,11 +82,11 @@ stages:
   jobs:
     - job: Audit
       steps:
-      - script: npm audit
+      - script: npm audit --audit-level=moderate
         displayName: Audit Dependencies (all)
         continueOnError: true
 
-      - script: npm audit --production
+      - script: npm audit --production --audit-level=moderate
         displayName: Audit Dependencies (prod-only)
         continueOnError: false
 
