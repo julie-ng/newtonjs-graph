@@ -66,7 +66,7 @@ variables:
     value: ${{ and(eq(variables['Build.SourceBranch'], 'refs/heads/release'), ne(variables['Build.Reason'], 'Schedule')) }}
 
   - name: continue-not-pr
-    value: ${{ and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) }}
+    value: ${{ ne(variables['Build.Reason'], 'PullRequest')) }}
 
 # ------
 # Stages
