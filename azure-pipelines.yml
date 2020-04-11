@@ -65,6 +65,9 @@ variables:
   - name: is-release
     value: ${{ and(eq(variables['Build.SourceBranch'], 'refs/heads/release'), ne(variables['Build.Reason'], 'Schedule')) }}
 
+  - name: continue-not-pr
+    value: ${{ and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) }}
+
 # ------
 # Stages
 # ------
@@ -105,6 +108,7 @@ stages:
 
 - stage: BuildImage
   displayName: 'Build (Docker)'
+  condition: ${{ variables['continue-not-pr'] }}
   jobs:
     - job: build_and_push
       displayName: 'Build and Push Image'
@@ -122,47 +126,32 @@ stages:
       - script: npm run demo:build
         displayName: 'NPM: build demo'
 
-      # 4
+      # 4 - of release, use versioned image tag
       - template: steps/set-custom-variable.yml@templates
         parameters:
+          condition: ${{ variables['is-release'] }}
           variableName: image-tag
           command: 'npm run --silent my-version'
-          # Override image tag with versioned release tag
-          condition: ${{ variables['is-release'] }}
 
       # 5 - buld and push images only master or release
       - template: steps/docker-build-push.yml@templates
         parameters:
+          condition: ${{ or(variables['is-dev'], variables['is-release']) }}
           registryConnectionName: $(registry-connection)
           imageName: $(image-name)
           tagsAsMultilineString: |
             $(image-tag)
-          # condition: ${{ or(variables['is-dev'], variables['is-release']) }}
-
-      # 6 - lock release images
-      # - task: AzureCLI@2
-      #   displayName: 'Lock release image, preventing delete'
-      #   condition: ${{ variables['is-release'] }}
-      #   inputs:
-      #     azureSubscription: $(lib-arm-connection)
-      #     scriptType: bash
-      #     scriptLocation: inlineScript
-      #     inlineScript: |
-      #         az --version
-      #         az acr repository update \
-      #           --name $(lib-acr-name) --image $(image-name):$(image-tag) \
-      #           --write-enabled false
 
 
 # --- Stage: deploy to Azure App Services ---
 
 - stage: DeployImage
   displayName: Deploy
+  condition: ${{ variables['continue-not-pr'] }}
   jobs:
-
   - job: deploy_master
     displayName: 'Deploy (master)'
-    # condition: ${{ variables['is-dev'] }} # TODO: update library
+    condition: ${{ variables['is-dev'] }}
     steps:
       - template: steps/deploy-app-service.yml@templates
         parameters:
@@ -174,7 +163,6 @@ stages:
     displayName: 'Deploy (release)'
     condition: ${{ variables['is-release'] }}
     steps:
-      # Override image tag with versioned release tag
       - template: steps/set-custom-variable.yml@templates
         parameters:
           variableName: image-tag
