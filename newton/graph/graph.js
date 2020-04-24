@@ -11,7 +11,8 @@ const Nodes = require('./views/nodes')
 const defaults = {
 	margin: 40,
 	height: 550,
-	width: 800 // can't use `window` in tests
+	width: 800, // can't use `window` in tests
+	scaleExtent: [0.1, 10]
 }
 
 /**
@@ -39,6 +40,7 @@ class Graph extends EventEmitter {
 		this.height = opts.height || defaults.height
 		this.width = (opts.width || defaults.width) - this.margin
 		this.engine = opts.engine || 'cola'
+		this.scaleExtent = opts.scaleExtent || defaults.scaleExtent
 		this.options = opts
 
 		this._setNetwork(opts)
@@ -118,7 +120,11 @@ class Graph extends EventEmitter {
 		this.svg = d3.select('svg')
 			.attr('width', this.width)
 			.attr('height', this.height)
-
+		this.g = this.svg.append('g')
+		var zoom = d3.zoom().scaleExtent(this.scaleExtent).on('zoom', () => {
+			this.g.attr('transform', d3.event.transform);
+		  })
+		this.svg.call(zoom)
 		this._addArrows([
 			'is-default',
 			'is-source',
@@ -298,7 +304,7 @@ class Graph extends EventEmitter {
 	_addArrows (stylesArray) {
 		// 20 for radius 6
 		// 24 for radius 10
-		this.svg.append("svg:defs")
+		this.g.append("svg:defs")
 			.selectAll('marker')
 			.data(stylesArray)
 		.enter().append('svg:marker')
