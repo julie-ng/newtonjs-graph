@@ -122,8 +122,8 @@ class Graph extends EventEmitter {
 			.attr('height', this.height)
 		this.g = this.svg.append('g')
 		var zoom = d3.zoom().scaleExtent(this.scaleExtent).on('zoom', () => {
-			this.g.attr('transform', d3.event.transform);
-		  })
+			this.g.attr('transform', d3.event.transform)
+		})
 		this.svg.call(zoom)
 		this._addArrows([
 			'is-default',

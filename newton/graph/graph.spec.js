@@ -63,7 +63,8 @@ describe ('Graph', function () {
 				margin: 1,
 				height: 2,
 				width: 3,
-				network: network
+				network: network,
+				scaleExtent: [1, 5]
 			}
 			let graph = new Graph(opts)
 
