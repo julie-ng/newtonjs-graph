@@ -1,10 +1,10 @@
 # Newton Graph Library 
 
-[![Build Status](https://travis-ci.org/julie-ng/newtonjs-graph.svg?branch=master)](https://travis-ci.org/julie-ng/newtonjs-graph)
+[![Build Status](https://travis-ci.org/julie-ng/newtonjs-graph.svg?branch=main)](https://travis-ci.org/julie-ng/newtonjs-graph)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/7a3975197c576202fe08/test_coverage)](https://codeclimate.com/github/julie-ng/newtonjs-graph/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/7a3975197c576202fe08/maintainability)](https://codeclimate.com/github/julie-ng/newtonjs-graph/maintainability)
 [![Known Vulnerabilities](https://snyk.io/test/github/julie-ng/newtonjs-graph/badge.svg?targetFile=package.json)](https://snyk.io/test/github/julie-ng/newtonjs-graph?targetFile=package.json)
-[![Build Status](https://dev.azure.com/julie-ng/newtonjs/_apis/build/status/julie-ng.newtonjs-graph?branchName=master)](https://dev.azure.com/julie-ng/newtonjs/_build/latest?definitionId=2&branchName=master)
+[![Build Status](https://dev.azure.com/julie-ng/newtonjs/_apis/build/status/julie-ng.newtonjs-graph?branchName=main)](https://dev.azure.com/julie-ng/newtonjs/_build/latest?definitionId=2&branchName=main)
 
 This repository contains learning and prototype code for a high-level dashboard for architects and stakeholders. The goal is to visualize architectures in large organizations as organisms that live and breathe with deployments, problems, etc. These real-time visualizations could instead reveal insights about how [Conway's Law](https://en.wikipedia.org/wiki/Conway%27s_law) applies to the organization.
 

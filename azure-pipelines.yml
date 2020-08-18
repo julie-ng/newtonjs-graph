@@ -10,7 +10,7 @@ pool:
 trigger:
   branches:
     include:
-    - master
+    - main
     - feat/*
     - refactor/*
     - release
@@ -25,7 +25,7 @@ schedules:
     always: true
     branches:
       include:
-      - master
+      - main
       - releases/*
 
 
@@ -60,7 +60,7 @@ variables:
     value: docker-hub-julieio-connection
 
   - name: is-dev
-    value: ${{ eq(variables['Build.SourceBranch'], 'refs/heads/master') }}
+    value: ${{ eq(variables['Build.SourceBranch'], 'refs/heads/main') }}
 
   - name: is-release
     value: ${{ and(eq(variables['Build.SourceBranch'], 'refs/heads/release'), ne(variables['Build.Reason'], 'Schedule')) }}
@@ -133,7 +133,7 @@ stages:
           variableName: image-tag
           command: 'npm run --silent my-version'
 
-      # 5 - buld and push images only master or release
+      # 5 - buld and push images only main or release
       - template: steps/docker-build-push.yml@templates
         parameters:
           condition: ${{ or(variables['is-dev'], variables['is-release']) }}
@@ -149,8 +149,8 @@ stages:
   displayName: Deploy
   condition: ${{ variables['continue-not-pr'] }}
   jobs:
-  - job: deploy_master
-    displayName: 'Deploy (master)'
+  - job: deploy_dev
+    displayName: 'Deploy (dev)'
     condition: ${{ variables['is-dev'] }}
     steps:
       - template: steps/deploy-app-service.yml@templates
