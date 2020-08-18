@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [0.2.2](https://github.com/julie-ng/newtonjs-graph/compare/v0.2.1...v0.2.2) (2020-08-18)
 
+* **deps:** update dependencies
+* **devops:** use Docker Hub instead of Azure Container Registry
+
 ### [0.2.1](https://github.com/julie-ng/newtonjs-graph/compare/v0.2.0...v0.2.1) (2020-03-15)
 
 
