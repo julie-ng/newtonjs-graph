@@ -29,7 +29,7 @@
     "my-version": "node -e \"console.log(require('./package.json').version)\""
   },
   "dependencies": {
-    "d3": "^5.7.0",
+    "d3": "^7.6.1",
     "webcola": "^3.3.8"
   },
   "devDependencies": {
